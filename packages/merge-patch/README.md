@@ -18,3 +18,10 @@ var JSON8 = require('json8-merge-patch');
 ```javascript
 doc = JSON8.mergePatch(doc, {"name": "Jeanette doe"});
 ```
+
+# tests
+
+```
+npm install -g eslint mocha
+npm test
+```

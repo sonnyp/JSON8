@@ -6,4 +6,4 @@ node_js:
   - "io.js"
 
 before_install:
-  - npm install -g eslint
+  - npm install -g eslint mocha
