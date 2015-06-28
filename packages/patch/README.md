@@ -3,7 +3,7 @@ JSON8-patch
 
 [![build status](https://img.shields.io/travis/JSON8/patch.svg?style=flat-square)](https://travis-ci.org/JSON8/patch)
 
-JSON8-patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [Tests](#tests)
+JSON8-patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [tests](#tests)
 
 http://jsonpatch.com/
 
@@ -56,11 +56,11 @@ doc = JSON8.patch(doc, [
 
 ```JSON8.patch``` is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
 
-# Apply
+# apply
 
 ```JSON8.apply``` is an alias to ```JSON.patch``` and behaves exactly the same.
 
-# Revert
+# revert
 
 If ```JSON8.patch``` is passed with a third argument ```{revert: true}``` it will return an array ```[doc, items]```.
 
@@ -80,7 +80,7 @@ doc = JSON8.revert(doc, patchResult[1]);
 
 ```add```, ```copy```, ```replace```, ```move```, ```remove```, ```test``` operations return an array of the form ```[document, previous, idx]```
 
-The first argument is returned for the same reason ```JSON8.apply``` returns a document see [Patch](#patch)
+The first argument is returned for the same reason ```JSON8.apply``` returns a document see [patch](#patch)
 
 The second argument is the previous value at the specified destination if any, undefined otherwise.
 
