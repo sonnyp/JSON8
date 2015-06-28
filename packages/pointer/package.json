@@ -1,0 +1,22 @@
+{
+  "name": "json8-pointer",
+  "version": "0.1.0",
+  "description": "JSON Pointer implementation for JavaScript",
+  "keywords": [
+    "JSON",
+    "pointer"
+  ],
+  "homepage": "https://github.com/JSON8/pointer",
+  "main": "index.js",
+  "repository": "github:JSON8/pointer",
+  "scripts": {
+    "syntax": "eslint .",
+    "unit": "mocha --recursive test/",
+    "test": "npm run unit && npm run syntax"
+  },
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "MIT",
+  "dependencies": {
+    "json8-core": "^0.1.0"
+  }
+}

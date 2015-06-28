@@ -1,0 +1,5 @@
+env:
+  mocha: true
+
+rules:
+  padded-blocks: 0
