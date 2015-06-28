@@ -2,7 +2,12 @@
   "name": "json8-merge-patch",
   "version": "0.1.0",
   "description": " JSON Merge Patch implementation for JavaScript",
-  "keywords": ["JSON", "patch", "merge", "diff"],
+  "keywords": [
+    "JSON",
+    "merge",
+    "patch",
+    "diff"
+  ],
   "homepage": "https://github.com/JSON8/merge-patch",
   "main": "index.js",
   "repository": "github:JSON8/merge-patch",
@@ -12,5 +17,8 @@
     "test": "npm run unit && npm run syntax"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "json8-core": "^0.1.0"
+  }
 }
