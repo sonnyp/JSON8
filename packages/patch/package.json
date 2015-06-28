@@ -1,0 +1,24 @@
+{
+  "name": "json8-patch",
+  "version": "0.1.0",
+  "description": "JSON Patch implementation for JavaScript",
+  "keywords": [
+    "JSON",
+    "Patch",
+    "diff"
+  ],
+  "homepage": "https://github.com/JSON8/patch",
+  "main": "index.js",
+  "repository": "github:JSON8/patch",
+  "scripts": {
+    "syntax": "eslint .",
+    "unit": "mocha test/*.js",
+    "test": "./scripts/make-json-patch-tests && npm run unit && npm run syntax"
+  },
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "MIT",
+  "dependencies": {
+    "json8-core": "^0.1.0",
+    "json8-pointer": "^0.1.0"
+  }
+}
