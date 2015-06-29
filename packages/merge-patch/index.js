@@ -1,6 +1,8 @@
 'use strict'
 
-var isObject = require('json8-core').isObject
+var core = require('json8-core')
+var isObject = core.isObject
+var isJSON = core.isJSON
 
 /**
  * apply a JSON merge patch
@@ -9,12 +11,15 @@ var isObject = require('json8-core').isObject
  * @param  {Object} patch  - JSON object patch
  * @return {Object}        - JSON object document
  */
-var patch = function(doc, patch) {
-  if (!isObject(patch))
+var apply = function(doc, patch) {
+  if (!isObject(patch)) {
+    if (!isJSON(patch))
+      throw new TypeError('patch argument is not a valid JSON value')
     return patch
+  }
 
   if (!isObject(doc))
-    return {}
+    doc = Object.create(null)
 
   for (var k in patch) {
     var v = patch[k]
@@ -22,10 +27,11 @@ var patch = function(doc, patch) {
       delete doc[k]
       continue
     }
-    doc[k] = patch(doc[k], v)
+    doc[k] = apply(doc[k], v)
   }
 
   return doc
 }
 
-module.exports.patch = patch
+module.exports.apply = apply
+module.exports.patch = apply

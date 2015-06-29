@@ -3,3 +3,4 @@ env:
 
 rules:
   padded-blocks: 0
+  max-nested-callbacks: [2, 4]
