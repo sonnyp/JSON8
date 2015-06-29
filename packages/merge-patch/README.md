@@ -13,11 +13,15 @@ npm install json8-merge-patch
 var JSON8 = require('json8-merge-patch');
 ```
 
-# patch
+# apply
 
 ```javascript
-doc = JSON8.mergePatch(doc, {"name": "Jeanette doe"});
+doc = JSON8.apply(doc, {"name": "Jeanette doe"});
 ```
+
+# patch
+
+```JSON8.patch``` is an alias of ```JSON8.apply``` and behave exactly the same.
 
 # tests
 

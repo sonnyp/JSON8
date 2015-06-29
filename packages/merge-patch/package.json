@@ -1,6 +1,6 @@
 {
   "name": "json8-merge-patch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": " JSON Merge Patch implementation for JavaScript",
   "keywords": [
     "JSON",
