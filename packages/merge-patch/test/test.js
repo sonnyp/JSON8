@@ -1,7 +1,8 @@
 'use strict'
 
 var assert = require('assert')
-var apply = require('../index').apply
+var patch = require('../index')
+var apply = patch.apply
 
 describe('apply', function() {
 
@@ -53,4 +54,11 @@ describe('apply', function() {
     assert.deepEqual(doc, patch)
   })
 
+})
+
+describe('patch', function() {
+
+  it('is an alias to apply method', function() {
+    assert.equal(patch.patch, patch.apply)
+  })
 })
