@@ -23,6 +23,24 @@ doc = JSON8.apply(doc, {"name": "Jeanette doe"});
 
 ```JSON8.patch``` is an alias of ```JSON8.apply``` and behave exactly the same.
 
+# toJSONPatch
+
+This method is only available if [JSON8-pointer](https://github.com/JSON8/pointer) is installed.
+
+```npm install json8-pointer```
+
+```javascript
+var JSONMergePatch = {
+  "foo": {"bar": "foobar"},
+  "foo": null}
+}
+var JSONPatch = JSON8.toJSONPatch(JSONMergePatch)
+//[
+//  { op: 'add', path: '/foo/bar', value: 'foobar' },
+//  { op: 'delete', path: '/foo/foo' }
+//]
+```
+
 # tests
 
 ```

@@ -61,4 +61,5 @@ describe('patch', function() {
   it('is an alias to apply method', function() {
     assert.equal(patch.patch, patch.apply)
   })
+
 })
