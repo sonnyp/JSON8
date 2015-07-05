@@ -35,7 +35,7 @@ module.exports = function toJSONPatch(patch, prefix) {
     var path = pointer.serialize(tokens)
 
     if (v === null)
-      ops.push({"op": "delete", "path": path})
+      ops.push({"op": "remove", "path": path})
     else
       ops.push({"op": "add", "path": path, "value": v})
   }

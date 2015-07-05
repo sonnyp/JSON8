@@ -3,10 +3,13 @@ JSON8 Merge Patch
 
 [![build status](https://img.shields.io/travis/JSON8/merge-patch.svg?style=flat-square)](https://travis-ci.org/JSON8/merge-patch)
 
-Implementation of JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396)
+JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396) implementation for JavaScript.
 
 * [Getting started](#getting-started)
 * [Methods](#methods)
+  * [apply](#apply)
+  * [patch](#patch)
+  * [toJSONPatch](#tojsonpatch)
 * [Tests](#tests)
 * [Contributing](#contributing)
 
@@ -49,6 +52,8 @@ Alias for [apply](#apply) method.
 
 ## toJSONPatch
 
+To work with JSON Patch see [JSON8 Patch](https://github.com/JSON8/patch).
+
 This method is only available if the optional dependency [JSON8 Pointer](https://github.com/JSON8/pointer) is installed.
 
 ```npm install json8-pointer```
@@ -61,9 +66,45 @@ var JSONMergePatch = {
 var JSONPatch = mergePatch.toJSONPatch(JSONMergePatch)
 //[
 //  { op: 'add', path: '/foo/bar', value: 'foobar' },
-//  { op: 'delete', path: '/bar' }
+//  { op: 'remove', path: '/bar' }
 //]
 ```
+
+Be aware that per specification a JSON Merge Patch that would succefully apply on a document might fail to apply once converted to a JSON Patch.
+
+There are 3 cases:
+
+Incompatible destination
+
+```javascript
+
+var doc = []
+var JSONMergeatch = {a: 'hello'}
+var JSONPatch = toJSONPatch(JSONMergePatch)
+// JSONPatch will fail to apply because doc is not an object
+```
+
+Wrong location
+
+```javascript
+
+var doc = {}
+var JSONMergeatch = {a: {b: 'hello'}}
+var JSONPatch = toJSONPatch(JSONMergePatch)
+// JSONPatch will fail to apply because doc.a doesn't exist
+```
+
+Remove non-existant value
+
+```javascript
+
+var doc = {}
+var JSONMergeatch = {a: null}
+var JSONPatch = toJSONPatch(JSONMergePatch)
+// JSONPatch will fail to apply because doc.a doesn't exist
+```
+
+I might add an option to the toJSONPatch method later to produce a succeful JSON Patch but the only way to do this is to pass the document as well. Let me know if there is any interest or [contribute](https://github.com/JSON8/merge-patch/blob/master/CONTRIBUTING.md).
 
 [↑](#json8-merge-patch)
 

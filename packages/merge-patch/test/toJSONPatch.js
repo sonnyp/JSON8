@@ -2,17 +2,20 @@
 
 import assert from 'assert'
 import toJSONPatch from '../lib/toJSONPatch'
+import tests from './RFC.json'
+import {apply} from 'json8-patch'
+import {clone} from 'json8-core'
 
 describe('toJSONPatch', () => {
 
   it('converts path properties with null value as a deconste operation', () => {
     const patch = toJSONPatch({"foo": null})
-    assert.deepEqual(patch, [{"op": "delete", "path": "/foo"}])
+    assert.deepEqual(patch, [{"op": "remove", "path": "/foo"}])
   })
 
   it('converts nested path properties with null value as a deconste operation', () => {
     const patch = toJSONPatch({"foo": {"bar": null}})
-    assert.deepEqual(patch, [{"op": "delete", "path": "/foo/bar"}])
+    assert.deepEqual(patch, [{"op": "remove", "path": "/foo/bar"}])
   })
 
   it('converts path properties with non null value as an add operation', () => {
@@ -30,6 +33,29 @@ describe('toJSONPatch', () => {
       const patch = toJSONPatch(v)
       assert.deepEqual(patch, [{"op": "replace", "path": "", "value": v}])
     })
+  })
+
+  describe('RFC', function() {
+
+    tests.forEach(function(test) {
+      test = clone(test)
+
+      if (test['json-patch'] === false) {
+        it('throws an error for ' + JSON.stringify(test.patch) + ' apply on ' + JSON.stringify(test.original), () => {
+          const patch = toJSONPatch(test.patch)
+          assert.throws(function() {
+            apply(test.original, patch)
+          })
+        })
+      }
+      else {
+        it('returns ' + JSON.stringify(test.result), () => {
+          const patch = toJSONPatch(test.patch)
+          assert.deepEqual(apply(test.original, patch), test.result)
+        })
+      }
+    })
+
   })
 
 })
