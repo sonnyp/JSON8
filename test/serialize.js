@@ -1,0 +1,51 @@
+'use strict'
+
+import assert from 'assert'
+import {serialize} from '..'
+
+const valid = {
+  'true': true,
+  'false': false,
+  'null': null,
+  '"foo"': 'foo',
+  '{}': {},
+  '[]': [],
+  '42': 42,
+  '-0': -0,
+  '-42': -42,
+}
+
+/*eslint-disable object-shorthand*/
+const invalid = {
+  "Infinity": Infinity,
+  "-Infinity": -Infinity,
+  "function": function() {},
+  "undefined": undefined,
+  "NaN": NaN,
+}
+/*eslint-enable object-shorthand*/
+
+const forEach = function(obj, fn) {
+  for (const i in obj)
+    fn(i, obj[i])
+}
+
+if (global.Symbol && typeof Symbol() === 'symbol') invalid.symbol = Symbol()
+
+describe('serialize', () => {
+
+  forEach(valid, (k, v) => {
+    it('returns ' + k + ' for ' + k, () => {
+      assert.deepEqual(serialize(v), k)
+    })
+  })
+
+  forEach(invalid, (k, v) => {
+    it('throws a TypeError for ' + k, () => {
+      assert.throws(function() {
+        serialize(v)
+      }, TypeError)
+    })
+  })
+
+})

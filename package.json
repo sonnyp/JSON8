@@ -1,0 +1,20 @@
+{
+  "name": "json8",
+  "version": "0.2.0",
+  "description": "JSON toolkit for JavaScript",
+  "keywords": [
+    "JSON"
+  ],
+  "homepage": "https://github.com/JSON8/JSON8",
+  "repository": "github:JSON8/JSON8",
+  "main": "index.js",
+  "scripts": {
+    "preversion": "npm run browserify && npm test",
+    "browserify": "webpack -p index.js JSON8.js --output-library=JSON8",
+    "lint": "eslint .",
+    "unit": "mocha --compilers js:babel/register --recursive test/",
+    "test": "npm run unit && npm run lint"
+  },
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "MIT"
+}

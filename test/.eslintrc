@@ -1,0 +1,16 @@
+env:
+  mocha: true
+  es6: true
+
+ecmaFeatures:
+  modules: true
+
+rules:
+  # ECMAScript 6
+  no-var: 2
+  object-shorthand: [2, always]
+  prefer-const: 2
+
+  #Style
+  padded-blocks: 0
+  max-nested-callbacks: 0
