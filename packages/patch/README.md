@@ -58,21 +58,6 @@ See [clone](https://github.com/JSON8/core#clone).
 
 # Methods
 
-```javascript
-var doc = {
-  "name": "John Doe",
-  "address": {
-    "street": "...",
-    "number": 42,
-    "city": "Neverland"
-  },
-  "tags": ["friends", "coworker"],
-  "age": 25,
-  "starred": true,
-  "height": null
-});
-```
-
 ## apply
 
 ```javascript
