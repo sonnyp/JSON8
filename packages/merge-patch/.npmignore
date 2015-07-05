@@ -6,3 +6,6 @@ test/
 .gitignore
 .npmignore
 .travis.yml
+
+CONTRIBUTING.md
+LICENSE

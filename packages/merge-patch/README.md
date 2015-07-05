@@ -1,31 +1,55 @@
-JSON8-merge-patch
-===========
+JSON8 Merge Patch
+=================
 
 [![build status](https://img.shields.io/travis/JSON8/merge-patch.svg?style=flat-square)](https://travis-ci.org/JSON8/merge-patch)
 
-Implementation of [RFC 7396](https://tools.ietf.org/html/rfc7396)
+Implementation of JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396)
 
-```
-npm install json8-merge-patch
-```
+* [Getting started](#getting-started)
+* [Methods](#methods)
+* [Tests](#tests)
+* [Contributing](#contributing)
+
+# Getting started
+
+```npm install json8-merge-patch```
 
 ```javascript
-var JSON8 = require('json8-merge-patch');
+var mergePatch = require('json8-merge-patch');
 ```
 
-# apply
+or
+
+```xml
+<script src="node_modules/json8-merge-patch/JSON8MergePatch.js"></script>
+```
+```javascript
+var mergePatch = window.JSON8MergePatch
+```
+
+[↑](#json8-merge-patch)
+
+# Methods
+
+## apply
+
+Apply a JSON Merge Patch on a JSON document.
 
 ```javascript
-doc = JSON8.apply(doc, {"name": "Jeanette doe"});
+doc = mergePatch.apply(doc, {"name": "Jeanette doe"});
 ```
 
-# patch
+[↑](#json8-merge-patch)
 
-```JSON8.patch``` is an alias of ```JSON8.apply``` and behave exactly the same.
+## patch
 
-# toJSONPatch
+Alias for [apply](#apply) method.
 
-This method is only available if [JSON8-pointer](https://github.com/JSON8/pointer) is installed.
+[↑](#json8-merge-patch)
+
+## toJSONPatch
+
+This method is only available if the optional dependency [JSON8 Pointer](https://github.com/JSON8/pointer) is installed.
 
 ```npm install json8-pointer```
 
@@ -34,16 +58,26 @@ var JSONMergePatch = {
   "foo": {"bar": "foobar"},
   "foo": null}
 }
-var JSONPatch = JSON8.toJSONPatch(JSONMergePatch)
+var JSONPatch = mergePatch.toJSONPatch(JSONMergePatch)
 //[
 //  { op: 'add', path: '/foo/bar', value: 'foobar' },
-//  { op: 'delete', path: '/foo/foo' }
+//  { op: 'delete', path: '/bar' }
 //]
 ```
 
-# tests
+[↑](#json8-merge-patch)
+
+# Tests
 
 ```
-npm install -g eslint mocha
+npm install -g eslint mocha babel
 npm test
 ```
+
+[↑](#json8-merge-patch)
+
+# Contributing
+
+See [CONTRIBUTING.md](https://github.com/JSON8/merge-patch/blob/master/CONTRIBUTING.md)
+
+[↑](#json8-merge-patch)
