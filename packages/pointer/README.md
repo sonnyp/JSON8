@@ -5,6 +5,8 @@ JSON8 Pointer
 
 JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) implementation for JavaScript.
 
+See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work with JSON Pointer.
+
 * [Getting started](#getting-started)
 * [Methods](#methods)
   * [find](#find)
