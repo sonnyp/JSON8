@@ -20,6 +20,3 @@ module.exports.valid = require('./lib/valid')
 module.exports.serialize = require('./lib/serialize')
 module.exports.parse = JSON.parse
 module.exports.stringify = JSON.stringify
-
-// TODO -- remove me (backward compatibility)
-module.exports.isDocument = module.exports.isStructure
