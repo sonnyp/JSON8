@@ -14,13 +14,13 @@
     "preversion": "npm run browserify && npm test",
     "browserify": "webpack -p index.js JSON8Patch.js --output-library=JSON8Patch",
     "lint": "eslint .",
-    "unit": "mocha --compilers js:babel/register --recursive test/",
+    "unit": "./scripts/make-json-patch-tests && mocha --compilers js:babel/register --recursive test/",
     "test": "npm run unit && npm run lint"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "MIT",
   "dependencies": {
-    "json8-core": "^0.2.0",
-    "json8-pointer": "^0.2.0"
+    "json8": "^0.1.0",
+    "json8-pointer": "^0.3.0"
   }
 }

@@ -1,13 +1,10 @@
 'use strict'
 
-var core = require('json8-core')
 var extras = require('./lib/extras')
 var operations = require('./lib/operations')
 var patch = require('./lib/patch')
 
 var exports = {
-  clone: core.clone,
-
   get: extras.get,
   has: extras.has,
 

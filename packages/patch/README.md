@@ -11,8 +11,8 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
 
 * [Getting started](#getting-started)
 * [Methods](#methods)
-  * [patch](#patch)
   * [apply](#apply)
+  * [patch](#patch)
   * [revert](#revert)
   * [Operations](#operations)
     * [add](#add)
@@ -48,11 +48,11 @@ For performance concerns JSON8 Patch mutates documents; if you want it to work o
 
 ```javascript
 
-var clone = require('json8-core').clone;
+var clone = require('json8').clone;
 doc = clone(doc)
 ```
 
-See [clone](https://github.com/JSON8/core#clone).
+See [clone](https://github.com/JSON8/JSON8#clone).
 
 [↑](#json8-pointer)
 

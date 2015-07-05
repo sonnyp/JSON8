@@ -1,12 +1,12 @@
 'use strict'
 
-var pointer = require('json8-pointer')
-var parse = pointer.parse
-var walk = pointer.walk
-var core = require('json8-core')
-var isArray = core.isArray
-var clone = core.clone
-var equal = core.equal
+var JSON8Pointer = require('json8-pointer')
+var parse = JSON8Pointer.parse
+var walk = JSON8Pointer.walk
+var JSON8 = require('json8')
+var isArray = JSON8.isArray
+var clone = JSON8.clone
+var equal = JSON8.equal
 var get = require('./extras').get
 
 /**

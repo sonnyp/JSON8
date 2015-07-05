@@ -1,9 +1,9 @@
 'use strict'
 
-var pointer = require('json8-pointer')
-var parse = pointer.parse
-var serialize = pointer.serialize
-var isArray = require('json8-core').isArray
+var JSON8Pointer = require('json8-pointer')
+var parse = JSON8Pointer.parse
+var serialize = JSON8Pointer.serialize
+var isArray = require('json8').isArray
 var operations = require('./operations')
 
 /**
@@ -75,7 +75,7 @@ var reverse = function(patch, previous, idx) {
  * @param  {Boolean}      options.reversible  - return an array to revert
  * @return {void}
  */
-var patch = function(doc, patch, options) {
+var apply = function(doc, patch, options) {
   if (!isArray(patch))
     throw new Error('Invalid argument, patch must be an array')
 
@@ -127,10 +127,10 @@ var foo = function(items) {
  */
 var revert = function(doc, items) {
   var patches = foo(items)
-  return patch(doc, patches)
+  return apply(doc, patches)
 }
 
 module.exports.foo = foo
-module.exports.patch = patch
+module.exports.apply = apply
 module.exports.revert = revert
 module.exports.reverse = reverse

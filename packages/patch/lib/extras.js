@@ -1,8 +1,8 @@
 'use strict'
 
-var pointer = require('json8-pointer')
-var walk = pointer.walk
-var parse = pointer.parse
+var JSON8Pointer = require('json8-pointer')
+var walk = JSON8Pointer.walk
+var parse = JSON8Pointer.parse
 
 /**
  * Get the value at the JSON Pointer location

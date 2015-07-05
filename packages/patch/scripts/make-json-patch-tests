@@ -16,10 +16,10 @@ var HEADER = [
   "'use strict'\n",
   "var assert = require('assert')",
   "var patch = require('../lib/patch')",
-  "var apply = patch.patch",
+  "var apply = patch.apply",
   "var revert = patch.revert",
-  "var clone = require('json8-core').clone\n",
-  "describe('json-patch/json-patch-tests', function() {\n"
+  "var clone = require('json8').clone\n",
+  "describe('json-patch/json-patch-tests', function() {\n",
 ].join('\n')
 var FOOTER = '\n})\n'
 
