@@ -1,35 +1,84 @@
-JSON8-pointer
-===========
+JSON8 Pointer
+=============
 
 [![build status](https://img.shields.io/travis/JSON8/pointer.svg?style=flat-square)](https://travis-ci.org/JSON8/pointer)
 
-[JSON Pointer](http://tools.ietf.org/html/rfc6901) implementation for JavaScript
+JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) implementation for JavaScript.
 
-```
-npm install json8-pointer
-```
+* [Getting started](#getting-started)
+* [Methods](#methods)
+  * [find](#find)
+  * [parse](#parse)
+  * [serialize](#serialize)
+* [Tests](#tests)
+* [Contributing](#contributing)
+
+# Getting started
+
+```npm install json8-pointer```
 
 ```javascript
-var JSON8 = require('jsong-pointer');
+var JSONPointer = require('json8-pointer');
 ```
 
-# parse
+or
+
+```xml
+<script src="node_modules/json8-pointer/JSON8Pointer.js"></script>
+```
+```javascript
+var JSONPointer = window.JSON8Pointer
+```
+
+[↑](#json8-pointer)
+
+# Methods
+
+## find
+
+Use a JSON Pointer to find a value in a JSON document.
 
 ```javascript
-JSON8.parse('/foo/bar/hello');
-// returns ['foo', 'bar', 'hello'];
+var doc = {"foo": {"bar": "foobar"}}
+JSONPointer.find(doc, '/foo/bar');
+// "foobar"
 ```
 
-# serialize
+[↑](#json8-pointer)
+
+## parse
+
+Takes a JSON Pointer string and return an array of unescaped tokens.
+
+```javascript
+JSONPointer.parse('/foo/bar/hello');
+// ['foo', 'bar', 'hello'];
+
+JSONPointer.parse('/foo/a~1b')
+// ['foo', 'a/b']
+```
+
+[↑](#json8-pointer)
+
+## serialize
+
+Takes an array of escaped tokens (see [parse](parse)) and return a JSON Pointer string.
 
  ```javascript
 JSON8.serialize(['foo', 'bar', 'hello']);
-// returns ('/foo/bar/hello');
+// '/foo/bar/hello'
+
+JSONPointer.serialize(['foo', 'a/b'])
+// '/foo/a~1b'
 ```
 
-# tests
+[↑](#json8-pointer)
+
+# Tests
 
 ```
 npm install -g eslint mocha
 npm test
 ```
+
+[↑](#json8-pointer)
