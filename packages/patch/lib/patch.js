@@ -69,10 +69,10 @@ var reverse = function(patch, previous, idx) {
 
 /**
  * Apply a JSON Patch to a JSON document
- * @param  {Object|Array} doc             - JSON document to apply the patch to
- * @param  {Array}        patch           - JSON Patch array
- * @param  {Object}       options         - options
- * @param  {Boolean}      options.revert  - return an array to revert
+ * @param  {Object|Array} doc                 - JSON document to apply the patch to
+ * @param  {Array}        patch               - JSON Patch array
+ * @param  {Object}       options             - options
+ * @param  {Boolean}      options.reversible  - return an array to revert
  * @return {void}
  */
 var patch = function(doc, patch, options) {
@@ -97,7 +97,7 @@ var patch = function(doc, patch, options) {
     done.push([p, r[1], r[2]])
   }
 
-  if (!options || !options.revert)
+  if (!options || !options.reversible)
     return doc
 
   return [doc, done]

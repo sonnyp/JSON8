@@ -71,7 +71,7 @@ tests.forEach(function(test) {
       "it('reverts the patch', function() {",
       "  var test = " + JSON.stringify(test),
       "  var doc = clone(test.doc)",
-      "  var r = apply(doc, test.patch, {revert: true})",
+      "  var r = apply(doc, test.patch, {reversible: true})",
       "  assert.deepEqual(revert(r[0], r[1]), test.doc)",
       "})"
     ].join('\n')
