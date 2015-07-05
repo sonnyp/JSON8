@@ -4,7 +4,7 @@
   { "original": {"a":"b"}, "patch": {"b":"c"}, "result": {"a":"b","b":"c"} },
   { "original": {"a":"b","b":"c"}, "patch": {"a":null}, "result": {"b":"c"} },
   { "original": {"a":["b"]}, "patch": {"a":"c"}, "result": {"a":"c"} },
-  { "original": {"a":"c"}, "patch": {"a":"b"}, "result": {"a":["b"]} },
+  { "original": {"a":"c"}, "patch": {"a":["b"]}, "result": {"a":["b"]} },
   { "original": {"a":{"b":"c"}}, "patch": {"a":{"b":"d","c":null}}, "result": {"a":{"b":"d"}}, "json-patch": false},
   { "original": {"a":[{"b":"c"}]}, "patch": {"a":[1]}, "result": {"a":[1]} },
   { "original": ["a","b"], "patch": ["c","d"], "result": ["c","d"] },
