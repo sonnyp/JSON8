@@ -15,8 +15,8 @@ var exports = {
   copy: operations.copy,
   test: operations.test,
 
-  patch: patch.patch,
-  apply: patch.patch,
+  apply: patch.apply,
+  patch: patch.apply,
   revert: patch.revert,
 }
 
