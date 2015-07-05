@@ -79,8 +79,14 @@ JSONPointer.serialize(['foo', 'a/b'])
 # Tests
 
 ```
-npm install -g eslint mocha
+npm install -g eslint mocha babel
 npm test
 ```
+
+[↑](#json8-pointer)
+
+# Contributing
+
+See [CONTRIBUTING.md](https://github.com/JSON8/merge-pointer/blob/master/CONTRIBUTING.md)
 
 [↑](#json8-pointer)

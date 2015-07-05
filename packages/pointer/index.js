@@ -1,8 +1,8 @@
 'use strict'
 
-var core = require('json8-core')
-var isArray = core.isArray
-var isObject = core.isObject
+var JSON8 = require('json8')
+var isArray = JSON8.isArray
+var isObject = JSON8.isObject
 
 /**
  * parse a JSON Pointer string
