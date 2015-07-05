@@ -97,10 +97,10 @@ var patch = function(doc, patch, options) {
     done.push([p, r[1], r[2]])
   }
 
-  if (options && options.revert)
-    return [doc, done]
+  if (!options || !options.revert)
+    return doc
 
-  return doc
+  return [doc, done]
 }
 
 /**

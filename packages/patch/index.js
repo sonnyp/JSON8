@@ -20,7 +20,7 @@ var exports = {
 
   patch: patch.patch,
   apply: patch.patch,
-  revert: patch.revert
+  revert: patch.revert,
 }
 
 for (var i in exports)

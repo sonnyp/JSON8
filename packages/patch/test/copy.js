@@ -1,64 +1,64 @@
 'use strict'
 
-var assert = require('assert')
-var operations = require('../lib/operations')
+import assert from 'assert'
+import operations from '../lib/operations'
 
-describe('copy', function() {
+describe('copy', () => {
 
-  var doc
+  let doc
 
-  var copy = function(path, dest) {
+  const copy = function(path, dest) {
     return operations.copy(doc, path, dest)
   }
 
-  describe('object location', function() {
+  describe('object location', () => {
 
-    it('copy the object if the parent exists and is valid', function() {
+    it('copy the object if the parent exists and is valid', () => {
       doc = {bar: 'foo'}
       copy('/bar', '/foo')
       assert.deepEqual(doc.bar, doc.foo)
     })
 
-    it('doesn\'t shallow copy objects', function() {
+    it('doesn\'t shallow copy objects', () => {
       doc = {bar: []}
       copy('/bar', '/foo')
       assert.deepEqual(doc.bar, doc.foo)
     })
 
-    it('throws an error if the parent does not exists', function() {
+    it('throws an error if the parent does not exists', () => {
       doc = {}
-      assert.throws(function() {
+      assert.throws(() => {
         copy('/foo/bar', '/bar/foo')
       }, Error)
     })
 
-    it('throws an error if the parent is not valid', function() {
+    it('throws an error if the parent is not valid', () => {
       doc = {foo: 'bar'}
-      assert.throws(function() {
+      assert.throws(() => {
         copy('/foo/bar', '/bar/foo')
       }, Error)
     })
 
   })
 
-  describe('array location', function() {
+  describe('array location', () => {
 
-    it('sets the value if the parent exists and is valid', function() {
+    it('sets the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
       copy('/foo/0', '/foo/1')
       assert.deepEqual(doc.foo[0], doc.foo[1])
     })
 
-    it('throws an error if the parent does not exists', function() {
+    it('throws an error if the parent does not exists', () => {
       doc = {'foo': []}
-      assert.throws(function() {
+      assert.throws(() => {
         copy('/foo/0/bar', '/foo/bar')
       }, Error)
     })
 
-    it('throws an error if the parent is not valid', function() {
+    it('throws an error if the parent is not valid', () => {
       doc = {foo: true}
-      assert.throws(function() {
+      assert.throws(() => {
         copy('/foo/bar', '/bar/foo')
       }, Error)
     })

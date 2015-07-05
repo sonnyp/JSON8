@@ -1,56 +1,56 @@
 'use strict'
 
-var assert = require('assert')
-var extras = require('../lib/extras')
+import assert from 'assert'
+import extras from '../lib/extras'
 
-describe('get', function() {
+describe('get', () => {
 
-  var doc
+  let doc
 
-  var get = function(path) {
+  const get = function(path) {
     return extras.get(doc, path)
   }
 
-  describe('object location', function() {
+  describe('object location', () => {
 
-    it('returns the value if the location exists', function() {
+    it('returns the value if the location exists', () => {
       doc = {'foo': 'bar'}
-      var r = get('/foo')
+      const r = get('/foo')
       assert.strictEqual(r, 'bar')
     })
 
-    it('returns undefined if the location does not exists', function() {
+    it('returns undefined if the location does not exists', () => {
       doc = {}
-      var r = get('/foo')
+      const r = get('/foo')
       assert.strictEqual(r, undefined)
     })
 
-    it('throws an error if the path cannot be walked', function() {
+    it('throws an error if the path cannot be walked', () => {
       doc = {}
-      assert.throws(function() {
+      assert.throws(() => {
         get('/foo/bar')
       }, Error)
     })
 
   })
 
-  describe('array location', function() {
+  describe('array location', () => {
 
-    it('returns the value if the location exists', function() {
+    it('returns the value if the location exists', () => {
       doc = {'foo': ['bar']}
-      var r = get('/foo/0')
+      const r = get('/foo/0')
       assert.strictEqual(r, 'bar')
     })
 
-    it('returns undefined if the value does not exists', function() {
+    it('returns undefined if the value does not exists', () => {
       doc = {'foo': []}
-      var r = get('/foo/0')
+      const r = get('/foo/0')
       assert.strictEqual(r, undefined)
     })
 
-    it('throws an error if the path cannot be walked', function() {
+    it('throws an error if the path cannot be walked', () => {
       doc = {'foo': []}
-      assert.throws(function() {
+      assert.throws(() => {
         get('/foo/0/bar')
       }, Error)
     })

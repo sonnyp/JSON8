@@ -1,60 +1,60 @@
 'use strict'
 
-var assert = require('assert')
-var operations = require('../lib/operations')
+import assert from 'assert'
+import operations from '../lib/operations'
 
-describe('remove', function() {
+describe('remove', () => {
 
-  var doc
+  let doc
 
-  var remove = function(path) {
+  const remove = function(path) {
     return operations.remove(doc, path)
   }
 
-  describe('object location', function() {
+  describe('object location', () => {
 
-    it('removes and returns the value if the location exists', function() {
+    it('removes and returns the value if the location exists', () => {
       doc = {foo: 'bar'}
-      var r = remove('/foo')
+      const r = remove('/foo')
       assert.strictEqual(Object.keys(r[0]).length, 0)
       assert.strictEqual(r[1], 'bar')
     })
 
-    it('throws an error if the location does not exists', function() {
+    it('throws an error if the location does not exists', () => {
       doc = {}
-      assert.throws(function() {
+      assert.throws(() => {
         remove('/foo')
       }, Error)
     })
 
-    it('throws an error if the path cannot be walked', function() {
+    it('throws an error if the path cannot be walked', () => {
       doc = {}
-      assert.throws(function() {
+      assert.throws(() => {
         remove('/foo/bar')
       }, Error)
     })
 
   })
 
-  describe('array location', function() {
+  describe('array location', () => {
 
-    it('removes and returns the value if the location exists', function() {
+    it('removes and returns the value if the location exists', () => {
       doc = ['bar']
-      var r = remove('/0')
+      const r = remove('/0')
       assert.strictEqual(r[0].length, 0)
       assert.strictEqual(r[1], 'bar')
     })
 
-    it('throws an error if the location does not exists', function() {
+    it('throws an error if the location does not exists', () => {
       doc = []
-      assert.throws(function() {
+      assert.throws(() => {
         remove('/0')
       }, Error)
     })
 
-    it('throws an error if the path cannot be walked', function() {
+    it('throws an error if the path cannot be walked', () => {
       doc = {}
-      assert.throws(function() {
+      assert.throws(() => {
         remove('/foo/0')
       }, Error)
     })

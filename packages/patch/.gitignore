@@ -6,3 +6,4 @@
 !.travis.yml
 
 test/json-patch-tests.js
+JSON8Patch.js

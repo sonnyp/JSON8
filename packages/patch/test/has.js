@@ -1,56 +1,56 @@
 'use strict'
 
-var assert = require('assert')
-var extras = require('../lib/extras')
+import assert from 'assert'
+import extras from '../lib/extras'
 
-describe('has', function() {
+describe('has', () => {
 
-  var doc
+  let doc
 
-  var has = function(path) {
+  const has = function(path) {
     return extras.has(doc, path)
   }
 
-  describe('object location', function() {
+  describe('object location', () => {
 
-    it('returns true if there is a value at the specified location', function() {
+    it('returns true if there is a value at the specified location', () => {
       doc = {'foo': 'bar'}
-      var r = has('/foo')
+      const r = has('/foo')
       assert.strictEqual(r, true)
     })
 
-    it('returns false if there is no value at the specified location', function() {
+    it('returns false if there is no value at the specified location', () => {
       doc = {}
-      var r = has('/foo')
+      const r = has('/foo')
       assert.strictEqual(r, false)
     })
 
-    it('throws an error if the path cannot be walked', function() {
+    it('throws an error if the path cannot be walked', () => {
       doc = {}
-      assert.throws(function() {
+      assert.throws(() => {
         has('/foo/bar')
       }, Error)
     })
 
   })
 
-  describe('array location', function() {
+  describe('array location', () => {
 
-    it('returns true if there is a value at the specified location', function() {
+    it('returns true if there is a value at the specified location', () => {
       doc = {'foo': ['bar']}
-      var r = has('/foo/0')
+      const r = has('/foo/0')
       assert.strictEqual(r, true)
     })
 
-    it('returns false if there is no value at the specified location', function() {
+    it('returns false if there is no value at the specified location', () => {
       doc = {'foo': []}
-      var r = has('/foo/0')
+      const r = has('/foo/0')
       assert.strictEqual(r, false)
     })
 
-    it('throws an error if the path cannot be walked', function() {
+    it('throws an error if the path cannot be walked', () => {
       doc = {'foo': []}
-      assert.throws(function() {
+      assert.throws(() => {
         has('/foo/0/bar')
       }, Error)
     })

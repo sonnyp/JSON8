@@ -37,6 +37,7 @@ rules:
   indent: [2, 2]
   no-lonely-if: 2
   no-floating-decimal: 2
+  comma-dangle: [2, always-multiline]
   brace-style: [2, stroustrup]
   comma-style: [2, last]
   consistent-this: [0, that]

@@ -1,28 +1,62 @@
-JSON8-patch
+JSON8 Patch
 ===========
 
 [![build status](https://img.shields.io/travis/JSON8/patch.svg?style=flat-square)](https://travis-ci.org/JSON8/patch)
 
-JSON8-patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [tests](#tests)
+JSON Patch [RFC 6902](http://tools.ietf.org/html/rfc6902) implementation for JavaScript.
 
-http://jsonpatch.com/
+See http://jsonpatch.com/ for more information about JSON Patch.
 
+JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [Tests](#tests)
 
-```
-npm install json8-patch
-```
+* [Getting started](#getting-started)
+* [Methods](#methods)
+  * [patch](#patch)
+  * [apply](#apply)
+  * [revert](#revert)
+  * [Operations](#operations)
+    * [add](#add)
+    * [remove](#remove)
+    * [replace](#replace)
+    * [move](#move)
+    * [copy](#copy)
+    * [test](#test)
+  * [Extra operations](#extra-operations)
+    * [get](#get)
+    * [has](#has)
+* [Tests](#tests)
+* [Contributing](#contributing)
+
+# Getting started
+
+```npm install json8-patch```
 
 ```javascript
-var JSON8 = require('json8-patch');
+var JSONPatch = require('json8-patch');
 ```
 
-For performance concerns JSON8-patch mutates documents; if you want it to work on its own shallow copy of your document use:
+or
+
+```xml
+<script src="node_modules/json8-patch/JSON8Patch.js"></script>
+```
+```javascript
+var JSONPatch = window.JSON8Patch
+```
+
+For performance concerns JSON8 Patch mutates documents; if you want it to work on its own shallow copy of your document use:
 
 ```javascript
 
-doc = JSON8.clone(doc)
+var clone = require('json8-core').clone;
+doc = clone(doc)
 ```
+
 See [clone](https://github.com/JSON8/core#clone).
+
+[↑](#json8-pointer)
+
+# Methods
 
 ```javascript
 var doc = {
@@ -39,10 +73,10 @@ var doc = {
 });
 ```
 
-# patch
+## apply
 
 ```javascript
-doc = JSON8.patch(doc, [
+doc = JSONPatch.apply(doc, [
   { "op": "add",     "path": "/tags/0",        "value": "family"          },
   { "op": "remove",  "path": "/height"                                    },
   { "op": "replace", "path": "/age",           "value": "26"              },
@@ -52,90 +86,120 @@ doc = JSON8.patch(doc, [
 ]);
 ```
 
-```JSON8.patch``` returns a document because the JSON Patch specification states that an operation can replace the original document.
+```JSONPatch.apply``` returns a document because the JSON Patch specification states that an operation can replace the original document.
 
-```JSON8.patch``` is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
+```JSONPatch.apply``` is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
 
-# apply
+[↑](#json8-patch)
 
-```JSON8.apply``` is an alias to ```JSON.patch``` and behaves exactly the same.
+## patch
 
-# revert
+Alias for [apply](#apply) method.
 
-If ```JSON8.patch``` is passed with a third argument ```{revert: true}``` it will return an array ```[doc, items]```.
+[↑](#json8-patch)
 
-The items object can be used to revert a patch on a document.
+## revert
+
+If the [patch](#patch) or [apply](#apply) method is called with a third argument ```{reversible: true}``` it will return an array of the form ```[doc, revert]```.
+
+The revert object can be used to revert a patch on a document.
 
 ```javascript
-// apply the patch
-var patchResult = JSON8.patch(doc, patch, {revert: true});
+// apply the patch with the reversible option
+var patchResult = JSONPatch.apply(doc, patch, {reversible: true});
 doc = patchResult[0];
 
 // revert the patch
-doc = JSON8.revert(doc, patchResult[1]);
-// doc is strictly identical (in the JSON sense) to the original
+doc = JSONPatch.revert(doc, patchResult[1]);
+// doc is strictly identical to the origina
 ```
 
-# Operations
+[↑](#json8-patch)
+
+## Operations
 
 ```add```, ```copy```, ```replace```, ```move```, ```remove```, ```test``` operations return an array of the form ```[document, previous, idx]```
 
-The first argument is returned for the same reason ```JSON8.apply``` returns a document see [patch](#patch)
+The first argument is the patched document.
 
 The second argument is the previous value at the specified destination if any, undefined otherwise.
 
-The third argument is the index of the new element. For ```add``` operation only using the JSON Pointer '-' token to push an item at the end of an array.
+The third argument is used internaly and can be ignored. It is the index of the new element. For ```add``` operation only using the JSON Pointer '-' token to push an item at the end of an array.
 
-## add
+### add
 ```javascript
-doc = JSON8.add(doc, '/foo', 'foo')[0]
+doc = JSONPatch.add(doc, '/foo', 'foo')[0]
 ```
 
-## remove
+[↑](#json8-patch)
+
+### remove
 ```javascript
-doc = JSON8.remove(doc, '/foo')[0];
+doc = JSONPatch.remove(doc, '/foo')[0];
 ```
 
-## replace
+[↑](#json8-patch)
+
+### replace
 ```javascript
-doc = JSON8.replace(doc, '/foo', 'foo')[0];
+doc = JSONPatch.replace(doc, '/foo', 'foo')[0];
 ```
 
-## move
+[↑](#json8-patch)
+
+### move
 ```javascript
-doc = JSON8.move(doc, '/foo', '/bar')[0];
+doc = JSONPatch.move(doc, '/foo', '/bar')[0];
 ```
 
-## copy
+[↑](#json8-patch)
+
+### copy
 ```javascript
-doc = JSON8.copy(doc, '/foo', '/bar')[0];
+doc = JSONPatch.copy(doc, '/foo', '/bar')[0];
 ```
 
-## test
+[↑](#json8-patch)
+
+### test
 ```javascript
-doc = JSON8.test(doc, '/foo', 'bar')[0];
+doc = JSONPatch.test(doc, '/foo', 'bar')[0];
 ```
 
-# Extra operations
+[↑](#json8-patch)
 
-Those are not part of the standard and are only provided for convenience. They cannot be used inside a JSON Patch document.
+## Extra operations
 
-## get
+Those are not part of the standard and are only provided for convenience.
+
+### get
 ```javascript
-JSON8.get(doc, '/foo');
+JSONPatch.get(doc, '/foo');
 // returns value at /foo
 ```
 
-## has
+[↑](#json8-patch)
+
+### has
 ```javascript
-JSON8.has(doc, '/foo');
+JSONPatch.has(doc, '/foo');
 // returns true if foo property exists, false otherwise
 ```
 
-# tests
+[↑](#json8-patch)
+
+# Tests
 
 ```
 git submodule update --init --recursive
-npm install -g eslint mocha
+npm install -g eslint mocha babel
 npm test
 ```
+
+[↑](#json8-patch)
+
+# Contributing
+
+See [CONTRIBUTING.md](https://github.com/JSON8/patch/blob/master/CONTRIBUTING.md)
+
+[↑](#json8-patch)

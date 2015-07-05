@@ -1,8 +1,13 @@
+scripts/
 test/
 
 .editorconfig
 .eslintignore
 .eslintrc
 .gitignore
+.gitmodules
 .npmignore
 .travis.yml
+
+CONTRIBUTING.md
+LICENSE

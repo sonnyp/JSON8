@@ -1,59 +1,59 @@
 'use strict'
 
-var assert = require('assert')
-var operations = require('../lib/operations')
+import assert from 'assert'
+import operations from '../lib/operations'
 
-describe('add', function() {
+describe('add', () => {
 
-  var doc
+  let doc
 
-  var add = function(path, obj) {
+  const add = function(path, obj) {
     return operations.add(doc, path, obj)
   }
 
-  describe('object location', function() {
+  describe('object location', () => {
 
-    it('sets the value if the parent exists and is valid', function() {
+    it('sets the value if the parent exists and is valid', () => {
       doc = {}
-      var obj = {bar: 'foo'}
-      var r = add('/foo', {bar: 'foo'})
+      const obj = {bar: 'foo'}
+      const r = add('/foo', {bar: 'foo'})
       assert.deepEqual(r[0].foo, obj)
     })
 
-    it('throws an error if the parent does not exists', function() {
+    it('throws an error if the parent does not exists', () => {
       doc = {}
-      assert.throws(function() {
+      assert.throws(() => {
         add('/foo/bar', {bar: 'foo'})
       }, Error)
     })
 
-    it('throws an error if the parent is not valid', function() {
+    it('throws an error if the parent is not valid', () => {
       doc = {foo: 'bar'}
-      assert.throws(function() {
+      assert.throws(() => {
         add('/foo/bar', {bar: 'foo'})
       }, Error)
     })
 
   })
 
-  describe('array location', function() {
+  describe('array location', () => {
 
-    it('adds the value if the parent exists and is valid', function() {
+    it('adds the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
-      var r = add('/foo/0', 'barfoo')
+      const r = add('/foo/0', 'barfoo')
       assert.deepEqual(r[0], {foo: ['barfoo', 'bar']})
     })
 
-    it('throws an error if the parent does not exists', function() {
+    it('throws an error if the parent does not exists', () => {
       doc = {'foo': []}
-      assert.throws(function() {
+      assert.throws(() => {
         add('/foo/0/bar', 'foobar')
       }, Error)
     })
 
-    it('throws an error if the parent is not valid', function() {
+    it('throws an error if the parent is not valid', () => {
       doc = {foo: true}
-      assert.throws(function() {
+      assert.throws(() => {
         add('/foo/bar', {bar: 'foo'})
       }, Error)
     })
