@@ -3,7 +3,7 @@
 import assert from 'assert'
 import apply from '../lib/apply'
 import tests from './RFC.json'
-import {clone} from 'json8-core'
+import {clone} from 'json8'
 
 describe('RFC', () => {
 

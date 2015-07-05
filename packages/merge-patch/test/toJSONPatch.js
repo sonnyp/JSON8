@@ -4,7 +4,7 @@ import assert from 'assert'
 import toJSONPatch from '../lib/toJSONPatch'
 import tests from './RFC.json'
 import {apply} from 'json8-patch'
-import {clone} from 'json8-core'
+import {clone} from 'json8'
 
 describe('toJSONPatch', () => {
 

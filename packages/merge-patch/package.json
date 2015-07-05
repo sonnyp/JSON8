@@ -21,10 +21,10 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "MIT",
   "dependencies": {
-    "json8-core": "^0.2.0"
+    "json8": "^0.1.0"
   },
   "devDependencies": {
-    "json8-patch": "^0.1.0",
-    "json8-pointer": "^0.1.0"
+    "json8-patch": "^0.2.1",
+    "json8-pointer": "^0.3.0"
   }
 }
