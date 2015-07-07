@@ -16,6 +16,12 @@ const VALID = {
   '-42': -42,
 }
 
+if (global.Map)
+  VALID.map = new Map()
+
+if (global.Set)
+  VALID.set = new Set()
+
 const INVALID = {
   "Infinity": Infinity,
   "-Infinity": -Infinity,

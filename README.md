@@ -45,7 +45,9 @@ var JSON8 = window.JSON8
 
 # Motivations
 
-Even though JSON is inspired by JavaScript, JavaScript lacks some basic features to work efficiently and safely with JSON. Plus there are traps to be aware of. Examples of the common ones:
+Even though JSON is inspired by JavaScript, JavaScript lacks some basic features to work efficiently and safely with JSON.
+
+Plus there are some pitfalls to be aware of. Examples of the common ones:
 
 ```javascript
 JSON.stringify(undefined)        // undefined
@@ -79,6 +81,7 @@ JSON.stringify(Infinity)  // 'null'
 typeof -Infinity          // 'number'
 JSON.stringify(-Infinity) // 'null'
 
+JSON.parse("-0")   // -0
 JSON.stringify(-0) // '0'
 ```
 
@@ -88,7 +91,7 @@ JSON.stringify(-0) // '0'
 
 ## clone
 
-Deep clone any JSON value.
+Deep clone any value.
 
 ```javascript
 var doc = {"foo": "bar"}
@@ -103,7 +106,7 @@ JSON8.clone(42)   // 42
 
 ## equal
 
-Test for JSON equality between two JSON documents.
+Test for equality between two documents.
 
 ```javascript
 JSON8.equal(true, true)     // true
@@ -125,7 +128,9 @@ Returns the JSON type for a value, ```undefined``` if the value is not of any JS
 
 ```javascript
 JSON8.type({})        // "object"
+JSON8.type(new Map()) // "object"
 JSON8.type([])        // "array"
+JSON8.type(new Set()) // "array"
 JSON8.type(42)        // "number"
 JSON8.type('foo')     // "string"
 JSON8.type(null)      // "null"
@@ -167,11 +172,13 @@ Where type is any of:
 
 #### structure
 
-Returns true for array and object, false otherwise.
+Returns true for arrays and objects, false otherwise.
 
 ```javascript
-JSON8.is({}, 'structure') // true
-JSON8.isStructure([])     // true
+JSON8.is({}, 'structure')    // true
+JSON8.isStructure([])        // true
+JSON8.isStructure(new Set()) // true
+JSON8.isStructure(new Map()) // true
 
 JSON8.isStructure(null)   // false
 ```
@@ -205,11 +212,12 @@ Returns true for object, false otherwise.
 JSON8.is({}, 'object')        // true
 JSON8.isObject({})            // true
 JSON8.isObject({})            // true
-JSON8.isObject(new Date())    // true
+JSON8.isObject(new Map())     // true
 
 JSON8.isObject([])            // false
 JSON8.isObject(null)          // false
 JSON8.isObject(function() {}) // false
+JSON8.isObject(new Set())     // false
 ```
 
 [↑](#json8)
@@ -219,11 +227,12 @@ JSON8.isObject(function() {}) // false
 Returns true for array, false otherwise.
 
 ```javascript
-JSON8.is([], 'array') // true
-JSON8.isArray([])     // true
-JSON8.isArray([])     // true
+JSON8.is([], 'array')    // true
+JSON8.isArray([])        // true
+JSON8.isArray(new Set()) // true
 
-JSON8.isArray({})     // false
+JSON8.isArray({})        // false
+JSON8.isArray(new Map()) // false
 ```
 
 [↑](#json8)
@@ -303,6 +312,8 @@ JSON8.isJSON(null)          //true
 JSON8.isJSON({})            //true
 JSON8.isJSON([])            //true
 JSON8.isJSON(42)            //true
+JSON8.isJSON(new Map())     //true
+JSON8.isJSON(new Set())     //true
 
 JSON8.isJSON(undefined)     //false
 JSON8.isJSON(NaN)           //false
@@ -319,10 +330,10 @@ Recursive version of [is JSON](#json), works on primitive values as well.
 
 ```javascript
 JSON8.valid(true)                   //true
-JSON8.valid({"foo":"bar"})          //true
+JSON8.valid({"foo": "bar"})         //true
 
-JSON8.valid({"foo":undefined})      //false
-JSON8.valid({"foo":NaN})            //false
+JSON8.valid({"foo": undefined})     //false
+JSON8.valid({"foo": NaN})           //false
 JSON8.valid(["bar", function() {}]) //false
 ```
 
@@ -341,7 +352,9 @@ Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/Java
   * NaN
   * symbols
   * functions
-* Returns "-0" for signed zero (-0) while JSON.stringify return "0"
+* Works with [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (serialize as JSON object)
+* Works with [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) (serialize as JSON array)
+* Serializes signed zeros (-0) as "-0" while JSON.stringify returns "0"
 * Ignores [toJSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON_behavior) function property.
 * Does not serialize Date objects into ISO date strings (see previous bullet point for reason), use [Date.toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
 * Second argument is equivalent to the JSON.stringfy [space](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#space_argument) (third) argument
@@ -358,6 +371,15 @@ JSON8.serialize({"foo": "bar"}, 2)
 //   "foo": "bar"
 // }
 
+var set = new Set()
+set.add('hello')
+JSON8.serialize(set)
+// ["hello"]
+
+var map = new Map()
+map.set('foo', 'bar')
+JSON8.serialize(map)
+// {"foo":"bar"}
 
 // Because JSON8 ignores the toJSON property, it doesn't serialize
 // Date objects into ISO date strings.

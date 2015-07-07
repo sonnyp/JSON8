@@ -3,34 +3,39 @@
 import assert from 'assert'
 import {serialize} from '..'
 
-const valid = {
-  'true': true,
-  'false': false,
-  'null': null,
-  '"foo"': 'foo',
-  '{}': {},
-  '[]': [],
-  '42': 42,
-  '-0': -0,
-  '-42': -42,
-}
+const valid = [
+  ['true', true],
+  ['false', false],
+  ['null', null],
+  ['"foo"', 'foo'],
+  ['{}', {}],
+  ['[]', []],
+  ['42', 42],
+  ['-0', -0],
+  ['-42', -42],
+]
 
-/*eslint-disable object-shorthand*/
-const invalid = {
-  "Infinity": Infinity,
-  "-Infinity": -Infinity,
-  "function": function() {},
-  "undefined": undefined,
-  "NaN": NaN,
-}
-/*eslint-enable object-shorthand*/
+if (global.Set)
+  valid.push(['[]', new Set()])
+
+if (global.Map)
+  valid.push(['{}', new Map()])
+
+const invalid = [
+  ['Infinity', Infinity],
+  ['-Infinity', -Infinity],
+  ['function', function() {}],
+  ['undefined', undefined],
+  ['NaN', NaN],
+]
+
+if (global.Symbol && typeof Symbol() === 'symbol') invalid.push(['symbol', Symbol()])
 
 const forEach = function(obj, fn) {
-  for (const i in obj)
-    fn(i, obj[i])
+  obj.forEach(function(item) {
+    fn(item[0], item[1])
+  })
 }
-
-if (global.Symbol && typeof Symbol() === 'symbol') invalid.symbol = Symbol()
 
 describe('serialize', () => {
 

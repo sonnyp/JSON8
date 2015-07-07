@@ -1,7 +1,7 @@
 'use strict'
 
 import assert from 'assert'
-import {clone} from '..'
+import {clone, equal} from '..'
 
 describe('clone', () => {
 
@@ -13,14 +13,34 @@ describe('clone', () => {
     cl = clone(doc)
     assert.deepEqual(cl, doc)
     assert.notStrictEqual(cl, doc)
+    assert(equal(doc, cl))
   })
+
+  if (global.Set) {
+    it('returns an set clone copy', () => {
+      doc = new Set(["foo", "bar"])
+      cl = clone(doc)
+      assert(equal(doc, cl))
+      assert.notStrictEqual(cl, doc)
+    })
+  }
 
   it('returns an object clone copy', () => {
     doc = {"foo": "bar", "bar": "foo"}
     cl = clone(doc)
     assert.deepEqual(cl, doc)
     assert.notStrictEqual(cl, doc)
+    assert(equal(doc, cl))
   })
+
+  if (global.Map) {
+    it('returns a map clone copy', () => {
+      doc = {"foo": "bar", "bar": "foo"}
+      cl = clone(doc)
+      assert(equal(doc, cl))
+      assert.notStrictEqual(cl, doc)
+    })
+  }
 
   it('returns false for false', () => {
     assert.strictEqual(clone(false), false)
