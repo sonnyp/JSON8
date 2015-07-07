@@ -1,6 +1,9 @@
 env:
   node: true
 
+ecmaFeatures:
+  forOf: true
+
 rules:
   # Possible Errors
   no-console: 2

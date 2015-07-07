@@ -24,6 +24,8 @@ const numbers = {
 const structures = {
   '[]': [],
   '{}': {},
+  'map': new Map(),
+  'set': new Set(),
 }
 
 const VALID = {}
@@ -120,7 +122,13 @@ describe('is', () => {
       assert.strictEqual(is({}, 'object'), true)
       assert.strictEqual(isObject({}), true)
     })
-    allBut('{}', (k, v) => {
+
+    it('returns true for map', () => {
+      assert.strictEqual(is(new Map(), 'object'), true)
+      assert.strictEqual(isObject(new Map()), true)
+    })
+
+    allBut(['{}', 'map'], (k, v) => {
       it('returns false for ' + k, () => {
         assert.strictEqual(is(v, 'object'), false)
         assert.strictEqual(isObject(v), false)
@@ -134,7 +142,12 @@ describe('is', () => {
       assert.strictEqual(isArray([]), true)
     })
 
-    allBut('[]', (k, v) => {
+    it('returns true for set', () => {
+      assert.strictEqual(is(new Set(), 'array'), true)
+      assert.strictEqual(isArray(new Set()), true)
+    })
+
+    allBut(['[]', 'set'], (k, v) => {
       it('returns false for ' + k, () => {
         assert.strictEqual(isArray(v), false)
       })
