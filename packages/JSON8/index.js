@@ -18,5 +18,5 @@ module.exports.type = require('./lib/type')
 module.exports.equal = require('./lib/equal')
 module.exports.valid = require('./lib/valid')
 module.exports.serialize = require('./lib/serialize')
-module.exports.parse = JSON.parse
-module.exports.stringify = JSON.stringify
+module.exports.parse = require('./lib/parse')
+module.exports.forEach = require('./lib/forEach')

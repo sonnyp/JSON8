@@ -58,7 +58,7 @@ module.exports = function serialize(obj, spacer) {
     var keys = Object.keys(obj)
     for (var j = 0, len = keys.length; j < len; j++) {
       var k = keys[j]
-      str += JSON.stringify(obj[k]) + ':' + serialize(obj[k])
+      str += JSON.stringify(k) + ':' + serialize(obj[k])
       if (j !== len - 1) str += ','
     }
     str += '}'

@@ -83,6 +83,14 @@ JSON.stringify(-Infinity) // 'null'
 
 JSON.parse("-0")   // -0
 JSON.stringify(-0) // '0'
+
+var set = new Set()
+set.add('foo')
+JSON.stringify(set)   // '{}'
+
+var map = new Map()
+map.set('foo', 'bar')
+JSON.stringify(map)   // '{}''
 ```
 
 [↑](#json8)
