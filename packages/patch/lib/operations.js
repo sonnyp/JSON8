@@ -4,7 +4,6 @@ var JSON8Pointer = require('json8-pointer')
 var parse = JSON8Pointer.parse
 var walk = JSON8Pointer.walk
 var JSON8 = require('json8')
-var isArray = JSON8.isArray
 var clone = JSON8.clone
 var equal = JSON8.equal
 var get = require('./extras').get
@@ -32,7 +31,7 @@ var add = function(doc, path, value) {
   var old
   var idx
 
-  if (isArray(parent)) {
+  if (Array.isArray(parent)) {
     if (token === '-') {
       parent.push(value)
       idx = parent.length - 1
@@ -71,7 +70,7 @@ var remove = function(doc, path) {
   if (old === undefined)
     throw new Error('Location not found')
 
-  if (isArray(parent))
+  if (Array.isArray(parent))
     parent.splice(token, 1)
   else
     delete parent[token]

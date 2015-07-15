@@ -3,7 +3,6 @@
 var JSON8Pointer = require('json8-pointer')
 var parse = JSON8Pointer.parse
 var serialize = JSON8Pointer.serialize
-var isArray = require('json8').isArray
 var operations = require('./operations')
 
 /**
@@ -76,7 +75,7 @@ var reverse = function(patch, previous, idx) {
  * @return {void}
  */
 var apply = function(doc, patch, options) {
-  if (!isArray(patch))
+  if (!Array.isArray(patch))
     throw new Error('Invalid argument, patch must be an array')
 
   var done = []

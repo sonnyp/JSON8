@@ -5,7 +5,7 @@ JSON8 Patch
 
 JSON Patch [RFC 6902](http://tools.ietf.org/html/rfc6902) implementation for JavaScript.
 
-See http://jsonpatch.com/ for more information about JSON Patch.
+See [jsonpatch.com](http://jsonpatch.com) for more information about JSON Patch.
 
 JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [Tests](#tests)
 
