@@ -1,6 +1,5 @@
 'use strict'
 
-var isArray = require('json8').isArray
 var parse = require('./parse')
 var walk = require('./walk')
 
@@ -12,7 +11,7 @@ var walk = require('./walk')
  * @return {Any}                   - value at the JSON Pointer location - undefined otherwise
  */
 module.exports = function find(doc, pointer) {
-  var tokens = isArray(pointer) ? pointer : parse(pointer)
+  var tokens = Array.isArray(pointer) ? pointer : parse(pointer)
 
   // returns the document
   if (tokens.length === 0)

@@ -1,8 +1,5 @@
 'use strict'
 
-var JSON8 = require('json8')
-var isArray = JSON8.isArray
-var isObject = JSON8.isObject
 var validArrayToken = require('./validArrayToken')
 
 /**
@@ -10,32 +7,32 @@ var validArrayToken = require('./validArrayToken')
  *
  * @param {Object|Array} doc     - JSON document
  * @param {Array}        tokens  - array of tokens
- * @return {Array}               - [token, parent]
+ * @return {Array}               - [token, target]
  */
 module.exports = function walk(doc, tokens) {
   var length = tokens.length
 
   var i = 0
-  var parent = doc
+  var target = doc
   var token
 
   while (i < length - 1) {
     token = tokens[i++]
 
-    if (isArray(parent))
-      validArrayToken(token, parent.length)
-    else if (!isObject(parent))
+    if (Array.isArray(target))
+      validArrayToken(token, target.length)
+    else if (typeof target !== 'object' || target === null)
       throw new Error('Cannot be walked')
 
-    parent = parent[token]
+    target = target[token]
   }
 
   token = tokens[i]
 
-  if (isArray(parent))
-    validArrayToken(token, parent.length)
-  else if (!isObject(parent))
-    throw new Error('Invalid location')
+  if (Array.isArray(target))
+    validArrayToken(token, target.length)
+  else if (typeof target !== 'object' || target === null)
+    throw new Error('Invalid target')
 
-  return [token, parent]
+  return [token, target]
 }

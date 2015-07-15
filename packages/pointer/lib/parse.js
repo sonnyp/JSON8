@@ -1,7 +1,5 @@
 'use strict'
 
-var isArray = require('json8').isArray
-
 /**
  * parse a JSON Pointer string
  *
@@ -9,7 +7,7 @@ var isArray = require('json8').isArray
  * @return {Array}           - array of tokens
  */
 module.exports = function parse(pointer) {
-  if (isArray(pointer))
+  if (Array.isArray(pointer))
     return pointer
 
   if (pointer.length === 0)

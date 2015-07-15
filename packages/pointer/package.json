@@ -17,8 +17,5 @@
     "test": "npm run unit && npm run lint"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
-  "license": "MIT",
-  "dependencies": {
-    "json8": "^0.1.0"
-  }
+  "license": "MIT"
 }
