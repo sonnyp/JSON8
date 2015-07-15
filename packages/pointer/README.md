@@ -39,11 +39,16 @@ var JSONPointer = window.JSON8Pointer
 ## find
 
 Use a JSON Pointer to find a value in a JSON document.
+Returns ```undefined``` if the value cannot be found.
 
 ```javascript
 var doc = {"foo": {"bar": "foobar"}}
+
 JSONPointer.find(doc, '/foo/bar');
 // "foobar"
+
+JSONPointer.find(doc, '/bar/foo');
+// undefined
 ```
 
 [↑](#json8-pointer)
