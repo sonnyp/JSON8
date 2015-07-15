@@ -14,6 +14,7 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
   * [apply](#apply)
   * [patch](#patch)
   * [revert](#revert)
+  * [diff](#diff)
   * [Operations](#operations)
     * [add](#add)
     * [remove](#remove)
@@ -99,6 +100,23 @@ doc = patchResult[0];
 // revert the patch
 doc = ooPatch.revert(doc, patchResult[1]);
 // doc is strictly identical to the origina
+```
+
+[↑](#json8-patch)
+
+## diff
+
+Returns a diff in the form of a JSON Patch for 2 JSON values.
+
+```javascript
+ooPatch.diff(true, false)
+// [{"op": "replace", "path": "", "value": "false"}]
+
+ooPatch.diff([], [])
+// []
+
+ooPatch.diff({}, {"foo": "bar"})
+// [{"op": "add", "path": "/foo", "value": "bar"}]
 ```
 
 [↑](#json8-patch)
