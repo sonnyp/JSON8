@@ -9,6 +9,7 @@ JSON8
   * [clone](#clone)
   * [equal](#equal)
   * [type](#type)
+  * [size](#size)
   * [is](#is)
     - [structure](#structure)
     - [primitive](#primitive)
@@ -153,6 +154,32 @@ JSON8.type(function() {})  // undefined
 ```
 
 [↑](#json8)
+
+## size
+
+Returns the size (length) of a structure.
+
+```javascript
+JSON8.size([], 0)
+JSON8.size({}, 0)
+JSON8.size(new Set(), 0)
+JSON8.size(new Map(), 0)
+```
+
+## forEach
+
+Iterates over a structure.
+
+```javascript
+var log = function(value, name) {
+  console.log(name + ':' + value)
+}
+
+JSON8.forEach([], log)
+JSON8.forEach({}, log)
+JSON8.forEach(new Map(), log)
+JSON8.forEach(new Set(), log)
+```
 
 ## is
 
