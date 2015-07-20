@@ -1,7 +1,7 @@
 'use strict'
 
 import assert from 'assert'
-import {parse} from '..'
+import {parse, OBJECT} from '..'
 
 const valid = [
   ['true', true],
@@ -60,6 +60,20 @@ describe('parse', () => {
       assert(parsed instanceof Map)
       assert.equal(parsed.get('foo'), 'bar')
     })
+
+    it('doesn\'t parse objects as Maps if not enabled', () => {
+      const str = '{"foo":"bar"}'
+      const parsed = parse(str)
+      assert.equal(typeof parsed, OBJECT)
+      assert.equal(parsed.foo, 'bar')
+    })
+
+    it('doesn\'t parse objects as Maps if disabled', () => {
+      const str = '{"foo":"bar"}'
+      const parsed = parse(str, {map: false})
+      assert.equal(typeof parsed, OBJECT)
+      assert.equal(parsed.foo, 'bar')
+    })
   }
 
   if (global.Set) {
@@ -68,6 +82,20 @@ describe('parse', () => {
       const parsed = parse(str, {set: true})
       assert(parsed instanceof Set)
       assert.equal(parsed.has('foo'), true)
+    })
+
+    it('doesn\'t parse arrays as Sets if not enabled', () => {
+      const str = '["foo"]'
+      const parsed = parse(str)
+      assert(Array.isArray(parsed))
+      assert.equal(parsed.indexOf('foo'), 0)
+    })
+
+    it('doesn\'t parse arrays as Sets if disabled', () => {
+      const str = '["foo"]'
+      const parsed = parse(str, {set: false})
+      assert(Array.isArray(parsed))
+      assert.equal(parsed.indexOf('foo'), 0)
     })
   }
 

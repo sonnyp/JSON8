@@ -17,7 +17,7 @@ describe('clone', () => {
   })
 
   if (global.Set) {
-    it('returns an set clone copy', () => {
+    it('returns a set clone copy', () => {
       doc = new Set(["foo", "bar"])
       cl = clone(doc)
       assert(equal(doc, cl))
