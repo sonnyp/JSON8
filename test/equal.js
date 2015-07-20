@@ -60,7 +60,7 @@ describe('equal', () => {
   })
 
   if (global.Set) {
-    describe('Map', () => {
+    describe('map', () => {
       it('returns true for identical', () => {
         equal(new Map(), new Map())
         const a = new Map()

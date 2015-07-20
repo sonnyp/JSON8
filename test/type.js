@@ -17,6 +17,12 @@ describe('type', () => {
     assert.strictEqual(type([]), 'array')
   })
 
+  if (global.Set) {
+    it('returns array for set', () => {
+      assert.strictEqual(type(new Set()), 'array')
+    })
+  }
+
   it('returns null for null', () => {
     assert.strictEqual(type(null), 'null')
   })
@@ -24,6 +30,12 @@ describe('type', () => {
   it('returns object for object', () => {
     assert.strictEqual(type({}), 'object')
   })
+
+  if (global.Map) {
+    it('returns object for map', () => {
+      assert.strictEqual(type(new Map()), 'object')
+    })
+  }
 
   it('returns number for integer', () => {
     assert.strictEqual(type(1234), 'number')
