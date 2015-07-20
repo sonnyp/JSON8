@@ -23,7 +23,6 @@ JSON8
     - [JSON](#json)
   * [valid](#valid)
   * [serialize](#serialize)
-  * [stringify](#stringify)
   * [parse](#parse)
 * [Tests](#tests)
 * [Contributing](#contributing)
@@ -251,7 +250,6 @@ Returns true for object, false otherwise.
 ```javascript
 JSON8.is({}, 'object')        // true
 JSON8.isObject({})            // true
-JSON8.isObject({})            // true
 JSON8.isObject(new Map())     // true
 
 JSON8.isObject([])            // false
@@ -381,7 +379,7 @@ JSON8.valid(["bar", function() {}]) //false
 
 ## serialize
 
-Takes a JSON document and returns a parseable JSON string. It is a stricter JSON.stringify alternative.
+Takes a JSON document and returns a parseable JSON string.
 
 Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
@@ -441,23 +439,17 @@ JSON8.serialize(obk) // '{"date":"2015-10-21T16:29:00.000Z"}''
 
 [↑](#json8)
 
-## stringify
-
-Alias for [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
-
-```javascript
-var string = JSON8.stringify(doc);
-```
-
-[↑](#json8)
-
 ## parse
 
-Alias for [JSON.parse](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
+Takes a JSON string and returns a JavaScript value.
 
 ```javascript
-var doc = JSON8.parse(string);
+var doc = JSON8.parse(string, options);
 ```
+
+```options.set``` to true tells JSON8 to parse JSON arrays as Set (default false).
+```options.map``` to true tells JSON8 to parse JSON objects as Map (default false).
+
 
 [↑](#json8)
 
