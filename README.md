@@ -167,6 +167,8 @@ JSON8.size(new Set(), 0)
 JSON8.size(new Map(), 0)
 ```
 
+[↑](#json8)
+
 ## forEach
 
 Iterates over a structure.
@@ -181,6 +183,8 @@ JSON8.forEach({}, log)
 JSON8.forEach(new Map(), log)
 JSON8.forEach(new Set(), log)
 ```
+
+[↑](#json8)
 
 ## is
 
