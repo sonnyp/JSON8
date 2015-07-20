@@ -10,7 +10,7 @@ JSON8
   * [equal](#equal)
   * [type](#type)
   * [size](#size)
-  * [forEach](#forEach)
+  * [forEach](#foreach)
   * [is](#is)
     - [structure](#structure)
     - [primitive](#primitive)
