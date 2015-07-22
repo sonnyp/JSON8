@@ -31,6 +31,8 @@ JSON8
 
 ```npm install json8```
 
+----
+
 ```javascript
 var JSON8 = require('json8');
 ```
@@ -86,10 +88,12 @@ JSON.parse("-0")   // -0
 JSON.stringify(-0) // '0'
 
 var set = new Set()
+typeof set            // 'object'
 set.add('foo')
 JSON.stringify(set)   // '{}'
 
 var map = new Map()
+typeof map            // 'object'
 map.set('foo', 'bar')
 JSON.stringify(map)   // '{}''
 ```
