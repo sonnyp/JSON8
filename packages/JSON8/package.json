@@ -9,8 +9,8 @@
   "repository": "github:JSON8/JSON8",
   "main": "index.js",
   "scripts": {
-    "preversion": "npm run browserify && npm test",
-    "browserify": "webpack -p index.js JSON8.js --output-library=JSON8",
+    "preversion": "npm run webify && npm test",
+    "webify": "webpack -p index.js JSON8.js --output-library=JSON8",
     "lint": "eslint .",
     "unit": "mocha --compilers js:babel/register --recursive test/",
     "test": "npm run unit && npm run lint"
