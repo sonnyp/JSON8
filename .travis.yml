@@ -7,4 +7,8 @@ node_js:
 
 before_install:
   - npm install -g eslint mocha babel webpack
+
+script:
+  - npm run unit
+  - npm run lint
   - npm run browserify
