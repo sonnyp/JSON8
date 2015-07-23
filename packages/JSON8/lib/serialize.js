@@ -16,7 +16,7 @@ module.exports = function serialize(obj, spacer) {
       return JSON.stringify(obj)
     case NUMBER:
       if (isNaN(obj) || obj === Infinity || obj === -Infinity)
-        throw new TypeError(obj + ' is not a valid JSON value')
+        throw new TypeError(obj + ' is not JSON valid')
       if (obj === 0 && (1 / obj) === -Infinity)
         return '-0'
       return obj.toString()
@@ -64,7 +64,7 @@ module.exports = function serialize(obj, spacer) {
     str += '}'
   }
   else {
-    throw new TypeError(obj + ' is not a valid JSON value')
+    throw new TypeError(obj + ' is not JSON valid')
   }
 
   if (spacer)
