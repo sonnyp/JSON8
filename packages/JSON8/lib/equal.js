@@ -11,7 +11,7 @@ module.exports = function equal(a, b) {
   if ([STRING, BOOLEAN, NUMBER].indexOf(type) > -1)
     return a === b
 
-  if (a === null) return a === b
+  if (a === null) return b === null
 
   if (type !== OBJECT) return false
 
@@ -48,5 +48,3 @@ module.exports = function equal(a, b) {
   }
   return true
 }
-
-// console.log(module.exports(new Set(['foo']), new Set(['bar'])))
