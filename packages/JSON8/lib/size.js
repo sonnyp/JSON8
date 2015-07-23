@@ -4,7 +4,7 @@ var OBJECT = require('./types').OBJECT
 
 module.exports = function size(obj) {
   if (typeof obj !== OBJECT || obj === null)
-    throw new TypeError('Argument must be a structure')
+    throw new TypeError(obj + ' is not a structure')
 
   if (Array.isArray(obj))
     return obj.length
