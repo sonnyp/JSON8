@@ -64,8 +64,7 @@ else {
     return typeof obj === OBJECT && obj !== null && !isArray(obj)
   }
 }
-
-/*/
+/**/
 
 /*
  * JSON
