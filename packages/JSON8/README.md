@@ -40,7 +40,7 @@ var oo = require('json8');
 or
 
 ```xml
-<script src="node_modules/json8/oo.js"></script>
+<script src="node_modules/json8/JSON8.js"></script>
 ```
 ```javascript
 var oo = window.JSON8
