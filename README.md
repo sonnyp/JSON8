@@ -5,9 +5,9 @@ JSON8
 
 # Introduction
 
-JSON8 is a JavaScript utility library that makes working with JSON/data/structures safer and easier.
+JSON8 is a JavaScript library that makes working with JSON/data/structures safer and easier.
 
-Features:
+Features
 
 * Strong JSON and type validation
 * Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set); include [es6-shim](https://github.com/paulmillr/es6-shim/) for < IE 11
@@ -15,6 +15,12 @@ Features:
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
 * See [Methods](#methods) and [Motivations](#motivations)
 * [Tested](https://travis-ci.org/JSON8/JSON8)
+
+See also
+
+* [JSON8 Patch](https://github.com/JSON8/patch) for JSON diffing and patching
+* [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simple JSON object diffing and patching
+* [JSON8 Pointer](https://github.com/JSON8/pointer) for JSON Pointer (URL for JSON) implementation
 
 ----
 
