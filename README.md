@@ -3,8 +3,24 @@ JSON8
 
 [![build status](https://img.shields.io/travis/JSON8/JSON8.svg?style=flat-square)](https://travis-ci.org/JSON8/JSON8)
 
+# Introduction
+
+JSON8 is a JavaScript utility library that makes working with JSON/data/structures safer and easier.
+
+Features:
+
+* Strong JSON and type validation
+* Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set); include [es6-shim](https://github.com/paulmillr/es6-shim/) for < IE 11
+* Abstracts differences between JavaScript object structures (array, object, map, set)
+* Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
+* See [Methods](#methods) and [Motivations](#motivations)
+* [Tested](https://travis-ci.org/JSON8/JSON8)
+
+----
+
+
+* [Introduction](#introduction)
 * [Getting started](#getting-started)
-* [Motivations](#motivations)
 * [Methods](#methods)
   * [clone](#clone)
   * [equal](#equal)
@@ -24,6 +40,7 @@ JSON8
   * [valid](#valid)
   * [serialize](#serialize)
   * [parse](#parse)
+* [Motivations](#motivations)
 * [Tests](#tests)
 * [Contributing](#contributing)
 
@@ -44,121 +61,6 @@ or
 ```
 ```javascript
 var oo = window.JSON8
-```
-
-[↑](#json8)
-
-# Motivations
-
-## Types
-
-Getting/asserting the JSON type of a value in Javascript is troublesome.
-
-* [oo.type](#type) returns the JSON type of any value
-
-* [oo.is](#is) checks if a value is of the provided type
-
-* [oo.isStructure](#structure) checks if a value is a JSON structure (an array or an object)
-
-* [oo.isPrimitive](#primitive) checks if a value is a JSON primitive (null, boolean, string, number)
-
-[↑](#json8)
-
-## Safety
-
-[oo.serialize](#serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with null like JSON.striginfy does.
-
-JSON8 [types](#types) helps avoiding many common errors as well.
-
-[↑](#json8)
-
-## Map and Set
-
-[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) are new structures available in ES6. Both are serializable and parseable as JSON, Map as object and Set as array. JSON8 was designed with that in mind and every single method supports Map and Set, a few examples:
-
-* [isArray](#array) returns ```true``` for Set
-* [isObject](#object) returns ```true``` for Map
-* [valid](#valid), [isStructure](#structure), [isJSON](#JSON) return ```true``` for Map and Set
-* [type](#type) returns ```'array'``` for Set and ```'object'``` for Map
-* [serialize](#serialize) stringifies Set as array and Map as object
-* [parse](#parse) optionally parses arrays as Set and objects as Map
-
-[↑](#json8)
-
-## Comparaisons
-
-```javascript
-
-// undefined is not JSON valid
-JSON.stringify(undefined) // undefined
-oo.serialize(undefined)   // TypeError
-
-JSON.stringify({foo: undefined}) // '{}'
-oo.serialize({foo: undefined})   // TypeError
-
-JSON.stringify([undefined]) // '[null]'
-oo.serialize([undefined])   // TypeError
-
-// same applies for NaN, Infinity and -Infinity
-typeof NaN   // 'number'
-oo.type(NaN) // undefined
-
-JSON.stringify(NaN)        // 'null'
-JSON.stringify({foo: NaN}) // '{"foo":null}'
-JSON.stringify([NaN])      // '[null]'
-oo.serialize(NaN)          // TypeError
-
-// typeof null returns 'object'
-typeof null   // 'object'
-oo.type(null) // 'null'
-
-// arrays
-var array = []
-typeof []      // 'object'
-oo.type(array) // 'array'
-array[2] = 'foo'
-array[1]              // undefined
-array[0]              // undefined
-JSON.stringify(array) // '[null,null,"foo"]'
-oo.serialize(array)   // TypeError
-
-// functions
-JSON.stringify(function(){})        // undefined
-JSON.stringify({foo: function(){}}) // '{}'
-JSON.stringify([function(){}])      // '[null]'
-oo.serialize(function() {})         // TypeError
-
-// Set
-var set = new Set()
-typeof set   // 'object'
-oo.type(set) // 'array'
-
-set.add('foo')
-JSON.stringify(set) // '{}'
-oo.serialize(set)   // '["foo"]'
-
-// Map
-var map = new Map()
-typeof map   // 'object'
-oo.type(map) // 'object'
-
-map.set('foo', 'bar')
-JSON.stringify(map) // '{}'
-oo.serialize(map)   // '{"foo": "bar"}'
-
-// typeof Date returns 'object' but JSON.stringify returns a string
-typeof new Date()          // 'object'
-JSON.stringify(new Date()) // '2015-10-21T16:29:00.000Z'
-oo.type(new Date())        // 'object'
-oo.serialize(new Date())   // '{}'
-// if you do want a string date in your JSON use one of the many Date methods such as toISOString
-
-// -0
-JSON.parse("-0")   //  -0
-JSON.stringify(-0) //  "0"
-
-oo.parse("-0")     //  -0
-oo.serialize(-0)   // "-0"
 ```
 
 [↑](#json8)
@@ -192,6 +94,7 @@ oo.equal(
   {foo: 'bar', bar: 'foo'}
   {bar: 'foo', foo: 'bar'}
 )                        // true
+oo.equal(new Set([1, 2]), new Set([2, 1])) // true
 
 oo.equal([1, 2], [2, 1]) // false
 ```
@@ -521,6 +424,125 @@ var doc = oo.parse(string[, options]);
 ```options.set``` to parse JSON arrays as Set (default false).
 ```options.map``` to parse JSON objects as Map (default false).
 
+
+[↑](#json8)
+
+# Motivations
+
+## Types
+
+Getting/asserting the JSON type of a value in JavaScript is troublesome.
+
+* [oo.type](#type) returns the JSON type of any value
+
+* [oo.is](#is) checks if a value is of the provided type
+
+* [oo.isStructure](#structure) checks if a value is a JSON structure (an array or an object)
+
+* [oo.isPrimitive](#primitive) checks if a value is a JSON primitive (null, boolean, string, number)
+
+[↑](#json8)
+
+## Safety
+
+[oo.serialize](#serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does.
+
+JSON8 [types](#types) helps avoiding many common errors as well.
+
+[↑](#json8)
+
+## Map and Set
+
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) are new structures available in ES6. Both are serializable and parseable as JSON, Map as object and Set as array. JSON8 was designed with that in mind and every single method supports Map and Set, a few examples:
+
+* [isArray](#array) returns ```true``` for Set
+* [isObject](#object) returns ```true``` for Map
+* [valid](#valid), [isStructure](#structure), [isJSON](#JSON) return ```true``` for Map and Set
+* [type](#type) returns ```'array'``` for Set and ```'object'``` for Map
+* [serialize](#serialize) stringifies Set as array and Map as object
+* [parse](#parse) optionally parses arrays as Set and objects as Map
+
+[↑](#json8)
+
+## Consistency
+
+JSON8 provides methods that abstracts differences between JavaScript structures (array, object, map, set).
+
+## Comparaisons
+
+```javascript
+
+// undefined is not JSON valid
+JSON.stringify(undefined) // undefined
+oo.serialize(undefined)   // TypeError
+
+JSON.stringify({foo: undefined}) // '{}'
+oo.serialize({foo: undefined})   // TypeError
+
+JSON.stringify([undefined]) // '[null]'
+oo.serialize([undefined])   // TypeError
+
+// same applies for NaN, Infinity and -Infinity
+typeof NaN   // 'number'
+oo.type(NaN) // undefined
+
+JSON.stringify(NaN)        // 'null'
+JSON.stringify({foo: NaN}) // '{"foo":null}'
+JSON.stringify([NaN])      // '[null]'
+oo.serialize(NaN)          // TypeError
+
+// typeof null returns 'object'
+typeof null   // 'object'
+oo.type(null) // 'null'
+
+// arrays
+var array = []
+typeof []      // 'object'
+oo.type(array) // 'array'
+array[2] = 'foo'
+array[1]              // undefined
+array[0]              // undefined
+JSON.stringify(array) // '[null,null,"foo"]'
+oo.serialize(array)   // TypeError
+
+// functions
+JSON.stringify(function(){})        // undefined
+JSON.stringify({foo: function(){}}) // '{}'
+JSON.stringify([function(){}])      // '[null]'
+oo.serialize(function() {})         // TypeError
+
+// Set
+var set = new Set()
+typeof set   // 'object'
+oo.type(set) // 'array'
+
+set.add('foo')
+JSON.stringify(set) // '{}'
+oo.serialize(set)   // '["foo"]'
+
+// Map
+var map = new Map()
+typeof map   // 'object'
+oo.type(map) // 'object'
+
+map.set('foo', 'bar')
+JSON.stringify(map) // '{}'
+oo.serialize(map)   // '{"foo": "bar"}'
+
+// typeof Date returns 'object' but JSON.stringify returns a string
+typeof new Date()          // 'object'
+JSON.stringify(new Date()) // '2015-10-21T16:29:00.000Z'
+oo.type(new Date())        // 'object'
+oo.serialize(new Date())   // '{}'
+// if you do want a string date in your JSON use one of the many Date methods such as toISOString
+
+// -0
+JSON.parse("-0")   //  -0
+JSON.stringify(-0) //  "0"
+
+oo.parse("-0")     //  -0
+oo.serialize(-0)   // "-0"
+```
 
 [↑](#json8)
 
