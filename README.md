@@ -34,68 +34,131 @@ JSON8
 ----
 
 ```javascript
-var JSON8 = require('json8');
+var oo = require('json8');
 ```
 
 or
 
 ```xml
-<script src="node_modules/json8/JSON8.js"></script>
+<script src="node_modules/json8/oo.js"></script>
 ```
 ```javascript
-var JSON8 = window.JSON8
+var oo = window.JSON8
 ```
+
+[↑](#json8)
 
 # Motivations
 
-Even though JSON is inspired by JavaScript, JavaScript lacks some basic features to work efficiently and safely with JSON.
+## Types
 
-Plus there are some pitfalls to be aware of. Examples of the common ones:
+Getting/asserting the JSON type of a value in Javascript is troublesome.
+
+* [oo.type](#type) returns the JSON type of any value
+
+* [oo.is](#is) checks if a value is of the provided type
+
+* [oo.isStructure](#structure) checks if a value is a JSON structure (an array or an object)
+
+* [oo.isPrimitive](#primitive) checks if a value is a JSON primitive (null, boolean, string, number)
+
+[↑](#json8)
+
+## Safety
+
+[oo.serialize](#serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with null like JSON.striginfy does.
+
+JSON8 [types](#types) helps avoiding many common errors as well.
+
+[↑](#json8)
+
+## Map and Set
+
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) are new structures available in ES6. Both are serializable and parseable as JSON, Map as object and Set as array. JSON8 was designed with that in mind and every single method supports Map and Set, a few examples:
+
+* [isArray](#array) returns ```true``` for Set
+* [isObject](#object) returns ```true``` for Map
+* [valid](#valid), [isStructure](#structure), [isJSON](#JSON) return ```true``` for Map and Set
+* [type](#type) returns ```'array'``` for Set and ```'object'``` for Map
+* [serialize](#serialize) stringifies Set as array and Map as object
+* [parse](#parse) optionally parses arrays as Set and objects as Map
+
+[↑](#json8)
+
+## Comparaisons
 
 ```javascript
-JSON.stringify(undefined)        // undefined
-JSON.stringify({foo: undefined}) // '{}'
-JSON.stringify([undefined])      // '[null]'
 
-typeof NaN                 // 'number'
+// undefined is not JSON valid
+JSON.stringify(undefined) // undefined
+oo.serialize(undefined)   // TypeError
+
+JSON.stringify({foo: undefined}) // '{}'
+oo.serialize({foo: undefined})   // TypeError
+
+JSON.stringify([undefined]) // '[null]'
+oo.serialize([undefined])   // TypeError
+
+// same applies for NaN, Infinity and -Infinity
+typeof NaN   // 'number'
+oo.type(NaN) // undefined
+
 JSON.stringify(NaN)        // 'null'
 JSON.stringify({foo: NaN}) // '{"foo":null}'
 JSON.stringify([NaN])      // '[null]'
+oo.serialize(NaN)          // TypeError
 
-typeof null      // 'object'
-null.foo         // throws TypeError
-null.foo = 'bar' // throws TypeError
+// typeof null returns 'object'
+typeof null   // 'object'
+oo.type(null) // 'null'
 
-typeof new Date()          // 'object'
-JSON.stringify(new Date()) // '2015-10-21T16:29:00.000Z'
-
+// arrays
 var array = []
+typeof []      // 'object'
+oo.type(array) // 'array'
 array[2] = 'foo'
 array[1]              // undefined
 array[0]              // undefined
 JSON.stringify(array) // '[null,null,"foo"]'
+oo.serialize(array)   // TypeError
 
+// functions
 JSON.stringify(function(){})        // undefined
 JSON.stringify({foo: function(){}}) // '{}'
 JSON.stringify([function(){}])      // '[null]'
+oo.serialize(function() {})         // TypeError
 
-typeof Infinity           // 'number'
-JSON.stringify(Infinity)  // 'null'
-typeof -Infinity          // 'number'
-JSON.stringify(-Infinity) // 'null'
-
-JSON.parse("-0")   // -0
-JSON.stringify(-0) // '0'
-
+// Set
 var set = new Set()
-typeof set            // 'object'
-set.add('foo')
-JSON.stringify(set)   // '{}'
+typeof set   // 'object'
+oo.type(set) // 'array'
 
+set.add('foo')
+JSON.stringify(set) // '{}'
+oo.serialize(set)   // '["foo"]'
+
+// Map
 var map = new Map()
-typeof map            // 'object'
+typeof map   // 'object'
+oo.type(map) // 'object'
+
 map.set('foo', 'bar')
-JSON.stringify(map)   // '{}''
+JSON.stringify(map) // '{}'
+oo.serialize(map)   // '{"foo": "bar"}'
+
+// typeof Date returns 'object' but JSON.stringify returns a string
+typeof new Date()          // 'object'
+JSON.stringify(new Date()) // '2015-10-21T16:29:00.000Z'
+oo.type(new Date())        // 'object'
+oo.serialize(new Date())   // '{}'
+// if you do want a string date in your JSON use one of the many Date methods such as toISOString
+
+// -0
+JSON.parse("-0")   //  -0
+JSON.stringify(-0) //  "0"
+
+oo.parse("-0")     //  -0
+oo.serialize(-0)   // "-0"
 ```
 
 [↑](#json8)
@@ -108,11 +171,11 @@ Deep clone any value.
 
 ```javascript
 var doc = {"foo": "bar"}
-var clone = JSON8.clone(doc) // {"foo":"bar"}
-copy === doc                 // false
+var clone = oo.clone(doc) // {"foo":"bar"}
+copy === doc              // false
 
-JSON8.clone(true) // true
-JSON8.clone(42)   // 42
+oo.clone(true) // true
+oo.clone(42)   // 42
 ```
 
 [↑](#json8)
@@ -122,15 +185,15 @@ JSON8.clone(42)   // 42
 Test for equality between two documents.
 
 ```javascript
-JSON8.equal(true, true)     // true
-JSON8.equal([], [])         // true
-JSON8.equal({}, {})         // true
-JSON8.equal(
+oo.equal(true, true)     // true
+oo.equal([], [])         // true
+oo.equal({}, {})         // true
+oo.equal(
   {foo: 'bar', bar: 'foo'}
   {bar: 'foo', foo: 'bar'}
-)                           // true
+)                        // true
 
-JSON8.equal([1, 2], [2, 1]) // false
+oo.equal([1, 2], [2, 1]) // false
 ```
 
 [↑](#json8)
@@ -140,34 +203,37 @@ JSON8.equal([1, 2], [2, 1]) // false
 Returns the JSON type for a value, ```undefined``` if the value is not of any JSON type.
 
 ```javascript
-JSON8.type({})        // "object"
-JSON8.type(new Map()) // "object"
-JSON8.type([])        // "array"
-JSON8.type(new Set()) // "array"
-JSON8.type(42)        // "number"
-JSON8.type('foo')     // "string"
-JSON8.type(null)      // "null"
-JSON8.type(true)      // "boolean"
+oo.type({})        // 'object'
+oo.type(new Map()) // 'object'
+oo.type([])        // 'array'
+oo.type(new Set()) // 'array'
+oo.type(42)        // 'number'
+oo.type('foo')     // 'string'
+oo.type(null)      // 'null'
+oo.type(true)      // 'boolean'
 
-JSON8.type(undefined)      // undefined
-JSON8.type(Infinity)       // undefined
-JSON8.type(-Infinity)      // undefined
-JSON8.type(NaN)            // undefined
-JSON8.type(Symbol())       // undefined
-JSON8.type(function() {})  // undefined
+oo.type(undefined)      // undefined
+oo.type(Infinity)       // undefined
+oo.type(-Infinity)      // undefined
+oo.type(NaN)            // undefined
+oo.type(Symbol())       // undefined
+oo.type(function() {})  // undefined
 ```
 
 [↑](#json8)
 
 ## size
 
-Returns the size (length) of a structure.
+Returns the size (or length) of a structure.
 
 ```javascript
-JSON8.size([], 0)
-JSON8.size({}, 0)
-JSON8.size(new Set(), 0)
-JSON8.size(new Map(), 0)
+oo.size([])        // 0
+oo.size({})        // 0
+oo.size(new Set()) // 0
+oo.size(new Map()) // 0
+
+oo.size(null)     // TypeError
+00.size('string') // TypeError
 ```
 
 [↑](#json8)
@@ -181,10 +247,10 @@ var log = function(value, name) {
   console.log(name + ':' + value)
 }
 
-JSON8.forEach([], log)
-JSON8.forEach({}, log)
-JSON8.forEach(new Map(), log)
-JSON8.forEach(new Set(), log)
+oo.forEach([], log)
+oo.forEach({}, log)
+oo.forEach(new Map(), log)
+oo.forEach(new Set(), log)
 ```
 
 [↑](#json8)
@@ -194,11 +260,13 @@ JSON8.forEach(new Set(), log)
 For each type you can use the syntax
 
 ```javascript
-JSON8.is('foo', type)
+oo.is('foo', type)
 ```
+
 or
+
 ```javascript
-JSON.isType('foo')
+oo.isType('foo')
 ```
 
 Where type is any of:
@@ -218,12 +286,12 @@ Where type is any of:
 Returns true for arrays and objects, false otherwise.
 
 ```javascript
-JSON8.is({}, 'structure')    // true
-JSON8.isStructure([])        // true
-JSON8.isStructure(new Set()) // true
-JSON8.isStructure(new Map()) // true
+oo.is({}, 'structure')    // true
+oo.isStructure([])        // true
+oo.isStructure(new Set()) // true
+oo.isStructure(new Map()) // true
 
-JSON8.isStructure(null)   // false
+oo.isStructure(null)   // false
 ```
 
 [↑](#json8)
@@ -234,15 +302,15 @@ Returns true for primitives, false otherwise.
 Primitives are: number, boolean, null, string.
 
 ```javascript
-JSON8.is(null, 'primitive') // true
-JSON8.isPrimitive(true)     // true
-JSON8.isPrimitive('foo')    // true
-JSON8.isPrimitive(42)       // true
+oo.is(null, 'primitive') // true
+oo.isPrimitive(true)     // true
+oo.isPrimitive('foo')    // true
+oo.isPrimitive(42)       // true
 
-JSON8.isPrimitive([]])      // false
-JSON8.isPrimitive({})       // false
-JSON8.isPrimitive(Infinity) // false
-JSON8.isPrimitive(NaN)      // false
+oo.isPrimitive([]])      // false
+oo.isPrimitive({})       // false
+oo.isPrimitive(Infinity) // false
+oo.isPrimitive(NaN)      // false
 ```
 
 [↑](#json8)
@@ -252,14 +320,14 @@ JSON8.isPrimitive(NaN)      // false
 Returns true for object, false otherwise.
 
 ```javascript
-JSON8.is({}, 'object')        // true
-JSON8.isObject({})            // true
-JSON8.isObject(new Map())     // true
+oo.is({}, 'object')        // true
+oo.isObject({})            // true
+oo.isObject(new Map())     // true
 
-JSON8.isObject([])            // false
-JSON8.isObject(null)          // false
-JSON8.isObject(function() {}) // false
-JSON8.isObject(new Set())     // false
+oo.isObject([])            // false
+oo.isObject(null)          // false
+oo.isObject(function() {}) // false
+oo.isObject(new Set())     // false
 ```
 
 [↑](#json8)
@@ -269,12 +337,12 @@ JSON8.isObject(new Set())     // false
 Returns true for array, false otherwise.
 
 ```javascript
-JSON8.is([], 'array')    // true
-JSON8.isArray([])        // true
-JSON8.isArray(new Set()) // true
+oo.is([], 'array')    // true
+oo.isArray([])        // true
+oo.isArray(new Set()) // true
 
-JSON8.isArray({})        // false
-JSON8.isArray(new Map()) // false
+oo.isArray({})        // false
+oo.isArray(new Map()) // false
 ```
 
 [↑](#json8)
@@ -284,13 +352,13 @@ JSON8.isArray(new Map()) // false
 Returns true for number, false otherwise.
 
 ```javascript
-JSON8.is(42, 'number')    // true
-JSON8.isNumber(4.2)       // true
-JSON8.isNumber(-42)       // true
+oo.is(42, 'number')    // true
+oo.isNumber(4.2)       // true
+oo.isNumber(-42)       // true
 
-JSON8.isNumber(Infinity)  // false
-JSON8.isNumber(-Infinity) // false
-JSON8.isNumber(NaN)       // false
+oo.isNumber(Infinity)  // false
+oo.isNumber(-Infinity) // false
+oo.isNumber(NaN)       // false
 ```
 
 [↑](#json8)
@@ -300,13 +368,13 @@ JSON8.isNumber(NaN)       // false
 Returns true for string, false otherwise.
 
 ```javascript
-JSON8.is('foo', 'string') // true
-JSON8.isString('☕'️)       // true
-JSON8.isString('')        // true
+oo.is('foo', 'string') // true
+oo.isString('☕'️)       // true
+oo.isString('')        // true
 
-JSON8.isString(42)        // false
-JSON8.isString(undefined) // false
-JSON8.isString(null)      // false
+oo.isString(42)        // false
+oo.isString(undefined) // false
+oo.isString(null)      // false
 ```
 
 [↑](#json8)
@@ -316,12 +384,12 @@ JSON8.isString(null)      // false
 Returns true for boolean, false otherwise.
 
 ```javascript
-JSON8.is(true, 'boolean') // true
-JSON8.isBoolean(false)    // true
-JSON8.isBoolean(false)    // true
+oo.is(true, 'boolean') // true
+oo.isBoolean(false)    // true
+oo.isBoolean(false)    // true
 
-JSON8.isBoolean(0)        // false
-JSON8.isBoolean(1)        // false
+oo.isBoolean(0)        // false
+oo.isBoolean(1)        // false
 ```
 
 [↑](#json8)
@@ -331,11 +399,10 @@ JSON8.isBoolean(1)        // false
 Returns true for null, false otherwise.
 
 ```javascript
-JSON8.is(null, 'null')  // true
-JSON8.isNull(null)      // true
-JSON8.isNull(null)      // true
+oo.is(null, 'null')  // true
+oo.isNull(null)      // true
 
-JSON8.isNull(undefined) // false
+oo.isNull(undefined) // false
 ```
 
 [↑](#json8)
@@ -348,20 +415,20 @@ JSON valid values are: number, boolean, null, string, array, object.
 This method is not recursive, if you need to deep check for validity use the [valid method](#valid).
 
 ```javascript
-JSON8.is(true, 'JSON')      //true
-JSON8.isJSON('foo')         //true
-JSON8.isJSON(null)          //true
-JSON8.isJSON({})            //true
-JSON8.isJSON([])            //true
-JSON8.isJSON(42)            //true
-JSON8.isJSON(new Map())     //true
-JSON8.isJSON(new Set())     //true
+oo.is(true, 'JSON')      //true
+oo.isJSON('foo')         //true
+oo.isJSON(null)          //true
+oo.isJSON({})            //true
+oo.isJSON([])            //true
+oo.isJSON(42)            //true
+oo.isJSON(new Map())     //true
+oo.isJSON(new Set())     //true
 
-JSON8.isJSON(undefined)     //false
-JSON8.isJSON(NaN)           //false
-JSON8.isJSON(Infinity)      //false
-JSON8.isJSON(-Infinity)     //false
-JSON8.isJSON(function() {}) //false
+oo.isJSON(undefined)     //false
+oo.isJSON(NaN)           //false
+oo.isJSON(Infinity)      //false
+oo.isJSON(-Infinity)     //false
+oo.isJSON(function() {}) //false
 ```
 
 [↑](#json8)
@@ -371,12 +438,12 @@ JSON8.isJSON(function() {}) //false
 Recursive version of [is JSON](#json), works on primitive values as well.
 
 ```javascript
-JSON8.valid(true)                   //true
-JSON8.valid({"foo": "bar"})         //true
+oo.valid(true)                   //true
+oo.valid({"foo": "bar"})         //true
 
-JSON8.valid({"foo": undefined})     //false
-JSON8.valid({"foo": NaN})           //false
-JSON8.valid(["bar", function() {}]) //false
+oo.valid({"foo": undefined})     //false
+oo.valid({"foo": NaN})           //false
+oo.valid(["bar", function() {}]) //false
 ```
 
 [↑](#json8)
@@ -403,24 +470,24 @@ Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/Java
 * There is no alternative to the [replacer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) argument
 
 ```javascript
-JSON8.serialize(doc[, spacer]);
+oo.serialize(doc[, spacer]);
 
-JSON8.serialize({"foo": "bar"})
+oo.serialize({"foo": "bar"})
 // {"foo":"bar"}
 
-JSON8.serialize({"foo": "bar"}, 2)
+oo.serialize({"foo": "bar"}, 2)
 // {
 //   "foo": "bar"
 // }
 
 var set = new Set()
 set.add('hello')
-JSON8.serialize(set)
+oo.serialize(set)
 // ["hello"]
 
 var map = new Map()
 map.set('foo', 'bar')
-JSON8.serialize(map)
+oo.serialize(map)
 // {"foo":"bar"}
 
 // Because JSON8 ignores the toJSON property, it doesn't serialize
@@ -432,13 +499,13 @@ var date = new Date();
 
 // BAD
 obj.date = date
-JSON.stringify(obj)  // '{"date":"2015-10-21T16:29:00.000Z"}''
-JSON8.serialize(obj) // '{"date":"obj"}'
+JSON.stringify(obj) // '{"date":"2015-10-21T16:29:00.000Z"}''
+oo.serialize(obj)   // '{"date":"obj"}'
 
 // GOOD
 obj.date = date.toISOString()
-JSON.stringify(obj)  // '{"date":"2015-10-21T16:29:00.000Z"}''
-JSON8.serialize(obk) // '{"date":"2015-10-21T16:29:00.000Z"}''
+JSON.stringify(obj) // '{"date":"2015-10-21T16:29:00.000Z"}''
+oo.serialize(obj)   // '{"date":"2015-10-21T16:29:00.000Z"}''
 ```
 
 [↑](#json8)
@@ -448,11 +515,11 @@ JSON8.serialize(obk) // '{"date":"2015-10-21T16:29:00.000Z"}''
 Takes a JSON string and returns a JavaScript value.
 
 ```javascript
-var doc = JSON8.parse(string, options);
+var doc = oo.parse(string[, options]);
 ```
 
-```options.set``` to true tells JSON8 to parse JSON arrays as Set (default false).
-```options.map``` to true tells JSON8 to parse JSON objects as Map (default false).
+```options.set``` to parse JSON arrays as Set (default false).
+```options.map``` to parse JSON objects as Map (default false).
 
 
 [↑](#json8)
