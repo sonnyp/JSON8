@@ -4,10 +4,10 @@ var forOf = require('./forOf')
 
 module.exports = function some(obj, fn, ctx) {
   var result = true
-  forOf(obj, function(value, key, stop) {
-    if (!fn.apply(ctx, arguments)) {
+  forOf(obj, function(value, key) {
+    if (!fn.call(ctx, value, key)) {
       result = false
-      stop()
+      return true
     }
   })
   return result

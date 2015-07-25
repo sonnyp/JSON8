@@ -3,12 +3,13 @@
 var forEach = require('./forEach')
 var OBJECT = require('./types').OBJECT
 
-module.exports.map = function(obj, fn) {
+module.exports.map = function(obj, fn, ctx) {
   if (typeof obj !== OBJECT || obj === null)
     throw new TypeError(obj + ' is not a structure')
 
   var mapped
   var iterator
+  if (ctx) fn = fn.bind(ctx)
 
   if (Array.isArray(obj)) {
     mapped = []

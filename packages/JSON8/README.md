@@ -15,12 +15,13 @@ Features
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
 * See [Methods](#methods) and [Motivations](#motivations)
 * [Tested](https://travis-ci.org/JSON8/JSON8)
+* Modular, you can save bandwith/memory by requiring needed methods using ```require('json8/METHOD_NAME')```
 
 See also
 
 * [JSON8 Patch](https://github.com/JSON8/patch) for JSON diffing and patching
-* [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simple JSON object diffing and patching
 * [JSON8 Pointer](https://github.com/JSON8/pointer) for JSON Pointer (URL for JSON) implementation
+* [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simple JSON object diffing and patching
 
 ----
 
@@ -31,8 +32,6 @@ See also
   * [clone](#clone)
   * [equal](#equal)
   * [type](#type)
-  * [size](#size)
-  * [forEach](#foreach)
   * [is](#is)
     - [structure](#structure)
     - [primitive](#primitive)
@@ -46,6 +45,20 @@ See also
   * [valid](#valid)
   * [serialize](#serialize)
   * [parse](#parse)
+  * Structures
+    - [size](#size)
+    - [has](#has)
+    - [forEach](#foreach)
+    - [forOf](#forof)
+    - [map](#map)
+    - [some](#some)
+    - [every](#every)
+    - Array
+      * [add](#add)
+      * [remove](#remove)
+    - Object
+      * [set](#set)
+      * [unset](#unset)
 * [Motivations](#motivations)
 * [Tests](#tests)
 * [Contributing](#contributing)
@@ -80,7 +93,8 @@ Deep clone any value.
 ```javascript
 var doc = {"foo": "bar"}
 var clone = oo.clone(doc) // {"foo":"bar"}
-copy === doc              // false
+doc === copy        // false
+oo.equal(doc, copy) // true
 
 oo.clone(true) // true
 oo.clone(42)   // 42
@@ -127,39 +141,6 @@ oo.type(-Infinity)      // undefined
 oo.type(NaN)            // undefined
 oo.type(Symbol())       // undefined
 oo.type(function() {})  // undefined
-```
-
-[↑](#json8)
-
-## size
-
-Returns the size (or length) of a structure.
-
-```javascript
-oo.size([])        // 0
-oo.size({})        // 0
-oo.size(new Set()) // 0
-oo.size(new Map()) // 0
-
-oo.size(null)     // TypeError
-00.size('string') // TypeError
-```
-
-[↑](#json8)
-
-## forEach
-
-Iterates over a structure.
-
-```javascript
-var log = function(value, name) {
-  console.log(name + ':' + value)
-}
-
-oo.forEach([], log)
-oo.forEach({}, log)
-oo.forEach(new Map(), log)
-oo.forEach(new Set(), log)
 ```
 
 [↑](#json8)
@@ -430,8 +411,124 @@ var doc = oo.parse(string[, options]);
 ```options.set``` to parse JSON arrays as Set (default false).
 ```options.map``` to parse JSON objects as Map (default false).
 
+[↑](#json8)
+
+## Structures
+
+### size
+
+Returns the size (or length) of a structure.
+
+```javascript
+oo.size(["foo"])        // 1
+oo.size({"foo": "bar"}) // 1
+var set = new Set()
+set.add('foo')
+oo.size(set)            // 1
+var map = new Map()
+map.set('foo', 'bar')
+oo.size(map)            // 1
+
+oo.size(null)     // TypeError
+oo.size('string') // TypeError
+```
 
 [↑](#json8)
+
+### has
+
+Returns ```true``` if the structure has the key (for object) or the value (for array)
+
+```javascript
+oo.has({"foo": "bar"}, "foo")     // true
+oo.has({"foo": undefined}, "foo") // false
+oo.has([true, null, "foo"], null) // true
+```
+
+[↑](#json8)
+
+## forEach
+
+Iterates over a structure.
+
+```javascript
+var log = function(value, key) {
+  console.log(key + ':' + value)
+}
+
+oo.forEach([], log)
+oo.forEach({}, log)
+oo.forEach(new Map(), log)
+oo.forEach(new Set(), log)
+```
+
+[↑](#json8)
+
+## forOf
+
+Same as [forEach](#forEach) but returning ```true``` breaks the loop.
+
+```javascript
+var log = function(value, key) {
+  if (value === 'c')
+    return true
+  console.log(key + ':' + value)
+}
+
+oo.forOf(['a', 'b', 'c', 'd'], log) // logs 'a' and 'b' then breaks
+```
+
+[↑](#json8)
+
+## map
+
+Creates a new structure with the results of calling the provided function on every element in the provided structure. Returning undefined omits the value.
+
+```javascript
+var stringifyValues = function(value, key) {
+  return value.toString()
+}
+
+var foos = oo.map([1, 2, 3], map) // ["foo", "bar"]
+```
+
+## filter
+
+Creates a new structure with all elements that pass the test implemented by the provided function.
+
+```javascript
+var superior10 = oo.map([1, 5, 11, 12], function(value, key) {
+  return value > 10
+}) // [11, 12]
+```
+
+[↑](#json8)
+
+## some
+
+Tests whether some element in the structure pass the test implemented by the provided function.
+
+```javascript
+var containsNull = function(value, key) {
+  return value === null
+}
+
+oo.forOf(['foo', null, 'bar']) // true
+oo.forOf(['foo', 'bar'])       // false
+```
+
+## every
+
+Tests whether all elements in the structure passes the test implemented by the provided function
+
+```javascript
+var containsStringOnly = function(value, key) {
+  return typeof value === 'string'
+}
+
+oo.forOf(['foo', 'bar']) // true
+oo.forOf(['foo', 52])    // false
+```
 
 # Motivations
 
