@@ -51,6 +51,7 @@ See also
     - [forEach](#foreach)
     - [forOf](#forof)
     - [map](#map)
+    - [filter](#filter)
     - [some](#some)
     - [every](#every)
     - Array
@@ -492,6 +493,8 @@ var stringifyValues = function(value, key) {
 var foos = oo.map([1, 2, 3], map) // ["foo", "bar"]
 ```
 
+[↑](#json8)
+
 ## filter
 
 Creates a new structure with all elements that pass the test implemented by the provided function.
@@ -517,6 +520,8 @@ oo.forOf(['foo', null, 'bar']) // true
 oo.forOf(['foo', 'bar'])       // false
 ```
 
+[↑](#json8)
+
 ## every
 
 Tests whether all elements in the structure passes the test implemented by the provided function
@@ -529,6 +534,8 @@ var containsStringOnly = function(value, key) {
 oo.forOf(['foo', 'bar']) // true
 oo.forOf(['foo', 52])    // false
 ```
+
+[↑](#json8)
 
 # Motivations
 
