@@ -21,7 +21,7 @@ See also
 
 * [JSON8 Patch](https://github.com/JSON8/patch) for JSON diffing and patching
 * [JSON8 Pointer](https://github.com/JSON8/pointer) for JSON Pointer (URL for JSON) implementation
-* [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simple JSON object diffing and patching
+* [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simpler JSON object diffing/patching alternative to JSON Patch and Pointer
 
 ----
 
@@ -277,10 +277,9 @@ Returns true for boolean, false otherwise.
 ```javascript
 oo.is(true, 'boolean') // true
 oo.isBoolean(false)    // true
-oo.isBoolean(false)    // true
 
 oo.isBoolean(0)        // false
-oo.isBoolean(1)        // false
+oo.isBoolean('foo')    // false
 ```
 
 [↑](#json8)
@@ -500,7 +499,7 @@ var foos = oo.map([1, 2, 3], map) // ["foo", "bar"]
 Creates a new structure with all elements that pass the test implemented by the provided function.
 
 ```javascript
-var superior10 = oo.map([1, 5, 11, 12], function(value, key) {
+var bigNumbers = oo.map([1, 5, 11, 12], function(value, key) {
   return value > 10
 }) // [11, 12]
 ```
