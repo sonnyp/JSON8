@@ -11,6 +11,6 @@ JSON8 is written in ES5 for optimization concerns while tests are written in ES6
 
 If you want to build the browser standalone version:
 ```
-npm install webpack -g
-npm run browserify
+npm install browserify -g
+npm run webify
 ```

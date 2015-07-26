@@ -5,7 +5,7 @@ JSON8 Pointer
 
 JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) implementation for JavaScript.
 
-See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work with JSON Pointer.
+See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work with JSON pointers.
 
 * [Getting started](#getting-started)
 * [Methods](#methods)
@@ -19,8 +19,10 @@ See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work 
 
 ```npm install json8-pointer```
 
+----
+
 ```javascript
-var JSONPointer = require('json8-pointer');
+var ooPointer = require('json8-pointer');
 ```
 
 or
@@ -29,7 +31,7 @@ or
 <script src="node_modules/json8-pointer/JSON8Pointer.js"></script>
 ```
 ```javascript
-var JSONPointer = window.JSON8Pointer
+var ooPointer = window.JSON8Pointer
 ```
 
 [↑](#json8-pointer)
@@ -44,10 +46,10 @@ Returns ```undefined``` if the value cannot be found.
 ```javascript
 var doc = {"foo": {"bar": "foobar"}}
 
-JSONPointer.find(doc, '/foo/bar');
+ooPointer.find(doc, '/foo/bar');
 // "foobar"
 
-JSONPointer.find(doc, '/bar/foo');
+ooPointer.find(doc, '/bar/foo');
 // undefined
 ```
 
@@ -58,10 +60,10 @@ JSONPointer.find(doc, '/bar/foo');
 Takes a JSON Pointer string and return an array of unescaped tokens.
 
 ```javascript
-JSONPointer.parse('/foo/bar/hello');
+ooPointer.parse('/foo/bar/hello');
 // ['foo', 'bar', 'hello'];
 
-JSONPointer.parse('/foo/a~1b')
+ooPointer.parse('/foo/a~1b')
 // ['foo', 'a/b']
 ```
 
@@ -72,10 +74,10 @@ JSONPointer.parse('/foo/a~1b')
 Takes an array of escaped tokens (see [parse](parse)) and return a JSON Pointer string.
 
  ```javascript
-JSON8.serialize(['foo', 'bar', 'hello']);
+ooPointer.serialize(['foo', 'bar', 'hello']);
 // '/foo/bar/hello'
 
-JSONPointer.serialize(['foo', 'a/b'])
+ooPointer.serialize(['foo', 'a/b'])
 // '/foo/a~1b'
 ```
 

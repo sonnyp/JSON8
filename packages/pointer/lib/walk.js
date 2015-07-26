@@ -1,6 +1,7 @@
 'use strict'
 
 var validArrayToken = require('./validArrayToken')
+var OBJECT = 'object'
 
 /**
  * Walk a JSON document with a tokens array
@@ -21,7 +22,7 @@ module.exports = function walk(doc, tokens) {
 
     if (Array.isArray(target))
       validArrayToken(token, target.length)
-    else if (typeof target !== 'object' || target === null)
+    else if (typeof target !== OBJECT || target === null)
       throw new Error('Cannot be walked')
 
     target = target[token]
@@ -31,7 +32,7 @@ module.exports = function walk(doc, tokens) {
 
   if (Array.isArray(target))
     validArrayToken(token, target.length)
-  else if (typeof target !== 'object' || target === null)
+  else if (typeof target !== OBJECT || target === null)
     throw new Error('Invalid target')
 
   return [token, target]

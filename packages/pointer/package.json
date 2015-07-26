@@ -10,11 +10,11 @@
   "main": "index.js",
   "repository": "github:JSON8/pointer",
   "scripts": {
-    "preversion": "npm run browserify && npm test",
-    "browserify": "webpack -p index.js JSON8Pointer.js --output-library=JSON8Pointer",
+    "preversion": "npm run webify && npm test",
+    "webify": "browserify -s JSON8Pointer index.js -o JSON8Pointer.js",
     "lint": "eslint .",
     "unit": "mocha --compilers js:babel/register --recursive test/",
-    "test": "npm run unit && npm run lint"
+    "test": "npm run unit && npm run lint && npm run webify"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "MIT"
