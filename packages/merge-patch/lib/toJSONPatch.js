@@ -1,7 +1,7 @@
 'use strict'
 
 var JSON8 = require('json8')
-var isObject = JSON8.isObject
+var OBJECT = JSON8.OBJECT
 var isJSON = JSON8.isJSON
 var pointer = require('json8-pointer')
 
@@ -12,9 +12,9 @@ var pointer = require('json8-pointer')
  * @return {Array}         - JSON Patch document
  */
 module.exports = function toJSONPatch(patch, prefix) {
-  if (!isObject(patch)) {
+  if (typeof patch !== OBJECT || patch === null || Array.isArray(patch)) {
     if (!isJSON(patch))
-      throw new TypeError('patch argument is not a valid JSON value')
+      throw new TypeError(patch + ' is not JSON valid')
 
     return [{"op": "replace", "path": "", "value": patch}]
   }
@@ -27,7 +27,7 @@ module.exports = function toJSONPatch(patch, prefix) {
     var tokens = prefix.slice()
     tokens.push(k)
 
-    if (isObject(v)) {
+    if (typeof v === OBJECT && v !== null && !Array.isArray(v)) {
       ops = ops.concat(toJSONPatch(v, tokens))
       continue
     }

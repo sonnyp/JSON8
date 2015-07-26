@@ -1,7 +1,7 @@
 'use strict'
 
 var JSON8 = require('json8')
-var isObject = JSON8.isObject
+var OBJECT = JSON8.OBJECT
 var isJSON = JSON8.isJSON
 
 /**
@@ -12,14 +12,14 @@ var isJSON = JSON8.isJSON
  * @return {Object}        - JSON object document
  */
 module.exports = function apply(doc, patch) {
-  if (!isObject(patch)) {
+  if (typeof patch !== OBJECT || patch === null || Array.isArray(patch)) {
     if (!isJSON(patch))
-      throw new TypeError('patch argument is not a valid JSON value')
+      throw new TypeError(patch + ' is not JSON valid')
 
     return patch
   }
 
-  if (!isObject(doc))
+  if (typeof doc !== OBJECT || doc === null || Array.isArray(doc))
     doc = Object.create(null)
 
   for (var k in patch) {

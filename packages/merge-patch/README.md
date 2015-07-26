@@ -17,8 +17,10 @@ JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396) implementation 
 
 ```npm install json8-merge-patch```
 
+----
+
 ```javascript
-var mergePatch = require('json8-merge-patch');
+var ooPatch = require('json8-merge-patch');
 ```
 
 or
@@ -27,7 +29,7 @@ or
 <script src="node_modules/json8-merge-patch/JSON8MergePatch.js"></script>
 ```
 ```javascript
-var mergePatch = window.JSON8MergePatch
+var ooPatch = window.JSON8MergePatch
 ```
 
 [↑](#json8-merge-patch)
@@ -39,7 +41,7 @@ var mergePatch = window.JSON8MergePatch
 Apply a JSON Merge Patch on a JSON document.
 
 ```javascript
-doc = mergePatch.apply(doc, {"name": "Jeanette doe"});
+doc = ooPatch.apply(doc, {"name": "Jeanette doe"});
 ```
 
 [↑](#json8-merge-patch)
@@ -63,7 +65,7 @@ var JSONMergePatch = {
   "foo": {"bar": "foobar"},
   "foo": null}
 }
-var JSONPatch = mergePatch.toJSONPatch(JSONMergePatch)
+var JSONPatch = ooPatch.toJSONPatch(JSONMergePatch)
 //[
 //  { op: 'add', path: '/foo/bar', value: 'foobar' },
 //  { op: 'remove', path: '/bar' }

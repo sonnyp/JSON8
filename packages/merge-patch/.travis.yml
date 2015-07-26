@@ -1,10 +1,17 @@
+sudo: false
+
 language: node_js
 
 node_js:
   - "0.10"
+  - "0.11"
   - "0.12"
   - "io.js"
 
 before_install:
-  - npm install -g eslint mocha babel webpack
-  - npm run browserify
+  - npm install -g eslint mocha babel browserify
+
+script:
+  - npm run unit
+  - npm run lint
+  - npm run webify

@@ -12,16 +12,16 @@
   "main": "index.js",
   "repository": "github:JSON8/merge-patch",
   "scripts": {
-    "preversion": "npm run browserify && npm test",
-    "browserify": "webpack -p index.js JSON8MergePatch.js --output-library=JSON8MergePatch",
+    "preversion": "npm run webify && npm test",
+    "webify": "browserify -s JSON8MergePatch index.js -o JSON8MergePatch.js",
     "lint": "eslint .",
     "unit": "mocha --compilers js:babel/register --recursive test/",
-    "test": "npm run unit && npm run lint"
+    "test": "npm run unit && npm run lint && npm run webify"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "MIT",
   "dependencies": {
-    "json8": "^0.1.0"
+    "json8": "^0.2.0"
   },
   "devDependencies": {
     "json8-patch": "^0.2.1",
