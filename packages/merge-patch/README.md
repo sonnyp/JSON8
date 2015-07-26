@@ -81,7 +81,7 @@ Incompatible destination
 ```javascript
 
 var doc = []
-var JSONMergeatch = {a: 'hello'}
+var JSONMergePatch = {a: 'hello'}
 var JSONPatch = toJSONPatch(JSONMergePatch)
 // JSONPatch will fail to apply because doc is not an object
 ```
@@ -91,7 +91,7 @@ Wrong location
 ```javascript
 
 var doc = {}
-var JSONMergeatch = {a: {b: 'hello'}}
+var JSONMergePatch = {a: {b: 'hello'}}
 var JSONPatch = toJSONPatch(JSONMergePatch)
 // JSONPatch will fail to apply because doc.a doesn't exist
 ```
@@ -101,7 +101,7 @@ Remove non-existant value
 ```javascript
 
 var doc = {}
-var JSONMergeatch = {a: null}
+var JSONMergePatch = {a: null}
 var JSONPatch = toJSONPatch(JSONMergePatch)
 // JSONPatch will fail to apply because doc.a doesn't exist
 ```
