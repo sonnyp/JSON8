@@ -11,16 +11,16 @@
   "main": "index.js",
   "repository": "github:JSON8/patch",
   "scripts": {
-    "preversion": "npm run browserify && npm test",
-    "browserify": "webpack -p index.js JSON8Patch.js --output-library=JSON8Patch",
+    "preversion": "npm run webify && npm test",
+    "webify": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
     "lint": "eslint .",
     "unit": "./scripts/make-json-patch-tests && mocha --compilers js:babel/register --recursive test/",
-    "test": "npm run unit && npm run lint"
+    "test": "npm run unit && npm run lint && npm run webify"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "MIT",
   "dependencies": {
-    "json8": "^0.1.0",
+    "json8": "^0.2.0",
     "json8-pointer": "^0.3.0"
   }
 }

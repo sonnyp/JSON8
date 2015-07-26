@@ -31,8 +31,10 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
 
 ```npm install json8-patch```
 
+----
+
 ```javascript
-var JSONPatch = require('json8-patch');
+var ooPatch = require('json8-patch');
 ```
 
 or
@@ -41,7 +43,7 @@ or
 <script src="node_modules/json8-patch/JSON8Patch.js"></script>
 ```
 ```javascript
-var JSONPatch = window.JSON8Patch
+var ooPatch = window.JSON8Patch
 ```
 
 For performance concerns JSON8 Patch mutates documents; if you want it to work on its own shallow copy of your document use:
@@ -61,7 +63,7 @@ See [clone](https://github.com/JSON8/JSON8#clone).
 ## apply
 
 ```javascript
-doc = JSONPatch.apply(doc, [
+doc = ooPatch.apply(doc, [
   { "op": "add",     "path": "/tags/0",        "value": "family"          },
   { "op": "remove",  "path": "/height"                                    },
   { "op": "replace", "path": "/age",           "value": "26"              },
@@ -71,9 +73,9 @@ doc = JSONPatch.apply(doc, [
 ]);
 ```
 
-```JSONPatch.apply``` returns a document because the JSON Patch specification states that an operation can replace the original document.
+```ooPatch.apply``` returns a document because the JSON Patch specification states that an operation can replace the original document.
 
-```JSONPatch.apply``` is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
+```ooPatch.apply``` is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
 
 [↑](#json8-patch)
 
@@ -91,11 +93,11 @@ The revert object can be used to revert a patch on a document.
 
 ```javascript
 // apply the patch with the reversible option
-var patchResult = JSONPatch.apply(doc, patch, {reversible: true});
+var patchResult = ooPatch.apply(doc, patch, {reversible: true});
 doc = patchResult[0];
 
 // revert the patch
-doc = JSONPatch.revert(doc, patchResult[1]);
+doc = ooPatch.revert(doc, patchResult[1]);
 // doc is strictly identical to the origina
 ```
 
@@ -113,42 +115,42 @@ The third argument is used internaly and can be ignored. It is the index of the 
 
 ### add
 ```javascript
-doc = JSONPatch.add(doc, '/foo', 'foo')[0]
+doc = ooPatch.add(doc, '/foo', 'foo')[0]
 ```
 
 [↑](#json8-patch)
 
 ### remove
 ```javascript
-doc = JSONPatch.remove(doc, '/foo')[0];
+doc = ooPatch.remove(doc, '/foo')[0];
 ```
 
 [↑](#json8-patch)
 
 ### replace
 ```javascript
-doc = JSONPatch.replace(doc, '/foo', 'foo')[0];
+doc = ooPatch.replace(doc, '/foo', 'foo')[0];
 ```
 
 [↑](#json8-patch)
 
 ### move
 ```javascript
-doc = JSONPatch.move(doc, '/foo', '/bar')[0];
+doc = ooPatch.move(doc, '/foo', '/bar')[0];
 ```
 
 [↑](#json8-patch)
 
 ### copy
 ```javascript
-doc = JSONPatch.copy(doc, '/foo', '/bar')[0];
+doc = ooPatch.copy(doc, '/foo', '/bar')[0];
 ```
 
 [↑](#json8-patch)
 
 ### test
 ```javascript
-doc = JSONPatch.test(doc, '/foo', 'bar')[0];
+doc = ooPatch.test(doc, '/foo', 'bar')[0];
 ```
 
 [↑](#json8-patch)
@@ -159,7 +161,7 @@ Those are not part of the standard and are only provided for convenience.
 
 ### get
 ```javascript
-JSONPatch.get(doc, '/foo');
+ooPatch.get(doc, '/foo');
 // returns value at /foo
 ```
 
@@ -167,7 +169,7 @@ JSONPatch.get(doc, '/foo');
 
 ### has
 ```javascript
-JSONPatch.has(doc, '/foo');
+ooPatch.has(doc, '/foo');
 // returns true if foo property exists, false otherwise
 ```
 
