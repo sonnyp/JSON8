@@ -3,17 +3,20 @@
 /**
  * parse a JSON Pointer string
  *
- * @param  {String} pointer  - JSON Pointer string to parse
- * @return {Array}           - array of tokens
+ * @param  {String} pointer    - JSON Pointer string to parse
+ * @param  {String} separator  - separator to use, defaults to /
+ * @return {Array}             - array of tokens
  */
-module.exports = function parse(pointer) {
+module.exports = function parse(pointer, separator) {
   if (Array.isArray(pointer))
     return pointer
+
+  var sep = typeof separator === 'string' && separator.length > 0 ? separator : '/'
 
   if (pointer.length === 0)
     return []
 
-  if (pointer.charAt(0) !== '/')
+  if (pointer.charAt(0) !== sep)
     throw new Error('Invalid pointer: ' + pointer)
 
   var tokens = ['']
@@ -21,13 +24,13 @@ module.exports = function parse(pointer) {
 
   for (var i = 1, len = pointer.length; i < len; i++) {
     var l = pointer.charAt(i)
-    if (l === '/') {
+    if (l === sep) {
       tokens.push('')
       c++
     }
     else if (l === '~') {
       if (pointer.charAt(i + 1) === '1') {
-        tokens[c] += '/'
+        tokens[c] += sep
         i++
       }
       else if (pointer.charAt(i + 1) === '0') {

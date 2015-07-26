@@ -67,6 +67,13 @@ ooPointer.parse('/foo/a~1b')
 // ['foo', 'a/b']
 ```
 
+You can specify a different separator than the default ```/```.
+
+```javascript
+ooPointer.parse('.foo.bar.hello', '.');
+// ['foo', 'bar', 'hello'];
+```
+
 [↑](#json8-pointer)
 
 ## serialize
@@ -79,6 +86,13 @@ ooPointer.serialize(['foo', 'bar', 'hello']);
 
 ooPointer.serialize(['foo', 'a/b'])
 // '/foo/a~1b'
+```
+
+You can specify a different separator than the default ```/```.
+
+```javascript
+ooPointer.parse(['foo', 'bar', 'hello'], '.');
+// '.foo.bar.hello'
 ```
 
 [↑](#json8-pointer)
