@@ -54,10 +54,10 @@ See also
     - [filter](#filter)
     - [some](#some)
     - [every](#every)
-    - [Array](#array)
+    - [Array methods](#array-methods)
       * [add](#add)
       * [remove](#remove)
-    - [Object](#object)
+    - [Object methods](#object-methods)
       * [set](#set)
       * [unset](#unset)
 * [Motivations](#motivations)
@@ -536,7 +536,7 @@ oo.forOf(['foo', 52])    // false
 
 [↑](#json8)
 
-## Array
+## Array methods
 
 ### add
 
@@ -566,7 +566,7 @@ oo.remove(set, 'foo')
 // set is []
 ```
 
-## Object
+## Object methods
 
 ### set
 
