@@ -10,12 +10,12 @@ JSON8 is a JavaScript library that makes working with JSON/data/structures safer
 Features
 
 * Strong JSON and type validation
-* Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set); include [es6-shim](https://github.com/paulmillr/es6-shim/) for < IE 11
-* Abstracts differences between JavaScript object structures (array, object, map, set)
+* Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+* Abstracts differences between JavaScript structures/collections (array, object, map, set)
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
 * See [Methods](#methods) and [Motivations](#motivations)
 * [Tested](https://travis-ci.org/JSON8/JSON8)
-* Modular, you can save bandwith/memory by requiring needed methods using ```require('json8/METHOD_NAME')```
+* Modular, you can save bandwith/memory by requiring needed methods using ```require('json8/lib/METHOD_NAME')```
 
 See also
 
@@ -45,7 +45,7 @@ See also
   * [valid](#valid)
   * [serialize](#serialize)
   * [parse](#parse)
-  * Structures
+  * [Structures](#structures)
     - [size](#size)
     - [has](#has)
     - [forEach](#foreach)
@@ -54,10 +54,10 @@ See also
     - [filter](#filter)
     - [some](#some)
     - [every](#every)
-    - Array
+    - [Array](#array)
       * [add](#add)
       * [remove](#remove)
-    - Object
+    - [Object](#object)
       * [set](#set)
       * [unset](#unset)
 * [Motivations](#motivations)
@@ -115,7 +115,7 @@ oo.equal(
   {foo: 'bar', bar: 'foo'}
   {bar: 'foo', foo: 'bar'}
 )                        // true
-oo.equal(new Set([1, 2]), new Set([2, 1])) // true
+oo.equal(new Set([1, 2]), new Set([1, 2])) // true
 
 oo.equal([1, 2], [2, 1]) // false
 ```
@@ -447,7 +447,7 @@ oo.has([true, null, "foo"], null) // true
 
 [↑](#json8)
 
-## forEach
+### forEach
 
 Iterates over a structure.
 
@@ -464,7 +464,7 @@ oo.forEach(new Set(), log)
 
 [↑](#json8)
 
-## forOf
+### forOf
 
 Same as [forEach](#forEach) but returning ```true``` breaks the loop.
 
@@ -480,7 +480,7 @@ oo.forOf(['a', 'b', 'c', 'd'], log) // logs 'a' and 'b' then breaks
 
 [↑](#json8)
 
-## map
+### map
 
 Creates a new structure with the results of calling the provided function on every element in the provided structure. Returning undefined omits the value.
 
@@ -494,7 +494,7 @@ var foos = oo.map([1, 2, 3], map) // ["foo", "bar"]
 
 [↑](#json8)
 
-## filter
+### filter
 
 Creates a new structure with all elements that pass the test implemented by the provided function.
 
@@ -506,7 +506,7 @@ var bigNumbers = oo.map([1, 5, 11, 12], function(value, key) {
 
 [↑](#json8)
 
-## some
+### some
 
 Tests whether some element in the structure pass the test implemented by the provided function.
 
@@ -521,7 +521,7 @@ oo.forOf(['foo', 'bar'])       // false
 
 [↑](#json8)
 
-## every
+### every
 
 Tests whether all elements in the structure passes the test implemented by the provided function
 
@@ -535,6 +535,67 @@ oo.forOf(['foo', 52])    // false
 ```
 
 [↑](#json8)
+
+## Array
+
+### add
+
+Add a value to an array
+
+```javascript
+var array = ['foo']
+oo.add(array, 'foo')
+// array is ['foo', 'foo']
+
+var set = new Set(['foo'])
+oo.add(set, 'foo')
+// set is ['foo']
+```
+
+### remove
+
+Remove a value from an array
+
+```javascript
+var array = ['foo', 'foo']
+oo.remove(array, 'foo')
+// array is ["foo"]
+
+var set = new Set(['foo', 'foo'])
+oo.remove(set, 'foo')
+// set is []
+```
+
+## Object
+
+### set
+
+Add a key value to an object
+
+```javascript
+var object = {}
+oo.set(obj, 'foo', 'bar')
+// object is {"foo": "bar"}
+
+var map = new Map()
+oo.set(map, 'foo', 'bar')
+// map is {"foo": "bar"}
+```
+
+### unset
+
+Remove a key value from an object
+
+```javascript
+var object = {"foo": "bar"}
+oo.remove(obj, 'foo')
+// object is {}
+
+var map = new Map()
+map.set('foo', 'bar')
+oo.unset(map, 'foo')
+// map is {}
+```
 
 # Motivations
 
