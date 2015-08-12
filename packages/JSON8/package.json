@@ -11,10 +11,13 @@
   "scripts": {
     "preversion": "npm run webify && npm test",
     "webify": "browserify -s JSON8 index.js -o JSON8.js",
-    "lint": "eslint .",
+    "lint": "./node_modules/.bin/eslint .",
     "unit": "mocha --compilers js:babel/register --recursive test/",
     "test": "npm run unit && npm run lint && npm run webify"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^0.24.1"
+  }
 }
