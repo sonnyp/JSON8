@@ -8,12 +8,13 @@
     "diff"
   ],
   "homepage": "https://github.com/JSON8/patch",
-  "main": "index.js",
   "repository": "github:JSON8/patch",
+  "bugs": "https://github.com/JSON8/patch/issues",
+  "main": "index.js",
   "scripts": {
     "preversion": "npm run webify && npm test",
     "webify": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
-    "lint": "eslint .",
+    "lint": "./node_modules/.bin/eslint .",
     "unit": "./scripts/make-json-patch-tests && mocha --compilers js:babel/register --recursive test/",
     "test": "npm run unit && npm run lint && npm run webify"
   },
@@ -22,5 +23,8 @@
   "dependencies": {
     "json8": "^0.2.0",
     "json8-pointer": "^0.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^0.24.1"
   }
 }
