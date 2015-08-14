@@ -53,4 +53,16 @@ describe('serialize', () => {
     })
   })
 
+  if (global.Map) {
+    describe('map', function() {
+      it('throws an error for non string keys', () => {
+        const map = new Map()
+        map.set(null, 'hello')
+        assert.throws(function() {
+          valid(map)
+        }, TypeError)
+      })
+    })
+  }
+
 })
