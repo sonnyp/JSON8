@@ -21,15 +21,32 @@ module.exports = function valid(obj) {
   else if (type !== OBJECT)
     return false
 
+  var c
+  var it
+
   if (global.Set && obj instanceof Set) {
-    for (var item of obj)
-      if (!valid(item)) return false
+    c = true
+    var values = obj.values()
+    while (c === true) {
+      it = values.next()
+      if (it.done === true) c = false
+      else if (!valid(it.value)) return false
+    }
     return true
   }
 
   if (global.Map && obj instanceof Map) {
-    for (var kv of obj)
-      if (!valid(kv[1])) return false
+    c = true
+    var entries = obj.entries()
+    while (c === true) {
+      it = entries.next()
+      if (it.done === true) {
+        c = false
+        continue
+      }
+      if (typeof it.value[0] !== 'string') return false
+      else if (!valid(it.value[1])) return false
+    }
     return true
   }
 
@@ -44,8 +61,8 @@ module.exports = function valid(obj) {
 
   var keys = Object.keys(obj)
   for (i = 0, l = keys.length; i < l; i++) {
-    var key = keys[i]
-    if (!valid(obj[key])) return false
+    var k = keys[i]
+    if (!valid(obj[k])) return false
   }
   return true
 }

@@ -52,4 +52,14 @@ describe('valid', () => {
     })
   })
 
+  if (global.Map) {
+    describe('map', function() {
+      it('return false for non string keys', () => {
+        const map = new Map()
+        map.set(null, 'hello')
+        assert.strictEqual(valid(map), false)
+      })
+    })
+  }
+
 })
