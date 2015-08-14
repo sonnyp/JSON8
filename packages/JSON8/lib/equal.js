@@ -47,7 +47,7 @@ module.exports = function equal(a, b) {
   if (Array.isArray(a)) {
     if (a.length !== b.length) return false
     for (i = 0, l = a.length; i < l; i++)
-      if (a[i] !== b[i]) return false
+      if (!equal(a[i], b[i])) return false
     return true
   }
 
@@ -61,7 +61,7 @@ module.exports = function equal(a, b) {
   if (keys.length !== Object.keys(b).length) return false
   for (i = 0, l = keys.length; i < l; i++) {
     var key = keys[i]
-    if (!has(b, key) || b[key] !== a[key]) return false
+    if (!has(b, key) || !equal(b[key], a[key])) return false
   }
 
   return true

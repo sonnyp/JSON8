@@ -19,5 +19,6 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^0.24.1"
-  }
+  },
+  "bugs": "https://github.com/JSON8/JSON8/issues"
 }

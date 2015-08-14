@@ -11,7 +11,6 @@ Features
 
 * Strong JSON and type validation
 * Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
-* Abstracts differences between JavaScript structures/collections (array, object, map, set)
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
 * See [Methods](#methods) and [Motivations](#motivations)
 * [Tested](https://travis-ci.org/JSON8/JSON8)
@@ -20,6 +19,7 @@ Features
 
 See also
 
+* [mole](https://github.com/sonnyp/mole) to work with Array/Map/Object/Set data structures.
 * [JSON8 Patch](https://github.com/JSON8/patch) for JSON diffing and patching
 * [JSON8 Pointer](https://github.com/JSON8/pointer) for JSON Pointer (URL for JSON) implementation
 * [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simpler JSON object diffing/patching alternative to JSON Patch and Pointer
@@ -46,22 +46,6 @@ See also
   * [valid](#valid)
   * [serialize](#serialize)
   * [parse](#parse)
-  * [Structures](#structures)
-    - [size](#size)
-    - [forEach](#foreach)
-    - [forOf](#forof)
-    - [map](#map)
-    - [filter](#filter)
-    - [some](#some)
-    - [every](#every)
-    - [Array methods](#array-methods)
-      * [add](#add)
-      * [remove](#remove)
-      * [contains](#contains)
-    - [Object methods](#object-methods)
-      * [set](#set)
-      * [unset](#unset)
-      * [has](#has)
 * [Motivations](#motivations)
 * [Tests](#tests)
 * [Contributing](#contributing)
@@ -419,202 +403,6 @@ var doc = oo.parse(string[, options]);
 
 [↑](#json8)
 
-## Structures
-
-### size
-
-Returns the size (or length) of a structure.
-
-```javascript
-oo.size(["foo"])        // 1
-oo.size({"foo": "bar"}) // 1
-var set = new Set()
-set.add('foo')
-oo.size(set)            // 1
-var map = new Map()
-map.set('foo', 'bar')
-oo.size(map)            // 1
-
-oo.size(null)     // TypeError
-oo.size('string') // TypeError
-```
-
-[↑](#json8)
-
-### forEach
-
-Iterates over a structure.
-
-```javascript
-var log = function(value, key) {
-  console.log(key + ':' + value)
-}
-
-oo.forEach([], log)
-oo.forEach({}, log)
-oo.forEach(new Map(), log)
-oo.forEach(new Set(), log)
-```
-
-[↑](#json8)
-
-### forOf
-
-Same as [forEach](#forEach) but returning ```true``` breaks the loop.
-
-```javascript
-var log = function(value, key) {
-  if (value === 'c')
-    return true
-  console.log(key + ':' + value)
-}
-
-oo.forOf(['a', 'b', 'c', 'd'], log) // logs 'a' and 'b' then breaks
-```
-
-[↑](#json8)
-
-### map
-
-Creates a new structure with the results of calling the provided function on every element in the provided structure. Returning undefined omits the value.
-
-```javascript
-var stringifyValues = function(value, key) {
-  return value.toString()
-}
-
-var foos = oo.map([1, 2, 3], map) // ["foo", "bar"]
-```
-
-[↑](#json8)
-
-### filter
-
-Creates a new structure with all elements that pass the test implemented by the provided function.
-
-```javascript
-var bigNumbers = oo.map([1, 5, 11, 12], function(value, key) {
-  return value > 10
-}) // [11, 12]
-```
-
-[↑](#json8)
-
-### some
-
-Tests whether some element in the structure pass the test implemented by the provided function.
-
-```javascript
-var containsNull = function(value, key) {
-  return value === null
-}
-
-oo.forOf(['foo', null, 'bar']) // true
-oo.forOf(['foo', 'bar'])       // false
-```
-
-[↑](#json8)
-
-### every
-
-Tests whether all elements in the structure passes the test implemented by the provided function
-
-```javascript
-var containsStringOnly = function(value, key) {
-  return typeof value === 'string'
-}
-
-oo.forOf(['foo', 'bar']) // true
-oo.forOf(['foo', 52])    // false
-```
-
-[↑](#json8)
-
-## Array methods
-
-### add
-
-Add a value to an array
-
-```javascript
-var array = ['foo']
-oo.add(array, 'foo')
-// array is ['foo', 'foo']
-
-var set = new Set(['foo'])
-oo.add(set, 'foo')
-// set is ['foo']
-```
-
-### remove
-
-Remove a value from an array
-
-```javascript
-var array = ['foo', 'foo']
-oo.remove(array, 'foo')
-// array is ["foo"]
-
-var set = new Set(['foo', 'foo'])
-oo.remove(set, 'foo')
-// set is []
-```
-
-### has
-
-Returns ```true``` if the array contains the value
-
-```javascript
-oo.has(['foo'], 'foo')          // true
-oo.has(new Set(['foo']), 'foo') // false
-```
-
-## Object methods
-
-### set
-
-Add a key value to an object
-
-```javascript
-var object = {}
-oo.set(obj, 'foo', 'bar')
-// object is {"foo": "bar"}
-
-var map = new Map()
-oo.set(map, 'foo', 'bar')
-// map is {"foo": "bar"}
-```
-
-### unset
-
-Remove a key value from an object
-
-```javascript
-var object = {"foo": "bar"}
-oo.remove(obj, 'foo')
-// object is {}
-
-var map = new Map()
-map.set('foo', 'bar')
-oo.unset(map, 'foo')
-// map is {}
-```
-
-### has
-
-Returns ```true``` if the object has the key
-
-```javascript
-oo.has({"foo": "bar"}, 'foo') // true
-oo.has({}, 'foo')             // false
-var map = new Map()
-map.set('foo', 'bar')
-oo.has(map, 'foo') // true
-```
-
-[↑](#json8)
-
-
 # Motivations
 
 ## Types
@@ -651,10 +439,6 @@ JSON8 [types](#types) helps avoiding many common errors as well.
 * [parse](#parse) optionally parses arrays as Set and objects as Map
 
 [↑](#json8)
-
-## Consistency
-
-JSON8 provides methods that abstracts differences between JavaScript structures (array, object, map, set).
 
 ## Comparaisons
 

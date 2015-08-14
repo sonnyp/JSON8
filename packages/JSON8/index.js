@@ -16,19 +16,3 @@ module.exports.type = require('./lib/type')
 for (var type in types)
   module.exports[type] = types[type]
 module.exports.valid = require('./lib/valid')
-
-// structures
-module.exports.every = require('./lib/every')
-module.exports.forEach = require('./lib/forEach')
-module.exports.forOf = require('./lib/forOf')
-module.exports.map = require('./lib/map')
-module.exports.size = require('./lib/size')
-module.exports.some = require('./lib/some')
-// array
-module.exports.add = require('./lib/add')
-module.exports.contains = require('./lib/contains')
-module.exports.remove = require('./lib/remove')
-// object
-module.exports.has = require('./lib/has')
-module.exports.set = require('./lib/set')
-module.exports.unset = require('./lib/unset')
