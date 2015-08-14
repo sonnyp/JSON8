@@ -85,6 +85,7 @@ oo.equal(doc, copy) // true
 
 oo.clone(true) // true
 oo.clone(42)   // 42
+oo.clone(-0)   // -0
 ```
 
 [↑](#json8)
@@ -108,6 +109,8 @@ oo.equal(new Set(), []) // true
 oo.equal(new Map(), {}) // true
 
 oo.equal([1, 2], [2, 1]) // false
+
+oo.equal(-0, +0) // false
 ```
 
 [↑](#json8)
@@ -509,6 +512,9 @@ oo.serialize(new Date())   // '{}'
 // if you do want a string date in your JSON use one of the many Date methods such as toISOString
 
 // -0
+-0 === 0           //  true
+oo.equal(-0, 0)    //  false
+
 JSON.parse("-0")   //  -0
 JSON.stringify(-0) //  "0"
 

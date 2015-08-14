@@ -1,7 +1,13 @@
 'use strict'
 
 var types = require('./types')
-var PRIMITIVES = types.PRIMITIVES
+// var PRIMITIVES = types.PRIMITIVES
+var OBJECT = types.OBJECT
+var ARRAY = types.ARRAY
+var STRING = types.STRING
+var BOOLEAN = types.BOOLEAN
+var NUMBER = types.NUMBER
+var NULL = types.NULL
 var type = require('./type')
 
 var toArray = function(set) {
@@ -21,45 +27,50 @@ var toObject = function(map) {
 }
 
 module.exports = function equal(a, b) {
-  if (global.Set && global.Map) {
-    if (a instanceof Set)
-      a = toArray(a)
-    else if (a instanceof Map) {
-      a = toObject(a)
-    }
-    if (b instanceof Set)
-      b = toArray(b)
-    else if (b instanceof Map) {
-      b = toObject(b)
-    }
-  }
-
-  console.log(a, typeof a)
-
   var ta = type(a)
-  if (!ta)
-    throw new Error(a + ' is not JSON valid')
+  var tb = type(b)
 
-  if (PRIMITIVES.indexOf(ta) > -1)
-    return a === b
-
-  if (ta !== type(b))
+  if (ta !== tb)
     return false
 
+  var t = ta
+
+  switch (t) {
+  case NUMBER:
+    if (a === 0 && (1 / a) === -Infinity)
+      return b === 0 && (1 / b === -Infinity)
+    return a === b
+  case STRING:
+  case NULL:
+  case BOOLEAN:
+      return a === b
+  }
+
   var i, l
-  if (Array.isArray(a)) {
+  if (t === ARRAY) {
+    if (global.Set) {
+      if (a instanceof Set) a = toArray(a)
+      if (b instanceof Set) b = toArray(b)
+    }
     if (a.length !== b.length) return false
     for (i = 0, l = a.length; i < l; i++)
       if (!equal(a[i], b[i])) return false
     return true
   }
 
-  var keys = Object.keys(a)
-  if (keys.length !== Object.keys(b).length) return false
-  for (i = 0, l = keys.length; i < l; i++) {
-    var key = keys[i]
-    if (b.hasOwnProperty && !b.hasOwnProperty(key)) return false
-    if (!equal(b[key], a[key])) return false
+  if (t === OBJECT) {
+    if (global.Map) {
+      if (a instanceof Map) a = toObject(a)
+      if (b instanceof Map) b = toObject(b)
+    }
+    var keys = Object.keys(a)
+    if (keys.length !== Object.keys(b).length) return false
+    for (i = 0, l = keys.length; i < l; i++) {
+      var key = keys[i]
+      if (b.hasOwnProperty && !b.hasOwnProperty(key)) return false
+      if (!equal(b[key], a[key])) return false
+    }
+    return true
   }
 
   return true
