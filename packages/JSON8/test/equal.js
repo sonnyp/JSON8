@@ -87,7 +87,7 @@ describe('equal', () => {
         equal(map, map)
       })
 
-      it('returns false for different', () => {
+      it.only('returns false for different', () => {
         const a = new Map()
         a.set('foo', 'bar')
         const b = new Map()
