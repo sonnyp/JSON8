@@ -15,7 +15,8 @@ Features
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
 * See [Methods](#methods) and [Motivations](#motivations)
 * [Tested](https://travis-ci.org/JSON8/JSON8)
-* Modular, you can save bandwith/memory by requiring needed methods using ```require('json8/lib/METHOD_NAME')```
+* Small, no dependencies
+* Modular, save bandwith/memory by requiring needed methods using ```require('json8/lib/METHOD_NAME')```
 
 See also
 
@@ -47,7 +48,6 @@ See also
   * [parse](#parse)
   * [Structures](#structures)
     - [size](#size)
-    - [has](#has)
     - [forEach](#foreach)
     - [forOf](#forof)
     - [map](#map)
@@ -57,9 +57,11 @@ See also
     - [Array methods](#array-methods)
       * [add](#add)
       * [remove](#remove)
+      * [contains](#contains)
     - [Object methods](#object-methods)
       * [set](#set)
       * [unset](#unset)
+      * [has](#has)
 * [Motivations](#motivations)
 * [Tests](#tests)
 * [Contributing](#contributing)
@@ -116,6 +118,10 @@ oo.equal(
   {bar: 'foo', foo: 'bar'}
 )                        // true
 oo.equal(new Set([1, 2]), new Set([1, 2])) // true
+oo.equal(new Set([2, 1]), new Set([1, 2])) // false
+
+oo.equal(new Set(), []) // true
+oo.equal(new Map(), {}) // true
 
 oo.equal([1, 2], [2, 1]) // false
 ```
@@ -435,18 +441,6 @@ oo.size('string') // TypeError
 
 [↑](#json8)
 
-### has
-
-Returns ```true``` if the structure has the key (for object) or the value (for array)
-
-```javascript
-oo.has({"foo": "bar"}, "foo")     // true
-oo.has({"foo": undefined}, "foo") // false
-oo.has([true, null, "foo"], null) // true
-```
-
-[↑](#json8)
-
 ### forEach
 
 Iterates over a structure.
@@ -566,6 +560,15 @@ oo.remove(set, 'foo')
 // set is []
 ```
 
+### has
+
+Returns ```true``` if the array contains the value
+
+```javascript
+oo.has(['foo'], 'foo')          // true
+oo.has(new Set(['foo']), 'foo') // false
+```
+
 ## Object methods
 
 ### set
@@ -596,6 +599,21 @@ map.set('foo', 'bar')
 oo.unset(map, 'foo')
 // map is {}
 ```
+
+### has
+
+Returns ```true``` if the object has the key
+
+```javascript
+oo.has({"foo": "bar"}, 'foo') // true
+oo.has({}, 'foo')             // false
+var map = new Map()
+map.set('foo', 'bar')
+oo.has(map, 'foo') // true
+```
+
+[↑](#json8)
+
 
 # Motivations
 

@@ -2,7 +2,7 @@
 
 var forOf = require('./forOf')
 
-module.exports = function some(obj, fn, ctx) {
+module.exports = function every(obj, fn, ctx) {
   var result = true
   forOf(obj, function(value, key) {
     if (!fn.call(ctx, value, key)) {
