@@ -21,8 +21,8 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "MIT",
   "dependencies": {
-    "json8": "^0.2.0",
-    "json8-pointer": "^0.3.0"
+    "json8": "^0.3.0",
+    "json8-pointer": "^0.4.0"
   },
   "devDependencies": {
     "eslint": "^0.24.1"
