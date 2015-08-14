@@ -1,7 +1,7 @@
 'use strict'
 
 import assert from 'assert'
-import types from '../lib/types'
+import types from '..'
 
 describe('types', () => {
 
