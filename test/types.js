@@ -29,4 +29,34 @@ describe('types', () => {
     assert.strictEqual(types.BOOLEAN, 'boolean')
   })
 
+  describe('STRUCTURES', () => {
+    it('contains ARRAY', () => {
+      assert(types.STRUCTURES.indexOf(types.ARRAY) !== -1)
+    })
+    it('contains OBJECT', () => {
+      assert(types.STRUCTURES.indexOf(types.OBJECT) !== -1)
+    })
+    it('has a length of 2', () => {
+      assert.equal(types.STRUCTURES.length, 2)
+    })
+  })
+
+  describe('PRIMITIVES', () => {
+    it('contains STRING', () => {
+      assert(types.PRIMITIVES.indexOf(types.STRING) !== -1)
+    })
+    it('contains NUMBER', () => {
+      assert(types.PRIMITIVES.indexOf(types.NUMBER) !== -1)
+    })
+    it('contains NULL', () => {
+      assert(types.PRIMITIVES.indexOf(types.NULL) !== -1)
+    })
+    it('contains BOOLEAN', () => {
+      assert(types.PRIMITIVES.indexOf(types.BOOLEAN) !== -1)
+    })
+    it('has a length of 4', () => {
+      assert.equal(types.PRIMITIVES.length, 4)
+    })
+  })
+
 })
