@@ -87,7 +87,7 @@ describe('equal', () => {
         equal(map, map)
       })
 
-      it.only('returns false for different', () => {
+      it('returns false for different', () => {
         const a = new Map()
         a.set('foo', 'bar')
         const b = new Map()
@@ -138,6 +138,19 @@ describe('equal', () => {
       differ(42, 43)
     })
 
+    describe('0', () => {
+      it('returns true for identical', () => {
+        equal(0, 0)
+        equal(-0, -0)
+        equal(+0, +0)
+        equal(+0, 0)
+      })
+
+      it('returns false for different', () => {
+        differ(-0, 0)
+        differ(-0, +0)
+      })
+    })
     // TODO: figure out what to do with those?
     // it('returns false for NaN', () => {
     //   differ(NaN, NaN)

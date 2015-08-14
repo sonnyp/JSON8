@@ -62,4 +62,10 @@ describe('clone', () => {
   it('returns null for null', () => {
     assert.strictEqual(clone(null), null)
   })
+
+  it('returns -0 for -0', () => {
+    const cl = clone(-0)
+    assert(cl === 0)
+    assert((1 / cl) === -Infinity)
+  })
 })
