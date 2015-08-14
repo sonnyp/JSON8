@@ -23,7 +23,8 @@ describe('equal', () => {
 
     it('returns false for different', () => {
       differ([1, 2], [2, 1])
-      differ([undefined], [undefined])
+      differ([1, 2], [1, 2, 3])
+      differ([1, 2, 3], [1, 2])
     })
   })
 
@@ -31,15 +32,27 @@ describe('equal', () => {
     describe('set', () => {
       it('returns true for identical', () => {
         equal(new Set(), new Set())
-        equal(new Set(['foo']), new Set(['foo']))
-        equal(new Set(['foo', 'bar']), new Set(['bar', 'foo']))
+        equal(new Set([1]), new Set([1]))
         const set = new Set()
         equal(set, set)
       })
 
       it('returns false for different', () => {
-        differ(new Set(['foo']), new Set(['bar']))
-        differ(new Set(['foo', 'bar']), new Set(['foo']))
+        differ(new Set([1]), new Set([2]))
+        differ(new Set([1, 2]), new Set([1]))
+        differ(new Set([1]), new Set([1, 2]))
+      })
+    })
+
+    describe('array and set', () => {
+      it('returns true for identical', () => {
+        equal(new Set([1, 2]), [1, 2])
+        equal([1, 2], new Set([1, 2]))
+      })
+
+      it('returns false for different', () => {
+        differ([1, 2], new Set([2, 1]))
+        differ(new Set([1, 2]), [2, 1])
       })
     })
   }
@@ -82,6 +95,26 @@ describe('equal', () => {
         differ(a, b)
       })
     })
+
+    describe('object and map', () => {
+      it('returns true for identical', () => {
+        equal({}, new Map())
+        const a = {'foo': 'bar', 'bar': 'foo'}
+        const b = new Map()
+        b.set('bar', 'foo')
+        b.set('foo', 'bar')
+        equal(a, b)
+        const map = new Map()
+        equal({}, map)
+      })
+
+      it('returns false for different', () => {
+        const a = {'foo': 'bar'}
+        const b = new Map()
+        b.set('bar', 'foo')
+        differ(a, b)
+      })
+    })
   }
 
   describe('boolean', () => {
@@ -108,6 +141,10 @@ describe('equal', () => {
     // TODO: figure out what to do with those?
     // it('returns false for NaN', () => {
     //   differ(NaN, NaN)
+    // })
+
+    // it('returns false for undefined', () => {
+    //   differ(undefined, undefined)
     // })
 
     // it('returns false for Infinity', () => {
