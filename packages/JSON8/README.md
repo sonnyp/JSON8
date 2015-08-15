@@ -527,7 +527,7 @@ oo.serialize(-0)   // "-0"
 # Tests
 
 ```
-npm install -g eslint mocha babel
+npm install -g mocha babel browserify
 npm test
 ```
 
