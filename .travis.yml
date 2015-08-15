@@ -9,7 +9,7 @@ node_js:
   - "io.js"
 
 before_install:
-  - npm install -g eslint mocha babel browserify
+  - npm install -g mocha babel browserify
 
 script:
   - npm run unit
