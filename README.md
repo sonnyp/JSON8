@@ -12,6 +12,7 @@ Features
 * Strong JSON and type validation
 * Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
+* [Smarter and safer JSON serializer/stringify](#serialize)
 * See [Methods](#methods) and [Motivations](#motivations)
 * [Tested](https://travis-ci.org/JSON8/JSON8)
 * Small, no dependencies
@@ -30,10 +31,10 @@ See also
 * [Introduction](#introduction)
 * [Getting started](#getting-started)
 * [Methods](#methods)
-  * [clone](#clone)
-  * [equal](#equal)
-  * [type](#type)
-  * [is](#is)
+  * [oo.clone](#ooclone)
+  * [oo.equal](#ooequal)
+  * [oo.type](#ootype)
+  * [oo.is](#oois)
     - [structure](#structure)
     - [primitive](#primitive)
     - [object](#object)
@@ -43,9 +44,9 @@ See also
     - [boolean](#boolean)
     - [null](#null)
     - [JSON](#json)
-  * [valid](#valid)
-  * [serialize](#serialize)
-  * [parse](#parse)
+  * [oo.valid](#oovalid)
+  * [oo.serialize](#ooserialize)
+  * [oo.parse](#ooparse)
 * [Motivations](#motivations)
 * [Tests](#tests)
 * [Contributing](#contributing)
@@ -73,7 +74,7 @@ var oo = window.JSON8
 
 # Methods
 
-## clone
+## oo.clone
 
 Deep clone any value.
 
@@ -90,7 +91,7 @@ oo.clone(-0)   // -0
 
 [↑](#json8)
 
-## equal
+## oo.equal
 
 Test for equality between two documents.
 
@@ -115,7 +116,7 @@ oo.equal(-0, +0) // false
 
 [↑](#json8)
 
-## type
+## oo.type
 
 Returns the JSON type for a value, ```undefined``` if the value is not of any JSON type.
 
@@ -139,7 +140,7 @@ oo.type(function() {})  // undefined
 
 [↑](#json8)
 
-## is
+## oo.is
 
 For each type you can use the syntax
 
@@ -208,6 +209,7 @@ oo.is({}, 'object')        // true
 oo.isObject({})            // true
 oo.isObject(new Map())     // true
 
+oo.isObject(null)          // false
 oo.isObject([])            // false
 oo.isObject(null)          // false
 oo.isObject(function() {}) // false
@@ -240,9 +242,9 @@ oo.is(42, 'number')    // true
 oo.isNumber(4.2)       // true
 oo.isNumber(-42)       // true
 
-oo.isNumber(Infinity)  // false
-oo.isNumber(-Infinity) // false
-oo.isNumber(NaN)       // false
+oo.isNumber(Infinity)  // false; Infinity is not valid JSON
+oo.isNumber(-Infinity) // false; -Infinity is not valid JSON
+oo.isNumber(NaN)       // false; NaN is not valid JSON
 ```
 
 [↑](#json8)
@@ -316,7 +318,7 @@ oo.isJSON(function() {}) //false
 
 [↑](#json8)
 
-## valid
+## oo.valid
 
 Recursive version of [is JSON](#json), works on primitive values as well.
 
@@ -331,7 +333,7 @@ oo.valid(["bar", function() {}]) //false
 
 [↑](#json8)
 
-## serialize
+## oo.serialize
 
 Takes a JSON document and returns a parseable JSON string. Uses ```JSON.stringify``` underneath so it's still fast.
 
@@ -398,7 +400,7 @@ oo.serialize(obj, {space: 2})
 
 [↑](#json8)
 
-## parse
+## oo.parse
 
 Takes a JSON string and returns a JavaScript value.
 
