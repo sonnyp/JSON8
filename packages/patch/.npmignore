@@ -6,7 +6,6 @@ test/
 .eslintrc
 .gitignore
 .gitmodules
-.npmignore
 .travis.yml
 
 CONTRIBUTING.md

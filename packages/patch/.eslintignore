@@ -1,2 +1,5 @@
+node_modules/
+test/json-patch-tests/
+
 test/json-patch-tests.js
 JSON8Patch.js

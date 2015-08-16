@@ -170,7 +170,7 @@ ooPatch.get(doc, '/foo');
 ### has
 ```javascript
 ooPatch.has(doc, '/foo');
-// returns true if foo property exists, false otherwise
+// returns true if there is a value at /foo
 ```
 
 [↑](#json8-patch)
@@ -179,7 +179,7 @@ ooPatch.has(doc, '/foo');
 
 ```
 git submodule update --init --recursive
-npm install -g eslint mocha babel
+npm install -g mocha babel browserify
 npm test
 ```
 
