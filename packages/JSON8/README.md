@@ -347,21 +347,16 @@ Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/Java
 * Works with [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (serialize as JSON object)
 * Works with [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) (serialize as JSON array)
 * Serializes signed zeros (-0) as "-0" while JSON.stringify returns "0"
-* Ignores [toJSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON_behavior) function property.
-* Does not serialize Date objects into ISO date strings (see previous bullet point for reason), use [Date.toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+* Optional toJSON boolean option to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) (defaults to false)
 * Options are provided as an object instead of arguments
 * There is no support to the [replacer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) argument. (yet?)
+* There is no support to the [space](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument) argument. (yet?)
 
 ```javascript
 oo.serialize(doc[, options]);
 
 oo.serialize({"foo": "bar"})
 // {"foo":"bar"}
-
-oo.serialize({"foo": "bar"}, {spacer: 2})
-// {
-//   "foo": "bar"
-// }
 
 var set = new Set()
 set.add('hello')
@@ -373,22 +368,9 @@ map.set('foo', 'bar')
 oo.serialize(map)
 // {"foo":"bar"}
 
-// Because JSON8 ignores the toJSON property, it doesn't serialize
-// Date objects into ISO date strings.
-// Use Date.toISOString() instead of relying on Date JSON serialization.
-
-var obj = {};
-var date = new Date();
-
-// BAD
-obj.date = date
-JSON.stringify(obj) // '{"date":"2015-10-21T16:29:00.000Z"}''
-oo.serialize(obj)   // '{"date":"obj"}'
-
-// GOOD
-obj.date = date.toISOString()
-JSON.stringify(obj) // '{"date":"2015-10-21T16:29:00.000Z"}''
-oo.serialize(obj)   // '{"date":"2015-10-21T16:29:00.000Z"}''
+// toJSON
+oo.serialize(new Date())                  // "2015-10-21T16:29:00.000Z"
+oo.serialize(new Date(), {toJSON: false}) // "{}"
 ```
 
 [↑](#json8)
@@ -424,7 +406,7 @@ Getting/asserting the JSON type of a value in JavaScript is troublesome.
 
 ## Safety
 
-[oo.serialize](#serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does.
+[oo.serialize](#serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does. It also accept an optional argument to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) which is a common pitfall.
 
 JSON8 [types](#types) helps avoiding many common errors as well.
 
@@ -505,11 +487,11 @@ JSON.stringify(map) // '{}'
 oo.serialize(map)   // '{"foo": "bar"}'
 
 // typeof Date returns 'object' but JSON.stringify returns a string
-typeof new Date()          // 'object'
-JSON.stringify(new Date()) // '2015-10-21T16:29:00.000Z'
-oo.type(new Date())        // 'object'
-oo.serialize(new Date())   // '{}'
-// if you do want a string date in your JSON use one of the many Date methods such as toISOString
+typeof new Date()                         // 'object'
+JSON.stringify(new Date())                // '2015-10-21T16:29:00.000Z'
+oo.type(new Date())                       // 'object'
+oo.serialize(new Date(), {toJSON: false}) // '{}'
+oo.serialize(new Date())                  // '2015-10-21T16:29:00.000Z'
 
 // -0
 -0 === 0           //  true

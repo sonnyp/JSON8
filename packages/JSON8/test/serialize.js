@@ -59,10 +59,76 @@ describe('serialize', () => {
         const map = new Map()
         map.set(null, 'hello')
         assert.throws(() => {
-          valid(map)
+          serialize(map)
         }, TypeError)
       })
     })
   }
+
+  describe('toJSON', () => {
+
+    it('uses toJSON if options are not provided', () => {
+      const obj = {}
+      obj.toJSON = function() {
+        return 'lol'
+      }
+      assert.strictEqual(serialize(obj), '"lol"')
+    })
+
+    it('uses toJSON toJSON option is not provided', () => {
+      const obj = {}
+      obj.toJSON = function() {
+        return 'lol'
+      }
+      assert.strictEqual(serialize(obj, {}), '"lol"')
+    })
+
+    it('uses toJSON toJSON option is set to true', () => {
+      const obj = {}
+      obj.toJSON = function() {
+        return 'lol'
+      }
+      assert.strictEqual(serialize(obj, {toJSON: true}), '"lol"')
+    })
+
+    it('does not use and serialize toJSON if toJSON option is set to false', () => {
+      const obj = {}
+      obj.toJSON = function() {
+        return 'lol'
+      }
+      assert.strictEqual(serialize(obj, {toJSON: false}), '{}')
+    })
+
+    it('serializes toJSON if it is not a function', () => {
+      const obj = {toJSON: true}
+      const expect = '{"toJSON":true}'
+      assert.strictEqual(serialize(obj), expect)
+      assert.strictEqual(serialize(obj, {}), expect)
+      assert.strictEqual(serialize(obj, {toJSON: false}), expect)
+      assert.strictEqual(serialize(obj, {toJSON: true}), expect)
+    })
+
+  })
+
+  it('serializes equal to JSON.stringify', () => {
+    const arr = [1, 'foo', [], {}]
+    arr.toJSON = 'hello'
+
+    const obj = {
+      array: arr,
+      boolean: true,
+      toJSON: 123,
+      string: 'foobar',
+      "Déjà vu": "Déjà vu",
+      /* eslint-disable */
+      bar: {
+        toJSON: function() {
+          return {"foo": "bar"}
+        },
+      },
+      /* eslint-enable */
+    }
+    assert.strictEqual(serialize(obj), JSON.stringify(obj))
+  })
 
 })
