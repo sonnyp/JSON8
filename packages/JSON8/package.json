@@ -17,7 +17,7 @@
     "test": "npm run unit && npm run lint && npm run webify"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
-  "license": "MIT",
+  "license": "ISC",
   "devDependencies": {
     "eslint": "^0.24.1"
   }
