@@ -50,11 +50,11 @@ For performance concerns JSON8 Patch mutates documents; if you want it to work o
 
 ```javascript
 
-var clone = require('json8').clone;
-doc = clone(doc)
+var oo = require('json8')
+doc = oo.clone(doc)
 ```
 
-See [clone](https://github.com/JSON8/JSON8#clone).
+See [clone](https://github.com/JSON8/JSON8#ooclone).
 
 [↑](#json8-pointer)
 

@@ -21,7 +21,7 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "dependencies": {
-    "json8": "^0.4.0",
+    "json8": "^0.7.0",
     "json8-pointer": "^0.4.0"
   },
   "devDependencies": {
