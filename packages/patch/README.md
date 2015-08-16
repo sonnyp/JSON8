@@ -25,6 +25,9 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
   * [Extra operations](#extra-operations)
     * [get](#get)
     * [has](#has)
+  * [Patch size](#patch-size)
+    * [pack](#pack)
+    * [unpack](#unpack)
 * [Tests](#tests)
 * [Contributing](#contributing)
 
@@ -69,14 +72,14 @@ doc = ooPatch.apply(doc, [
   { "op": "remove",  "path": "/height"                                    },
   { "op": "replace", "path": "/age",           "value": "26"              },
   { "op": "move",    "from": "/address/city",  "path": "/address/country" },
-  { "op": "copy",    "from": "/starred",       "to":    "bookmarked"      },
+  { "op": "copy",    "from": "/starred",       "to":    "/bookmarked"     },
   { "op": "test",    "path": "/starred",       "value": true              }
 ]);
 ```
 
 ```ooPatch.apply``` returns a document because the JSON Patch specification states that an operation can replace the original document.
 
-```ooPatch.apply``` is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
+The operation is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
 
 [↑](#json8-patch)
 
@@ -99,7 +102,7 @@ doc = patchResult[0];
 
 // revert the patch
 doc = ooPatch.revert(doc, patchResult[1]);
-// doc is strictly identical to the origina
+// doc is strictly identical to the original
 ```
 
 [↑](#json8-patch)
@@ -192,6 +195,78 @@ ooPatch.has(doc, '/foo');
 ```
 
 [↑](#json8-patch)
+
+## Patch size
+
+Per specification patches are pretty verbose. JSON8 provides [pack](#patch) and [unpack](#unpack) methods to reduce the size of patches and save memory/space/bandwidth.
+
+Size (in bytes) comparaison for the following patch file
+
+```json
+[
+  {"op": "add", "path": "/a/b/c", "value": ["foo", "bar"]},
+  {"op": "remove", "path": "/a/b/c"},
+  {"op": "replace", "path": "/a/b/c", "value": 42},
+  {"op": "move", "from": "/a/b/c", "path": "/a/b/d"},
+  {"op": "copy", "from": "/a/b/c", "path": "/a/b/e"},
+  {"op": "test", "path": "/a/b/c", "value": "foo"}
+]
+```
+
+|     format    | size (in bytes) |
+|:-------------:|:---------------:|
+| unpacked      |       313       |
+| unpacked gzip |       148       |
+| packed        |       151       |
+| packed gzip   |        99       |
+
+In pratice I'd recommand to use pack/unpack if
+
+* data compression cannot be used on the transport of the patch
+* keeping a large amount of patches in memory/on disk
+
+[↑](#json8-patch)
+
+### pack
+
+```javascript
+var patch = [
+  {"op": "add", "path": "/a/b/c", "value": ["foo", "bar"]},
+  {"op": "remove", "path": "/a/b/c"},
+  {"op": "replace", "path": "/a/b/c", "value": 42},
+  {"op": "move", "from": "/a/b/c", "path": "/a/b/d"},
+  {"op": "copy", "from": "/a/b/c", "path": "/a/b/e"},
+  {"op": "test", "path": "/a/b/c", "value": "foo"}
+];
+
+var packed = ooPatch.pack(patch);
+```
+
+Here is what packed looks like
+
+```json
+[
+  [0, "/a/b/c", ["foo", "bar"]],
+  [1, "/a/b/c"],
+  [2, "/a/b/c", 42],
+  [3, "/a/b/d", "/a/b/c"],
+  [4, "/a/b/e", "/a/b/c"],
+  [5, "/a/b/c", "foo"],
+]
+```
+
+[↑](#json8-patch)
+
+### unpack
+
+```javascript
+var patch = ooPatch.unpack(packed);
+// [{...}, {...}, ...]
+```
+
+[↑](#json8-patch)
+
+###
 
 # Tests
 
