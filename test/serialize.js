@@ -65,7 +65,7 @@ describe('serialize', () => {
     })
   }
 
-  describe('toJSON', () => {
+  describe('toJSON option', () => {
 
     it('uses toJSON if options are not provided', () => {
       const obj = {}
@@ -110,7 +110,7 @@ describe('serialize', () => {
 
   })
 
-  it('serializes equal to JSON.stringify', () => {
+  describe('space option', () => {
     const arr = [1, 'foo', [], {}]
     arr.toJSON = 'hello'
 
@@ -128,7 +128,77 @@ describe('serialize', () => {
       },
       /* eslint-enable */
     }
-    assert.strictEqual(serialize(obj), JSON.stringify(obj))
+
+    it('serializes equally to it', () => {
+      assert.strictEqual(serialize(obj), JSON.stringify(obj))
+    })
+
+    it('serializes equally to it with space param as number', () => {
+      assert.strictEqual(serialize(obj, {space: 2}), JSON.stringify(obj, null, 2))
+    })
+
+    it('serializes equally to it with space param as string', () => {
+      assert.strictEqual(serialize(obj, {space: '    '}), JSON.stringify(obj, null, '    '))
+    })
+
+  })
+
+  describe('replacer option', () => {
+
+    it('is called with the object as this context', () => {
+      const obj = {
+        foo: 'bar',
+      }
+      const replacer = function(k, v) {
+        assert.strictEqual(this, obj)
+        assert.strictEqual(k, 'foo')
+        assert.strictEqual(v, 'bar')
+      }
+      serialize(obj, {replacer})
+    })
+
+    it('deletes the value if the replacer return undefined for object', () => {
+      const obj = {
+        foo: 'bar',
+      }
+      const replacer = function() {
+        return undefined
+      }
+      assert.strictEqual(serialize(obj, {replacer}), '{}')
+    })
+
+    it('deletes the value if the replacer return undefined for array', () => {
+      const arr = ['foo']
+      const replacer = function(k, v) {
+        assert.strictEqual(this, arr)
+        assert.strictEqual(k, 0)
+        assert.strictEqual(v, 'foo')
+        return undefined
+      }
+      assert.strictEqual(serialize(arr, {replacer}), '[]')
+    })
+
+    it('splice the array if an item is deleted in between for array', () => {
+      const arr = ['foo', 'bar', 'foo']
+      const replacer = function(k, v) {
+        if (k === 1)
+          return undefined
+        return v
+      }
+      assert.strictEqual(serialize(arr, {replacer}), '["foo","foo"]')
+    })
+
+    if (global.Set) {
+      it('splice the array if an item is deleted in between for set', () => {
+        const set = new Set(['foo', 'bar', 'baz'])
+        const replacer = function(k, v) {
+          if (k === 1)
+            return undefined
+          return v
+        }
+        assert.strictEqual(serialize(set, {replacer}), '["foo","baz"]')
+      })
+    }
   })
 
 })
