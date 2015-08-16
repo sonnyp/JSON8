@@ -333,7 +333,7 @@ oo.valid(["bar", function() {}]) //false
 
 ## serialize
 
-Takes a JSON document and returns a parseable JSON string.
+Takes a JSON document and returns a parseable JSON string. Uses ```JSON.stringify``` underneath so it's still fast.
 
 Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
@@ -349,16 +349,16 @@ Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/Java
 * Serializes signed zeros (-0) as "-0" while JSON.stringify returns "0"
 * Ignores [toJSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON_behavior) function property.
 * Does not serialize Date objects into ISO date strings (see previous bullet point for reason), use [Date.toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
-* Second argument is equivalent to the JSON.stringfy [space](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#space_argument) (third) argument
-* There is no alternative to the [replacer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) argument
+* Options are provided as an object instead of arguments
+* There is no support to the [replacer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) argument. (yet?)
 
 ```javascript
-oo.serialize(doc[, spacer]);
+oo.serialize(doc[, options]);
 
 oo.serialize({"foo": "bar"})
 // {"foo":"bar"}
 
-oo.serialize({"foo": "bar"}, 2)
+oo.serialize({"foo": "bar"}, {spacer: 2})
 // {
 //   "foo": "bar"
 // }
