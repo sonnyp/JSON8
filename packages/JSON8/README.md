@@ -338,19 +338,21 @@ Takes a JSON document and returns a parseable JSON string. Uses ```JSON.stringif
 Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
 * Throws a TypeError for any invalid JSON value encountered such as
-  * undefined
-  * Infinity
-  * -Infinity
-  * NaN
-  * symbols
-  * functions
-* Works with [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (serialize as JSON object)
-* Works with [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) (serialize as JSON array)
-* Serializes signed zeros (-0) as "-0" while JSON.stringify returns "0"
-* Optional toJSON boolean option to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) (defaults to false)
+  * ```undefined```
+  * ```Infinity```
+  * ```-Infinity```
+  * ```NaN```
+  * ```symbols```
+  * ```functions```
+* Works with [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (serialized as JSON object)
+* Works with [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) (serialized as JSON array)
+* Serializes signed zeros ```-0``` as ```"-0"``` while JSON.stringify returns ```"0"```
 * Options are provided as an object instead of arguments
-* There is no support to the [replacer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) argument. (yet?)
-* There is no support to the [space](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument) argument. (yet?)
+
+Options
+* ```toJSON``` set to false disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) (defaults to true)
+* ```space``` same as JSON.stringify [space argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument)
+* ```replacer``` same as JSON.stringify [replacer argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) but remove the value from the array if ```undefined``` is returned
 
 ```javascript
 oo.serialize(doc[, options]);
@@ -358,19 +360,40 @@ oo.serialize(doc[, options]);
 oo.serialize({"foo": "bar"})
 // {"foo":"bar"}
 
+/*
+ * Set serialization
+ */
 var set = new Set()
 set.add('hello')
 oo.serialize(set)
 // ["hello"]
 
+/*
+ * Map serialization
+ */
 var map = new Map()
 map.set('foo', 'bar')
 oo.serialize(map)
 // {"foo":"bar"}
 
-// toJSON
-oo.serialize(new Date())                  // "2015-10-21T16:29:00.000Z"
-oo.serialize(new Date(), {toJSON: false}) // "{}"
+/*
+ * toJSON option
+ */
+oo.serialize(new Date())
+// "2015-10-21T16:29:00.000Z"
+oo.serialize(new Date(), {toJSON: false})
+// {}
+
+/*
+ * space option
+ */
+var obj = {foo: 'bar'}
+oo.serialize(obj)
+// {"foo":"bar"}
+oo.serialize(obj, {space: 2})
+// {
+//   "foo": "bar"
+// }
 ```
 
 [↑](#json8)
