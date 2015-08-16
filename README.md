@@ -425,6 +425,8 @@ Getting/asserting the JSON type of a value in JavaScript is troublesome.
 
 * [oo.isPrimitive](#primitive) checks if a value is a JSON primitive (null, boolean, string, number)
 
+* [oo.isJSON](#JSON) checks if the value is a JSON valid value
+
 [↑](#json8)
 
 ## Safety
@@ -432,6 +434,10 @@ Getting/asserting the JSON type of a value in JavaScript is troublesome.
 [oo.serialize](#serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does. It also accept an optional argument to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) which is a common pitfall.
 
 JSON8 [types](#types) helps avoiding many common errors as well.
+
+[oo.equal](#equal) performs a deep JSON equality comparaison
+
+[oo.valid](#valid) performs a recursive JSON validation on any value
 
 [↑](#json8)
 
