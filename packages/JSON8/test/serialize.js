@@ -47,18 +47,18 @@ describe('serialize', () => {
 
   forEach(invalid, (k, v) => {
     it('throws a TypeError for ' + k, () => {
-      assert.throws(function() {
+      assert.throws(() => {
         serialize(v)
       }, TypeError)
     })
   })
 
   if (global.Map) {
-    describe('map', function() {
+    describe('map', () => {
       it('throws an error for non string keys', () => {
         const map = new Map()
         map.set(null, 'hello')
-        assert.throws(function() {
+        assert.throws(() => {
           valid(map)
         }, TypeError)
       })

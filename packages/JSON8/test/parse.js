@@ -47,7 +47,7 @@ describe('parse', () => {
 
   forEach(invalid, (k) => {
     it('throws a SyntaxError for ' + k, () => {
-      assert.throws(function() {
+      assert.throws(() => {
         parse(k)
       }, SyntaxError)
     })

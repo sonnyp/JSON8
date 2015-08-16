@@ -85,6 +85,12 @@ const allBut = function(but, fn) {
 
 describe('is', () => {
 
+  it('throws an error if the type is unknown', () => {
+    assert.throws(() => {
+      is('foo', 'bar')
+    }, Error)
+  })
+
   describe('JSON', () => {
     forEach(VALID, (k, v) => {
       it('returns true for ' + k, () => {
