@@ -12,7 +12,7 @@ Features
 * Strong JSON and type validation
 * Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
-* [Smarter and safer JSON serializer/stringify](#serialize)
+* [Smarter and safer JSON serializer/stringify](#ooserialize)
 * See [Methods](#methods) and [Motivations](#motivations)
 * [Tested](https://travis-ci.org/JSON8/JSON8)
 * Small, no dependencies
