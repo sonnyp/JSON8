@@ -8,12 +8,12 @@ import {clone} from 'json8'
 
 describe('toJSONPatch', () => {
 
-  it('converts path properties with null value as a deconste operation', () => {
+  it('converts path properties with null value as a remove operation', () => {
     const patch = toJSONPatch({"foo": null})
     assert.deepEqual(patch, [{"op": "remove", "path": "/foo"}])
   })
 
-  it('converts nested path properties with null value as a deconste operation', () => {
+  it('converts nested path properties with null value as a remove operation', () => {
     const patch = toJSONPatch({"foo": {"bar": null}})
     assert.deepEqual(patch, [{"op": "remove", "path": "/foo/bar"}])
   })
@@ -51,7 +51,7 @@ describe('toJSONPatch', () => {
       else {
         it('returns ' + JSON.stringify(test.result), () => {
           const patch = toJSONPatch(test.patch)
-          assert.deepEqual(apply(test.original, patch), test.result)
+          assert.deepEqual(apply(test.original, patch).doc, test.result)
         })
       }
     })

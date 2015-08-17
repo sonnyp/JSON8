@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "eslint": "^0.24.1",
-    "json8-patch": "^0.2.1",
-    "json8-pointer": "^0.3.0"
+    "json8-patch": "^0.3.0",
+    "json8-pointer": "^0.4.0"
   }
 }

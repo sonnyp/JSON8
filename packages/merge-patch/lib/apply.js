@@ -1,8 +1,7 @@
 'use strict'
 
-var JSON8 = require('json8')
-var OBJECT = JSON8.OBJECT
-var isJSON = JSON8.isJSON
+var isJSON = require('json8/lib/isJSON')
+var OBJECT = 'object'
 
 /**
  * apply a JSON merge patch
