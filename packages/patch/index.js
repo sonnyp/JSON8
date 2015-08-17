@@ -1,24 +1,22 @@
 'use strict'
 
-var extras = require('./lib/extras')
-var operations = require('./lib/operations')
 var patch = require('./lib/patch')
 
-var exports = {
-  get: extras.get,
-  has: extras.has,
+module.exports.patch = patch.apply
+module.exports.apply = patch.apply
+module.exports.revert = patch.revert
 
-  add: operations.add,
-  remove: operations.remove,
-  replace: operations.replace,
-  move: operations.move,
-  copy: operations.copy,
-  test: operations.test,
+// Operations
+module.exports.add = require('./lib/add')
+module.exports.copy = require('./lib/copy')
+module.exports.move = require('./lib/move')
+module.exports.remove = require('./lib/remove')
+module.exports.replace = require('./lib/replace')
+module.exports.test = require('./lib/test')
 
-  apply: patch.apply,
-  patch: patch.apply,
-  revert: patch.revert,
-}
+// Extra operations
+module.exports.get = require('./lib/get')
+module.exports.has = require('./lib/has')
 
-for (var i in exports)
-  module.exports[i] = exports[i]
+module.exports.pack = require('./lib/pack')
+module.exports.unpack = require('./lib/unpack')

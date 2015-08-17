@@ -3,8 +3,22 @@
 var JSON8Pointer = require('json8-pointer')
 var parse = JSON8Pointer.parse
 var serialize = JSON8Pointer.serialize
-var operations = require('./operations')
 var isObject = require('json8').isObject
+
+var operations = Object.create(null)
+operations.add = require('./add')
+operations.copy = require('./copy')
+operations.move = require('./move')
+operations.remove = require('./remove')
+operations.replace = require('./replace')
+operations.test = require('./test')
+
+/**
+ * @typedef ApplyResult
+ * @type Object
+ * @property {Any}   doc     - The patched document
+ * @property {Array} revert  - An array to be used with revert method
+ */
 
 /**
  * Apply a single JSON Patch operation object to a JSON document

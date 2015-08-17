@@ -1,14 +1,14 @@
 'use strict'
 
 import assert from 'assert'
-import operations from '../lib/operations'
+import _replace from '../lib/replace'
 
 describe('replace', () => {
 
   let doc
 
   const replace = function(path, obj) {
-    return operations.replace(doc, path, obj)
+    return _replace(doc, path, obj)
   }
 
   describe('object location', () => {

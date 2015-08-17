@@ -1,14 +1,14 @@
 'use strict'
 
 import assert from 'assert'
-import operations from '../lib/operations'
+import _add from '../lib/add'
 
 describe('add', () => {
 
   let doc
 
   const add = function(path, obj) {
-    return operations.add(doc, path, obj)
+    return _add(doc, path, obj)
   }
 
   describe('object location', () => {

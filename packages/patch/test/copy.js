@@ -1,14 +1,14 @@
 'use strict'
 
 import assert from 'assert'
-import operations from '../lib/operations'
+import _copy from '../lib/copy'
 
 describe('copy', () => {
 
   let doc
 
   const copy = function(path, dest) {
-    return operations.copy(doc, path, dest)
+    return _copy(doc, path, dest)
   }
 
   describe('object location', () => {

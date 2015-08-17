@@ -1,14 +1,14 @@
 'use strict'
 
 import assert from 'assert'
-import extras from '../lib/extras'
+import _get from '../lib/get'
 
 describe('get', () => {
 
   let doc
 
   const get = function(path) {
-    return extras.get(doc, path)
+    return _get(doc, path)
   }
 
   describe('object location', () => {

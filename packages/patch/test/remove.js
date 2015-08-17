@@ -1,14 +1,14 @@
 'use strict'
 
 import assert from 'assert'
-import operations from '../lib/operations'
+import _remove from '../lib/remove'
 
 describe('remove', () => {
 
   let doc
 
   const remove = function(path) {
-    return operations.remove(doc, path)
+    return _remove(doc, path)
   }
 
   describe('object location', () => {
