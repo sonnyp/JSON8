@@ -13,8 +13,14 @@ describe('copy', () => {
 
   describe('object location', () => {
 
-    it('copy the object if the parent exists and is valid', () => {
+    it('copy the primitive if the parent exists and is valid', () => {
       doc = {bar: 'foo'}
+      copy('/bar', '/foo')
+      assert.deepEqual(doc.bar, doc.foo)
+    })
+
+    it('copy the structure if the parent exists and is valid', () => {
+      doc = {bar: {}}
       copy('/bar', '/foo')
       assert.deepEqual(doc.bar, doc.foo)
     })

@@ -15,6 +15,7 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
   * [patch](#patch)
   * [revert](#revert)
   * [diff](#diff)
+  * [valid](#valid)
   * [Operations](#operations)
     * [add](#add)
     * [remove](#remove)
@@ -116,6 +117,26 @@ ooPatch.diff({}, {"foo": "bar"})
 ```
 
 [↑](#json8-patch)
+
+## valid
+
+Returns ```true``` if the patch is valid, ```false``` otherwise.
+
+This method _only_ check for JSON Patch semantic.
+If you need to verify the patch is JSON valid, use [oo.valid](https://github.com/JSON8/JSON8#oovalid)
+
+```javascript
+ooPatch.valid({})  // false
+ooPatch.valid([{}] // false
+ooPatch.valid([{op: "foo", path: null, value: undefined}]) // false
+ooPatch.valid([{op: "add", path: "/foo"}]) // false
+
+ooPatch.valid([]) //true
+ooPatch.valid([{op: "add", path: "/foo", value: "bar"}]) //true
+```
+
+[↑](#json8-patch)
+
 
 ## Operations
 

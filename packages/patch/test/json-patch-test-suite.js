@@ -5,6 +5,7 @@ import {clone} from 'json8'
 import {apply, revert} from '../lib/patch'
 import pack from '../lib/pack'
 import unpack from '../lib/unpack'
+import valid from '../lib/valid'
 
 let tests = require('json-patch-test-suite/tests.json')
 const spec_tests = require('json-patch-test-suite/tests.json')
@@ -56,6 +57,13 @@ describe('json-patch-test-suite', () => {
           assert.doesNotThrow(() => {
             apply(t.doc, t.patch)
           })
+        })
+      }
+
+      if (test.expected && !test.error) {
+        it('validation returns true', () => {
+          const t = clone(test)
+          assert.strictEqual(valid(t.patch), true)
         })
       }
 
