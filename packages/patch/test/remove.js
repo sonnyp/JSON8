@@ -16,8 +16,8 @@ describe('remove', () => {
     it('removes and returns the value if the location exists', () => {
       doc = {foo: 'bar'}
       const r = remove('/foo')
-      assert.strictEqual(Object.keys(r[0]).length, 0)
-      assert.strictEqual(r[1], 'bar')
+      assert.strictEqual(Object.keys(r.doc).length, 0)
+      assert.strictEqual(r.previous, 'bar')
     })
 
     it('throws an error if the location does not exists', () => {
@@ -41,8 +41,8 @@ describe('remove', () => {
     it('removes and returns the value if the location exists', () => {
       doc = ['bar']
       const r = remove('/0')
-      assert.strictEqual(r[0].length, 0)
-      assert.strictEqual(r[1], 'bar')
+      assert.strictEqual(r.doc.length, 0)
+      assert.strictEqual(r.previous, 'bar')
     })
 
     it('throws an error if the location does not exists', () => {

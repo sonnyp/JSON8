@@ -4,6 +4,7 @@ var JSON8Pointer = require('json8-pointer')
 var parse = JSON8Pointer.parse
 var serialize = JSON8Pointer.serialize
 var operations = require('./operations')
+var isObject = require('json8').isObject
 
 /**
  * Apply a single JSON Patch operation object to a JSON document
@@ -72,7 +73,7 @@ var reverse = function(patch, previous, idx) {
  * @param  {Array}        patch               - JSON Patch array
  * @param  {Object}       options             - options
  * @param  {Boolean}      options.reversible  - return an array to revert
- * @return {void}
+ * @return {Object}                           - {doc: document, revert?: array}
  */
 var apply = function(doc, patch, options) {
   if (!Array.isArray(patch))
@@ -92,14 +93,16 @@ var apply = function(doc, patch, options) {
       throw err
     }
 
-    doc = r[0]
-    done.push([p, r[1], r[2]])
+    doc = r.doc
+    done.push([p, r.previous, r.idx])
   }
 
-  if (!options || !options.reversible)
-    return doc
+  var result = {doc: doc}
 
-  return [doc, done]
+  if (isObject(options) && options.reversible === true)
+    result.revert = done
+
+  return result
 }
 
 /**
@@ -126,7 +129,7 @@ var foo = function(items) {
  */
 var revert = function(doc, items) {
   var patches = foo(items)
-  return apply(doc, patches)
+  return apply(doc, patches).doc
 }
 
 module.exports.foo = foo

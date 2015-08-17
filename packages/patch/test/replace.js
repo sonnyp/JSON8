@@ -17,7 +17,7 @@ describe('replace', () => {
       doc = {'foo': 'hello'}
       const obj = {bar: 'foo'}
       const r = replace('/foo', {bar: 'foo'})
-      assert.deepEqual(r[0].foo, obj)
+      assert.deepEqual(r.doc.foo, obj)
     })
 
     it('throws an error if the parent does not exists', () => {
@@ -41,7 +41,7 @@ describe('replace', () => {
     it('replaces the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
       const r = replace('/foo/0', 'barfoo')
-      assert.deepEqual(r[0], {foo: ['barfoo']})
+      assert.deepEqual(r.doc, {foo: ['barfoo']})
     })
 
     it('throws an error if the parent does not exists', () => {

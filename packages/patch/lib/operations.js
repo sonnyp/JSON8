@@ -15,20 +15,20 @@ var get = require('./extras').get
  * @param  {Object|Array} doc    - JSON document to set the value to
  * @param  {Path}         path   - JSON Pointer string or tokens path
  * @param  {Any}          value  - value to add
- * @return {Array}               - [document, replaced value]
+ * @return {Object}              - {doc: document, previous: replaced value}
  */
 var add = function(doc, path, value) {
   var tokens = parse(path)
 
   // replaces the document
   if (tokens.length === 0)
-    return [value, doc]
+    return {doc: value, previous: doc}
 
   var r = walk(doc, tokens)
   var token = r[0]
   var parent = r[1]
 
-  var old
+  var previous
   var idx
 
   if (Array.isArray(parent)) {
@@ -40,11 +40,11 @@ var add = function(doc, path, value) {
       parent.splice(token, 0, value)
   }
   else {
-    old = parent[token]
+    previous = parent[token]
     parent[token] = value
   }
 
-  return [doc, old, idx]
+  return {doc: doc, previous: previous, idx: idx}
 }
 
 /**
@@ -60,14 +60,14 @@ var remove = function(doc, path) {
 
   // removes the document
   if (tokens.length === 0)
-    return [undefined, doc]
+    return {doc: undefined, previous: doc}
 
   var r = walk(doc, tokens)
   var token = r[0]
   var parent = r[1]
 
-  var old = parent[token]
-  if (old === undefined)
+  var previous = parent[token]
+  if (previous === undefined)
     throw new Error('Location not found')
 
   if (Array.isArray(parent))
@@ -75,7 +75,7 @@ var remove = function(doc, path) {
   else
     delete parent[token]
 
-  return [doc, old]
+  return {doc: doc, previous: previous}
 }
 
 /**
@@ -92,19 +92,19 @@ var replace = function(doc, path, value) {
 
   // replaces the document
   if (tokens.length === 0)
-    return [value, doc]
+    return {doc: value, previous: doc}
 
   var r = walk(doc, tokens)
   var token = r[0]
   var parent = r[1]
 
-  var old = parent[token]
-  if (old === undefined)
+  var previous = parent[token]
+  if (previous === undefined)
     throw new Error('Location not found')
 
   parent[token] = value
 
-  return [doc, old]
+  return {doc: doc, previous: previous}
 }
 
 /**
@@ -118,7 +118,7 @@ var replace = function(doc, path, value) {
  */
 var move = function(doc, path, dest) {
   var r = remove(doc, path)
-  return add(doc, dest, r[1])
+  return add(doc, dest, r.previous)
 }
 
 /**
@@ -149,7 +149,7 @@ var test = function(doc, path, value) {
   if (!equal(obj, value))
     throw new Error('Test failed')
 
-  return [doc]
+  return {doc: doc}
 }
 
 module.exports.add = add

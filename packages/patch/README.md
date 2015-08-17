@@ -67,19 +67,12 @@ See [clone](https://github.com/JSON8/JSON8#ooclone).
 ## apply
 
 ```javascript
-doc = ooPatch.apply(doc, [
-  { "op": "add",     "path": "/tags/0",        "value": "family"          },
-  { "op": "remove",  "path": "/height"                                    },
-  { "op": "replace", "path": "/age",           "value": "26"              },
-  { "op": "move",    "from": "/address/city",  "path": "/address/country" },
-  { "op": "copy",    "from": "/starred",       "to":    "/bookmarked"     },
-  { "op": "test",    "path": "/starred",       "value": true              }
-]);
+doc = ooPatch.apply(doc, patch).doc;
 ```
 
-```ooPatch.apply``` returns a document because the JSON Patch specification states that an operation can replace the original document.
+```ooPatch.apply``` (and other ooPatch methods) returns an object with a doc property because per specification a patch can replace the original root document.
 
-The operation is atomic, if any operation fails, the document will be restored to its original state and an error will be thrown.
+The operation is atomic, if any of the patch operation fails, the document will be restored to its original state and an error will be thrown.
 
 [↑](#json8-patch)
 
@@ -126,52 +119,49 @@ ooPatch.diff({}, {"foo": "bar"})
 
 ## Operations
 
-```add```, ```copy```, ```replace```, ```move```, ```remove```, ```test``` operations return an array of the form ```[document, previous, idx]```
+```add```, ```copy```, ```replace```, ```move```, ```remove```, ```test``` operations return an object of the form ```{doc: document, previous: value}```
 
-The first argument is the patched document.
-
-The second argument is the previous value at the specified destination if any, undefined otherwise.
-
-The third argument is used internaly and can be ignored. It is the index of the new element. For ```add``` operation only using the JSON Pointer '-' token to push an item at the end of an array.
+* ```doc``` is the patched document
+* ```previous``` is the previous/replaced value
 
 ### add
 ```javascript
-doc = ooPatch.add(doc, '/foo', 'foo')[0]
+doc = ooPatch.add(doc, '/foo', 'foo').doc;
 ```
 
 [↑](#json8-patch)
 
 ### remove
 ```javascript
-doc = ooPatch.remove(doc, '/foo')[0];
+doc = ooPatch.remove(doc, '/foo').doc;
 ```
 
 [↑](#json8-patch)
 
 ### replace
 ```javascript
-doc = ooPatch.replace(doc, '/foo', 'foo')[0];
+doc = ooPatch.replace(doc, '/foo', 'foo').doc;
 ```
 
 [↑](#json8-patch)
 
 ### move
 ```javascript
-doc = ooPatch.move(doc, '/foo', '/bar')[0];
+doc = ooPatch.move(doc, '/foo', '/bar').doc;
 ```
 
 [↑](#json8-patch)
 
 ### copy
 ```javascript
-doc = ooPatch.copy(doc, '/foo', '/bar')[0];
+doc = ooPatch.copy(doc, '/foo', '/bar').doc;
 ```
 
 [↑](#json8-patch)
 
 ### test
 ```javascript
-doc = ooPatch.test(doc, '/foo', 'bar')[0];
+doc = ooPatch.test(doc, '/foo', 'bar').doc;
 ```
 
 [↑](#json8-patch)

@@ -57,7 +57,7 @@ tests.forEach(function(test) {
       "    apply(doc, test.patch)",
       "  })",
       "  assert.deepEqual(doc, test.doc)",
-      "})"
+      "})",
     ].join('\n')
   }
   else {
@@ -65,15 +65,15 @@ tests.forEach(function(test) {
       "it('applies the patch', function() {",
       "  var test = " + JSON.stringify(test),
       "  var r = apply(test.doc, test.patch)",
-      "  assert.deepEqual(r, test.expected)",
+      "  assert.deepEqual(r.doc, test.expected)",
       "})",
       "\n",
       "it('reverts the patch', function() {",
       "  var test = " + JSON.stringify(test),
       "  var doc = clone(test.doc)",
       "  var r = apply(doc, test.patch, {reversible: true})",
-      "  assert.deepEqual(revert(r[0], r[1]), test.doc)",
-      "})"
+      "  assert.deepEqual(revert(r.doc, r.revert), test.doc)",
+      "})",
     ].join('\n')
   }
 

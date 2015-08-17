@@ -17,7 +17,7 @@ describe('add', () => {
       doc = {}
       const obj = {bar: 'foo'}
       const r = add('/foo', {bar: 'foo'})
-      assert.deepEqual(r[0].foo, obj)
+      assert.deepEqual(r.doc.foo, obj)
     })
 
     it('throws an error if the parent does not exists', () => {
@@ -41,7 +41,7 @@ describe('add', () => {
     it('adds the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
       const r = add('/foo/0', 'barfoo')
-      assert.deepEqual(r[0], {foo: ['barfoo', 'bar']})
+      assert.deepEqual(r.doc, {foo: ['barfoo', 'bar']})
     })
 
     it('throws an error if the parent does not exists', () => {
