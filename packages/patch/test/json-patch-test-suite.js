@@ -3,6 +3,8 @@
 import assert from 'assert'
 import {clone} from 'json8'
 import {apply, revert} from '../lib/patch'
+import pack from '../lib/pack'
+import unpack from '../lib/unpack'
 
 let tests = require('json-patch-test-suite/tests.json')
 const spec_tests = require('json-patch-test-suite/tests.json')
@@ -56,6 +58,15 @@ describe('json-patch-test-suite', () => {
           })
         })
       }
+
+      if (test.patch && !test.error && JSON.stringify(test.patch).indexOf('spurious') === -1) {
+        it('packs and unpacks the patch ok', () => {
+          const t = clone(test)
+          const packed = pack(test.patch)
+          assert.deepEqual(unpack(packed), t.patch)
+        })
+      }
+
     })
   })
 })

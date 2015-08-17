@@ -91,10 +91,10 @@ The revert object can be used to revert a patch on a document.
 ```javascript
 // apply the patch with the reversible option
 var patchResult = ooPatch.apply(doc, patch, {reversible: true});
-doc = patchResult[0];
+doc = patchResult.doc
 
 // revert the patch
-doc = ooPatch.revert(doc, patchResult[1]);
+doc = ooPatch.revert(doc, patchResult.revert);
 // doc is strictly identical to the original
 ```
 
