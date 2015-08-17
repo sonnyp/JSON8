@@ -1,11 +1,9 @@
-scripts/
 test/
 
 .editorconfig
 .eslintignore
 .eslintrc
 .gitignore
-.gitmodules
 .travis.yml
 
 CONTRIBUTING.md

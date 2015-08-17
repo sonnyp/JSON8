@@ -261,7 +261,6 @@ var patch = ooPatch.unpack(packed);
 # Tests
 
 ```
-git submodule update --init --recursive
 npm install -g mocha babel browserify
 npm test
 ```

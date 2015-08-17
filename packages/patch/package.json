@@ -15,7 +15,7 @@
     "preversion": "npm run webify && npm test",
     "webify": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
     "lint": "./node_modules/.bin/eslint .",
-    "unit": "./scripts/make-json-patch-tests && mocha --compilers js:babel/register --recursive test/",
+    "unit": "mocha --compilers js:babel/register --recursive test/",
     "test": "npm run unit && npm run lint && npm run webify"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
@@ -25,6 +25,7 @@
     "json8-pointer": "^0.4.0"
   },
   "devDependencies": {
-    "eslint": "^0.24.1"
+    "eslint": "^0.24.1",
+    "json-patch-test-suite": "^1.0.0"
   }
 }
