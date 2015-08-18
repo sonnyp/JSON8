@@ -5,6 +5,7 @@ var patch = require('./lib/patch')
 module.exports.patch = patch.apply
 module.exports.apply = patch.apply
 module.exports.revert = patch.revert
+module.exports.diff = require('./lib/diff')
 
 // Operations
 module.exports.add = require('./lib/add')
