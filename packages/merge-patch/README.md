@@ -91,11 +91,29 @@ Alias for [apply](#apply) method.
 
 [↑](#json8-merge-patch)
 
+## diff
+
+Compares two JSON documents and returns a JSON Merge Patch diff.
+
+```javascript
+var a = {"foo": "bar", "bar": "foo"}
+var b = {"foo": "foo"}
+
+ooMergePatch.diff(a, b)
+//{
+//  "foo": "foo",
+//  "bar": null
+// }
+```
+
+[↑](#json8-merge-patch)
+
 ## toJSONPatch
 
+JSON Patch is a more capable alternative to JSON Merge Patch.
 To work with JSON Patch see [JSON8 Patch](https://github.com/JSON8/patch).
 
-This method is only available if the optional dependency [JSON8 Pointer](https://github.com/JSON8/pointer) is installed.
+This method converts a JSON Merge Patch to a JSON Patch and is only available if the optional dependency [JSON8 Pointer](https://github.com/JSON8/pointer) is installed.
 
 ```npm install json8-pointer```
 

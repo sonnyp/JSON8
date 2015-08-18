@@ -1,0 +1,45 @@
+[
+  {"description": "equal empty objects no changes",
+    "a": {}, "b": {}, "diff": {}
+  },
+
+  {"description": "equal booleans no changes",
+    "a": true, "b": true, "diff": true
+  },
+
+  {"description": "equal strings no changes",
+    "a": "foo", "b": "foo", "diff": "foo"
+  },
+
+  {"description": "equal nulls no changes",
+    "a": null, "b": null, "diff": null
+  },
+
+  {"description": "equal empty arrays no changes",
+    "a": [], "b": [], "diff": []
+  },
+
+  {"description": "equal numbers no changes",
+    "a": 42, "b": 42, "diff": 42
+  },
+
+  {"description": "equal non empty arrays",
+    "a": ["foo"], "b": ["foo"], "diff": ["foo"]
+  },
+
+  {"description": "equal non empty objects",
+    "a": {"foo": "bar"}, "b": {"foo": "bar"}, "diff": {}
+  },
+
+  {"description": "different nested objects",
+    "a": {"foo": {"bar": "foo", "bla": "truc"}, "machin": "lol"},
+    "b": {"foo": {"truc": "lol", "bar": "bar"}},
+    "diff": {"foo": {"truc": "lol", "bar": "bar", "bla": null}, "machin": null}
+  },
+
+  {"description": "equal nested objects",
+    "a": {"foo": {"bar": "lol"}},
+    "b": {"foo": {"bar": "lol"}},
+    "diff": {}
+  }
+]
