@@ -85,7 +85,7 @@ Alias for [apply](#apply) method.
 
 ## revert
 
-If the [patch](#patch) or [apply](#apply) method is called with a third argument ```{reversible: true}``` it will return an additional value in the format of the ```revert``` property.
+If the [patch](#patch) or [apply](#apply) method is called with a third argument ```{reversible: true}``` it will return an additional value in the form of a ```revert``` property.
 
 The revert object can be used to revert a patch on a document.
 
