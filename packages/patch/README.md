@@ -95,7 +95,7 @@ var patchResult = ooPatch.apply(doc, patch, {reversible: true});
 doc = patchResult.doc
 
 // revert the patch
-doc = ooPatch.revert(doc, patchResult.revert);
+doc = ooPatch.revert(doc, patchResult.revert).doc;
 // doc is strictly identical to the original
 ```
 

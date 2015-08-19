@@ -9,7 +9,7 @@ import unpack from '../lib/unpack'
 import valid from '../lib/valid'
 
 let tests = require('json-patch-test-suite/tests.json')
-const spec_tests = require('json-patch-test-suite/tests.json')
+const spec_tests = require('json-patch-test-suite/spec_tests.json')
 
 tests = tests.concat(spec_tests)
 
@@ -49,7 +49,7 @@ describe('json-patch-test-suite', () => {
           const t = clone(test)
           const original = t.doc
           const r = apply(t.doc, t.patch, {reversible: true})
-          assert.deepEqual(revert(r.doc, r.revert), original)
+          assert.deepEqual(revert(r.doc, r.revert).doc, original)
         })
       }
       else {
@@ -69,6 +69,10 @@ describe('json-patch-test-suite', () => {
       }
 
       if (test.patch && !test.error && JSON.stringify(test.patch).indexOf('spurious') === -1) {
+        const ignore = ['Ignoring Unrecognized Elements']
+        if (test.comment && test.comment.indexOf(ignore[0]) !== -1)
+          return
+
         it('packs and unpacks the patch ok', () => {
           const t = clone(test)
           const packed = pack(test.patch)

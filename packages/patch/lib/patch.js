@@ -13,7 +13,7 @@ operations.replace = require('./replace')
 operations.test = require('./test')
 
 /**
- * @typedef ApplyResult
+ * @typedef PatchResult
  * @type Object
  * @property {Any}   doc     - The patched document
  * @property {Array} revert  - An array to be used with revert method
@@ -21,9 +21,9 @@ operations.test = require('./test')
 
 /**
  * Apply a single JSON Patch operation object to a JSON document
- * @param  {Object|Array} doc    - JSON document to apply the patch to
- * @param  {Object}       patch  - JSON Patch operation object
- * @return {void}
+ * @param  {Any}    doc    - JSON document to apply the patch to
+ * @param  {Object} patch  - JSON Patch operation object
+ * @return {Any}
  */
 var run = function(doc, patch) {
   if (typeof patch.path === 'string')
@@ -55,7 +55,7 @@ var run = function(doc, patch) {
  * @param  {Object}       patch     - JSON Patch operation object
  * @param  {Any}          previous  - previous value for add and replace operations
  * @param  {Number}       idx       - index of the item for array
- * @return {void}
+ * @return {Object}
  */
 var reverse = function(patch, previous, idx) {
   var op = patch.op
@@ -82,11 +82,11 @@ var reverse = function(patch, previous, idx) {
 
 /**
  * Apply a JSON Patch to a JSON document
- * @param  {Object|Array} doc                 - JSON document to apply the patch to
+ * @param  {Any}          doc                 - JSON document to apply the patch to
  * @param  {Array}        patch               - JSON Patch array
  * @param  {Object}       options             - options
  * @param  {Boolean}      options.reversible  - return an array to revert
- * @return {Object}                           - {doc: document, revert?: array}
+ * @return {PatchResult}
  */
 var apply = function apply(doc, patch, options) {
   if (!Array.isArray(patch))
@@ -136,13 +136,13 @@ var foo = function(items) {
 
 /**
  * Revert apply a JSON Patch
- * @param  {Object|Array} doc    - JSON document to which the patch was applied to
- * @param  {Array}        items  - array of [patch, previous, idx] items
- * @return {void}
+ * @param  {Any}     doc                 - JSON document to which the patch was applied to
+ * @param  {Array}   items               - array of [patch, previous, idx] items
+ * @return {PatchResult}
  */
 var revert = function revert(doc, items) {
   var patches = foo(items)
-  return apply(doc, patches).doc
+  return apply(doc, patches)
 }
 
 module.exports.foo = foo
