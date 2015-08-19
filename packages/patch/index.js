@@ -1,10 +1,10 @@
 'use strict'
 
-var patch = require('./lib/patch')
+var apply = require('./lib/apply')
 
-module.exports.patch = patch.apply
-module.exports.apply = patch.apply
-module.exports.revert = patch.revert
+module.exports.patch = apply
+module.exports.apply = apply
+module.exports.revert = require('./lib/revert')
 module.exports.diff = require('./lib/diff')
 
 // Operations

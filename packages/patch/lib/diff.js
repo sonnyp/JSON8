@@ -1,11 +1,10 @@
 'use strict'
 
 var serialize = require('json8-pointer').serialize
-var oo = require('json8')
-var type = oo.type
-var ARRAY = oo.ARRAY
-var OBJECT = oo.OBJECT
-var equal = oo.equal
+var equal = require('json8/lib/equal')
+var type = require('json8/lib/type')
+var ARRAY = 'array'
+var OBJECT = 'object'
 
 module.exports = function diff(a, b, pre) {
   var patches = []

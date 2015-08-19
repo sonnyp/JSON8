@@ -3,7 +3,6 @@
 var JSON8Pointer = require('json8-pointer')
 var parse = JSON8Pointer.parse
 var serialize = JSON8Pointer.serialize
-var isObject = require('json8').isObject
 
 var operations = Object.create(null)
 operations.add = require('./add')
@@ -89,7 +88,7 @@ var reverse = function(patch, previous, idx) {
  * @param  {Boolean}      options.reversible  - return an array to revert
  * @return {Object}                           - {doc: document, revert?: array}
  */
-var apply = function(doc, patch, options) {
+var apply = function apply(doc, patch, options) {
   if (!Array.isArray(patch))
     throw new Error('Invalid argument, patch must be an array')
 
@@ -113,7 +112,7 @@ var apply = function(doc, patch, options) {
 
   var result = {doc: doc}
 
-  if (isObject(options) && options.reversible === true)
+  if (options && typeof options === 'object' && options.reversible === true)
     result.revert = done
 
   return result
@@ -141,7 +140,7 @@ var foo = function(items) {
  * @param  {Array}        items  - array of [patch, previous, idx] items
  * @return {void}
  */
-var revert = function(doc, items) {
+var revert = function revert(doc, items) {
   var patches = foo(items)
   return apply(doc, patches).doc
 }

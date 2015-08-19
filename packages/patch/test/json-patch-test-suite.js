@@ -2,7 +2,8 @@
 
 import assert from 'assert'
 import {clone} from 'json8'
-import {apply, revert} from '../lib/patch'
+import apply from '../lib/apply'
+import revert from '../lib/revert'
 import pack from '../lib/pack'
 import unpack from '../lib/unpack'
 import valid from '../lib/valid'

@@ -1,7 +1,7 @@
 'use strict'
 
 var get = require('./get')
-var equal = require('json8').equal
+var equal = require('json8/lib/equal')
 
 /**
  * @typedef OperationResult
