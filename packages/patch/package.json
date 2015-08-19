@@ -26,6 +26,6 @@
   },
   "devDependencies": {
     "eslint": "^0.24.1",
-    "json-patch-test-suite": "^1.0.0"
+    "json-patch-test-suite": "^1.0.1"
   }
 }

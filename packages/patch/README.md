@@ -3,7 +3,7 @@ JSON8 Patch
 
 [![build status](https://img.shields.io/travis/JSON8/patch.svg?style=flat-square)](https://travis-ci.org/JSON8/patch)
 
-JSON Patch [RFC 6902](http://tools.ietf.org/html/rfc6902) implementation for JavaScript.
+JSON Patch [RFC 6902](http://tools.ietf.org/html/rfc6902) (and diff) implementation for JavaScript.
 
 See [jsonpatch.com](http://jsonpatch.com) for more information about JSON Patch.
 
@@ -131,8 +131,8 @@ ooPatch.valid([{}] // false
 ooPatch.valid([{op: "foo", path: null, value: undefined}]) // false
 ooPatch.valid([{op: "add", path: "/foo"}]) // false
 
-ooPatch.valid([]) //true
-ooPatch.valid([{op: "add", path: "/foo", value: "bar"}]) //true
+ooPatch.valid([]) // true
+ooPatch.valid([{op: "add", path: "/foo", value: "bar"}]) // true
 ```
 
 [↑](#json8-patch)
