@@ -1,6 +1,6 @@
 'use strict'
 
-var parse = require('./parse')
+var decode = require('./decode')
 var walk = require('./walk')
 
 /**
@@ -11,7 +11,7 @@ var walk = require('./walk')
  * @return {Any}                   - value at the JSON Pointer location - undefined otherwise
  */
 module.exports = function find(doc, pointer) {
-  var tokens = Array.isArray(pointer) ? pointer : parse(pointer)
+  var tokens = Array.isArray(pointer) ? pointer : decode(pointer)
 
   // returns the document
   if (tokens.length === 0)

@@ -1,13 +1,13 @@
 'use strict'
 
 /**
- * parse a JSON Pointer string
+ * decode a JSON Pointer string
  *
- * @param  {String} pointer    - JSON Pointer string to parse
+ * @param  {String} pointer    - JSON Pointer string to decode
  * @param  {String} separator  - separator to use, defaults to /
  * @return {Array}             - array of tokens
  */
-module.exports = function parse(pointer, separator) {
+module.exports = function decode(pointer, separator) {
   if (Array.isArray(pointer))
     return pointer
 
