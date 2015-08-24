@@ -77,7 +77,7 @@ person = ooMergePatch.apply(person, mergePatch)
 //{
 //  "name": "John Doe",
 //  "friendly": "maybe",
-//  "age": 10,
+//  "age": 19,
 //  "address": {}
 //}
 ```
