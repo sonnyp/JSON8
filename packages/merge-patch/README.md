@@ -20,6 +20,7 @@ See also
 * [Methods](#methods)
   * [apply](#apply)
   * [patch](#patch)
+  * [diff](#diff)
   * [toJSONPatch](#tojsonpatch)
 * [Tests](#tests)
 * [Contributing](#contributing)
