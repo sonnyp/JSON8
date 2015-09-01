@@ -23,7 +23,7 @@ See also
 * [mole](https://github.com/sonnyp/mole) to work with Array/Map/Object/Set data structures.
 * [JSON8 Patch](https://github.com/JSON8/patch) for JSON diffing and patching
 * [JSON8 Pointer](https://github.com/JSON8/pointer) for JSON Pointer (URL for JSON) implementation
-* [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simpler JSON object diffing/patching alternative to JSON Patch and Pointer
+* [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simpler but less capable JSON object diffing/patching alternative to JSON Patch and Pointer
 
 ----
 
