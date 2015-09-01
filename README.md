@@ -20,7 +20,6 @@ Features
 
 See also
 
-* [mole](https://github.com/sonnyp/mole) to work with Array/Map/Object/Set data structures.
 * [JSON8 Patch](https://github.com/JSON8/patch) for JSON diffing and patching
 * [JSON8 Pointer](https://github.com/JSON8/pointer) for JSON Pointer (URL for JSON) implementation
 * [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simpler but less capable JSON object diffing/patching alternative to JSON Patch and Pointer
@@ -31,6 +30,7 @@ See also
 * [Introduction](#introduction)
 * [Getting started](#getting-started)
 * [Methods](#methods)
+  * [oo](#oo)
   * [oo.clone](#ooclone)
   * [oo.equal](#ooequal)
   * [oo.type](#ootype)
@@ -76,6 +76,20 @@ var oo = window.JSON8
 [↑](#json8)
 
 # Methods
+
+## oo
+
+Returns an [oo.Document](#oodocument).
+
+```javascript
+var doc = oo(false)
+doc instanceof oo.Document // true
+doc.isBoolean()            // true
+doc.isPrimitive()          // true
+// ...
+```
+
+[↑](#json8)
 
 ## oo.clone
 
@@ -474,6 +488,23 @@ var doc = oo.parse(string[, options]);
 ```options.map``` to parse JSON objects as Map (default false).
 
 [↑](#json8)
+
+## oo.Document
+
+An oo.Document is a constructor that wraps a value and expose oo methods.
+
+You can use either ```oo(value)``` or ```new oo.Document(value)```.
+
+```javascript
+var doc = oo('hello')
+doc instanceof oo.Document // true
+doc.isString()             // true
+var clone = doc.clone()    // oo.Document
+doc.equal(clone)           // true
+```
+
+[↑](#json8)
+
 
 # Motivations
 
