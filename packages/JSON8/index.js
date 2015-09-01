@@ -1,28 +1,34 @@
 'use strict'
 
 var types = require('./lib/types')
+var Document = require('./lib/Document')
 
-exports.clone = require('./lib/clone')
-exports.equal = require('./lib/equal')
+var oo = module.exports = function(doc) {
+  return new Document(doc)
+}
 
-exports.has = require('./lib/has')
-exports.hasKey = require('./lib/hasKey')
-exports.hasValue = require('./lib/hasValue')
+oo.clone = require('./lib/clone')
+oo.Document = Document
+oo.equal = require('./lib/equal')
 
-exports.is = require('./lib/is')
-exports.isArray = require('./lib/isArray')
-exports.isBoolean = require('./lib/isBoolean')
-exports.isJSON = require('./lib/isJSON')
-exports.isNull = require('./lib/isNull')
-exports.isNumber = require('./lib/isNumber')
-exports.isObject = require('./lib/isObject')
-exports.isPrimitive = require('./lib/isPrimitive')
-exports.isString = require('./lib/isString')
-exports.isStructure = require('./lib/isStructure')
+oo.has = require('./lib/has')
+oo.hasKey = require('./lib/hasKey')
+oo.hasValue = require('./lib/hasValue')
 
-exports.parse = require('./lib/parse')
-exports.serialize = require('./lib/serialize')
-exports.type = require('./lib/type')
+oo.is = require('./lib/is')
+oo.isArray = require('./lib/isArray')
+oo.isBoolean = require('./lib/isBoolean')
+oo.isJSON = require('./lib/isJSON')
+oo.isNull = require('./lib/isNull')
+oo.isNumber = require('./lib/isNumber')
+oo.isObject = require('./lib/isObject')
+oo.isPrimitive = require('./lib/isPrimitive')
+oo.isString = require('./lib/isString')
+oo.isStructure = require('./lib/isStructure')
+
+oo.parse = require('./lib/parse')
+oo.serialize = require('./lib/serialize')
+oo.type = require('./lib/type')
 for (var type in types)
-  module.exports[type] = types[type]
-exports.valid = require('./lib/valid')
+  oo[type] = types[type]
+oo.valid = require('./lib/valid')
