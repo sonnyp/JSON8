@@ -1,0 +1,26 @@
+{
+  "name": "json8-text-sequence",
+  "version": "0.1.0",
+  "description": "JSON Text Sequence for JavaScript",
+  "keywords": [
+    "JSON",
+    "text",
+    "sequence"
+  ],
+  "homepage": "https://github.com/JSON8/text-sequence",
+  "repository": "github:JSON8/text-sequence",
+  "bugs": "https://github.com/JSON8/text-sequence/issues",
+  "main": "index.js",
+  "scripts": {
+    "preversion": "npm run webify && npm test",
+    "webify": "browserify -s JSON8TextSequence index.js -o JSON8TextSequence.js",
+    "lint": "./node_modules/.bin/eslint .",
+    "unit": "mocha --compilers js:babel/register --recursive test/",
+    "test": "npm run unit && npm run lint && npm run webify"
+  },
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^0.24.1"
+  }
+}
