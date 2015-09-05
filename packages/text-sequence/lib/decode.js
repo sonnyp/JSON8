@@ -2,6 +2,7 @@
 
 var RS = '\x1e'
 var LF = '\n'
+var CAN = '\x0A'
 
 module.exports = function decode(str) {
   var seqs = []
@@ -12,10 +13,16 @@ module.exports = function decode(str) {
         seq = str[++i]
       }
     }
+    else if (str[i] === CAN) {
+      seqs.push(JSON.parse(seq))
+      seq = ''
+      i++
+    }
     else if (str[i] === LF) {
-      seqs.push(seq)
+      seqs.push(JSON.parse(seq))
       seq = ''
     }
+
     else {
       seq += str[i]
     }
