@@ -1,8 +1,9 @@
 'use strict'
 
-var RS = '\x1e'
-var LF = '\n'
-var CAN = '\x0A'
+var chars = require('./chars')
+var RS = chars.RS
+var LF = chars.LS
+var CAN = chars.CAN
 
 module.exports = function decode(str) {
   var seqs = []
