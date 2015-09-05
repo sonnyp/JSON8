@@ -9,7 +9,7 @@ var EncodeStream = function() {
 }
 inherits(EncodeStream, Transform)
 
-EncodeStream.prototype._transform = function(obj, enc, done) {
+EncodeStream.prototype._transform = function(obj, enc, done) { // eslint-disable-line
   this.push(encode(obj), 'utf8')
   done()
 }
