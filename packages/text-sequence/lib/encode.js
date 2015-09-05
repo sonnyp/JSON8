@@ -2,7 +2,7 @@
 
 var chars = require('./chars')
 var RS = chars.RS
-var LF = chars.LS
+var LF = chars.LF
 var CAN = chars.CAN
 
 module.exports = function encode(array) {

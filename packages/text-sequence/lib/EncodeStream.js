@@ -10,7 +10,7 @@ var EncodeStream = function() {
 inherits(EncodeStream, Transform)
 
 EncodeStream.prototype._transform = function(obj, enc, done) {
-  this.push(encode([obj]), 'utf8')
+  this.push(encode(obj), 'utf8')
   done()
 }
 
