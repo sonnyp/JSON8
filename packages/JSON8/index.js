@@ -4,7 +4,10 @@ var types = require('./lib/types')
 
 exports.clone = require('./lib/clone')
 exports.equal = require('./lib/equal')
+
 exports.has = require('./lib/has')
+exports.hasKey = require('./lib/hasKey')
+exports.hasValue = require('./lib/hasValue')
 
 exports.is = require('./lib/is')
 exports.isArray = require('./lib/isArray')
