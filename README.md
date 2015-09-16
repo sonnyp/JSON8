@@ -1,7 +1,7 @@
 JSON8
 =====
 
-[![build status](https://img.shields.io/travis/JSON8/JSON8.svg?style=flat-square)](https://travis-ci.org/JSON8/JSON8)
+[![build status](https://img.shields.io/travis/JSON8/JSON8/master.svg?style=flat-square)](https://travis-ci.org/JSON8/JSON8/branches)
 
 # Introduction
 
@@ -44,6 +44,9 @@ See also
     - [boolean](#boolean)
     - [null](#null)
     - [JSON](#json)
+  * [oo.hasKey](#oohaskey)
+  * [oo.hasValue](#oohasvalue)
+  * [oo.has](#oohas)
   * [oo.valid](#oovalid)
   * [oo.serialize](#ooserialize)
   * [oo.parse](#ooparse)
@@ -318,6 +321,65 @@ oo.isJSON(function() {}) //false
 
 [↑](#json8)
 
+## oo.hasKey
+
+Iterates over a JSON object (Map or Object) until a JSON [equal](#ooequal) key is found.
+
+Returns true if the JSON object (Map or Object) contains an equal key.
+Returns false if the key is not a string.
+Returns false if the value at the key is undefined.
+
+```javascript
+oo.hasKey({'foo': 'bar'}, 'foo')         // true
+oo.hasKey({undefined: 'bar'}, undefined) // false
+oo.hasKey({'foo': undefined}, 'foo')     // false
+var obj = {}
+obj[{}] = 'foo'
+oo.hasKey(obj, {})                       // false
+
+var map = new Map()
+map.set('foo', 'bar')
+oo.hasKey(map, 'foo')     // true
+map.set(undefined, 'bar')
+oo.hasKey(map, undefined) // false
+map.set('foo', undefined)
+oo.hasKey(map, 'foo')     // false
+map.set({}, 'foo')
+oo.hasKey(map, {})        // true
+```
+
+[↑](#json8)
+
+## oo.hasValue
+
+Iterates over a JSON structure (Array or Object) until an [equal](#ooequal) value is found.
+
+Returns true if the JSON structure contains an equal value.
+Returns false if the value or the key for the value is undefined.
+
+```javascript
+oo.hasValue({'foo': 'bar'}, 'bar')         // true
+oo.hasValue({'foo': {}}, {})               // true
+oo.hasValue({undefined: 'bar'}, bar)       // false
+oo.hasValue({'foo': undefined}, undefined) // false
+
+var map = new Map()
+map.set('foo', 'bar')
+oo.hasKey(map, 'bar')      // true
+map.set(undefined, 'bar')
+oo.hasKey(map, 'bar')      // false
+map.set('foo', undefined)
+oo.hasKey(map, undefined)  // false
+```
+
+## oo.has
+
+If the provided structure is a JSON array (Set or Array) returns the result of hasValue with the given arguments.
+If the provided structure is a JSON object (Map or Object) returns the result of hasKey with the given arguments.
+Otherwise returns false.
+
+[↑](#json8)
+
 ## oo.valid
 
 Recursive version of [is JSON](#json), works on primitive values as well.
@@ -437,9 +499,9 @@ Getting/asserting the JSON type of a value in JavaScript is troublesome.
 
 JSON8 [types](#types) helps avoiding many common errors as well.
 
-[oo.equal](#equal) performs a deep JSON equality comparaison
+[oo.equal](#equal) performs deep JSON equality comparaison
 
-[oo.valid](#valid) performs a recursive JSON validation on any value
+[oo.valid](#valid) performs recursive JSON validation on any value
 
 [↑](#json8)
 
