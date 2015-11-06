@@ -12,7 +12,7 @@ node_js:
   - 'stable'
 
 before_install:
-  - npm install -g mocha babel browserify
+  - npm install -g mocha babel@5 browserify
 
 script:
   - npm run unit

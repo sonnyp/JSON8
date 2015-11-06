@@ -6,6 +6,7 @@ module.exports.patch = apply
 module.exports.apply = apply
 module.exports.revert = require('./lib/revert')
 module.exports.diff = require('./lib/diff')
+module.exports.valid = require('./lib/valid')
 
 // Operations
 module.exports.add = require('./lib/add')
