@@ -1,5 +1,3 @@
-'use strict'
-
 import assert from 'assert'
 import {is, isObject, isPrimitive, isNull, isJSON, isArray, isStructure, isNumber, isString, isBoolean} from '..'
 

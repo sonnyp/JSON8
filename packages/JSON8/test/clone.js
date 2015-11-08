@@ -1,5 +1,3 @@
-'use strict'
-
 import assert from 'assert'
 import {clone, equal} from '..'
 
@@ -64,7 +62,7 @@ describe('clone', () => {
   })
 
   it('returns -0 for -0', () => {
-    const cl = clone(-0)
+    cl = clone(-0)
     assert(cl === 0)
     assert((1 / cl) === -Infinity)
   })

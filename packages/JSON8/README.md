@@ -14,7 +14,7 @@ Features
 * Support Node.js/io.js and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
 * [Smarter and safer JSON serializer/stringify](#ooserialize)
 * See [Methods](#methods) and [Motivations](#motivations)
-* [Tested](https://travis-ci.org/JSON8/JSON8)
+* [Tested](https://travis-ci.org/JSON8/JSON8/branches)
 * Small, no dependencies
 * Modular, save bandwith/memory by requiring needed methods using ```require('json8/lib/METHOD_NAME')```
 
@@ -50,6 +50,7 @@ See also
   * [oo.valid](#oovalid)
   * [oo.serialize](#ooserialize)
   * [oo.parse](#ooparse)
+* [oo.Document](#oodocument)
 * [Motivations](#motivations)
 * [Tests](#tests)
 * [Contributing](#contributing)

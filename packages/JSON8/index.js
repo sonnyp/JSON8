@@ -32,3 +32,46 @@ oo.type = require('./lib/type')
 for (var type in types)
   oo[type] = types[type]
 oo.valid = require('./lib/valid')
+
+// Document
+
+;[
+  'has',
+  'hasKey',
+  'hasValue',
+  'is',
+  'isArray',
+  'isBoolean',
+  'isJSON',
+  'isNull',
+  'isNumber',
+  'isObject',
+  'isPrimitive',
+  'isString',
+  'isStructure',
+  'serialize',
+  'type',
+  'valid',
+].forEach(function(method) {
+  var fn = oo[method]
+  Document.prototype[method] = function() {
+    var args = [this.value].concat(arguments)
+    return fn.apply(null, args)
+  }
+})
+
+Document.prototype.toString = function() {
+  return oo.serialize(this.value)
+}
+
+Document.prototype.clone = function() {
+  return new Document(oo.clone(this.value))
+}
+
+Document.prototype.equal = function(obj) {
+  return oo.equal(this.value, obj instanceof Document ? obj.value : obj)
+}
+
+Document.prototype.parse = function() {
+  this.value = oo.parse.apply(null, [this.value].concat(arguments))
+}

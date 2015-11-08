@@ -3,13 +3,14 @@ sudo: false
 language: node_js
 
 node_js:
-  - "0.10"
-  - "0.11"
-  - "0.12"
-  - "io.js"
+  - '0.10'
+  - '0.12'
+  - '4'
+  - '5'
+  - 'stable'
 
 before_install:
-  - npm install -g mocha babel browserify
+  - npm install mocha browserify
 
 script:
   - npm run unit
