@@ -2,7 +2,7 @@
 
 var OBJECT = require('./types').OBJECT
 
-var replace = function(obj, options) {
+function replace(obj, options) {
   var i
   var l
 
