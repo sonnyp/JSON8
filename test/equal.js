@@ -1,5 +1,3 @@
-'use strict'
-
 import assert from 'assert'
 import JSON8 from '..'
 
@@ -151,7 +149,7 @@ describe('equal', () => {
         differ(-0, +0)
       })
     })
-    // TODO: figure out what to do with those?
+    // TODO: figure out what to do with those
     // it('returns false for NaN', () => {
     //   differ(NaN, NaN)
     // })

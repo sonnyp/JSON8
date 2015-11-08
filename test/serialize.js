@@ -1,5 +1,3 @@
-'use strict'
-
 import assert from 'assert'
 import {serialize} from '..'
 
@@ -150,7 +148,7 @@ describe('serialize', () => {
         foo: 'bar',
       }
       const replacer = function(k, v) {
-        assert.strictEqual(this, obj)
+        assert.strictEqual(this, obj) // eslint-disable-line no-invalid-this
         assert.strictEqual(k, 'foo')
         assert.strictEqual(v, 'bar')
       }
@@ -170,7 +168,7 @@ describe('serialize', () => {
     it('deletes the value if the replacer return undefined for array', () => {
       const arr = ['foo']
       const replacer = function(k, v) {
-        assert.strictEqual(this, arr)
+        assert.strictEqual(this, arr) // eslint-disable-line no-invalid-this
         assert.strictEqual(k, 0)
         assert.strictEqual(v, 'foo')
         return undefined
