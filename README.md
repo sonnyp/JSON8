@@ -111,7 +111,7 @@ oo.clone(-0)   // -0
 
 ## oo.equal
 
-Test for equality between two documents.
+Test for JSON equality between two documents.
 
 ```javascript
 oo.equal(true, true)     // true
@@ -183,6 +183,8 @@ Where type is any of:
 * [boolean](#boolean)
 * [null](#null)
 * [JSON](#json)
+
+```oo.is(value, type)``` throws an error if `type` is not one of those.
 
 #### structure
 
@@ -338,7 +340,7 @@ oo.isJSON(function() {}) //false
 
 ## oo.hasKey
 
-Iterates over a JSON object (Map or Object) until a JSON [equal](#ooequal) key is found.
+Iterates over a JSON object (Map or Object) until an [equal](#ooequal) JSON key is found.
 
 Returns true if the JSON object (Map or Object) contains an equal key.
 Returns false if the key is not a string.
@@ -367,7 +369,7 @@ oo.hasKey(map, {})        // true
 
 ## oo.hasValue
 
-Iterates over a JSON structure (Array or Object) until an [equal](#ooequal) value is found.
+Iterates over a JSON structure (Array or Object) until an [equal](#ooequal) JSON value is found.
 
 Returns true if the JSON structure contains an equal value.
 Returns false if the value or the key for the value is undefined.
@@ -413,6 +415,8 @@ oo.valid(["bar", function() {}]) //false
 ## oo.serialize
 
 Takes a JSON document and returns a parseable JSON string. Uses ```JSON.stringify``` underneath so it's still fast.
+
+Always use try/catch with oo.serialize.
 
 Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
@@ -480,6 +484,8 @@ oo.serialize(obj, {space: 2})
 ## oo.parse
 
 Takes a JSON string and returns a JavaScript value.
+
+Always use try/catch with oo.parse. Even with JSON.parse you should because [this](http://timelessrepo.com/json-isnt-a-javascript-subset).
 
 ```javascript
 var doc = oo.parse(string[, options]);
@@ -634,7 +640,7 @@ oo.serialize(-0)   // "-0"
 # Tests
 
 ```
-npm install -g mocha babel browserify
+npm install -g mocha browserify
 npm test
 ```
 
