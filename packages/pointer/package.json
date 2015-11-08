@@ -11,15 +11,19 @@
   "bugs": "https://github.com/JSON8/merge-patch/issues",
   "main": "index.js",
   "scripts": {
-    "preversion": "npm run webify && npm test",
+    "preversion": "npm test",
+    "prepublish": "npm run webify",
     "webify": "browserify -s JSON8Pointer index.js -o JSON8Pointer.js",
-    "lint": "./node_modules/.bin/eslint .",
+    "lint": "eslint .",
     "unit": "mocha --compilers js:babel/register --recursive test/",
     "test": "npm run unit && npm run lint && npm run webify"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^0.24.1"
+    "babel": "^5.8.29",
+    "eslint": "^1.9.0",
+    "eslint-config-atlas": "^1.0.2",
+    "eslint-config-bestpratices": "^1.0.7"
   }
 }

@@ -1,7 +1,7 @@
 JSON8 Pointer
 =============
 
-[![build status](https://img.shields.io/travis/JSON8/pointer.svg?style=flat-square)](https://travis-ci.org/JSON8/pointer)
+[![build status](https://img.shields.io/travis/JSON8/pointer.svg?style=flat-square)](https://travis-ci.org/JSON8/pointer/branches)
 
 JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) implementation for JavaScript.
 
@@ -114,7 +114,7 @@ Alias for the [encode](#encode) method.
 # Tests
 
 ```
-npm install -g eslint mocha babel
+npm install -g mocha browserify
 npm test
 ```
 
