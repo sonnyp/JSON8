@@ -38,36 +38,34 @@ describe('hasValue', () => {
     })
   })
 
-  if (global.Map) {
-    describe('Map', () => {
+  describe('Map', () => {
 
-      let obj
-      beforeEach(() => {
-        obj = new Map()
-      })
-
-      it('returns false if value is undefined', () => {
-        obj.set('foo', undefined)
-        lacks(obj, undefined)
-      })
-
-      it('returns true if the key is present', () => {
-        obj.set('foo', 'bar')
-        has(obj, 'bar')
-      })
-
-      it('returns false if the key is undefined', () => {
-        obj.set(undefined, 'foo')
-        lacks(obj, 'foo')
-      })
-
-      it('returns true if the value is present and is an object', () => {
-        obj.set({}, {})
-        has(obj, {})
-        lacks(obj, {"foo": "bar"})
-      })
-
+    let obj
+    beforeEach(() => {
+      obj = new Map()
     })
-  }
+
+    it('returns false if value is undefined', () => {
+      obj.set('foo', undefined)
+      lacks(obj, undefined)
+    })
+
+    it('returns true if the key is present', () => {
+      obj.set('foo', 'bar')
+      has(obj, 'bar')
+    })
+
+    it('returns false if the key is undefined', () => {
+      obj.set(undefined, 'foo')
+      lacks(obj, 'foo')
+    })
+
+    it('returns true if the value is present and is an object', () => {
+      obj.set({}, {})
+      has(obj, {})
+      lacks(obj, {"foo": "bar"})
+    })
+
+  })
 
 })

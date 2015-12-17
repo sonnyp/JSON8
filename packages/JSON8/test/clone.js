@@ -14,14 +14,12 @@ describe('clone', () => {
     assert(equal(doc, cl))
   })
 
-  if (global.Set) {
-    it('returns a set clone copy', () => {
-      doc = new Set(["foo", "bar"])
-      cl = clone(doc)
-      assert(equal(doc, cl))
-      assert.notStrictEqual(cl, doc)
-    })
-  }
+  it('returns a set clone copy', () => {
+    doc = new Set(["foo", "bar"])
+    cl = clone(doc)
+    assert(equal(doc, cl))
+    assert.notStrictEqual(cl, doc)
+  })
 
   it('returns an object clone copy', () => {
     doc = {"foo": "bar", "bar": "foo"}
@@ -31,14 +29,12 @@ describe('clone', () => {
     assert(equal(doc, cl))
   })
 
-  if (global.Map) {
-    it('returns a map clone copy', () => {
-      doc = {"foo": "bar", "bar": "foo"}
-      cl = clone(doc)
-      assert(equal(doc, cl))
-      assert.notStrictEqual(cl, doc)
-    })
-  }
+  it('returns a map clone copy', () => {
+    doc = {"foo": "bar", "bar": "foo"}
+    cl = clone(doc)
+    assert(equal(doc, cl))
+    assert.notStrictEqual(cl, doc)
+  })
 
   it('returns false for false', () => {
     assert.strictEqual(clone(false), false)
