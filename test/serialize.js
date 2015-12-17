@@ -176,6 +176,29 @@ describe('serialize', () => {
       assert.strictEqual(serialize(arr, {replacer}), '[]')
     })
 
+    it('splice the object if an item is deleted in between for object', () => {
+      const obj = {'foo': 'bar', 'bar': undefined, baz: 'baz'}
+      const replacer = function(k, v) {
+        if (k === 'bar')
+          return undefined
+        return v
+      }
+      assert.strictEqual(serialize(obj, {replacer}), '{"foo":"bar","baz":"baz"}')
+    })
+
+    it('splice the map if an item is deleted in between for map', () => {
+      const map = new Map()
+      map.set('foo', 'bar')
+      map.set('bar', undefined)
+      map.set('baz', 'baz')
+      const replacer = function(k, v) {
+        if (k === 'bar')
+          return undefined
+        return v
+      }
+      assert.strictEqual(serialize(map, {replacer}), '{"foo":"bar","baz":"baz"}')
+    })
+
     it('splice the array if an item is deleted in between for array', () => {
       const arr = ['foo', 'bar', 'foo']
       const replacer = function(k, v) {
@@ -190,7 +213,7 @@ describe('serialize', () => {
       it('splice the array if an item is deleted in between for set', () => {
         const set = new Set(['foo', 'bar', 'baz'])
         const replacer = function(k, v) {
-          if (k === 1)
+          if (k === 'bar')
             return undefined
           return v
         }
@@ -198,5 +221,4 @@ describe('serialize', () => {
       })
     }
   })
-
 })
