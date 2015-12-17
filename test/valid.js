@@ -12,13 +12,9 @@ const VALID = {
   '42': 42,
   '-0': -0,
   '-42': -42,
+  'map': new Map(),
+  'set': new Set(),
 }
-
-if (global.Map)
-  VALID.map = new Map()
-
-if (global.Set)
-  VALID.set = new Set()
 
 const INVALID = {
   "Infinity": Infinity,
@@ -50,14 +46,12 @@ describe('valid', () => {
     })
   })
 
-  if (global.Map) {
-    describe('map', function() {
-      it('return false for non string keys', () => {
-        const map = new Map()
-        map.set(null, 'hello')
-        assert.strictEqual(valid(map), false)
-      })
+  describe('map', function() {
+    it('return false for non string keys', () => {
+      const map = new Map()
+      map.set(null, 'hello')
+      assert.strictEqual(valid(map), false)
     })
-  }
+  })
 
 })

@@ -11,13 +11,9 @@ const valid = [
   ['42', 42],
   ['-0', -0],
   ['-42', -42],
+  ['[]', new Set()],
+  ['{}', new Map()],
 ]
-
-if (global.Set)
-  valid.push(['[]', new Set()])
-
-if (global.Map)
-  valid.push(['{}', new Map()])
 
 const invalid = [
   ['Infinity', Infinity],
@@ -51,17 +47,15 @@ describe('serialize', () => {
     })
   })
 
-  if (global.Map) {
-    describe('map', () => {
-      it('throws an error for non string keys', () => {
-        const map = new Map()
-        map.set(null, 'hello')
-        assert.throws(() => {
-          serialize(map)
-        }, TypeError)
-      })
+  describe('map', () => {
+    it('throws an error for non string keys', () => {
+      const map = new Map()
+      map.set(null, 'hello')
+      assert.throws(() => {
+        serialize(map)
+      }, TypeError)
     })
-  }
+  })
 
   describe('toJSON option', () => {
 
@@ -209,17 +203,15 @@ describe('serialize', () => {
       assert.strictEqual(serialize(arr, {replacer}), '["foo","foo"]')
     })
 
-    if (global.Set) {
-      it('splice the array if an item is deleted in between for set', () => {
-        const set = new Set(['foo', 'bar', 'baz'])
-        const replacer = function(k, v) {
-          if (k === 'bar')
-            return undefined
-          return v
-        }
-        assert.strictEqual(serialize(set, {replacer}), '["foo","baz"]')
-      })
-    }
+    it('splice the array if an item is deleted in between for set', () => {
+      const set = new Set(['foo', 'bar', 'baz'])
+      const replacer = function(k, v) {
+        if (k === 'bar')
+          return undefined
+        return v
+      }
+      assert.strictEqual(serialize(set, {replacer}), '["foo","baz"]')
+    })
 
     // https://github.com/JSON8/JSON8/issues/18
     describe('returns undefined', () => {
@@ -235,23 +227,19 @@ describe('serialize', () => {
         assert.strictEqual(s, '["foo"]')
       })
 
-      if (global.Set) {
-        it('produces correct JSON for Set', () => {
-          const set = new Set(['foo', undefined])
-          const s = serialize(set, {replacer})
-          assert.strictEqual(s, '["foo"]')
-        })
-      }
+      it('produces correct JSON for Set', () => {
+        const set = new Set(['foo', undefined])
+        const s = serialize(set, {replacer})
+        assert.strictEqual(s, '["foo"]')
+      })
 
-      if (global.Map) {
-        it('produces correct JSON for Map', () => {
-          const map = new Map()
-          map.set('foo', 'bar')
-          map.set('baz', undefined)
-          const s = serialize(map, {replacer})
-          assert.strictEqual(s, '{"foo":"bar"}')
-        })
-      }
+      it('produces correct JSON for Map', () => {
+        const map = new Map()
+        map.set('foo', 'bar')
+        map.set('baz', undefined)
+        const s = serialize(map, {replacer})
+        assert.strictEqual(s, '{"foo":"bar"}')
+      })
     })
   })
 })

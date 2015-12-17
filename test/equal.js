@@ -26,34 +26,32 @@ describe('equal', () => {
     })
   })
 
-  if (global.Set) {
-    describe('set', () => {
-      it('returns true for identical', () => {
-        equal(new Set(), new Set())
-        equal(new Set([1]), new Set([1]))
-        const set = new Set()
-        equal(set, set)
-      })
-
-      it('returns false for different', () => {
-        differ(new Set([1]), new Set([2]))
-        differ(new Set([1, 2]), new Set([1]))
-        differ(new Set([1]), new Set([1, 2]))
-      })
+  describe('set', () => {
+    it('returns true for identical', () => {
+      equal(new Set(), new Set())
+      equal(new Set([1]), new Set([1]))
+      const set = new Set()
+      equal(set, set)
     })
 
-    describe('array and set', () => {
-      it('returns true for identical', () => {
-        equal(new Set([1, 2]), [1, 2])
-        equal([1, 2], new Set([1, 2]))
-      })
-
-      it('returns false for different', () => {
-        differ([1, 2], new Set([2, 1]))
-        differ(new Set([1, 2]), [2, 1])
-      })
+    it('returns false for different', () => {
+      differ(new Set([1]), new Set([2]))
+      differ(new Set([1, 2]), new Set([1]))
+      differ(new Set([1]), new Set([1, 2]))
     })
-  }
+  })
+
+  describe('array and set', () => {
+    it('returns true for identical', () => {
+      equal(new Set([1, 2]), [1, 2])
+      equal([1, 2], new Set([1, 2]))
+    })
+
+    it('returns false for different', () => {
+      differ([1, 2], new Set([2, 1]))
+      differ(new Set([1, 2]), [2, 1])
+    })
+  })
 
   describe('object', () => {
     it('returns true for identical', () => {
@@ -70,50 +68,48 @@ describe('equal', () => {
     })
   })
 
-  if (global.Set) {
-    describe('map', () => {
-      it('returns true for identical', () => {
-        equal(new Map(), new Map())
-        const a = new Map()
-        a.set('foo', 'bar')
-        a.set('bar', 'foo')
-        const b = new Map()
-        b.set('bar', 'foo')
-        b.set('foo', 'bar')
-        equal(a, b)
-        const map = new Map()
-        equal(map, map)
-      })
-
-      it('returns false for different', () => {
-        const a = new Map()
-        a.set('foo', 'bar')
-        const b = new Map()
-        b.set('bar', 'foo')
-        differ(a, b)
-      })
+  describe('map', () => {
+    it('returns true for identical', () => {
+      equal(new Map(), new Map())
+      const a = new Map()
+      a.set('foo', 'bar')
+      a.set('bar', 'foo')
+      const b = new Map()
+      b.set('bar', 'foo')
+      b.set('foo', 'bar')
+      equal(a, b)
+      const map = new Map()
+      equal(map, map)
     })
 
-    describe('object and map', () => {
-      it('returns true for identical', () => {
-        equal({}, new Map())
-        const a = {'foo': 'bar', 'bar': 'foo'}
-        const b = new Map()
-        b.set('bar', 'foo')
-        b.set('foo', 'bar')
-        equal(a, b)
-        const map = new Map()
-        equal({}, map)
-      })
-
-      it('returns false for different', () => {
-        const a = {'foo': 'bar'}
-        const b = new Map()
-        b.set('bar', 'foo')
-        differ(a, b)
-      })
+    it('returns false for different', () => {
+      const a = new Map()
+      a.set('foo', 'bar')
+      const b = new Map()
+      b.set('bar', 'foo')
+      differ(a, b)
     })
-  }
+  })
+
+  describe('object and map', () => {
+    it('returns true for identical', () => {
+      equal({}, new Map())
+      const a = {'foo': 'bar', 'bar': 'foo'}
+      const b = new Map()
+      b.set('bar', 'foo')
+      b.set('foo', 'bar')
+      equal(a, b)
+      const map = new Map()
+      equal({}, map)
+    })
+
+    it('returns false for different', () => {
+      const a = {'foo': 'bar'}
+      const b = new Map()
+      b.set('bar', 'foo')
+      differ(a, b)
+    })
+  })
 
   describe('boolean', () => {
     it('returns true for identical', () => {
