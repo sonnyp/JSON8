@@ -220,5 +220,38 @@ describe('serialize', () => {
         assert.strictEqual(serialize(set, {replacer}), '["foo","baz"]')
       })
     }
+
+    // https://github.com/JSON8/JSON8/issues/18
+    describe('returns undefined', () => {
+      const replacer = (k, v) => v
+
+      it('produces correct JSON for object', () => {
+        const s = serialize({foo: 'bar', baz: undefined}, {replacer})
+        assert.strictEqual(s, '{"foo":"bar"}')
+      })
+
+      it('produces correct JSON for array', () => {
+        const s = serialize(['foo', undefined], {replacer})
+        assert.strictEqual(s, '["foo"]')
+      })
+
+      if (global.Set) {
+        it('produces correct JSON for Set', () => {
+          const set = new Set(['foo', undefined])
+          const s = serialize(set, {replacer})
+          assert.strictEqual(s, '["foo"]')
+        })
+      }
+
+      if (global.Map) {
+        it('produces correct JSON for Map', () => {
+          const map = new Map()
+          map.set('foo', 'bar')
+          map.set('baz', undefined)
+          const s = serialize(map, {replacer})
+          assert.strictEqual(s, '{"foo":"bar"}')
+        })
+      }
+    })
   })
 })
