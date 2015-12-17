@@ -51,50 +51,46 @@ describe('parse', () => {
     })
   })
 
-  if (global.Map) {
-    it('parse objects as Maps if enabled', () => {
-      const str = '{"foo":"bar"}'
-      const parsed = parse(str, {map: true})
-      assert(parsed instanceof Map)
-      assert.equal(parsed.get('foo'), 'bar')
-    })
+  it('parse objects as Maps if enabled', () => {
+    const str = '{"foo":"bar"}'
+    const parsed = parse(str, {map: true})
+    assert(parsed instanceof Map)
+    assert.equal(parsed.get('foo'), 'bar')
+  })
 
-    it('doesn\'t parse objects as Maps if not enabled', () => {
-      const str = '{"foo":"bar"}'
-      const parsed = parse(str)
-      assert.equal(typeof parsed, OBJECT)
-      assert.equal(parsed.foo, 'bar')
-    })
+  it('doesn\'t parse objects as Maps if not enabled', () => {
+    const str = '{"foo":"bar"}'
+    const parsed = parse(str)
+    assert.equal(typeof parsed, OBJECT)
+    assert.equal(parsed.foo, 'bar')
+  })
 
-    it('doesn\'t parse objects as Maps if disabled', () => {
-      const str = '{"foo":"bar"}'
-      const parsed = parse(str, {map: false})
-      assert.equal(typeof parsed, OBJECT)
-      assert.equal(parsed.foo, 'bar')
-    })
-  }
+  it('doesn\'t parse objects as Maps if disabled', () => {
+    const str = '{"foo":"bar"}'
+    const parsed = parse(str, {map: false})
+    assert.equal(typeof parsed, OBJECT)
+    assert.equal(parsed.foo, 'bar')
+  })
 
-  if (global.Set) {
-    it('parse arrays as Sets if enabled', () => {
-      const str = '["foo"]'
-      const parsed = parse(str, {set: true})
-      assert(parsed instanceof Set)
-      assert.equal(parsed.has('foo'), true)
-    })
+  it('parse arrays as Sets if enabled', () => {
+    const str = '["foo"]'
+    const parsed = parse(str, {set: true})
+    assert(parsed instanceof Set)
+    assert.equal(parsed.has('foo'), true)
+  })
 
-    it('doesn\'t parse arrays as Sets if not enabled', () => {
-      const str = '["foo"]'
-      const parsed = parse(str)
-      assert(Array.isArray(parsed))
-      assert.equal(parsed.indexOf('foo'), 0)
-    })
+  it('doesn\'t parse arrays as Sets if not enabled', () => {
+    const str = '["foo"]'
+    const parsed = parse(str)
+    assert(Array.isArray(parsed))
+    assert.equal(parsed.indexOf('foo'), 0)
+  })
 
-    it('doesn\'t parse arrays as Sets if disabled', () => {
-      const str = '["foo"]'
-      const parsed = parse(str, {set: false})
-      assert(Array.isArray(parsed))
-      assert.equal(parsed.indexOf('foo'), 0)
-    })
-  }
+  it('doesn\'t parse arrays as Sets if disabled', () => {
+    const str = '["foo"]'
+    const parsed = parse(str, {set: false})
+    assert(Array.isArray(parsed))
+    assert.equal(parsed.indexOf('foo'), 0)
+  })
 
 })
