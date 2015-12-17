@@ -1,5 +1,7 @@
 'use strict'
 
+/* eslint-disable no-magic-numbers */
+
 var types = require('./types')
 var OBJECT = types.OBJECT
 var NUMBER = types.NUMBER
@@ -45,6 +47,7 @@ var stringify = function(obj, opts) {
       if (replacer) {
         item = replacer.call(obj, i, item)
         if (item === undefined) {
+          if (i === l - 1 && str.length > 1) str = str.slice(0, -1)
           continue
         }
       }
@@ -60,6 +63,7 @@ var stringify = function(obj, opts) {
       if (replacer) {
         setItem = replacer.call(obj, setItem, setItem)
         if (setItem === undefined) {
+          if (n === obj.size - 1 && str.length > 1) str = str.slice(0, -1)
           n++
           return
         }
@@ -79,6 +83,7 @@ var stringify = function(obj, opts) {
       if (replacer) {
         v = replacer.call(obj, k, v)
         if (v === undefined) {
+          if (m === obj.size - 1 && str.length > 1) str = str.slice(0, -1)
           m++
           return
         }
@@ -98,8 +103,10 @@ var stringify = function(obj, opts) {
         continue
       if (replacer) {
         v = replacer.call(obj, k, v)
-        if (v === undefined)
+        if (v === undefined) {
+          if (j === len - 1 && str.length > 1) str = str.slice(0, -1)
           continue
+        }
       }
       str += JSON.stringify(k) + ':' + stringify(v, opts)
       if (j !== len - 1) str += ','
