@@ -485,7 +485,7 @@ oo.serialize(obj, {space: 2})
 
 Takes a JSON string and returns a JavaScript value.
 
-Always use try/catch with oo.parse. Even with JSON.parse you should because [this](http://timelessrepo.com/json-isnt-a-javascript-subset).
+Always use try/catch with oo.parse.
 
 ```javascript
 var doc = oo.parse(string[, options]);
