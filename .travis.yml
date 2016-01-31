@@ -15,4 +15,4 @@ before_install:
 script:
   - npm run unit
   - npm run lint
-  - npm run webify
+  - npm run bundle

@@ -6,4 +6,4 @@
 !.npmignore
 !.travis.yml
 
-JSON8.js
+bundle.js

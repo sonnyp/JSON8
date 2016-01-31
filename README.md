@@ -68,7 +68,7 @@ var oo = require('json8');
 or
 
 ```xml
-<script src="node_modules/json8/JSON8.js"></script>
+<script src="node_modules/json8/bundle.js"></script>
 ```
 ```javascript
 var oo = window.JSON8
@@ -519,27 +519,27 @@ doc.equal(clone)           // true
 
 Getting/asserting the JSON type of a value in JavaScript is troublesome.
 
-* [oo.type](#type) returns the JSON type of any value
+* [oo.type](#oo.type) returns the JSON type of any value
 
-* [oo.is](#is) checks if a value is of the provided type
+* [oo.is](#oo.is) checks if a value is of the provided type
 
-* [oo.isStructure](#structure) checks if a value is a JSON structure (an array or an object)
+* [oo.isStructure](#oo.isStructure) checks if a value is a JSON structure (an array or an object)
 
-* [oo.isPrimitive](#primitive) checks if a value is a JSON primitive (null, boolean, string, number)
+* [oo.isPrimitive](#oo.isPrimitive) checks if a value is a JSON primitive (null, boolean, string, number)
 
-* [oo.isJSON](#JSON) checks if the value is a JSON valid value
+* [oo.isJSON](#oo.isJSON) checks if the value is a JSON valid value
 
 [↑](#json8)
 
 ## Safety
 
-[oo.serialize](#serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does. It also accept an optional argument to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) which is a common pitfall.
+[oo.serialize](#oo.serialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does. It also accept an optional argument to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) which is a common pitfall.
 
 JSON8 [types](#types) helps avoiding many common errors as well.
 
-[oo.equal](#equal) performs deep JSON equality comparaison
+[oo.equal](#oo.equal) performs deep JSON equality comparaison
 
-[oo.valid](#valid) performs recursive JSON validation on any value
+[oo.valid](#oo.valid) performs recursive JSON validation on any value
 
 [↑](#json8)
 
