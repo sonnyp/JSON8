@@ -25,7 +25,7 @@ operations.test = require('./test')
  * @param  {Object} patch  - JSON Patch operation object
  * @return {Any}
  */
-var run = function(doc, patch) {
+function run(doc, patch) {
   if (typeof patch.path === 'string')
     var pathTokens = parse(patch.path)
   if (typeof patch.from === 'string')
@@ -57,7 +57,7 @@ var run = function(doc, patch) {
  * @param  {Number}       idx       - index of the item for array
  * @return {Object}
  */
-var reverse = function(patch, previous, idx) {
+function reverse(patch, previous, idx) {
   var op = patch.op
   var path = patch.path
 
@@ -88,7 +88,7 @@ var reverse = function(patch, previous, idx) {
  * @param  {Boolean}      options.reversible  - return an array to revert
  * @return {PatchResult}
  */
-var apply = function apply(doc, patch, options) {
+function apply(doc, patch, options) {
   if (!Array.isArray(patch))
     throw new Error('Invalid argument, patch must be an array')
 
@@ -123,7 +123,7 @@ var apply = function apply(doc, patch, options) {
  * @param  {Array} items    - array of [patch, previous, idx] items
  * @return {Array} patches  - JSON Patch array
  */
-var foo = function(items) {
+function foo(items) {
   var patches = []
 
   for (var i = 0, len = items.length; i < len; i++) {
@@ -140,7 +140,7 @@ var foo = function(items) {
  * @param  {Array}   items               - array of [patch, previous, idx] items
  * @return {PatchResult}
  */
-var revert = function revert(doc, items) {
+function revert(doc, items) {
   var patches = foo(items)
   return apply(doc, patches)
 }

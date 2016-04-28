@@ -2,7 +2,6 @@
 
 var get = require('./get')
 var add = require('./add')
-// var clone =
 
 /**
  * @typedef OperationResult
@@ -22,6 +21,5 @@ var add = require('./add')
  */
 module.exports = function copy(doc, path, dest) {
   var obj = get(doc, path)
-  // return add(doc, dest, clone(obj))
   return add(doc, dest, obj)
 }
