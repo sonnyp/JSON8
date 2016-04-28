@@ -23,3 +23,6 @@ module.exports.has = require('./lib/has')
 // Packing
 module.exports.pack = require('./lib/pack')
 module.exports.unpack = require('./lib/unpack')
+
+// Utilities
+module.exports.concat = require('./lib/concat')

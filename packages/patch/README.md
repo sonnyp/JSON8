@@ -16,6 +16,7 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
   * [revert](#revert)
   * [diff](#diff)
   * [valid](#valid)
+  * [concat](#concat)
   * [Operations](#operations)
     * [add](#add)
     * [remove](#remove)
@@ -137,6 +138,23 @@ ooPatch.valid([{op: "add", path: "/foo", value: "bar"}]) // true
 
 [↑](#json8-patch)
 
+## concat
+
+Concats multiple patches into one.
+
+```javascript
+var patch1 = [{op: "add", value: "bar", path: "/foo"}]
+var patch2 = [{op: "remove", path: "/foo"}]
+var patch = ooPatch.concat(patch1, patch2)
+
+// patch is
+[
+  {op: "add", value: "bar", path: "/foo"},
+  {op: "remove", path: "/foo"}
+]
+```
+
+[↑](#json8-patch)
 
 ## Operations
 
