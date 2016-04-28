@@ -7,12 +7,7 @@ node_js:
   - '0.12'
   - '4'
   - '5'
-  - 'stable'
+  - '6'
 
 before_install:
   - npm install mocha browserify
-
-script:
-  - npm run unit
-  - npm run lint
-  - npm run webify
