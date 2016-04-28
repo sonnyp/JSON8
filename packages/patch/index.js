@@ -2,11 +2,16 @@
 
 var apply = require('./lib/apply')
 
-module.exports.patch = apply
-module.exports.apply = apply
-module.exports.revert = require('./lib/revert')
 module.exports.diff = require('./lib/diff')
 module.exports.valid = require('./lib/valid')
+
+// Patching
+module.exports.patch = apply
+module.exports.apply = apply
+
+// Reverting
+module.exports.revert = require('./lib/revert')
+module.exports.buildPatchFromRevert = require('./lib/buildPatchFromRevert')
 
 // Operations
 module.exports.add = require('./lib/add')

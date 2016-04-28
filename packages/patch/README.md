@@ -14,6 +14,7 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
   * [apply](#apply)
   * [patch](#patch)
   * [revert](#revert)
+  * [buildPatchFromRevert](#buildPatchFromRevert)
   * [diff](#diff)
   * [valid](#valid)
   * [concat](#concat)
@@ -52,15 +53,17 @@ or
 var ooPatch = window.JSON8Patch
 ```
 
-For performance concerns JSON8 Patch mutates documents; if you want it to work on its own shallow copy of your document use:
+For performance concerns JSON8 Patch may mutate target document; if you want it to use its own copy use:
 
 ```javascript
-
 var oo = require('json8')
-doc = oo.clone(doc)
+var myDocument = {foo: 'bar'}
+var doc = oo.clone(myDocument)
 ```
 
 See [clone](https://github.com/JSON8/JSON8#ooclone).
+
+JSON8 Patch never mutates patches.
 
 [↑](#json8-pointer)
 
@@ -92,13 +95,40 @@ The revert object can be used to revert a patch on a document.
 
 ```javascript
 // apply the patch with the reversible option
-var patchResult = ooPatch.apply(doc, patch, {reversible: true});
-doc = patchResult.doc
+var applyResult = ooPatch.apply(doc, patch, {reversible: true});
+doc = applyResult.doc
 
 // revert the patch
-doc = ooPatch.revert(doc, patchResult.revert).doc;
+doc = ooPatch.revert(doc, applyResult.revert).doc;
 // doc is strictly identical to the original
 ```
+
+See also [buildPatchFromRevert](#buildPatchFromRevert) which offers more flexibility.
+
+[↑](#json8-patch)
+
+## buildPatchFromRevert
+
+Builds a valid JSON Patch from the result of a reversible apply operation.
+You can then use this patch with [apply](#apply) method to revert a previously applied patch.
+
+```javascript
+var applyResult = ooPatch.apply(doc, patch, {reversible: true});
+doc = applyResult.doc
+
+// revert the patch
+var revertPatch = ooPatch.buildPatchFromRevert(applyResult.revert) // this is a valid JSON Patch
+doc = ooPatch.apply(doc, revertPatch).doc
+// doc is strictly identical to the original
+```
+
+Because `buildPatchFromRevert + apply` offers more flexibility over `revert` it is preferred.
+
+* use [pack/unpack](#patch-size) with the result of `buildPatchFromRevert` making it ideal for storage or transport
+* reverse a revert (and so on...) with `{reversible: true}`
+* [diff](#diff) between reverts
+* merge multiple reverts into one
+* rebase reverts
 
 [↑](#json8-patch)
 
