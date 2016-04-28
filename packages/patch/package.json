@@ -12,11 +12,11 @@
   "bugs": "https://github.com/JSON8/patch/issues",
   "main": "index.js",
   "scripts": {
-    "preversion": "npm run webify && npm test",
-    "webify": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
+    "preversion": "npm run bundle && npm test",
+    "bundle": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
     "lint": "eslint .",
     "unit": "mocha --compilers js:babel-core/register --recursive test/",
-    "test": "npm run unit && npm run lint && npm run webify"
+    "test": "npm run unit && npm run lint && npm run bundle"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
