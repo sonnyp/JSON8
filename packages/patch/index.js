@@ -20,5 +20,6 @@ module.exports.test = require('./lib/test')
 module.exports.get = require('./lib/get')
 module.exports.has = require('./lib/has')
 
+// Packing
 module.exports.pack = require('./lib/pack')
 module.exports.unpack = require('./lib/unpack')

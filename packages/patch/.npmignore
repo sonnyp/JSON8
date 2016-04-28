@@ -1,5 +1,6 @@
 test/
 
+.babelrc
 .editorconfig
 .eslintignore
 .eslintrc

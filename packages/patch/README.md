@@ -282,7 +282,7 @@ var patch = ooPatch.unpack(packed);
 # Tests
 
 ```
-npm install -g mocha babel browserify
+npm install mocha browserify
 npm test
 ```
 

@@ -41,7 +41,6 @@ rules:
   brace-style: [2, stroustrup]
   comma-style: [2, last]
   consistent-this: [0, that]
-  func-style: [2, expression]
   max-nested-callbacks: [2, 3]
   no-multiple-empty-lines: [2, {max: 1}]
   no-nested-ternary: 2
