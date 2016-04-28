@@ -1,7 +1,7 @@
 CONTRIBUTING
 ============
 
-JSON8 is written in ES5 for optimization concerns while tests are written in ES6 and are transpiled on the fly.
+JSON8 is written in ES5, tests are written in ES6.
 
 1. ```npm install browserify mocha```
 2. Edit the files, make sure to adopt the same coding style
