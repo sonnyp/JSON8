@@ -10,7 +10,6 @@
   "homepage": "https://github.com/JSON8/patch",
   "repository": "github:JSON8/patch",
   "bugs": "https://github.com/JSON8/patch/issues",
-  "main": "index.js",
   "scripts": {
     "preversion": "npm run bundle && npm test",
     "bundle": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
