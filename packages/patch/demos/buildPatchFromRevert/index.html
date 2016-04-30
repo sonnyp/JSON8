@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+
+    <title>JSON8 Patch buildPatchFromRevert demo</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.min.css">
+
+    <!-- codemirror -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/mode/javascript/javascript.min.js"></script>
+
+    <!-- linting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/json-lint.min.js"></script>
+
+    <!-- code folding -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldcode.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/brace-fold.min.js"></script>
+
+    <!-- hightlighting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/closebrackets.min.js"></script>
+
+    <script src="../../JSON8Patch.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <p>This is a <strong>live editor</strong>. Editting <strong data-target="target">input</strong> or <strong data-target="patch">patch</strong> will update <strong data-target="result">revert</strong> instantly.</p>
+
+    <div id="target" class="json8">
+      <h1>input</h1>
+      <textarea></textarea>
+    </div>
+
+    <div id="patch" class="json8">
+      <h1>patch</h1>
+      <textarea></textarea>
+    </div>
+
+    <div id="result" class="json8">
+      <h1>revert</h1>
+      <textarea></textarea>
+    </div>
+
+    <pre>
+      <code class="language-javascript" id="example">
+var applyResult = ooPatch.apply(<strong data-target="target">input</strong>, <strong data-target="patch">patch</strong>, {reversible: true})
+<strong data-target="result">revert</strong> = ooPatch.buildPatchFromRevert(applyResult.revert)</code>
+    </pre>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/plugins/keep-markup/prism-keep-markup.min.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

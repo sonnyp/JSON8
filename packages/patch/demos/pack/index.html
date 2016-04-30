@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+
+    <title>JSON8 Patch pack demo</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.css">
+
+    <!-- codemirror -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/mode/javascript/javascript.js"></script>
+
+    <!-- linting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/json-lint.js"></script>
+
+    <!-- code folding -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldcode.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/brace-fold.js"></script>
+
+    <!-- hightlighting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/matchbrackets.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/closebrackets.js"></script>
+
+    <script src="../../JSON8Patch.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <p>This is a <strong>live editor</strong>. Editting <strong data-target="input">patch</strong> updates <strong data-target="output">packed</strong> and <strong data-target="unpacked">unpacked</strong>  instantly.
+
+    <div id="input" class="json8">
+      <h1>patch</h1>
+      <textarea></textarea>
+      <span>size: <span class="size"></span> bytes (w/o whitespaces)</span>
+    </div>
+
+    <div id="output" class="json8">
+      <h1>packed</h1>
+      <textarea></textarea>
+      <span>size: <span class="size"></span> bytes (w/o whitespaces)</span>
+    </div>
+
+    <div id="unpacked" class="json8">
+      <h1>unpacked</h1>
+      <textarea></textarea>
+      <span>size: <span class="size"></span> bytes (w/o whitespaces)</span>
+    </div>
+
+    <pre>
+      <code class="language-javascript" id="example">
+<strong data-target="output">packed</strong> = ooPatch.pack(<strong data-target="input">patch</strong>)
+<strong data-target="unpacked">unpacked</strong> = ooPatch.unpack(<strong data-target="output">packed</strong>)</code>
+    </pre>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/plugins/keep-markup/prism-keep-markup.min.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

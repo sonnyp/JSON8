@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+
+    <title>JSON8 Patch diff demo</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.css">
+
+    <!-- codemirror -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/mode/javascript/javascript.js"></script>
+
+    <!-- linting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/json-lint.js"></script>
+
+    <!-- code folding -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldcode.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/brace-fold.js"></script>
+
+    <!-- hightlighting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/matchbrackets.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/closebrackets.js"></script>
+
+    <script src="../../JSON8Patch.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <p>This is a <strong>live editor</strong>. Editing <strong data-target="input">original</strong> or <strong data-target="output">edited</strong> updates <strong data-target="patch">patch</strong> instantly.</p>
+
+    <div id="input" class="json8">
+      <h1>original</h1>
+      <textarea></textarea>
+    </div>
+
+    <div id="output" class="json8">
+      <h1>edited</h1>
+      <textarea></textarea>
+    </div>
+
+    <div id="patch" class="json8">
+      <h1>patch</h1>
+      <textarea></textarea>
+    </div>
+
+    <pre>
+      <code class="language-javascript" id="example">
+<strong data-target="patch">patch</strong> = ooPatch.diff(<strong data-target="input">original</strong>, <strong data-target="output">edited</strong>)</code>
+    </pre>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/plugins/keep-markup/prism-keep-markup.min.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>
