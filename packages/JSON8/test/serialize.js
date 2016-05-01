@@ -127,12 +127,13 @@ describe('serialize', () => {
 
     it('serializes equally to it with space param as number', () => {
       assert.strictEqual(serialize(obj, {space: 2}), JSON.stringify(obj, null, 2))
+      assert.strictEqual(serialize(obj, {space: 2}), JSON.stringify(obj, null, '  '))
     })
 
     it('serializes equally to it with space param as string', () => {
       assert.strictEqual(serialize(obj, {space: '    '}), JSON.stringify(obj, null, '    '))
+      assert.strictEqual(serialize(obj, {space: '    '}), JSON.stringify(obj, null, 4))
     })
-
   })
 
   describe('replacer option', () => {
@@ -211,6 +212,34 @@ describe('serialize', () => {
         return v
       }
       assert.strictEqual(serialize(set, {replacer}), '["foo","baz"]')
+    })
+
+    describe('with space option', () => {
+      it('object', () => {
+        const replacer = () => undefined
+        const s = serialize({foo: 'bar'}, {replacer, space: 2})
+        assert.strictEqual(s, '{}')
+      })
+
+      it('array', () => {
+        const replacer = () => undefined
+        const s = serialize(['foo'], {replacer, space: 2})
+        assert.strictEqual(s, '[]')
+      })
+
+      it('set', () => {
+        const replacer = () => undefined
+        const s = serialize(new Set(['foo']), {replacer, space: 2})
+        assert.strictEqual(s, '[]')
+      })
+
+      it('map', () => {
+        const replacer = () => undefined
+        const map = new Map()
+        map.set('foo', 'bar')
+        const s = serialize(map, {replacer, space: 2})
+        assert.strictEqual(s, '{}')
+      })
     })
 
     // https://github.com/JSON8/JSON8/issues/18

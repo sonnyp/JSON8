@@ -214,6 +214,7 @@ oo.isPrimitive(42)       // true
 
 oo.isPrimitive([]])      // false
 oo.isPrimitive({})       // false
+oo.isPrimitive(undefined)// false
 oo.isPrimitive(Infinity) // false
 oo.isPrimitive(NaN)      // false
 ```
@@ -640,7 +641,7 @@ oo.serialize(-0)   // "-0"
 # Tests
 
 ```
-npm install -g mocha browserify
+npm install mocha browserify
 npm test
 ```
 
