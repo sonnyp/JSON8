@@ -1,7 +1,7 @@
 'use strict'
 
 var parse = require('json8-pointer').parse
-var buildPatchFromRevert = require('./buildPatchFromRevert')
+var buildRevertPatch = require('./buildRevertPatch')
 
 var operations = Object.create(null)
 operations.add = require('./add')
@@ -15,7 +15,7 @@ operations.test = require('./test')
  * @typedef PatchResult
  * @type Object
  * @property {Any}   doc     - The patched document
- * @property {Array} revert  - An array to be used with revert or buildPatchFromRevert methods
+ * @property {Array} revert  - An array to be used with revert or buildRevertPatch methods
  */
 
 /**
@@ -72,7 +72,7 @@ function apply(doc, patch, options) {
     }
     catch (err) { // restore document
       // does not use ./revert.js because it is a circular dependency
-      var revertPatch = buildPatchFromRevert(done)
+      var revertPatch = buildRevertPatch(done)
       apply(doc, revertPatch)
       throw err
     }

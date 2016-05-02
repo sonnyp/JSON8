@@ -100,7 +100,7 @@
       }
 
       editors['result'].setOption('mode', 'application/json');
-      editors['result'].setValue(JSON.stringify(ooPatch.buildPatchFromRevert(applyResult.revert), null, 2))
+      editors['result'].setValue(JSON.stringify(ooPatch.buildRevertPatch(applyResult.revert), null, 2))
     }
 
     [editors['target'], editors['patch']].forEach(function (editor) {

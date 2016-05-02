@@ -14,7 +14,7 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
   * [apply](#apply)
   * [patch](#patch)
   * [revert](#revert)
-  * [buildPatchFromRevert](#buildPatchFromRevert)
+  * [buildRevertPatch](#buildrevertpatch)
   * [diff](#diff)
   * [valid](#valid)
   * [concat](#concat)
@@ -105,30 +105,31 @@ doc = ooPatch.revert(doc, applyResult.revert).doc;
 // doc is strictly identical to the original
 ```
 
-See also [buildPatchFromRevert](#buildPatchFromRevert) which offers more flexibility.
+See also [buildRevertPatch](#buildrevertpatch) which offers more flexibility.
 
 [↑](#json8-patch)
 
-## buildPatchFromRevert
+## buildRevertPatch
 
-[demo](https://json8.github.io/patch/demos/buildPatchFromRevert/)
+[demo](https://json8.github.io/patch/demos/buildRevertPatch/)
 
 Builds a valid JSON Patch from the result of a reversible apply operation.
 You can then use this patch with [apply](#apply) method to revert a previously applied patch.
 
 ```javascript
+// apply the patch
 var applyResult = ooPatch.apply(doc, patch, {reversible: true});
 doc = applyResult.doc
 
 // revert the patch
-var revertPatch = ooPatch.buildPatchFromRevert(applyResult.revert) // this is a valid JSON Patch
+var revertPatch = ooPatch.buildRevertPatch(applyResult.revert) // this is a valid JSON Patch
 doc = ooPatch.apply(doc, revertPatch).doc
 // doc is strictly identical to the original
 ```
 
-Because `buildPatchFromRevert + apply` offers more flexibility over `revert` it is preferred.
+Because `buildRevertPatch + apply` offers more flexibility over `revert` it is preferred.
 
-* use [pack/unpack](#patch-size) with the result of `buildPatchFromRevert` making it ideal for storage or transport
+* use [pack/unpack](#patch-size) with the result of `buildRevertPatch` making it ideal for storage or transport
 * reverse a revert (and so on...) with `{reversible: true}`
 * [diff](#diff) between reverts
 * merge multiple reverts into one

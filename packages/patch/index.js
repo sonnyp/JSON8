@@ -11,7 +11,7 @@ module.exports.apply = apply
 
 // Reverting
 module.exports.revert = require('./lib/revert')
-module.exports.buildPatchFromRevert = require('./lib/buildPatchFromRevert')
+module.exports.buildRevertPatch = require('./lib/buildRevertPatch')
 
 // Operations
 module.exports.add = require('./lib/add')

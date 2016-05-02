@@ -1,6 +1,6 @@
 'use strict'
 
-var buildPatchFromRevert = require('./buildPatchFromRevert')
+var buildRevertPatch = require('./buildRevertPatch')
 var apply = require('./apply')
 
 /**
@@ -16,6 +16,6 @@ var apply = require('./apply')
  * @return {PatchResult}
  */
 module.exports = function revert(doc, items) {
-  var patch = buildPatchFromRevert(items)
+  var patch = buildRevertPatch(items)
   return apply(doc, patch)
 }

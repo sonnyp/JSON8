@@ -39,7 +39,7 @@ function reverse(patch, previous, idx) {
  * @param  {Array} revert   - revert value from the apply or patch method with {reversible: true}
  * @return {Array} patches  - JSON Patch
  */
-module.exports = function buildPatchFromRevert(revert) {
+module.exports = function buildRevertPatch(revert) {
   var patch = []
 
   for (var i = 0, len = revert.length; i < len; i++) {

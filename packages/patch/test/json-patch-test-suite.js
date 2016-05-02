@@ -7,7 +7,7 @@ import revert from '../lib/revert'
 import pack from '../lib/pack'
 import unpack from '../lib/unpack'
 import valid from '../lib/valid'
-import buildPatchFromRevert from '../lib/buildPatchFromRevert'
+import buildRevertPatch from '../lib/buildRevertPatch'
 
 let tests = require('json-patch-test-suite/tests.json')
 const spec_tests = require('json-patch-test-suite/spec_tests.json')
@@ -53,11 +53,11 @@ describe('json-patch-test-suite', () => {
           assert.deepEqual(revert(r.doc, r.revert).doc, original)
         })
 
-        it('reverts the patch ok with buildPatchFromRevert and apply', () => {
+        it('reverts the patch ok with buildRevertPatch and apply', () => {
           const t = clone(test)
           const original = t.doc
           const r = apply(t.doc, t.patch, {reversible: true})
-          const revertPatch = buildPatchFromRevert(r.revert)
+          const revertPatch = buildRevertPatch(r.revert)
           assert.deepEqual(apply(r.doc, revertPatch).doc, original)
         })
       }
