@@ -437,6 +437,7 @@ Options
 * ```toJSON``` set to false disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) (defaults to true)
 * ```space``` same as JSON.stringify [space argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument)
 * ```replacer``` same as JSON.stringify [replacer argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) but remove the value from the array if ```undefined``` is returned
+* ```maxIndentLevel``` set a maximum level (depth) of indentation
 
 ```javascript
 oo.serialize(doc[, options]);
@@ -477,6 +478,15 @@ oo.serialize(obj)
 oo.serialize(obj, {space: 2})
 // {
 //   "foo": "bar"
+// }
+
+/*
+ * maxIndentLevel
+ */
+var obj = {foo: ['0', '1', '2']}
+oo.serialize(obj, {space: 2, maxIndentLevel: 1})
+// {
+//   "foo": ['0', '1', '2'] // without maxIndentLevel, each value would be on a newline
 // }
 ```
 
