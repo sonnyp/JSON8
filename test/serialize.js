@@ -25,6 +25,18 @@ const invalid = [
 
 if (global.Symbol && typeof Symbol() === 'symbol') invalid.push(['symbol', Symbol()])
 
+const compare = {
+  "string": "hello",
+  "null": null,
+  "true": true,
+  "false": false,
+  "empty string": "",
+  "empty object": {},
+  "empty map": new Map(),
+  "empty array": [],
+  "empty set": new Set(),
+}
+
 const forEach = function(obj, fn) {
   obj.forEach(function(item) {
     fn(item[0], item[1])
@@ -32,6 +44,19 @@ const forEach = function(obj, fn) {
 }
 
 describe('serialize', () => {
+  describe('compare', () => {
+    for (const key in compare) {
+      const v = compare[key]
+      it(key, () => { // eslint-disable-line
+        if (!(v instanceof Map) && !(v instanceof Set)) {
+          assert.strictEqual(serialize(v), JSON.stringify(v))
+          assert.strictEqual(serialize(v, {space: 2}), JSON.stringify(v, null, 2))
+          assert.strictEqual(serialize(v, {space: '    '}), JSON.stringify(v, null, '    '))
+        }
+      })
+    }
+  })
+
 
   forEach(valid, (k, v) => {
     it('returns ' + k + ' for ' + k, () => {
@@ -269,6 +294,45 @@ describe('serialize', () => {
         const s = serialize(map, {replacer})
         assert.strictEqual(s, '{"foo":"bar"}')
       })
+    })
+
+    describe('maxIndentLevel', () => {
+      const obj = [{"foo": {"bar": "foo"}}]
+
+      assert.strictEqual(
+        serialize(obj, {space: 0, maxIndentLevel: 0}),
+        '[{"foo":{"bar":"foo"}}]'
+      )
+
+      assert.strictEqual(
+        serialize(obj, {space: 0, maxIndentLevel: 1}),
+        '[{"foo":{"bar":"foo"}}]'
+      )
+
+      assert.strictEqual(
+        serialize(obj, {maxIndentLevel: 0}),
+        '[{"foo":{"bar":"foo"}}]'
+      )
+
+      assert.strictEqual(
+        serialize(obj, {maxIndentLevel: 1}),
+        '[{"foo":{"bar":"foo"}}]'
+      )
+
+      assert.strictEqual(
+        serialize(obj, {space: 2, maxIndentLevel: 0}),
+        '[{"foo": {"bar": "foo"}}]'
+      )
+
+      assert.strictEqual(
+        serialize(obj, {space: 2, maxIndentLevel: 1}),
+        '[\n  {"foo": {"bar": "foo"}}\n]'
+      )
+
+      assert.strictEqual(
+        serialize(obj, {space: 2, maxIndentLevel: 2}),
+        '[\n  {\n    "foo": {"bar": "foo"}\n  }\n]'
+      )
     })
   })
 })
