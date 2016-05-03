@@ -37,26 +37,28 @@
   <body>
     <p>This is a <strong>live editor</strong>. Editting <strong data-target="target">input</strong> or <strong data-target="patch">patch</strong> will update <strong data-target="result">revert</strong> instantly.</p>
 
-    <div id="target" class="json8">
+    <section id="target" class="json8">
       <h1>input</h1>
       <textarea></textarea>
-    </div>
+    </section><!--
 
-    <div id="patch" class="json8">
+ --><section id="patch" class="json8">
       <h1>patch</h1>
       <textarea></textarea>
-    </div>
+    </section><!--
 
-    <div id="result" class="json8">
+ --><section id="result" class="json8">
       <h1>revert</h1>
       <textarea></textarea>
-    </div>
+    </section>
 
-    <pre>
-      <code class="language-javascript" id="example">
+    <section>
+      <pre>
+        <code class="language-javascript" id="example">
 var applyResult = ooPatch.apply(<strong data-target="target">input</strong>, <strong data-target="patch">patch</strong>, {reversible: true})
 <strong data-target="result">revert</strong> = ooPatch.buildRevertPatch(applyResult.revert)</code>
-    </pre>
+      </pre>
+    </section>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/plugins/keep-markup/prism-keep-markup.min.js"></script>

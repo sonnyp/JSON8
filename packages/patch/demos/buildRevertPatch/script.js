@@ -51,7 +51,7 @@
     // })
 
     sections.forEach(function (section) {
-      var input = section.textarea = document.querySelector('div#' + section.id + ' textarea')
+      var input = section.textarea = document.querySelector('#' + section.id + ' textarea')
 
       if (section.value) {
         input.value = JSON.stringify(section.value, null, 2)

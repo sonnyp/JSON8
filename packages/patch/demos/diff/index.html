@@ -36,25 +36,27 @@
   <body>
     <p>This is a <strong>live editor</strong>. Editing <strong data-target="input">original</strong> or <strong data-target="output">edited</strong> updates <strong data-target="patch">patch</strong> instantly.</p>
 
-    <div id="input" class="json8">
+    <section id="input" class="json8">
       <h1>original</h1>
       <textarea></textarea>
-    </div>
+    </section><!--
 
-    <div id="output" class="json8">
+ --><section id="output" class="json8">
       <h1>edited</h1>
       <textarea></textarea>
-    </div>
+    </section><!--
 
-    <div id="patch" class="json8">
+ --><section id="patch" class="json8">
       <h1>patch</h1>
       <textarea></textarea>
-    </div>
+    </section>
 
-    <pre>
-      <code class="language-javascript" id="example">
-<strong data-target="patch">patch</strong> = ooPatch.diff(<strong data-target="input">original</strong>, <strong data-target="output">edited</strong>)</code>
-    </pre>
+    <section>
+      <pre>
+        <code class="language-javascript" id="example">
+  <strong data-target="patch">patch</strong> = ooPatch.diff(<strong data-target="input">original</strong>, <strong data-target="output">edited</strong>)</code>
+      </pre>
+    </section>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/plugins/keep-markup/prism-keep-markup.min.js"></script>

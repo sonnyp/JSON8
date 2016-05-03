@@ -71,7 +71,7 @@ JSON8 Patch never mutates patches.
 
 ## apply
 
-[demo](https://json8.github.io/patch/demos/apply/)
+[demo/playground](https://json8.github.io/patch/demos/apply/)
 
 ```javascript
 doc = ooPatch.apply(doc, patch).doc;
@@ -111,7 +111,7 @@ See also [buildRevertPatch](#buildrevertpatch) which offers more flexibility.
 
 ## buildRevertPatch
 
-[demo](https://json8.github.io/patch/demos/buildRevertPatch/)
+[demo/playground](https://json8.github.io/patch/demos/buildRevertPatch/)
 
 Builds a valid JSON Patch from the result of a reversible apply operation.
 You can then use this patch with [apply](#apply) method to revert a previously applied patch.
@@ -139,7 +139,7 @@ Because `buildRevertPatch + apply` offers more flexibility over `revert` it is p
 
 ## diff
 
-[demo](https://json8.github.io/patch/demos/diff/)
+[demo/playground](https://json8.github.io/patch/demos/diff/)
 
 Returns a diff in the form of a JSON Patch for 2 JSON values.
 
@@ -295,7 +295,7 @@ In pratice I'd recommand to use pack/unpack if
 
 ### pack
 
-[demo](https://json8.github.io/patch/demos/pack/)
+[demo/playground](https://json8.github.io/patch/demos/pack/)
 
 ```javascript
 var patch = [
@@ -327,7 +327,7 @@ Here is what packed looks like
 
 ### unpack
 
-[demo](https://json8.github.io/patch/demos/pack/)
+[demo/playground](https://json8.github.io/patch/demos/pack/)
 
 ```javascript
 var patch = ooPatch.unpack(packed);

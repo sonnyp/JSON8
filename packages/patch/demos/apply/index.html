@@ -36,25 +36,27 @@
   <body>
     <p>This is a <strong>live editor</strong>. Editting <strong data-target="target">input</strong> or <strong data-target="patch">patch</strong> will update <strong data-target="result">output</strong> instantly.</p>
 
-    <div id="target" class="json8">
+    <section id="target" class="json8">
       <h1>input</h1>
       <textarea></textarea>
-    </div>
+    </section><!--
 
-    <div id="patch" class="json8">
+ --><section id="patch" class="json8">
       <h1>patch</h1>
       <textarea></textarea>
-    </div>
+    </section><!--
 
-    <div id="result" class="json8">
+ --><section id="result" class="json8">
       <h1>output</h1>
       <textarea></textarea>
-    </div>
+    </section>
 
-    <pre>
-      <code class="language-javascript" id="example">
+    <section>
+      <pre>
+        <code class="language-javascript" id="example">
 <strong data-target="result">output</strong> = ooPatch.apply(<strong data-target="target">input</strong>, <strong data-target="patch">patch</strong>}).doc</code>
-    </pre>
+      </pre>
+    </section>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/plugins/keep-markup/prism-keep-markup.min.js"></script>
