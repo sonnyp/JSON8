@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = require('./patch')
+module.exports = require('./apply')

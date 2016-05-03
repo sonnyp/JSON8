@@ -1,6 +1,6 @@
 'use strict'
 
-var parse = require('json8-pointer').parse
+var decode = require('json8-pointer').decode
 var buildRevertPatch = require('./buildRevertPatch')
 
 var operations = Object.create(null)
@@ -26,9 +26,9 @@ operations.test = require('./test')
  */
 function run(doc, patch) {
   if (typeof patch.path === 'string')
-    var pathTokens = parse(patch.path)
+    var pathTokens = decode(patch.path)
   if (typeof patch.from === 'string')
-    var fromTokens = parse(patch.from)
+    var fromTokens = decode(patch.from)
 
   switch (patch.op) {
     case 'add':

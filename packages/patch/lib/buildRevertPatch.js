@@ -1,8 +1,8 @@
 'use strict'
 
-var JSON8Pointer = require('json8-pointer')
-var serialize = JSON8Pointer.serialize
-var parse = JSON8Pointer.parse
+var ooPointer = require('json8-pointer')
+var encode = ooPointer.encode
+var decode = ooPointer.decode
 
 /**
  * Return the reverse operation to a JSON Patch operation
@@ -20,9 +20,9 @@ function reverse(patch, previous, idx) {
       return {"op": "remove", "path": path}
 
     // for item pushed to array with -
-    var tokens = parse(path)
+    var tokens = decode(path)
     tokens[tokens.length - 1] = idx.toString()
-    return {"op": "remove", "path": serialize(tokens)}
+    return {"op": "remove", "path": encode(tokens)}
   }
   if (op === 'replace')
     return {"op": "replace", "path": path, "value": previous}

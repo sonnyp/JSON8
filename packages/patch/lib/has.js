@@ -1,8 +1,8 @@
 'use strict'
 
-var JSON8Pointer = require('json8-pointer')
-var walk = JSON8Pointer.walk
-var parse = JSON8Pointer.parse
+var ooPointer = require('json8-pointer')
+var walk = ooPointer.walk
+var decode = ooPointer.decode
 
 /**
  * @typedef OperationResult
@@ -19,7 +19,7 @@ var parse = JSON8Pointer.parse
  * @return {Bool}
  */
 module.exports = function has(doc, path) {
-  var tokens = parse(path)
+  var tokens = decode(path)
 
   // returns the document
   if (tokens.length === 0)

@@ -1,7 +1,7 @@
 'use strict'
 
 var ooPointer = require('json8-pointer')
-var parse = ooPointer.parse
+var decode = ooPointer.decode
 var walk = ooPointer.walk
 
 /**
@@ -21,7 +21,7 @@ var walk = ooPointer.walk
  * @return {OperationResult}
  */
 module.exports = function add(doc, path, value) {
-  var tokens = parse(path)
+  var tokens = decode(path)
 
   // replaces the document
   if (tokens.length === 0)

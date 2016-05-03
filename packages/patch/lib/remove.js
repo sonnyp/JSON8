@@ -1,7 +1,7 @@
 'use strict'
 
 var ooPointer = require('json8-pointer')
-var parse = ooPointer.parse
+var decode = ooPointer.decode
 var walk = ooPointer.walk
 
 /**
@@ -20,7 +20,7 @@ var walk = ooPointer.walk
  * @return {OperationResult}
  */
 module.exports = function remove(doc, path) {
-  var tokens = parse(path)
+  var tokens = decode(path)
 
   // removes the document
   if (tokens.length === 0)
