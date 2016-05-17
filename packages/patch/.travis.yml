@@ -11,3 +11,7 @@ node_js:
 
 before_install:
   - npm install mocha browserify
+
+script:
+  - npm test
+  - npm run benchmark

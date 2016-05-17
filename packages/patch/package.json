@@ -15,6 +15,7 @@
     "bundle": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
     "lint": "eslint .",
     "unit": "mocha --compilers js:babel-core/register --recursive test/",
+    "benchmark": "node benchmark.js",
     "test": "npm run unit && npm run lint && npm run bundle"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
@@ -26,9 +27,14 @@
   "devDependencies": {
     "babel-core": "^6.8.0",
     "babel-preset-es2015": "^6.3.13",
+    "benchmark": "^2.1.0",
     "browserify": "^15.2.0",
     "eslint": "^0.24.1",
+    "fast-json-patch": "^2.0.6",
+    "jiff": "^0.7.3",
+    "json-patch": "^0.7.0",
     "json-patch-test-suite": "^1.1.0",
+    "jsonpatch": "^3.0.1",
     "mocha": "^5.0.0"
   }
 }

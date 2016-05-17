@@ -479,6 +479,13 @@ base64-js@^1.0.2:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.1.tgz#a91947da1f4a516ea38e5b4ec0ec3773675e0886"
 
+benchmark@^2.1.0:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/benchmark/-/benchmark-2.1.4.tgz#09f3de31c916425d498cc2ee565a0ebf3c2a5629"
+  dependencies:
+    lodash "^4.17.4"
+    platform "^1.3.3"
+
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
@@ -793,6 +800,10 @@ debug@^2.1.1, debug@^2.6.8:
   dependencies:
     ms "2.0.0"
 
+deep-equal@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
+
 deep-is@~0.1.2:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
@@ -1013,6 +1024,12 @@ evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
 
+fast-json-patch@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/fast-json-patch/-/fast-json-patch-2.0.6.tgz#86fff8f8662391aa819722864d632e603e6ee605"
+  dependencies:
+    deep-equal "^1.0.1"
+
 fast-levenshtein@~1.0.0:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-1.0.7.tgz#0178dcdee023b92905193af0959e8a7639cfdcb9"
@@ -1220,6 +1237,10 @@ isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
+jiff@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/jiff/-/jiff-0.7.3.tgz#42db5d9140f1804399bb501747055a9434f40f46"
+
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
@@ -1242,6 +1263,10 @@ jsesc@~0.5.0:
 json-patch-test-suite@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/json-patch-test-suite/-/json-patch-test-suite-1.1.0.tgz#e12a7f067371ce6953b55fa8d6e2f64800916711"
+
+json-patch@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/json-patch/-/json-patch-0.7.0.tgz#2598958ea67fa3660dae8ee684d35407b37f4b98"
 
 json-stable-stringify@~0.0.0:
   version "0.0.1"
@@ -1268,6 +1293,10 @@ jsonify@~0.0.0:
 jsonparse@^1.2.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
+
+jsonpatch@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/jsonpatch/-/jsonpatch-3.0.1.tgz#97225367c1c3c5bf1641be59b2f73be19759f06f"
 
 jsonpointer@^4.0.0:
   version "4.0.1"
@@ -1489,6 +1518,10 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+platform@^1.3.3:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.5.tgz#fb6958c696e07e2918d2eeda0f0bc9448d733444"
 
 prelude-ls@~1.1.0, prelude-ls@~1.1.1, prelude-ls@~1.1.2:
   version "1.1.2"
