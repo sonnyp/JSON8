@@ -9,6 +9,7 @@ See [jsonpatch.com](http://jsonpatch.com) for more information about JSON Patch.
 
 JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [Tests](#tests)
 
+* [Comparison](#comparison)
 * [Getting started](#getting-started)
 * [Methods](#methods)
   * [apply](#apply)
@@ -33,6 +34,16 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
     * [unpack](#unpack)
 * [Tests](#tests)
 * [Contributing](#contributing)
+
+# Comparison
+
+|module                                                           | root<sub>[0](#root)</sub> | atomic<sub>[1](#atomic)</sub> | mutates<sub>[2](#mutates)</sub>|
+|-----------------------------------------------------------------|--------------------------|-------------------------------|--------------------------------|
+|**json8-patch**                                                  | ☑    | ☑      | ☑       |
+|[jsonpatch](https://github.com/dharmafly/jsonpatch.js)           | ☑    | ☐      | ☑       |
+|[jiff](https://github.com/cujojs/jiff)                           | ☑    | ☐      | ☑       |
+|[json-patch](https://github.com/bruth/jsonpatch-js)              | ☐    | ☐      | ☑       |
+|[fast-json-patch](https://github.com/Starcounter-Jack/JSON-Patch)| ☐    | ☐      | ☑       |
 
 # Getting started
 
@@ -350,5 +361,41 @@ npm test
 # Contributing
 
 See [CONTRIBUTING.md](https://github.com/JSON8/patch/blob/master/CONTRIBUTING.md)
+
+[↑](#json8-patch)
+
+##### Footnotes
+
+###### root
+
+Refers to the library ability to replace/remove root (/) on your target.
+
+Lack of this ability makes the library unable to comply with the specification and will result in unknown/inconsistent states for your target documents.
+
+```json
+[
+  {"op": "replace", "path": "/", "value": "{}"},
+  {"op": "remove", "path": "/"}
+]
+```
+
+###### atomic
+
+Refers to the library ability to revert successful patch operations after a failure on the mutated target.
+
+Lack of this ability makes the library unable to comply with the specification and will result in unknown/inconsistent states for your target documents.
+
+https://tools.ietf.org/html/rfc6902#section-5
+
+###### mutates
+
+Refers to the ability of the library to mutates the target document.
+
+It is best to choose a library which mutate the target document because it leaves you with the choice of creating a shallow copy first.
+
+* [JSON8 clone](https://www.npmjs.com/package/json8#ooclone)
+* [lodash clone](https://www.npmjs.com/package/lodash.clone)
+* [underscore clone](http://underscorejs.org/#clone)
+* ...
 
 [↑](#json8-patch)
