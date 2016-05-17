@@ -11,22 +11,23 @@
   "homepage": "https://github.com/JSON8/merge-patch",
   "repository": "github:JSON8/merge-patch",
   "bugs": "https://github.com/JSON8/merge-patch/issues",
-  "main": "index.js",
   "scripts": {
-    "preversion": "npm run webify && npm test",
-    "webify": "browserify -s JSON8MergePatch index.js -o JSON8MergePatch.js",
-    "lint": "./node_modules/.bin/eslint .",
-    "unit": "mocha --compilers js:babel/register --recursive test/",
-    "test": "npm run unit && npm run lint && npm run webify"
+    "preversion": "npm test",
+    "bundle": "browserify -s JSON8MergePatch index.js -o JSON8MergePatch.js",
+    "lint": "eslint .",
+    "unit": "mocha --compilers js:babel-core/register --recursive test/",
+    "test": "npm run unit && npm run lint && npm run bundle"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "dependencies": {
-    "json8": "^0.7.0"
+    "json8": "^0.9.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-core": "^6.8.0",
     "eslint": "^0.24.1",
-    "json8-patch": "^0.3.1",
-    "json8-pointer": "^0.4.0"
+    "json8-patch": "^0.4.0",
+    "json8-pointer": "^0.5.0"
   }
 }

@@ -1,6 +1,5 @@
 'use strict'
 
-var isJSON = require('json8/lib/isJSON')
 var OBJECT = 'object'
 
 /**
@@ -12,9 +11,6 @@ var OBJECT = 'object'
  */
 module.exports = function apply(doc, patch) {
   if (typeof patch !== OBJECT || patch === null || Array.isArray(patch)) {
-    if (!isJSON(patch))
-      throw new TypeError(patch + ' is not JSON valid')
-
     return patch
   }
 

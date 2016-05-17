@@ -1,8 +1,7 @@
 'use strict'
 
-var isJSON = require('json8/lib/isJSON')
 var OBJECT = 'object'
-var pointer = require('json8-pointer')
+var encode = require('json8-pointer/lib/encode')
 
 /**
  * Convert a JSON Merge Patch to a JSON Patch
@@ -12,9 +11,6 @@ var pointer = require('json8-pointer')
  */
 module.exports = function toJSONPatch(patch, prefix) {
   if (typeof patch !== OBJECT || patch === null || Array.isArray(patch)) {
-    if (!isJSON(patch))
-      throw new TypeError(patch + ' is not JSON valid')
-
     return [{"op": "replace", "path": "", "value": patch}]
   }
 
@@ -31,7 +27,7 @@ module.exports = function toJSONPatch(patch, prefix) {
       continue
     }
 
-    var path = pointer.serialize(tokens)
+    var path = encode(tokens)
 
     if (v === null)
       ops.push({"op": "remove", "path": path})

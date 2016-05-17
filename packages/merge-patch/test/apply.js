@@ -19,14 +19,6 @@ describe('apply', () => {
     })
   })
 
-  it('throws a TypeError if patch argument is not JSON', () => {
-    [undefined, +Infinity, -Infinity, NaN, function() {}].forEach((v) => {
-      assert.throws(() => {
-        apply({}, v)
-      }, TypeError)
-    })
-  })
-
   it('deletes patch properties with value null', () => {
     let doc = {"foo": "bar"}
     doc = apply(doc, {"foo": null})

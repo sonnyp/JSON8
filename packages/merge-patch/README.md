@@ -52,6 +52,9 @@ var ooMergePatch = window.JSON8MergePatch
 
 Apply a JSON Merge Patch to a JSON document.
 
+* May mutates the target document, if you wish to pass a shallow copy use [JSON8 clone](https://github.com/JSON8/JSON8#ooclone).
+* Does not validate the patch nor the target nor the result for JSON validness, use [JSON8 valid](https://github.com/JSON8/JSON8#valid).
+
 ```javascript
 doc = ooMergePatch.apply(doc, mergePatch);
 ```
@@ -114,9 +117,9 @@ ooMergePatch.diff(a, b)
 JSON Patch is a more capable alternative to JSON Merge Patch.
 To work with JSON Patch see [JSON8 Patch](https://github.com/JSON8/patch).
 
-This method converts a JSON Merge Patch to a JSON Patch and is only available if the optional dependency [JSON8 Pointer](https://github.com/JSON8/pointer) is installed.
+This method converts a JSON Merge Patch to a JSON Patch and is only available if the optional dependency [JSON8 Pointer](https://github.com/JSON8/pointer) is available.
 
-```npm install json8-pointer```
+Does not validate the merge patch nor the patch for JSON validness, use [JSON8 valid](https://github.com/JSON8/JSON8#valid).
 
 ```javascript
 var JSONMergePatch = {
@@ -130,7 +133,7 @@ var JSONPatch = ooMergePatch.toJSONPatch(JSONMergePatch)
 //]
 ```
 
-Per specification a JSON Merge Patch that would succefully apply on a document might fail to apply once converted to a JSON Patch.
+Per specification a JSON Merge Patch that would successfully apply on a document might fail to apply once converted to a JSON Patch.
 
 There are 3 cases:
 
@@ -164,14 +167,14 @@ var JSONPatch = toJSONPatch(JSONMergePatch)
 // JSONPatch will fail to apply because doc.a doesn't exist
 ```
 
-I might add an option to the toJSONPatch method later to produce a succeful JSON Patch but the only way to do this is to pass the document as well. Let me know if there is any interest or [contribute](https://github.com/JSON8/merge-patch/blob/master/CONTRIBUTING.md).
+I might add an option to the toJSONPatch method later to produce a successful JSON Patch but the only way to do this is to pass the document as well. Let me know if there is any interest or [contribute](https://github.com/JSON8/merge-patch/blob/master/CONTRIBUTING.md).
 
 [↑](#json8-merge-patch)
 
 # Tests
 
 ```
-npm install -g eslint mocha babel
+npm install mocha browserify
 npm test
 ```
 
