@@ -1,0 +1,10 @@
+{
+  "name": "json8-isStructure",
+  "version": "1.0.0",
+  "description": "JSON isStructure method",
+  "keywords": "JSON, isStructure, is, structure, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8"
+}

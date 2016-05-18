@@ -1,0 +1,13 @@
+{
+  "name": "json8-isPrimitive",
+  "version": "1.0.1",
+  "description": "JSON isPrimitive method",
+  "keywords": "JSON, isPrimitive, is, primitive, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8",
+  "dependencies": {
+    "json8-types": "^2.0.0"
+  }
+}

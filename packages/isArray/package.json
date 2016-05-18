@@ -1,0 +1,10 @@
+{
+  "name": "json8-isArray",
+  "version": "1.0.0",
+  "description": "JSON isArray method",
+  "keywords": "JSON, isArray, is, array, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8"
+}

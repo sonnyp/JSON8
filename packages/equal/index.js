@@ -1,13 +1,13 @@
 'use strict'
 
-var types = require('./types')
+var types = require('json8-types')
 var OBJECT = types.OBJECT
 var ARRAY = types.ARRAY
 var STRING = types.STRING
 var BOOLEAN = types.BOOLEAN
 var NUMBER = types.NUMBER
 var NULL = types.NULL
-var type = require('./type')
+var type = require('json8-type')
 
 function toArray(set) {
   var array = []

@@ -1,0 +1,13 @@
+{
+  "name": "json8-isObject",
+  "version": "1.0.0",
+  "description": "JSON isObject method",
+  "keywords": "JSON, isObject, is, object, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8",
+  "dependencies": {
+    "json8-isArray": "^1.0.0"
+  }
+}

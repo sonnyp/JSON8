@@ -1,6 +1,6 @@
 'use strict'
 
-var types = require('./types')
+var types = require('json8-types')
 var NUMBER = types.NUMBER
 var OBJECT = types.OBJECT
 var BOOLEAN = types.BOOLEAN

@@ -2,11 +2,11 @@
 
 /* eslint-disable no-magic-numbers */
 
-var types = require('./types')
+var types = require('json8-types')
 var OBJECT = types.OBJECT
-var NUMBER = types.NUMBER
 var STRING = types.STRING
 var BOOLEAN = types.BOOLEAN
+var NUMBER = types.NUMBER
 
 function stringify(obj, opts, depth) {
   if (opts.toJSON === true && typeof obj === OBJECT && obj !== null && typeof obj.toJSON === 'function')

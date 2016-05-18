@@ -1,37 +1,37 @@
 'use strict'
 
-var types = require('./lib/types')
+var types = require('json8-types')
 var Document = require('./lib/Document')
 
 var oo = module.exports = function(doc) {
   return new Document(doc)
 }
 
-oo.clone = require('./lib/clone')
+oo.clone = require('json8-clone')
 oo.Document = Document
-oo.equal = require('./lib/equal')
+oo.equal = require('json8-equal')
 
 oo.has = require('./lib/has')
 oo.hasKey = require('./lib/hasKey')
 oo.hasValue = require('./lib/hasValue')
 
-oo.is = require('./lib/is')
-oo.isArray = require('./lib/isArray')
-oo.isBoolean = require('./lib/isBoolean')
-oo.isJSON = require('./lib/isJSON')
-oo.isNull = require('./lib/isNull')
-oo.isNumber = require('./lib/isNumber')
-oo.isObject = require('./lib/isObject')
-oo.isPrimitive = require('./lib/isPrimitive')
-oo.isString = require('./lib/isString')
-oo.isStructure = require('./lib/isStructure')
+oo.is = require('json8-is')
+oo.isArray = require('json8-isArray')
+oo.isBoolean = require('json8-isBoolean')
+oo.isJSON = require('json8-isJSON')
+oo.isNull = require('json8-isNull')
+oo.isNumber = require('json8-isNumber')
+oo.isObject = require('json8-isObject')
+oo.isPrimitive = require('json8-isPrimitive')
+oo.isString = require('json8-isString')
+oo.isStructure = require('json8-isStructure')
 
-oo.parse = require('./lib/parse')
-oo.serialize = require('./lib/serialize')
-oo.type = require('./lib/type')
+oo.parse = require('json8-parse')
+oo.serialize = require('json8-serialize')
+oo.type = require('json8-type')
 for (var type in types)
   oo[type] = types[type]
-oo.valid = require('./lib/valid')
+oo.valid = require('json8-valid')
 
 // Document
 

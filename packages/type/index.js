@@ -1,6 +1,6 @@
 'use strict'
 
-var types = require('./types')
+var types = require('json8-types')
 var OBJECT = types.OBJECT
 var ARRAY = types.ARRAY
 var NULL = types.NULL

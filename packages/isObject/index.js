@@ -1,7 +1,7 @@
 'use strict'
 
-var isArray = require('./isArray')
-var OBJECT = require('./types').OBJECT
+var isArray = require('json8-isArray')
+var OBJECT = 'object'
 
 module.exports = (global.Map
   ? function isObject(obj) {

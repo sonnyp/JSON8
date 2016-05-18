@@ -1,0 +1,10 @@
+{
+  "name": "json8-isBoolean",
+  "version": "1.0.0",
+  "description": "JSON isBoolean method",
+  "keywords": "JSON, isBoolean, is, boolean, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8"
+}

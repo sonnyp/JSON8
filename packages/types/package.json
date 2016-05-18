@@ -1,0 +1,10 @@
+{
+  "name": "json8-types",
+  "version": "2.0.0",
+  "description": "JSON types",
+  "keywords": "JSON, types",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8"
+}
