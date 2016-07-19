@@ -7,3 +7,4 @@ rules:
   curly: 0
   no-warning-comments: 0
   default-case: 0
+  dot-location: [2, 'property']
