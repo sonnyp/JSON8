@@ -1,5 +1,6 @@
 import assert from 'assert'
 import {serialize} from '..'
+import {readFileSync} from 'fs'
 
 const valid = [
   ['true', true],
@@ -44,6 +45,10 @@ const forEach = function(obj, fn) {
 }
 
 describe('serialize', () => {
+  describe('escapes u2028 and u2029', () => {
+    assert.strictEqual(serialize(readFileSync('./test/fixtures.txt', 'utf8')), '"ro\\u2028cks! ro\\u2029cks!\\n"')
+  })
+
   describe('compare', () => {
     for (const key in compare) {
       const v = compare[key]
