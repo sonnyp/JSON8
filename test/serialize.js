@@ -159,6 +159,14 @@ describe('serialize', () => {
       assert.strictEqual(serialize(obj, {space: '    '}), JSON.stringify(obj, null, '    '))
       assert.strictEqual(serialize(obj, {space: '    '}), JSON.stringify(obj, null, 4))
     })
+
+    it('works equally with Object and Map', () => {
+      const map = new Map()
+      for (const i in obj) {
+        map.set(i, obj[i])
+      }
+      assert.strictEqual(serialize(obj, {space: 2}), serialize(map, {space: 2}))
+    })
   })
 
   describe('replacer option', () => {
