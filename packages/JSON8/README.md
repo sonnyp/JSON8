@@ -544,7 +544,7 @@ Getting/asserting the JSON type of a value in JavaScript is troublesome.
 
 ## Safety
 
-[oo.serialize](#ooserialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does. It also accept an optional argument to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) which is a common pitfall.
+[oo.serialize](#ooserialize) will throw an exception for any non JSON valid value (undefined, NaN, Infinity, -Infinity, ...) instead of ignoring it or replacing it with ```null``` like JSON.striginfy does. It also accept an optional argument to disable [toJSON behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior) which is a common pitfall. Additionally it encodes [invalid JavaScript characters](http://timelessrepo.com/json-isnt-a-javascript-subset).
 
 JSON8 [types](#types) helps avoiding many common errors as well.
 
