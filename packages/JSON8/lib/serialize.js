@@ -91,7 +91,7 @@ function stringify(obj, opts, depth) {
         }
       }
       if (n === 0) str += nl
-      str += stringify(setItem, opts, depth + 1)
+      str += indent + stringify(setItem, opts, depth + 1)
       if (n++ !== obj.size - 1) str += ',' + delimiter
       else str += nl + pindent
     })
@@ -115,7 +115,7 @@ function stringify(obj, opts, depth) {
         }
       }
       if (m === 0) str += nl
-      str += JSON.stringify(k) + ':' + space + stringify(v, opts, depth + 1)
+      str += indent + JSON.stringify(k) + ':' + space + stringify(v, opts, depth + 1)
       if (m++ !== obj.size - 1) str += ',' + delimiter
       else str += nl + pindent
     })
