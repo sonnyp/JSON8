@@ -14,12 +14,13 @@ See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work 
   * [parse](#parse)
   * [encode](#encode)
   * [serialize](#serialize)
+  * [join](#join)
 * [Tests](#tests)
 * [Contributing](#contributing)
 
 # Getting started
 
-```npm install json8-pointer```
+`npm install json8-pointer`
 
 ----
 
@@ -69,7 +70,7 @@ ooPointer.decode('/foo/a~1b')
 // ['foo', 'a/b']
 ```
 
-You can specify a different separator than the default ```/```.
+You can specify a different separator than the default `/`.
 
 ```javascript
 ooPointer.decode('.foo.bar.hello', '.');
@@ -86,7 +87,7 @@ Alias for the [decode](#decode) method.
 
 ## encode
 
-Takes an array of escaped tokens (see [parse](parse)) and return a JSON Pointer string.
+Takes an array of escaped tokens (see [encode](#encode)) and return a JSON Pointer string.
 
  ```javascript
 ooPointer.encode(['foo', 'bar', 'hello']);
@@ -96,7 +97,7 @@ ooPointer.encode(['foo', 'a/b'])
 // '/foo/a~1b'
 ```
 
-You can specify a different separator than the default ```/```.
+You can specify a different separator than the default `/`.
 
 ```javascript
 ooPointer.encode(['foo', 'bar', 'hello'], '.');
@@ -108,6 +109,27 @@ ooPointer.encode(['foo', 'bar', 'hello'], '.');
 ## serialize
 
 Alias for the [encode](#encode) method.
+
+[↑](#json8-pointer)
+
+## join
+
+Join a base pointer and tokens;
+
+```javascript
+ooPointer.join('/foo', ['bar'])
+ooPointer.join(['foo'], 'bar')
+ooPointer.join('', ['foo', 'bar'])
+ooPointer.join([], ['foo', 'bar'])
+// `/foo/bar`
+```
+
+You can specify a different separator than the default `/`.
+
+```javascript
+ooPointer.join('/foo', ['bar'], '.')
+// `.foo.bar`
+```
 
 [↑](#json8-pointer)
 

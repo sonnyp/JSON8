@@ -14,8 +14,7 @@ module.exports = function find(doc, pointer) {
   var tokens = Array.isArray(pointer) ? pointer : decode(pointer)
 
   // returns the document
-  if (tokens.length === 0)
-    return doc
+  if (tokens.length === 0) return doc
 
   var r
 

@@ -12,11 +12,9 @@ module.exports = function decode(pointer, separator) {
 
   var sep = typeof separator === 'string' && separator.length > 0 ? separator : '/'
 
-  if (pointer.length === 0)
-    return []
+  if (pointer.length === 0) return []
 
-  if (pointer.charAt(0) !== sep)
-    throw new Error('Invalid pointer: ' + pointer)
+  if (pointer.charAt(0) !== sep) throw new Error('Invalid pointer: ' + pointer)
 
   var tokens = ['']
   var c = 0

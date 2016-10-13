@@ -11,5 +11,8 @@ describe.only('join', () => {
     assert.strictEqual(join('/foo', ['bar']), '/foo/bar');
     assert.strictEqual(join('/foo', []), '/foo');
     assert.strictEqual(join('', ['foo']), '/foo');
+
+    assert.strictEqual(join('', ['0']), '/0');
+    assert.strictEqual(join('/0', ['foo']), '/0/foo');
   })
 })
