@@ -14,5 +14,10 @@ describe('join', () => {
 
     assert.strictEqual(join('', ['0']), '/0');
     assert.strictEqual(join('/0', ['foo']), '/0/foo');
+
+    assert.strictEqual(join([], []), '');
+    assert.strictEqual(join('', []), '');
+    assert.strictEqual(join('', ''), '/');
+    assert.strictEqual(join([], ''), '/');
   })
 })
