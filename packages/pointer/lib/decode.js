@@ -8,8 +8,7 @@
  * @return {Array}             - array of tokens
  */
 module.exports = function decode(pointer, separator) {
-  if (Array.isArray(pointer))
-    return pointer
+  if (Array.isArray(pointer)) return pointer
 
   var sep = typeof separator === 'string' && separator.length > 0 ? separator : '/'
 

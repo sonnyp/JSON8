@@ -10,3 +10,4 @@ module.exports.parse = decode
 module.exports.validArrayToken = require('./lib/validArrayToken')
 module.exports.walk = require('./lib/walk')
 module.exports.find = require('./lib/find')
+module.exports.join = require('./lib/join')
