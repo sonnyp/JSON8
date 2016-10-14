@@ -1,10 +1,7 @@
 'use strict'
 
-var types = require('./types')
-var OBJECT = types.OBJECT
-
 module.exports = function clone(obj) {
-  if (typeof obj !== OBJECT || obj === null)
+  if (typeof obj !== 'object' || obj === null)
     return obj
 
   var c, i, l

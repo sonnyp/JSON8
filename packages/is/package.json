@@ -1,0 +1,22 @@
+{
+  "name": "json8-is",
+  "version": "1.0.1",
+  "description": "JSON is method",
+  "keywords": "JSON, is, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8",
+  "dependencies": {
+    "json8-isArray": "^1.0.0",
+    "json8-isBoolean": "^1.0.0",
+    "json8-isJSON": "^1.0.0",
+    "json8-isNull": "^1.0.0",
+    "json8-isNumber": "^1.0.0",
+    "json8-isObject": "^1.0.0",
+    "json8-isPrimitive": "^1.0.0",
+    "json8-isString": "^1.0.0",
+    "json8-isStructure": "^1.0.0",
+    "json8-types": "^2.0.0"
+  }
+}

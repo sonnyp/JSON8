@@ -1,0 +1,13 @@
+{
+  "name": "json8-valid",
+  "version": "1.0.0",
+  "description": "JS8N valid method",
+  "keywords": "JSON, valid, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8",
+  "dependencies": {
+    "json8-types": "^2.0.0"
+  }
+}

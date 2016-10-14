@@ -1,0 +1,14 @@
+{
+  "name": "json8-equal",
+  "version": "1.0.0",
+  "description": "JSON8 equal method",
+  "keywords": "JSON, equal, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8",
+  "dependencies": {
+    "json8-types": "^2.0.0",
+    "json8-type": "^1.0.0"
+  }
+}

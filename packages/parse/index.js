@@ -1,6 +1,6 @@
 'use strict'
 
-var OBJECT = require('./types').OBJECT
+var OBJECT = 'object'
 
 function replace(obj, options) {
   var i

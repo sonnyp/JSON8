@@ -1,0 +1,10 @@
+{
+  "name": "json8-isString",
+  "version": "1.0.0",
+  "description": "JSON isString method",
+  "keywords": "JSON, isString, is, string, map set",
+  "author": "Sonny Piers <sonny@fastmail.net>",
+  "license": "ISC",
+  "repository": "github:JSON8/JSON8",
+  "homepage": "https://github.com/JSON8/JSON8"
+}
