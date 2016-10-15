@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+
+    <title>JSON8 Pointer flatten demo</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.css">
+
+    <!-- codemirror -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/mode/javascript/javascript.js"></script>
+
+    <!-- linting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/json-lint.js"></script>
+
+    <!-- code folding -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldcode.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/brace-fold.js"></script>
+
+    <!-- hightlighting -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/matchbrackets.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/edit/closebrackets.js"></script>
+
+    <script src="../../JSON8Pointer.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <p>This is a <strong>live editor</strong>. Editting <strong data-target="target">input</strong> will update <strong data-target="flatten">flatten</strong> and <strong data-target="unflatten">unflatten</strong> instantly.</p>
+
+    <section id="target" class="json8">
+      <h1>input</h1>
+      <textarea></textarea>
+    </section><!--
+
+  --><section id="flatten" class="json8">
+       <h1>flatten</h1>
+       <textarea></textarea>
+     </section><!--
+
+  --><section id="unflatten" class="json8">
+        <h1>unflatten</h1>
+        <textarea></textarea>
+      </section>
+
+    <section>
+      <pre>
+        <code class="language-javascript" id="example">
+<strong data-target="flatten">flatten</strong> = pointer.flatten(<strong data-target="target">input</strong>)</code>
+<strong data-target="unflatten">unflatten</strong> = pointer.unflatten(<strong data-target="flatten">flatten</strong>)</code>
+      </pre>
+    </section>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/plugins/keep-markup/prism-keep-markup.min.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

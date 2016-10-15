@@ -1,7 +1,7 @@
 'use strict'
 
 var decode = require('./decode')
-var walk = require('./walk')
+var context = require('./context')
 
 /**
  * Get the value at the JSON Pointer location
@@ -19,7 +19,7 @@ module.exports = function find(doc, pointer) {
   var r
 
   try {
-    r = walk(doc, tokens)
+    r = context(doc, tokens)
   }
   catch (e) {
     return undefined

@@ -1,5 +1,7 @@
 'use strict'
 
+var escape = require('./escape')
+
 /**
  * Encode a JSON tokens list
  *
@@ -12,17 +14,7 @@ module.exports = function encode(tokens, separator) {
   var sep = typeof separator === 'string' && separator.length > 0 ? separator : '/'
 
   for (var i = 0, len = tokens.length; i < len; i++) {
-    var token = tokens[i]
-    pointer += sep
-    for (var y = 0, length = token.length; y < length; y++) {
-      var l = token.charAt(y)
-      if (l === '~')
-        pointer += '~0'
-      else if (l === sep)
-        pointer += '~1'
-      else
-        pointer += l
-    }
+    pointer += sep + escape(tokens[i], sep)
   }
 
   return pointer

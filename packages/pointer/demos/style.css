@@ -1,0 +1,24 @@
+.CodeMirror {
+  border: 1px solid black;
+  /*width: 500px;*/
+  width: 100%;
+  height: 500px;
+}
+
+.json8 {
+  display: inline-block;
+  width: calc(100% / 3);
+}
+
+.json8 > h1 {
+  text-align: center;
+}
+
+.highlight {
+   background-color: #ffa;
+}
+
+[data-target] {
+  text-decoration: underline;
+  cursor: pointer;
+}

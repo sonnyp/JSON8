@@ -1,39 +1,33 @@
 'use strict'
 
-var validArrayToken = require('./validArrayToken')
-var OBJECT = 'object'
+var _walk = require('@fuba/walk')
+var join = require('./join')
 
-/**
- * Walk a JSON document with a tokens array
- *
- * @param {Object|Array} doc     - JSON document
- * @param {Array}        tokens  - array of tokens
- * @return {Array}               - [token, target]
- */
-module.exports = function walk(doc, tokens) {
-  var length = tokens.length
+module.exports = function walk (json, fn) {
+  var dic = Object.create(null)
 
-  var i = 0
-  var target = doc
-  var token
-
-  while (i < length - 1) {
-    token = tokens[i++]
-
-    if (Array.isArray(target))
-      validArrayToken(token, target.length)
-    else if (typeof target !== OBJECT || target === null)
-      throw new Error('Cannot be walked')
-
-    target = target[token]
+  function get(obj) {
+    for (var p in dic) {
+      if (dic[p] === obj) return p
+    }
   }
 
-  token = tokens[i]
+  function set(obj, key, parent) {
+    var path = join(parent ? get(parent) : parent , key)
+    dic[path] = obj
+  }
 
-  if (Array.isArray(target))
-    validArrayToken(token, target.length)
-  else if (typeof target !== OBJECT || target === null)
-    throw new Error('Invalid target')
+  _walk(json, function (v, k, p) {
+    if (v !== null && typeof v === 'object') {
+      if (p === undefined || k === undefined) set(v, [], '')
+      else set(v, k.toString(), p)
+    }
 
-  return [token, target]
+    if (k === undefined || p === undefined) {
+      fn(v, '')
+    } else {
+      var parent = get(p)
+      fn(v, join(parent, k.toString()), p, parent)
+    }
+  })
 }

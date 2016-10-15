@@ -10,11 +10,18 @@ See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work 
 * [Getting started](#getting-started)
 * [Methods](#methods)
   * [find](#find)
-  * [decode](#decode)
-  * [parse](#parse)
   * [encode](#encode)
   * [serialize](#serialize)
+  * [escape](#escape)
+  * [decode](#decode)
+  * [parse](#parse)
+  * [unescape](#unescape)
+  * [context](#context)
   * [join](#join)
+  * [index](#index)
+  * [dict](#dict)
+  * [flatten](#flatten)
+  * [unflatten](#unflatten)
 * [Tests](#tests)
 * [Contributing](#contributing)
 
@@ -25,7 +32,7 @@ See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work 
 ----
 
 ```javascript
-var ooPointer = require('json8-pointer');
+var pointer = require('json8-pointer');
 ```
 
 or
@@ -34,7 +41,7 @@ or
 <script src="node_modules/json8-pointer/JSON8Pointer.js"></script>
 ```
 ```javascript
-var ooPointer = window.JSON8Pointer
+var pointer = window.JSON8Pointer
 ```
 
 [↑](#json8-pointer)
@@ -49,58 +56,44 @@ Returns ```undefined``` if the value cannot be found.
 ```javascript
 var doc = {"foo": {"bar": "foobar"}}
 
-ooPointer.find(doc, '/foo/bar');
+pointer.find(doc, '/foo/bar');
 // "foobar"
 
-ooPointer.find(doc, '/bar/foo');
+pointer.find(doc, '/bar/foo');
 // undefined
 ```
 
 [↑](#json8-pointer)
 
-## decode
+## context
 
-Takes a JSON Pointer string and return an array of unescaped tokens.
-
-```javascript
-ooPointer.decode('/foo/bar/hello');
-// ['foo', 'bar', 'hello'];
-
-ooPointer.decode('/foo/a~1b')
-// ['foo', 'a/b']
-```
-
-You can specify a different separator than the default `/`.
+Returns the target parent and target property of a pointer.
 
 ```javascript
-ooPointer.decode('.foo.bar.hello', '.');
-// ['foo', 'bar', 'hello'];
+var doc = {"foo": {"bar": "foobar"}}
+
+pointer.context(doc, '/foo/bar');
+// ['bar', doc.foo]
 ```
-
-[↑](#json8-pointer)
-
-## parse
-
-Alias for the [decode](#decode) method.
 
 [↑](#json8-pointer)
 
 ## encode
 
-Takes an array of escaped tokens (see [encode](#encode)) and return a JSON Pointer string.
+Takes an array of unescaped tokens (see [decode](#decode)) and return a JSON Pointer string.
 
  ```javascript
-ooPointer.encode(['foo', 'bar', 'hello']);
+pointer.encode(['foo', 'bar', 'hello']);
 // '/foo/bar/hello'
 
-ooPointer.encode(['foo', 'a/b'])
+pointer.encode(['foo', 'a/b'])
 // '/foo/a~1b'
 ```
 
 You can specify a different separator than the default `/`.
 
 ```javascript
-ooPointer.encode(['foo', 'bar', 'hello'], '.');
+pointer.encode(['foo', 'bar', 'hello'], '.');
 // '.foo.bar.hello'
 ```
 
@@ -112,23 +105,161 @@ Alias for the [encode](#encode) method.
 
 [↑](#json8-pointer)
 
+## escape
+
+Escape a single token for use in JSON Pointer.
+
+```javascript
+pointer.escape('a/b')
+// 'a~1b'
+```
+
+You can specify a different separator than the default `/`.
+
+```javascript
+pointer.escape('a.b', '.')
+// 'a~1b'
+```
+
+[↑](#json8-pointer)
+
+## decode
+
+Takes a JSON Pointer string and return an array of unescaped tokens.
+
+```javascript
+pointer.decode('/foo/bar/hello');
+// ['foo', 'bar', 'hello'];
+
+pointer.decode('/foo/a~1b')
+// ['foo', 'a/b']
+```
+
+You can specify a different separator than the default `/`.
+
+```javascript
+pointer.decode('.foo.bar.hello', '.');
+// ['foo', 'bar', 'hello'];
+```
+
+[↑](#json8-pointer)
+
+## parse
+
+Alias for the [decode](#decode) method.
+
+[↑](#json8-pointer)
+
+## unescape
+
+Unescape a single token see [escape](#escape).
+
+```javascript
+pointer.unescape('a~1b')
+// 'a/b'
+```
+
+You can specify a different separator than the default `/`.
+
+```javascript
+pointer.unescape('a~1b', '.')
+// 'a/b'
+```
+
+[↑](#json8-pointer)
+
 ## join
 
 Join a base pointer and tokens;
 
 ```javascript
-ooPointer.join('/foo', ['bar'])
-ooPointer.join(['foo'], 'bar')
-ooPointer.join('', ['foo', 'bar'])
-ooPointer.join([], ['foo', 'bar'])
+pointer.join('/foo', ['bar'])
+pointer.join(['foo'], 'bar')
+pointer.join('', ['foo', 'bar'])
+pointer.join([], ['foo', 'bar'])
 // `/foo/bar`
 ```
 
 You can specify a different separator than the default `/`.
 
 ```javascript
-ooPointer.join('/foo', ['bar'], '.')
+pointer.join('/foo', ['bar'], '.')
 // `.foo.bar`
+```
+
+[↑](#json8-pointer)
+
+## index
+
+[demo/playground](https://json8.github.io/pointer/demos/index/)
+
+The `index` method returns an object with all values indexed by pointers.
+
+```javascript
+pointer.index('foo') // {'': 'foo'}
+
+pointer.index(['hello', 'earth'])
+//  {
+//    '': ['hello', 'earth'],
+//    '/0': 'hello',
+//    '/1': 'earth'
+//  }
+```
+
+[↑](#json8-pointer)
+
+## dict
+
+[demo/playground](https://json8.github.io/pointer/demos/dict/)
+
+Just like (index)[#index] but only indexes primitives.
+
+```javascript
+pointer.index(['hello', 'earth'])
+//  {
+//    '/0': 'hello',
+//    '/1': 'earth'
+//  }
+
+pointer.index({'foo', 'bar'})
+//  {
+//    '/foo': 'bar'
+//  }
+```
+
+[↑](#json8-pointer)
+
+## flatten
+
+[demo/playground](https://json8.github.io/pointer/demos/flatten/)
+
+The `flatten` method works like a flat version of [index](#index).
+
+```javascript
+pointer.flatten(['hello', 'earth'])
+//  {
+//    '': [],
+//    '/0': 'hello',
+//    '/1': 'earth'
+//  }
+```
+
+[↑](#json8-pointer)
+
+## unflatten
+
+[demo/playground](https://json8.github.io/pointer/demos/flatten/)
+
+The `unflatten` method takes an [flattened](#flatten) object and returns a deep JSON document.
+
+```javascript
+pointer.unflatten({'': 'foo'}) // 'foo'
+
+pointer.unflatten({
+  '': [],
+  '/0': 'hello',
+  '/1': 'earth'
+}) // ['hello', 'earth']
 ```
 
 [↑](#json8-pointer)
