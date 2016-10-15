@@ -210,7 +210,7 @@ pointer.index(['hello', 'earth'])
 
 ## dict
 
-[demo/playground](https://json8.github.io/pointer/demos/dict/)
+[demo/playground](https://json8.github.io/pointer/demos/index/)
 
 Just like (index)[#index] but only indexes primitives.
 
