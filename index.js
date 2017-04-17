@@ -26,6 +26,8 @@ oo.isPrimitive = require('./lib/isPrimitive')
 oo.isString = require('./lib/isString')
 oo.isStructure = require('./lib/isStructure')
 
+oo.merge = require('./lib/merge')
+
 oo.parse = require('./lib/parse')
 oo.serialize = require('./lib/serialize')
 oo.type = require('./lib/type')
