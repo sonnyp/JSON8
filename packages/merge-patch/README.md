@@ -124,7 +124,7 @@ Does not validate the merge patch nor the patch for JSON validness, use [JSON8 v
 ```javascript
 var JSONMergePatch = {
   "foo": {"bar": "foobar"},
-  "foo": null}
+  "bar": null}
 }
 var JSONPatch = ooMergePatch.toJSONPatch(JSONMergePatch)
 //[
