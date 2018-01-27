@@ -10,13 +10,13 @@ See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work 
 * [Getting started](#getting-started)
 * [Methods](#methods)
   * [find](#find)
+  * [context](#context)
   * [encode](#encode)
   * [serialize](#serialize)
   * [escape](#escape)
   * [decode](#decode)
   * [parse](#parse)
   * [unescape](#unescape)
-  * [context](#context)
   * [join](#join)
   * [index](#index)
   * [dict](#dict)
@@ -212,7 +212,7 @@ pointer.index(['hello', 'earth'])
 
 [demo/playground](https://json8.github.io/pointer/demos/index/)
 
-Just like (index)[#index] but only indexes primitives.
+Just like [index](#index) but only indexes primitives.
 
 ```javascript
 pointer.index(['hello', 'earth'])
