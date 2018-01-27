@@ -1,5 +1,7 @@
-import assert from 'assert'
-import {hasValue} from '..'
+'use strict'
+
+const assert = require('assert')
+const { hasValue } = require('..')
 
 const has = function(obj, value) {
   assert.deepEqual(hasValue(obj, value), true)
@@ -10,36 +12,34 @@ const lacks = function(obj, value) {
 }
 
 describe('hasValue', () => {
-
   it('returns false if the obj is not an object', () => {
     lacks(null, 'foo')
   })
 
   describe('object', () => {
     it('returns false if value is undefined', () => {
-      lacks({'foo': undefined}, undefined)
+      lacks({ foo: undefined }, undefined)
     })
 
     it('returns true if the value is present', () => {
-      has({foo: 'bar'}, 'bar')
+      has({ foo: 'bar' }, 'bar')
     })
 
     it('returns true if the key is undefined', () => {
-      has({undefined: 'foo'}, 'foo')
+      has({ undefined: 'foo' }, 'foo')
     })
 
     it('returns false if the value lives in the prototype chain', () => {
-      lacks(Object.create({foo: 'bar'}), 'bar')
+      lacks(Object.create({ foo: 'bar' }), 'bar')
     })
 
     it('returns true if the value is present and is an object', () => {
-      has({'foo': {}}, {})
-      lacks({}, {"foo": "bar"})
+      has({ foo: {} }, {})
+      lacks({}, { foo: 'bar' })
     })
   })
 
   describe('Map', () => {
-
     let obj
     beforeEach(() => {
       obj = new Map()
@@ -63,9 +63,7 @@ describe('hasValue', () => {
     it('returns true if the value is present and is an object', () => {
       obj.set({}, {})
       has(obj, {})
-      lacks(obj, {"foo": "bar"})
+      lacks(obj, { foo: 'bar' })
     })
-
   })
-
 })

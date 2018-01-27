@@ -1,11 +1,11 @@
 'use strict'
 
-var types = require('./lib/types')
-var Document = require('./lib/Document')
+const types = require('./lib/types')
+const Document = require('./lib/Document')
 
-var oo = module.exports = function(doc) {
+const oo = (module.exports = function(doc) {
   return new Document(doc)
-}
+})
 
 oo.clone = require('./lib/clone')
 oo.Document = Document
@@ -29,12 +29,10 @@ oo.isStructure = require('./lib/isStructure')
 oo.parse = require('./lib/parse')
 oo.serialize = require('./lib/serialize')
 oo.type = require('./lib/type')
-for (var type in types)
-  oo[type] = types[type]
+for (const type in types) oo[type] = types[type]
 oo.valid = require('./lib/valid')
 
 // Document
-
 ;[
   'has',
   'hasKey',
@@ -53,9 +51,9 @@ oo.valid = require('./lib/valid')
   'type',
   'valid',
 ].forEach(function(method) {
-  var fn = oo[method]
+  const fn = oo[method]
   Document.prototype[method] = function() {
-    var args = [this.value].concat(arguments)
+    const args = [this.value].concat(arguments)
     return fn.apply(null, args)
   }
 })

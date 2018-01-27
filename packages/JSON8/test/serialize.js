@@ -1,6 +1,8 @@
-import assert from 'assert'
-import {serialize} from '..'
-import {readFileSync} from 'fs'
+'use strict'
+
+const assert = require('assert')
+const { serialize } = require('..')
+const { readFileSync } = require('fs')
 
 const valid = [
   ['true', true],
@@ -24,18 +26,19 @@ const invalid = [
   ['NaN', NaN],
 ]
 
-if (global.Symbol && typeof Symbol() === 'symbol') invalid.push(['symbol', Symbol()])
+if (global.Symbol && typeof Symbol() === 'symbol')
+  invalid.push(['symbol', Symbol()])
 
 const compare = {
-  "string": "hello",
-  "null": null,
-  "true": true,
-  "false": false,
-  "empty string": "",
-  "empty object": {},
-  "empty map": new Map(),
-  "empty array": [],
-  "empty set": new Set(),
+  string: 'hello',
+  null: null,
+  true: true,
+  false: false,
+  'empty string': '',
+  'empty object': {},
+  'empty map': new Map(),
+  'empty array': [],
+  'empty set': new Set(),
 }
 
 const forEach = function(obj, fn) {
@@ -46,22 +49,31 @@ const forEach = function(obj, fn) {
 
 describe('serialize', () => {
   describe('escapes u2028 and u2029', () => {
-    assert.strictEqual(serialize(readFileSync('./test/fixtures.txt', 'utf8')), '"ro\\u2028cks! ro\\u2029cks!\\n"')
+    assert.strictEqual(
+      serialize(readFileSync('./test/fixtures.txt', 'utf8')),
+      '"ro\\u2028cks! ro\\u2029cks!\\n"'
+    )
   })
 
   describe('compare', () => {
     for (const key in compare) {
       const v = compare[key]
-      it(key, () => { // eslint-disable-line
+      it(key, () => {
+        // eslint-disable-line
         if (!(v instanceof Map) && !(v instanceof Set)) {
           assert.strictEqual(serialize(v), JSON.stringify(v))
-          assert.strictEqual(serialize(v, {space: 2}), JSON.stringify(v, null, 2))
-          assert.strictEqual(serialize(v, {space: '    '}), JSON.stringify(v, null, '    '))
+          assert.strictEqual(
+            serialize(v, { space: 2 }),
+            JSON.stringify(v, null, 2)
+          )
+          assert.strictEqual(
+            serialize(v, { space: '    ' }),
+            JSON.stringify(v, null, '    ')
+          )
         }
       })
     }
   })
-
 
   forEach(valid, (k, v) => {
     it('returns ' + k + ' for ' + k, () => {
@@ -88,7 +100,6 @@ describe('serialize', () => {
   })
 
   describe('toJSON option', () => {
-
     it('uses toJSON if options are not provided', () => {
       const obj = {}
       obj.toJSON = function() {
@@ -110,7 +121,7 @@ describe('serialize', () => {
       obj.toJSON = function() {
         return 'lol'
       }
-      assert.strictEqual(serialize(obj, {toJSON: true}), '"lol"')
+      assert.strictEqual(serialize(obj, { toJSON: true }), '"lol"')
     })
 
     it('does not use and serialize toJSON if toJSON option is set to false', () => {
@@ -118,18 +129,17 @@ describe('serialize', () => {
       obj.toJSON = function() {
         return 'lol'
       }
-      assert.strictEqual(serialize(obj, {toJSON: false}), '{}')
+      assert.strictEqual(serialize(obj, { toJSON: false }), '{}')
     })
 
     it('serializes toJSON if it is not a function', () => {
-      const obj = {toJSON: true}
+      const obj = { toJSON: true }
       const expect = '{"toJSON":true}'
       assert.strictEqual(serialize(obj), expect)
       assert.strictEqual(serialize(obj, {}), expect)
-      assert.strictEqual(serialize(obj, {toJSON: false}), expect)
-      assert.strictEqual(serialize(obj, {toJSON: true}), expect)
+      assert.strictEqual(serialize(obj, { toJSON: false }), expect)
+      assert.strictEqual(serialize(obj, { toJSON: true }), expect)
     })
-
   })
 
   describe('space option', () => {
@@ -141,11 +151,11 @@ describe('serialize', () => {
       boolean: true,
       toJSON: 123,
       string: 'foobar',
-      "Déjà vu": "Déjà vu",
+      'Déjà vu': 'Déjà vu',
       /* eslint-disable */
       bar: {
         toJSON: function() {
-          return {"foo": "bar"}
+          return { foo: 'bar' }
         },
       },
       /* eslint-enable */
@@ -156,13 +166,25 @@ describe('serialize', () => {
     })
 
     it('serializes equally to it with space param as number', () => {
-      assert.strictEqual(serialize(obj, {space: 2}), JSON.stringify(obj, null, 2))
-      assert.strictEqual(serialize(obj, {space: 2}), JSON.stringify(obj, null, '  '))
+      assert.strictEqual(
+        serialize(obj, { space: 2 }),
+        JSON.stringify(obj, null, 2)
+      )
+      assert.strictEqual(
+        serialize(obj, { space: 2 }),
+        JSON.stringify(obj, null, '  ')
+      )
     })
 
     it('serializes equally to it with space param as string', () => {
-      assert.strictEqual(serialize(obj, {space: '    '}), JSON.stringify(obj, null, '    '))
-      assert.strictEqual(serialize(obj, {space: '    '}), JSON.stringify(obj, null, 4))
+      assert.strictEqual(
+        serialize(obj, { space: '    ' }),
+        JSON.stringify(obj, null, '    ')
+      )
+      assert.strictEqual(
+        serialize(obj, { space: '    ' }),
+        JSON.stringify(obj, null, 4)
+      )
     })
 
     it('works equally with Object and Map', () => {
@@ -170,12 +192,14 @@ describe('serialize', () => {
       for (const i in obj) {
         map.set(i, obj[i])
       }
-      assert.strictEqual(serialize(obj, {space: 2}), serialize(map, {space: 2}))
+      assert.strictEqual(
+        serialize(obj, { space: 2 }),
+        serialize(map, { space: 2 })
+      )
     })
   })
 
   describe('replacer option', () => {
-
     it('is called with the object as this context', () => {
       const obj = {
         foo: 'bar',
@@ -185,7 +209,7 @@ describe('serialize', () => {
         assert.strictEqual(k, 'foo')
         assert.strictEqual(v, 'bar')
       }
-      serialize(obj, {replacer})
+      serialize(obj, { replacer })
     })
 
     it('deletes the value if the replacer return undefined for object', () => {
@@ -195,7 +219,7 @@ describe('serialize', () => {
       const replacer = function() {
         return undefined
       }
-      assert.strictEqual(serialize(obj, {replacer}), '{}')
+      assert.strictEqual(serialize(obj, { replacer }), '{}')
     })
 
     it('deletes the value if the replacer return undefined for array', () => {
@@ -206,17 +230,19 @@ describe('serialize', () => {
         assert.strictEqual(v, 'foo')
         return undefined
       }
-      assert.strictEqual(serialize(arr, {replacer}), '[]')
+      assert.strictEqual(serialize(arr, { replacer }), '[]')
     })
 
     it('splice the object if an item is deleted in between for object', () => {
-      const obj = {'foo': 'bar', 'bar': undefined, baz: 'baz'}
+      const obj = { foo: 'bar', bar: undefined, baz: 'baz' }
       const replacer = function(k, v) {
-        if (k === 'bar')
-          return undefined
+        if (k === 'bar') return undefined
         return v
       }
-      assert.strictEqual(serialize(obj, {replacer}), '{"foo":"bar","baz":"baz"}')
+      assert.strictEqual(
+        serialize(obj, { replacer }),
+        '{"foo":"bar","baz":"baz"}'
+      )
     })
 
     it('splice the map if an item is deleted in between for map', () => {
@@ -225,49 +251,49 @@ describe('serialize', () => {
       map.set('bar', undefined)
       map.set('baz', 'baz')
       const replacer = function(k, v) {
-        if (k === 'bar')
-          return undefined
+        if (k === 'bar') return undefined
         return v
       }
-      assert.strictEqual(serialize(map, {replacer}), '{"foo":"bar","baz":"baz"}')
+      assert.strictEqual(
+        serialize(map, { replacer }),
+        '{"foo":"bar","baz":"baz"}'
+      )
     })
 
     it('splice the array if an item is deleted in between for array', () => {
       const arr = ['foo', 'bar', 'foo']
       const replacer = function(k, v) {
-        if (k === 1)
-          return undefined
+        if (k === 1) return undefined
         return v
       }
-      assert.strictEqual(serialize(arr, {replacer}), '["foo","foo"]')
+      assert.strictEqual(serialize(arr, { replacer }), '["foo","foo"]')
     })
 
     it('splice the array if an item is deleted in between for set', () => {
       const set = new Set(['foo', 'bar', 'baz'])
       const replacer = function(k, v) {
-        if (k === 'bar')
-          return undefined
+        if (k === 'bar') return undefined
         return v
       }
-      assert.strictEqual(serialize(set, {replacer}), '["foo","baz"]')
+      assert.strictEqual(serialize(set, { replacer }), '["foo","baz"]')
     })
 
     describe('with space option', () => {
       it('object', () => {
         const replacer = () => undefined
-        const s = serialize({foo: 'bar'}, {replacer, space: 2})
+        const s = serialize({ foo: 'bar' }, { replacer, space: 2 })
         assert.strictEqual(s, '{}')
       })
 
       it('array', () => {
         const replacer = () => undefined
-        const s = serialize(['foo'], {replacer, space: 2})
+        const s = serialize(['foo'], { replacer, space: 2 })
         assert.strictEqual(s, '[]')
       })
 
       it('set', () => {
         const replacer = () => undefined
-        const s = serialize(new Set(['foo']), {replacer, space: 2})
+        const s = serialize(new Set(['foo']), { replacer, space: 2 })
         assert.strictEqual(s, '[]')
       })
 
@@ -275,7 +301,7 @@ describe('serialize', () => {
         const replacer = () => undefined
         const map = new Map()
         map.set('foo', 'bar')
-        const s = serialize(map, {replacer, space: 2})
+        const s = serialize(map, { replacer, space: 2 })
         assert.strictEqual(s, '{}')
       })
     })
@@ -285,18 +311,18 @@ describe('serialize', () => {
       const replacer = (k, v) => v
 
       it('produces correct JSON for object', () => {
-        const s = serialize({foo: 'bar', baz: undefined}, {replacer})
+        const s = serialize({ foo: 'bar', baz: undefined }, { replacer })
         assert.strictEqual(s, '{"foo":"bar"}')
       })
 
       it('produces correct JSON for array', () => {
-        const s = serialize(['foo', undefined], {replacer})
+        const s = serialize(['foo', undefined], { replacer })
         assert.strictEqual(s, '["foo"]')
       })
 
       it('produces correct JSON for Set', () => {
         const set = new Set(['foo', undefined])
-        const s = serialize(set, {replacer})
+        const s = serialize(set, { replacer })
         assert.strictEqual(s, '["foo"]')
       })
 
@@ -304,46 +330,46 @@ describe('serialize', () => {
         const map = new Map()
         map.set('foo', 'bar')
         map.set('baz', undefined)
-        const s = serialize(map, {replacer})
+        const s = serialize(map, { replacer })
         assert.strictEqual(s, '{"foo":"bar"}')
       })
     })
 
     describe('maxIndentLevel', () => {
-      const obj = [{"foo": {"bar": "foo"}}]
+      const obj = [{ foo: { bar: 'foo' } }]
 
       assert.strictEqual(
-        serialize(obj, {space: 0, maxIndentLevel: 0}),
+        serialize(obj, { space: 0, maxIndentLevel: 0 }),
         '[{"foo":{"bar":"foo"}}]'
       )
 
       assert.strictEqual(
-        serialize(obj, {space: 0, maxIndentLevel: 1}),
+        serialize(obj, { space: 0, maxIndentLevel: 1 }),
         '[{"foo":{"bar":"foo"}}]'
       )
 
       assert.strictEqual(
-        serialize(obj, {maxIndentLevel: 0}),
+        serialize(obj, { maxIndentLevel: 0 }),
         '[{"foo":{"bar":"foo"}}]'
       )
 
       assert.strictEqual(
-        serialize(obj, {maxIndentLevel: 1}),
+        serialize(obj, { maxIndentLevel: 1 }),
         '[{"foo":{"bar":"foo"}}]'
       )
 
       assert.strictEqual(
-        serialize(obj, {space: 2, maxIndentLevel: 0}),
+        serialize(obj, { space: 2, maxIndentLevel: 0 }),
         '[{"foo": {"bar": "foo"}}]'
       )
 
       assert.strictEqual(
-        serialize(obj, {space: 2, maxIndentLevel: 1}),
+        serialize(obj, { space: 2, maxIndentLevel: 1 }),
         '[\n  {"foo": {"bar": "foo"}}\n]'
       )
 
       assert.strictEqual(
-        serialize(obj, {space: 2, maxIndentLevel: 2}),
+        serialize(obj, { space: 2, maxIndentLevel: 2 }),
         '[\n  {\n    "foo": {"bar": "foo"}\n  }\n]'
       )
     })

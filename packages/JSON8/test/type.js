@@ -1,8 +1,9 @@
-import assert from 'assert'
-import {type} from '..'
+'use strict'
+
+const assert = require('assert')
+const { type } = require('..')
 
 describe('type', () => {
-
   it('returns boolean for false', () => {
     assert.strictEqual(type(false), 'boolean')
   })

@@ -1,5 +1,7 @@
-import assert from 'assert'
-import JSON8 from '..'
+'use strict'
+
+const assert = require('assert')
+const JSON8 = require('..')
 
 const equal = function(a, b) {
   assert.strictEqual(JSON8.equal(a, b), true)
@@ -10,7 +12,6 @@ const differ = function(a, b) {
 }
 
 describe('equal', () => {
-
   describe('array', () => {
     it('returns true for identical', () => {
       equal([1, 2], [1, 2])
@@ -55,16 +56,16 @@ describe('equal', () => {
 
   describe('object', () => {
     it('returns true for identical', () => {
-      equal({"foo": "bar"}, {"foo": "bar"})
-      equal({"foo": "bar", "bar": "foo"}, {"foo": "bar", "bar": "foo"})
+      equal({ foo: 'bar' }, { foo: 'bar' })
+      equal({ foo: 'bar', bar: 'foo' }, { foo: 'bar', bar: 'foo' })
       equal({}, {})
       const obj = {}
       equal(obj, obj)
     })
 
     it('returns false for different', () => {
-      differ({"foo": "bar"}, {})
-      differ({"foo": "bar"}, {"bar": "foo"})
+      differ({ foo: 'bar' }, {})
+      differ({ foo: 'bar' }, { bar: 'foo' })
     })
   })
 
@@ -94,7 +95,7 @@ describe('equal', () => {
   describe('object and map', () => {
     it('returns true for identical', () => {
       equal({}, new Map())
-      const a = {'foo': 'bar', 'bar': 'foo'}
+      const a = { foo: 'bar', bar: 'foo' }
       const b = new Map()
       b.set('bar', 'foo')
       b.set('foo', 'bar')
@@ -104,7 +105,7 @@ describe('equal', () => {
     })
 
     it('returns false for different', () => {
-      const a = {'foo': 'bar'}
+      const a = { foo: 'bar' }
       const b = new Map()
       b.set('bar', 'foo')
       differ(a, b)
@@ -182,5 +183,4 @@ describe('equal', () => {
       differ(null, 'bar')
     })
   })
-
 })

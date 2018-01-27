@@ -1,14 +1,14 @@
 'use strict'
 
-var types = require('./types')
-var NUMBER = types.NUMBER
-var OBJECT = types.OBJECT
-var BOOLEAN = types.BOOLEAN
-var STRING = types.STRING
-var NULL = types.NULL
-var ARRAY = types.ARRAY
+const types = require('./types')
+const NUMBER = types.NUMBER
+const OBJECT = types.OBJECT
+const BOOLEAN = types.BOOLEAN
+const STRING = types.STRING
+const NULL = types.NULL
+const ARRAY = types.ARRAY
 
-var methods = Object.create(null)
+const methods = Object.create(null)
 methods[ARRAY] = require('./isArray')
 methods[BOOLEAN] = require('./isBoolean')
 methods.JSON = require('./isJSON')
@@ -20,8 +20,7 @@ methods[STRING] = require('./isString')
 methods.structure = require('./isStructure')
 
 module.exports = function is(obj, type) {
-  var fn = methods[type]
-  if (!fn)
-    throw new Error(type + ' is not a valid type')
+  const fn = methods[type]
+  if (!fn) throw new Error(type + ' is not a valid type')
   return fn(obj)
 }
