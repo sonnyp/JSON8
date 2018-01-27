@@ -1,13 +1,14 @@
-import assert from 'assert'
-import {clone, equal} from '..'
+'use strict'
+
+const assert = require('assert')
+const { clone, equal } = require('..')
 
 describe('clone', () => {
-
   let doc = null
   let cl = null
 
   it('returns an array clone copy', () => {
-    doc = ["foo", "bar"]
+    doc = ['foo', 'bar']
     cl = clone(doc)
     assert.deepEqual(cl, doc)
     assert.notStrictEqual(cl, doc)
@@ -15,14 +16,14 @@ describe('clone', () => {
   })
 
   it('returns a set clone copy', () => {
-    doc = new Set(["foo", "bar"])
+    doc = new Set(['foo', 'bar'])
     cl = clone(doc)
     assert(equal(doc, cl))
     assert.notStrictEqual(cl, doc)
   })
 
   it('returns an object clone copy', () => {
-    doc = {"foo": "bar", "bar": "foo"}
+    doc = { foo: 'bar', bar: 'foo' }
     cl = clone(doc)
     assert.deepEqual(cl, doc)
     assert.notStrictEqual(cl, doc)
@@ -30,7 +31,7 @@ describe('clone', () => {
   })
 
   it('returns a map clone copy', () => {
-    doc = {"foo": "bar", "bar": "foo"}
+    doc = { foo: 'bar', bar: 'foo' }
     cl = clone(doc)
     assert(equal(doc, cl))
     assert.notStrictEqual(cl, doc)
@@ -60,6 +61,6 @@ describe('clone', () => {
   it('returns -0 for -0', () => {
     cl = clone(-0)
     assert(cl === 0)
-    assert((1 / cl) === -Infinity)
+    assert(1 / cl === -Infinity)
   })
 })

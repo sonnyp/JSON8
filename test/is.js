@@ -1,11 +1,24 @@
-import assert from 'assert'
-import {is, isObject, isPrimitive, isNull, isJSON, isArray, isStructure, isNumber, isString, isBoolean} from '..'
+'use strict'
+
+const assert = require('assert')
+const {
+  is,
+  isObject,
+  isPrimitive,
+  isNull,
+  isJSON,
+  isArray,
+  isStructure,
+  isNumber,
+  isString,
+  isBoolean,
+} = require('..')
 
 const primitives = {
-  'null': null,
-  'true': true,
-  'false': false,
-  '\'foo\'': 'string',
+  null: null,
+  true: true,
+  false: false,
+  "'foo'": 'string',
   'positive integer': 42,
   'negative integer': -42,
   'positive float': 4.2,
@@ -22,31 +35,27 @@ const numbers = {
 const structures = {
   '[]': [],
   '{}': {},
-  'map': new Map(),
-  'set': new Set(),
+  map: new Map(),
+  set: new Set(),
 }
 
 const VALID = {}
-for (const p in primitives)
-  VALID[p] = primitives[p]
-for (const s in structures)
-  VALID[s] = structures[s]
+for (const p in primitives) VALID[p] = primitives[p]
+for (const s in structures) VALID[s] = structures[s]
 
 /*eslint-disable object-shorthand*/
 const INVALID = {
-  'Infinity': Infinity,
+  Infinity: Infinity,
   '-Infinity': -Infinity,
-  'NaN': NaN,
-  'undefined': undefined,
-  'function': () => {},
+  NaN: NaN,
+  undefined: undefined,
+  function: () => {},
 }
 /*eslint-enable object-shorthand*/
 
 const ALL = {}
-for (const valid in VALID)
-  ALL[valid] = VALID[valid]
-for (const invalid in INVALID)
-  ALL[invalid] = INVALID[invalid]
+for (const valid in VALID) ALL[valid] = VALID[valid]
+for (const invalid in INVALID) ALL[invalid] = INVALID[invalid]
 
 if (global.Symbol && typeof Symbol() === 'symbol') INVALID.symbol = Symbol()
 
@@ -57,14 +66,11 @@ const forEach = function(obj, fn) {
 }
 
 const forEachBut = function(obj, but, fn) {
-  if (isObject(but))
-    but = Object.keys(but)
-  else
-    but = isArray(but) ? but : [but]
+  if (isObject(but)) but = Object.keys(but)
+  else but = isArray(but) ? but : [but]
 
   forEach(obj, function(k, v) {
-    if (but.indexOf(k) === -1)
-      fn(k, v)
+    if (but.indexOf(k) === -1) fn(k, v)
   })
 }
 
@@ -82,7 +88,6 @@ const allBut = function(but, fn) {
 }
 
 describe('is', () => {
-
   it('throws an error if the type is unknown', () => {
     assert.throws(() => {
       is('foo', 'bar')
@@ -191,12 +196,12 @@ describe('is', () => {
   })
 
   describe('string', () => {
-    it('returns true for \'foo\'', () => {
+    it("returns true for 'foo'", () => {
       assert.strictEqual(is('foo', 'string'), true)
       assert.strictEqual(isString('foo'), true)
     })
 
-    allBut('\'foo\'', (k, v) => {
+    allBut("'foo'", (k, v) => {
       it('returns false for ' + k, () => {
         assert.strictEqual(is(v, 'string'), false)
         assert.strictEqual(isString(v), false)

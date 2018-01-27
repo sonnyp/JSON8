@@ -1,11 +1,12 @@
 test/
 
-.babelrc
 .editorconfig
 .eslintignore
 .eslintrc
 .gitignore
 .npmignore
+.prettierignore
+.prettierrc
 .travis.yml
 
 CONTRIBUTING.md

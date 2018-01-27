@@ -1,10 +1,21 @@
 extends:
-  - 'atlas'
+  - eslint:recommended
+  - plugin:prettier/recommended
+
+parserOptions:
+  ecmaVersion: 2015
+  sourceType: script
+
+env:
+  node: true
+  browser: true
+  es6: true
+
+plugins:
+  - prettier
 
 rules:
-  guard-for-in: 0
-  complexity: 0
-  curly: 0
-  no-warning-comments: 0
-  default-case: 0
-  dot-location: [2, 'property']
+  prettier/prettier: error
+  prefer-const: error
+  no-var: error
+  strict: ["error", "global"]
