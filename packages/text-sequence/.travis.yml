@@ -3,15 +3,14 @@ sudo: false
 language: node_js
 
 node_js:
-  - "0.10"
-  - "0.11"
-  - "0.12"
-  - "io.js"
+  - '7'
+  - '8'
+  - '9'
 
-before_install:
-  - npm install -g mocha babel browserify
+cache:
+  yarn: true
+  directories:
+  - node_modules/
 
 script:
-  - npm run unit
-  - npm run lint
-  - npm run webify
+  - npm run test
