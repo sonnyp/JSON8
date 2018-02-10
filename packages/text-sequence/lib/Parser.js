@@ -12,14 +12,14 @@ module.exports = class Parser extends EventEmitter {
 
   write(data) {
     if (typeof data !== "string") data = data.toString();
-    for (let i = 0, l = data.length; i < l; i++) {
-      const char = data[i];
+    for (let pos = 0, l = data.length; pos < l; pos++) {
+      const char = data[pos];
       if (char === RS) {
         this.seq = "";
       } else if (char === CAN) {
         this.emit("data", JSON.parse(this.seq));
         this.seq = "";
-        i++;
+        pos++;
       } else if (char === LF) {
         this.emit("data", JSON.parse(this.seq));
         this.seq = "";
