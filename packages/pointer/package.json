@@ -1,8 +1,11 @@
 {
   "name": "json8-pointer",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "JSON Pointer implementation for JavaScript",
-  "keywords": ["JSON", "pointer"],
+  "keywords": [
+    "JSON",
+    "pointer"
+  ],
   "homepage": "https://github.com/JSON8/pointer",
   "repository": "github:JSON8/pointer",
   "bugs": "https://github.com/JSON8/merge-patch/issues",
@@ -13,8 +16,7 @@
     "bundle": "browserify -s JSON8Pointer index.js -o JSON8Pointer.js",
     "lint": "eslint .",
     "unit": "mocha --compilers js:babel-core/register --recursive test/",
-    "test":
-      "npm run unit && npm run lint && npm run bundle && npm run benchmark",
+    "test": "npm run unit && npm run lint && npm run bundle && npm run benchmark",
     "benchmark": "node benchmark.js"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
