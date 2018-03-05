@@ -11,7 +11,7 @@
     "preversion": "npm test",
     "lint": "prettier -l **.js",
     "unit": "ava",
-    "test": "npm run unit && npm run lint && npm run benchmark"
+    "test": "npm run unit && npm run lint"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",

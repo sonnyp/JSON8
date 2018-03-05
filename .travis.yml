@@ -1,0 +1,21 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+
+matrix:
+  fast_finish: true
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+test:
+  - lerna run test
+  - lerna run benchmark
