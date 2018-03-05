@@ -8,16 +8,6 @@
   dependencies:
     acorn "^5.2.1"
 
-"@fuba/each@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@fuba/each/-/each-0.0.3.tgz#38d118d3fc5104bec9bf04101eaf7e234593267c"
-
-"@fuba/walk@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@fuba/walk/-/walk-0.0.3.tgz#58c24b07e87bb963d736e6c775cbae525841fdf9"
-  dependencies:
-    "@fuba/each" "^0.0.3"
-
 JSONStream@^1.0.3:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.2.tgz#c102371b6ec3a7cf3b847ca00c20bb0fce4c6dea"

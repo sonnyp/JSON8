@@ -7,3 +7,4 @@
 !.travis.yml
 
 JSON8Pointer.js
+node_modules/
