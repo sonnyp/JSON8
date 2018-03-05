@@ -1,7 +1,7 @@
 'use strict'
 
 var ooPointer = require('json8-pointer')
-var walk = ooPointer.walk
+var walk = require('./walk')
 var decode = ooPointer.decode
 
 /**

@@ -2,7 +2,7 @@
 
 var ooPointer = require('json8-pointer')
 var decode = ooPointer.decode
-var walk = ooPointer.walk
+var walk = require('./walk')
 
 /**
  * @typedef OperationResult
