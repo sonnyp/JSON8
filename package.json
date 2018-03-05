@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.0.0-alpha.3"
+  },
+  "workspaces": ["packages/*"]
+}
