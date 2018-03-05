@@ -539,7 +539,7 @@ Getting/asserting the JSON type of a value in JavaScript is troublesome.
 
 * [oo.isPrimitive](#ooisPrimitive) checks if a value is a JSON primitive (null, boolean, string, number)
 
-* [oo.isJSON](#JSON) checks if the value is a JSON valid value
+* [oo.isJSON](#json) checks if the value is a JSON valid value
 
 [↑](#json8)
 
@@ -561,7 +561,7 @@ JSON8 [types](#types) helps avoiding many common errors as well.
 
 * [isArray](#array) returns ```true``` for Set
 * [isObject](#object) returns ```true``` for Map
-* [valid](#oovalid), [isStructure](#structure), [isJSON](#JSON) return ```true``` for Map and Set
+* [valid](#oovalid), [isStructure](#structure), [isJSON](#json) return ```true``` for Map and Set
 * [type](#ootype) returns ```'array'``` for Set and ```'object'``` for Map
 * [serialize](#ooserialize) stringifies Set as array and Map as object
 * [parse](#ooparse) optionally parses arrays as Set and objects as Map
