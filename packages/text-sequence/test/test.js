@@ -1,35 +1,7 @@
 "use strict";
 
 const test = require("ava");
-const serialize = require("../lib/serialize");
 const parse = require("../lib/parse");
-
-test("serialize", t => {
-  t.is(serialize(["hello"]), '\x1e"hello"\x0A');
-  t.is(serialize([true]), "\x1etrue\x0A");
-  t.is(serialize([false]), "\x1efalse\x0A");
-  t.is(serialize([null]), "\x1enull\x0A");
-  t.is(serialize([0]), "\x1e0\x0A");
-  t.is(serialize([-1]), "\x1e-1\x0A");
-  t.is(serialize([1]), "\x1e1\x0A");
-  t.is(serialize([]), "");
-});
-
-test("parser", t => {
-  t.deepEqual(parse('\x1e"hello"\x0A'), ["hello"]);
-  t.deepEqual(parse("\x1etrue\x0A"), [true]);
-  t.deepEqual(parse("\x1efalse\x0A"), [false]);
-  t.deepEqual(parse("\x1enull\x0A"), [null]);
-  t.deepEqual(parse("\x1e0\x0A"), [0]);
-  t.deepEqual(parse("\x1e-1\x0A"), [-1]);
-  t.deepEqual(parse("\x1e1\x0A"), [1]);
-  t.deepEqual(parse(""), []);
-  // Multiple consecutive RS octets do not denote empty
-  // sequence elements between them and can be ignored.
-  // https://tools.ietf.org/html/rfc7464#section-2.1
-  t.deepEqual(parse("\x1e\x1e"), []);
-});
-
 const { createReadStream } = require("fs");
 const ParseStream = require("../lib/ParseStream");
 

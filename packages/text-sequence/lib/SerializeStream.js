@@ -15,7 +15,12 @@ module.exports = class SerializeStream extends Transform {
   }
 
   _transform(data, encoding, callback) {
-    this.serializer.write(data);
+    try {
+      this.serializer.write(data);
+    } catch (err) {
+      callback(err);
+      return
+    }
     callback();
   }
 
