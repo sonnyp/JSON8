@@ -1,54 +1,61 @@
 "use strict";
 
-const Benchmark = require("benchmark");
-const JSONStream = require("JSONStream");
+const { createReadStream, readFile } = require("fs");
+const {promisify} = require('util')
 const JSONTextSequence = require("..");
-const { readFileSync, createReadStream } = require("fs");
+const JSONStream = require("JSONStream");
+const pEvent = require("p-event");
 
-var suite = new Benchmark.Suite("parse");
-const versions = JSON.parse(readFileSync(__dirname + "/data.json")).map(
-  version => JSON.stringify(version)
-);
+const pReadFile = promisify(readFile)
 
-suite
-  .add("JSONStream", {
-    defer: true,
-    fn: deferrred => {
-      const stream = JSONStream.parse("*");
-      stream.on("error", console.error);
-      stream.on("end", () => {
-        deferrred.resolve();
-      });
+const testJSONTextSequence = async () => {
+  const stream = createReadStream(__dirname + "/data.jts");
 
-      stream.write("[");
-      versions.forEach((version, idx) => {
-        stream.write(version);
-        if (idx < versions.length) stream.write(",");
-      });
-      stream.end("]");
-    }
-  })
-  .add("json8-text-sequence", {
-    defer: true,
-    fn: deferrred => {
-      const stream = new JSONTextSequence.ParseStream();
-      stream.on("error", console.error);
-      stream.on("finish", () => {
-        deferrred.resolve();
-      });
+  stream.pipe(new JSONTextSequence.ParseStream());
 
-      versions.forEach((version, idx) => {
-        stream.write(version);
-      });
-      stream.end();
-    }
-  })
-  // add listeners
-  .on("cycle", function(event) {
-    console.log(String(event.target));
-  })
-  .on("complete", function() {
-    console.log("Fastest is " + this.filter("fastest").map("name"));
-  })
-  // run async
-  .run({ async: true });
+  const now = Date.now();
+  stream.on("end", () => {
+    console.log("json8-text-sequence", Date.now() - now, "ms");
+  });
+  return pEvent(stream, "end");
+};
+
+const testJSONStream = async () => {
+  const stream = createReadStream(__dirname + "/data.json");
+
+  stream.pipe(JSONStream.parse());
+
+  const now = Date.now();
+  stream.on("end", () => {
+    console.log("JSONStream", Date.now() - now, "ms");
+  });
+  return pEvent(stream, "end");
+};
+
+
+const testRequire = async () => {
+  const now = Date.now();
+  require(__dirname + "/data.json")
+  console.log("require (non streaming)", Date.now() - now, "ms");
+};
+
+const testJSONParse = async () => {
+  const now = Date.now();
+  JSON.parse(await pReadFile(__dirname + "/data.json", 'utf8'))
+  console.log("fs.readFile and JSON.parse (non streaming)", Date.now() - now, "ms");
+};
+
+const testJSONTextSequenceParse = async () => {
+  const now = Date.now();
+  JSONTextSequence.parse(await pReadFile(__dirname + "/data.jts", 'utf8'))
+  console.log("fs.readFile and json-text-sequence parse (non streaming)", Date.now() - now, "ms");
+};
+
+
+(async () => {
+  await testJSONStream();
+  await testJSONTextSequence();
+  await testRequire();
+  await testJSONParse();
+  await testJSONTextSequenceParse();
+})();

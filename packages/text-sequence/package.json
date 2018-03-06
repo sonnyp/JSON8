@@ -2,12 +2,17 @@
   "name": "json8-text-sequence",
   "version": "0.1.0",
   "description": "JSON Text Sequence toolkit JavaScript",
-  "keywords": ["JSON", "text", "sequence", "stream"],
+  "keywords": [
+    "JSON",
+    "text",
+    "sequence",
+    "stream"
+  ],
   "homepage": "https://github.com/JSON8/text-sequence",
   "repository": "github:JSON8/text-sequence",
   "bugs": "https://github.com/JSON8/text-sequence/issues",
   "scripts": {
-    "benchmark": "node benchmark/fromReadStream",
+    "benchmark": "node benchmark",
     "preversion": "npm test",
     "lint": "prettier -l **.js",
     "unit": "ava",
@@ -18,7 +23,6 @@
   "devDependencies": {
     "JSONStream": "^1.3.2",
     "ava": "^0.25.0",
-    "benchmark": "^2.1.4",
     "p-event": "^1.3.0",
     "prettier": "^1.10.2",
     "request": "^2.83.0"
