@@ -1,7 +1,7 @@
 JSON8 Patch
 ===========
 
-[![build status](https://img.shields.io/travis/JSON8/patch.svg?style=flat-square)](https://travis-ci.org/JSON8/patch/branches)
+# Introduction
 
 JSON Patch [RFC 6902](http://tools.ietf.org/html/rfc6902) (and diff) implementation for JavaScript.
 
@@ -9,6 +9,9 @@ See [jsonpatch.com](http://jsonpatch.com) for more information about JSON Patch.
 
 JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [Tests](#tests)
 
+----
+
+* [Introduction](#introduction)
 * [Comparison](#comparison)
 * [Getting started](#getting-started)
 * [Methods](#methods)
@@ -32,8 +35,6 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
   * [Patch size](#patch-size)
     * [pack](#pack)
     * [unpack](#unpack)
-* [Tests](#tests)
-* [Contributing](#contributing)
 
 # Comparison
 
@@ -344,23 +345,6 @@ Here is what packed looks like
 var patch = ooPatch.unpack(packed);
 // [{...}, {...}, ...]
 ```
-
-[↑](#json8-patch)
-
-###
-
-# Tests
-
-```
-npm install mocha browserify
-npm test
-```
-
-[↑](#json8-patch)
-
-# Contributing
-
-See [CONTRIBUTING.md](https://github.com/JSON8/patch/blob/master/CONTRIBUTING.md)
 
 [↑](#json8-patch)
 

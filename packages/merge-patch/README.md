@@ -1,11 +1,9 @@
 JSON8 Merge Patch
 =================
 
-[![build status](https://img.shields.io/travis/JSON8/merge-patch.svg?style=flat-square)](https://travis-ci.org/JSON8/merge-patch)
-
 # Introduction
 
-JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396) implementation for JavaScript.
+JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396) toolkit for JavaScript.
 
 See also
 
@@ -22,8 +20,6 @@ See also
   * [patch](#patch)
   * [diff](#diff)
   * [toJSONPatch](#tojsonpatch)
-* [Tests](#tests)
-* [Contributing](#contributing)
 
 # Getting started
 
@@ -168,20 +164,5 @@ var JSONPatch = toJSONPatch(JSONMergePatch)
 ```
 
 I might add an option to the toJSONPatch method later to produce a successful JSON Patch but the only way to do this is to pass the document as well. Let me know if there is any interest or [contribute](https://github.com/JSON8/merge-patch/blob/master/CONTRIBUTING.md).
-
-[↑](#json8-merge-patch)
-
-# Tests
-
-```
-npm install mocha browserify
-npm test
-```
-
-[↑](#json8-merge-patch)
-
-# Contributing
-
-See [CONTRIBUTING.md](https://github.com/JSON8/merge-patch/blob/master/CONTRIBUTING.md)
 
 [↑](#json8-merge-patch)

@@ -1,12 +1,15 @@
 JSON8 Pointer
 =============
 
-[![build status](https://img.shields.io/travis/JSON8/pointer.svg?style=flat-square)](https://travis-ci.org/JSON8/pointer/branches)
+# Introduction
 
-JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) implementation for JavaScript.
+JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) toolkit for JavaScript.
 
 See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work with JSON pointers.
 
+----
+
+* [Introduction](#introduction)
 * [Getting started](#getting-started)
 * [Methods](#methods)
   * [find](#find)
@@ -22,8 +25,6 @@ See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work 
   * [dict](#dict)
   * [flatten](#flatten)
   * [unflatten](#unflatten)
-* [Tests](#tests)
-* [Contributing](#contributing)
 
 # Getting started
 
@@ -261,20 +262,5 @@ pointer.unflatten({
   '/1': 'earth'
 }) // ['hello', 'earth']
 ```
-
-[↑](#json8-pointer)
-
-# Tests
-
-```
-npm install -g mocha browserify
-npm test
-```
-
-[↑](#json8-pointer)
-
-# Contributing
-
-See [CONTRIBUTING.md](https://github.com/JSON8/merge-pointer/blob/master/CONTRIBUTING.md)
 
 [↑](#json8-pointer)

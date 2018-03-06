@@ -1,7 +1,7 @@
 {
   "name": "json8-text-sequence",
   "version": "0.1.0",
-  "description": "JSON Text Sequence for JavaScript",
+  "description": "JSON Text Sequence toolkit JavaScript",
   "keywords": ["JSON", "text", "sequence", "stream"],
   "homepage": "https://github.com/JSON8/text-sequence",
   "repository": "github:JSON8/text-sequence",

@@ -1,8 +1,6 @@
 JSON8
 =====
 
-[![build status](https://img.shields.io/travis/JSON8/JSON8/master.svg?style=flat-square)](https://travis-ci.org/JSON8/JSON8/branches)
-
 # Introduction
 
 JSON8 is a JavaScript library that makes working with JSON/data/structures safer and easier.
@@ -26,7 +24,6 @@ See also
 * [JSON8 Merge Patch](https://github.com/JSON8/merge-patch) for simpler but less capable JSON object diffing/patching alternative to JSON Patch and Pointer
 
 ----
-
 
 * [Introduction](#introduction)
 * [Getting started](#getting-started)
@@ -53,8 +50,6 @@ See also
   * [oo.parse](#ooparse)
 * [oo.Document](#oodocument)
 * [Motivations](#motivations)
-* [Tests](#tests)
-* [Contributing](#contributing)
 
 # Getting started
 
@@ -646,19 +641,5 @@ JSON.stringify(-0) //  "0"
 oo.parse("-0")     //  -0
 oo.serialize(-0)   // "-0"
 ```
-
-[↑](#json8)
-
-# Tests
-
-```
-npm test
-```
-
-[↑](#json8)
-
-# Contributing
-
-See [CONTRIBUTING.md](https://github.com/JSON8/JSON8/blob/master/CONTRIBUTING.md)
 
 [↑](#json8)

@@ -1,7 +1,7 @@
 {
   "name": "json8-patch",
   "version": "0.4.1",
-  "description": "JSON Patch implementation for JavaScript",
+  "description": "JSON Patch toolkit for JavaScript",
   "keywords": [
     "JSON",
     "patch",
