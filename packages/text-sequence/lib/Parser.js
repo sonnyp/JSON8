@@ -1,6 +1,6 @@
 "use strict";
 
-const { RS, LF, CAN } = require("./chars");
+const { RS, LF } = require("./chars");
 const { EventEmitter } = require("events");
 
 module.exports = class Parser extends EventEmitter {
@@ -16,10 +16,6 @@ module.exports = class Parser extends EventEmitter {
       const char = data[pos];
       if (char === RS) {
         this.seq = "";
-      } else if (char === CAN) {
-        this.emit("data", JSON.parse(this.seq));
-        this.seq = "";
-        pos++;
       } else if (char === LF) {
         this.emit("data", JSON.parse(this.seq));
         this.seq = "";
