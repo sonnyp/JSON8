@@ -1,7 +1,7 @@
 "use strict";
 
 const { createReadStream, readFile } = require("fs");
-const {promisify} = require('util')
+const promisify = require('util.promisify')
 const JSON8TextSequence = require("..");
 const JSONStream = require("JSONStream");
 const JSONTextSequence = require('json-text-sequence')
