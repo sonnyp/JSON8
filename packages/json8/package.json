@@ -27,10 +27,8 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^15.2.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.5.0",
-    "mocha": "^5.0.0",
     "prettier": "^1.10.2"
   }
 }
