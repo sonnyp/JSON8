@@ -1,8 +1,8 @@
-'use strict'
+"use strict";
 
-var ooPointer = require('json8-pointer')
-var decode = ooPointer.decode
-var walk = require('./walk')
+var ooPointer = require("json8-pointer");
+var decode = ooPointer.decode;
+var walk = require("./walk");
 
 /**
  * @typedef OperationResult
@@ -21,31 +21,27 @@ var walk = require('./walk')
  * @return {OperationResult}
  */
 module.exports = function add(doc, path, value) {
-  var tokens = decode(path)
+  var tokens = decode(path);
 
   // replaces the document
-  if (tokens.length === 0)
-    return {doc: value, previous: doc}
+  if (tokens.length === 0) return { doc: value, previous: doc };
 
-  var r = walk(doc, tokens)
-  var token = r[0]
-  var parent = r[1]
+  var r = walk(doc, tokens);
+  var token = r[0];
+  var parent = r[1];
 
-  var previous
-  var idx
+  var previous;
+  var idx;
 
   if (Array.isArray(parent)) {
-    if (token === '-') {
-      parent.push(value)
-      idx = parent.length - 1
-    }
-    else
-      parent.splice(token, 0, value)
-  }
-  else {
-    previous = parent[token]
-    parent[token] = value
+    if (token === "-") {
+      parent.push(value);
+      idx = parent.length - 1;
+    } else parent.splice(token, 0, value);
+  } else {
+    previous = parent[token];
+    parent[token] = value;
   }
 
-  return {doc: doc, previous: previous, idx: idx}
-}
+  return { doc: doc, previous: previous, idx: idx };
+};

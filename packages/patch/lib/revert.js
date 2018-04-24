@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-var buildRevertPatch = require('./buildRevertPatch')
-var apply = require('./apply')
+var buildRevertPatch = require("./buildRevertPatch");
+var apply = require("./apply");
 
 /**
  * @typedef RevertResult
@@ -16,6 +16,6 @@ var apply = require('./apply')
  * @return {PatchResult}
  */
 module.exports = function revert(doc, items) {
-  var patch = buildRevertPatch(items)
-  return apply(doc, patch)
-}
+  var patch = buildRevertPatch(items);
+  return apply(doc, patch);
+};

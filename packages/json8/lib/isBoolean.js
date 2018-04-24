@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-const BOOLEAN = require('./types').BOOLEAN
+const BOOLEAN = require("./types").BOOLEAN;
 
 module.exports = function isBoolean(obj) {
-  return typeof obj === BOOLEAN
-}
+  return typeof obj === BOOLEAN;
+};

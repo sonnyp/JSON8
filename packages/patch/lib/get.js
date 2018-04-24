@@ -1,8 +1,8 @@
-'use strict'
+"use strict";
 
-var ooPointer = require('json8-pointer')
-var walk = require('./walk')
-var decode = ooPointer.decode
+var ooPointer = require("json8-pointer");
+var walk = require("./walk");
+var decode = ooPointer.decode;
 
 /**
  * @typedef OperationResult
@@ -19,15 +19,14 @@ var decode = ooPointer.decode
  * @return {Any}                - value at the JSON Pointer location
  */
 module.exports = function get(doc, path) {
-  var tokens = decode(path)
+  var tokens = decode(path);
 
   // returns the document
-  if (tokens.length === 0)
-    return doc
+  if (tokens.length === 0) return doc;
 
-  var r = walk(doc, tokens)
-  var token = r[0]
-  var parent = r[1]
+  var r = walk(doc, tokens);
+  var token = r[0];
+  var parent = r[1];
 
-  return parent[token]
-}
+  return parent[token];
+};

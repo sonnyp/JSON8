@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-var get = require('./get')
-var add = require('./add')
+var get = require("./get");
+var add = require("./add");
 
 /**
  * @typedef OperationResult
@@ -20,6 +20,6 @@ var add = require('./add')
  * @return {OperationResult}
  */
 module.exports = function copy(doc, path, dest) {
-  var obj = get(doc, path)
-  return add(doc, dest, obj)
-}
+  var obj = get(doc, path);
+  return add(doc, dest, obj);
+};

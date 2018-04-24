@@ -31,7 +31,7 @@ test.cb("SerializeStream", t => {
   serializer.pipe(
     createWriteStream(__dirname + "/SerializeStream.log", {
       encoding: "utf8",
-      flags: "w"
+      flags: "w",
     })
   );
 

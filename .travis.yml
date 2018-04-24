@@ -18,5 +18,5 @@ cache:
 before_script: lerna bootstrap
 
 script:
-  - lerna run test
+  - yarn test
   - lerna run benchmark

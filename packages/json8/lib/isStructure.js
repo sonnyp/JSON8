@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-const OBJECT = require('./types').OBJECT
+const OBJECT = require("./types").OBJECT;
 
 module.exports = function isStructure(obj) {
-  return typeof obj === OBJECT && obj !== null
-}
+  return typeof obj === OBJECT && obj !== null;
+};

@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-var get = require('./get')
-var equal = require('json8/lib/equal')
+var get = require("./get");
+var equal = require("json8/lib/equal");
 
 /**
  * @typedef OperationResult
@@ -20,9 +20,8 @@ var equal = require('json8/lib/equal')
  * @return {OperationResult}
  */
 module.exports = function test(doc, path, value) {
-  var obj = get(doc, path)
-  if (!equal(obj, value))
-    throw new Error('Test failed')
+  var obj = get(doc, path);
+  if (!equal(obj, value)) throw new Error("Test failed");
 
-  return {doc: doc}
-}
+  return { doc: doc };
+};

@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-var remove = require('./remove')
-var add = require('./add')
+var remove = require("./remove");
+var add = require("./add");
 
 /**
  * @typedef OperationResult
@@ -20,6 +20,6 @@ var add = require('./add')
  * @return {OperationResult}
  */
 module.exports = function move(doc, path, dest) {
-  var r = remove(doc, path)
-  return add(doc, dest, r.previous)
-}
+  var r = remove(doc, path);
+  return add(doc, dest, r.previous);
+};

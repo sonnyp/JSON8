@@ -1,8 +1,8 @@
-'use strict'
+"use strict";
 
-var ooPointer = require('json8-pointer')
-var decode = ooPointer.decode
-var walk = require('./walk')
+var ooPointer = require("json8-pointer");
+var decode = ooPointer.decode;
+var walk = require("./walk");
 
 /**
  * @typedef OperationResult
@@ -20,24 +20,20 @@ var walk = require('./walk')
  * @return {OperationResult}
  */
 module.exports = function remove(doc, path) {
-  var tokens = decode(path)
+  var tokens = decode(path);
 
   // removes the document
-  if (tokens.length === 0)
-    return {doc: undefined, previous: doc}
+  if (tokens.length === 0) return { doc: undefined, previous: doc };
 
-  var r = walk(doc, tokens)
-  var token = r[0]
-  var parent = r[1]
+  var r = walk(doc, tokens);
+  var token = r[0];
+  var parent = r[1];
 
-  var previous = parent[token]
-  if (previous === undefined)
-    throw new Error('Location not found')
+  var previous = parent[token];
+  if (previous === undefined) throw new Error("Location not found");
 
-  if (Array.isArray(parent))
-    parent.splice(token, 1)
-  else
-    delete parent[token]
+  if (Array.isArray(parent)) parent.splice(token, 1);
+  else delete parent[token];
 
-  return {doc: doc, previous: previous}
-}
+  return { doc: doc, previous: previous };
+};
