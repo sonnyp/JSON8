@@ -18,21 +18,21 @@ module.exports = function valid(patch) {
       return false
 
     switch (operation) {
-      case 'add':
-      case 'replace':
-      case 'test':
-        if (op.value === undefined)
-          return false
-        break
-      case 'move':
-      case 'copy':
-        if (typeof op.from !== 'string')
-          return false
-        break
-      case 'remove':
-        break
-      default:
+    case 'add':
+    case 'replace':
+    case 'test':
+      if (op.value === undefined)
         return false
+      break
+    case 'move':
+    case 'copy':
+      if (typeof op.from !== 'string')
+        return false
+      break
+    case 'remove':
+      break
+    default:
+      return false
     }
   }
 

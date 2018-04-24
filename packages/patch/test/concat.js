@@ -1,7 +1,7 @@
 'use strict'
 
-import assert from 'assert'
-import concat from '../lib/concat'
+const assert = require('assert')
+const concat = require('../lib/concat')
 
 describe('concat', () => {
   it('concats the patches into a bigger patch', () => {

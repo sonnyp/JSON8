@@ -1,13 +1,12 @@
 'use strict'
 
-import assert from 'assert'
-import apply from '../lib/apply'
-import diff from '../lib/diff'
-import tests from './diff.json'
-import {clone} from 'json8'
+const assert = require('assert')
+const apply = require('../lib/apply')
+const diff = require('../lib/diff')
+const tests = require('./diff.json')
+const {clone} = require('json8')
 
 describe('diff', () => {
-
   tests.forEach(test => {
     test = clone(test)
     it(test.description, () => {
@@ -15,5 +14,4 @@ describe('diff', () => {
       assert.deepEqual(apply(test.a, test.diff), test.b)
     })
   })
-
 })

@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import apply from '../lib/apply'
+const assert = require('assert')
+const apply = require('../lib/apply')
 
 describe('apply', () => {
-
   it('returns the patch argument if it\'s not an object', () => {
     [true, false, null, [], 42, 'foo'].forEach((v) => {
       assert.equal(apply({}, v), v)
@@ -44,5 +43,4 @@ describe('apply', () => {
     doc = apply(doc, patch)
     assert.deepEqual(doc, patch)
   })
-
 })

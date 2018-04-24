@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import _move from '../lib/move'
+const assert = require('assert')
+const _move = require('../lib/move')
 
 describe('move', () => {
-
   let doc
 
   const move = function(path, dest) {
@@ -12,7 +11,6 @@ describe('move', () => {
   }
 
   describe('object location', () => {
-
     it('moves the object if the parent exists and is valid', () => {
       doc = {bar: 'foo'}
       move('/bar', '/foo')
@@ -33,11 +31,9 @@ describe('move', () => {
         move('/foo/bar', '/bar/foo')
       }, Error)
     })
-
   })
 
   describe('array location', () => {
-
     it('sets the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
       move('/foo/0', '/hello')
@@ -58,7 +54,5 @@ describe('move', () => {
         move('/foo/bar', '/bar/foo')
       }, Error)
     })
-
   })
-
 })

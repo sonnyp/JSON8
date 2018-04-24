@@ -1,6 +1,8 @@
-import assert from 'assert'
-import {flatten, unflatten} from '..'
-import {clone} from 'json8'
+'use strict'
+
+const assert = require('assert')
+const {flatten, unflatten} = require('..')
+const {clone} = require('json8')
 
 const tests = [
   {

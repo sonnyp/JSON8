@@ -1,5 +1,7 @@
-import assert from 'assert'
-import {encode, decode} from '..'
+'use strict'
+
+const assert = require('assert')
+const {encode, decode} = require('..')
 
 describe('parse', () => {
 

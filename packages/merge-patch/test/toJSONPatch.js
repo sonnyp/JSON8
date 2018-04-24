@@ -1,13 +1,12 @@
 'use strict'
 
-import assert from 'assert'
-import toJSONPatch from '../lib/toJSONPatch'
-import tests from './RFC.json'
-import {apply} from 'json8-patch'
-import {clone} from 'json8'
+const assert = require('assert')
+const toJSONPatch = require('../lib/toJSONPatch')
+const tests = require('./RFC.json')
+const {apply} = require('json8-patch')
+const {clone} = require('json8')
 
 describe('toJSONPatch', () => {
-
   it('converts path properties with null value as a remove operation', () => {
     const patch = toJSONPatch({"foo": null})
     assert.deepEqual(patch, [{"op": "remove", "path": "/foo"}])
@@ -36,7 +35,6 @@ describe('toJSONPatch', () => {
   })
 
   describe('RFC', function() {
-
     tests.forEach(function(test) {
       test = clone(test)
 
@@ -55,7 +53,5 @@ describe('toJSONPatch', () => {
         })
       }
     })
-
   })
-
 })

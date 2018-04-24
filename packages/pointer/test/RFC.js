@@ -1,9 +1,11 @@
+'use strict'
+
 /*
   https://tools.ietf.org/html/rfc6901#page-5
  */
 
-import assert from 'assert'
-import pointer from '..'
+const assert = require('assert')
+const pointer = require('..')
 
 describe('RFC', () => {
 

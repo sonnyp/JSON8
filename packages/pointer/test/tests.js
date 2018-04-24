@@ -1,5 +1,7 @@
-import assert from 'assert'
-import find from '../lib/find'
+'use strict'
+
+const assert = require('assert')
+const find = require('../lib/find')
 
 describe('trailing slash', () => {
   describe('/ with object', () => {

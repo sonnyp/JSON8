@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import _copy from '../lib/copy'
+const assert = require('assert')
+const _copy = require('../lib/copy')
 
 describe('copy', () => {
-
   let doc
 
   const copy = function(path, dest) {
@@ -12,7 +11,6 @@ describe('copy', () => {
   }
 
   describe('object location', () => {
-
     it('copy the primitive if the parent exists and is valid', () => {
       doc = {bar: 'foo'}
       copy('/bar', '/foo')
@@ -44,11 +42,9 @@ describe('copy', () => {
         copy('/foo/bar', '/bar/foo')
       }, Error)
     })
-
   })
 
   describe('array location', () => {
-
     it('sets the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
       copy('/foo/0', '/foo/1')
@@ -68,7 +64,5 @@ describe('copy', () => {
         copy('/foo/bar', '/bar/foo')
       }, Error)
     })
-
   })
-
 })

@@ -31,19 +31,19 @@ function run(doc, patch) {
     var fromTokens = decode(patch.from)
 
   switch (patch.op) {
-    case 'add':
-    case 'replace':
-    case 'test':
-      if (patch.value === undefined)
-        throw new Error('Missing value parameter')
-      return operations[patch.op](doc, pathTokens, patch.value)
+  case 'add':
+  case 'replace':
+  case 'test':
+    if (patch.value === undefined)
+      throw new Error('Missing value parameter')
+    return operations[patch.op](doc, pathTokens, patch.value)
 
-    case 'move':
-    case 'copy':
-      return operations[patch.op](doc, fromTokens, pathTokens)
+  case 'move':
+  case 'copy':
+    return operations[patch.op](doc, fromTokens, pathTokens)
 
-    case 'remove':
-      return operations[patch.op](doc, pathTokens)
+  case 'remove':
+    return operations[patch.op](doc, pathTokens)
   }
 
   throw new Error(patch.op + ' isn\'t a valid operation')

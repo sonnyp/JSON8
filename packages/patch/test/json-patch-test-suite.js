@@ -1,13 +1,8 @@
 'use strict'
 
-import assert from 'assert'
-import {clone} from 'json8'
-import apply from '../lib/apply'
-import revert from '../lib/revert'
-import pack from '../lib/pack'
-import unpack from '../lib/unpack'
-import valid from '../lib/valid'
-import buildRevertPatch from '../lib/buildRevertPatch'
+const assert = require('assert')
+const {clone} = require('json8')
+const {apply, revert, pack, unpack, valid, buildRevertPatch} = require('..')
 
 let tests = require('json-patch-test-suite/tests.json')
 const spec_tests = require('json-patch-test-suite/spec_tests.json')
@@ -15,13 +10,11 @@ const spec_tests = require('json-patch-test-suite/spec_tests.json')
 tests = tests.concat(spec_tests)
 
 describe('json-patch-test-suite', () => {
-
   tests.forEach(test => {
     if (test.disabled)
       return
 
     describe(test.comment ? test.comment : 'no test description', () => {
-
       if (test.error) {
         it('throws an error', () => {
           const t = clone(test)
@@ -88,7 +81,6 @@ describe('json-patch-test-suite', () => {
           assert.deepEqual(unpack(packed), t.patch)
         })
       }
-
     })
   })
 })

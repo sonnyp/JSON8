@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import _remove from '../lib/remove'
+const assert = require('assert')
+const _remove = require('../lib/remove')
 
 describe('remove', () => {
-
   let doc
 
   const remove = function(path) {
@@ -12,7 +11,6 @@ describe('remove', () => {
   }
 
   describe('object location', () => {
-
     it('removes and returns the value if the location exists', () => {
       doc = {foo: 'bar'}
       const r = remove('/foo')
@@ -33,11 +31,9 @@ describe('remove', () => {
         remove('/foo/bar')
       }, Error)
     })
-
   })
 
   describe('array location', () => {
-
     it('removes and returns the value if the location exists', () => {
       doc = ['bar']
       const r = remove('/0')
@@ -58,7 +54,5 @@ describe('remove', () => {
         remove('/foo/0')
       }, Error)
     })
-
   })
-
 })

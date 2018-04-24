@@ -1,8 +1,8 @@
 'use strict'
 
-import assert from 'assert'
-import pack from '../lib/pack'
-import unpack from '../lib/unpack'
+const assert = require('assert')
+const pack = require('../lib/pack')
+const unpack = require('../lib/unpack')
 
 const patch = [
   {"op": "add", "path": "/a/b/c", "value": ["foo", "bar"]},

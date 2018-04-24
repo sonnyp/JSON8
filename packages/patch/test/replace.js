@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import _replace from '../lib/replace'
+const assert = require('assert')
+const _replace = require('../lib/replace')
 
 describe('replace', () => {
-
   let doc
 
   const replace = function(path, obj) {
@@ -12,7 +11,6 @@ describe('replace', () => {
   }
 
   describe('object location', () => {
-
     it('replaces the value if the parent exists and is valid', () => {
       doc = {'foo': 'hello'}
       const obj = {bar: 'foo'}
@@ -33,11 +31,9 @@ describe('replace', () => {
         replace('/foo/bar', {bar: 'foo'})
       }, Error)
     })
-
   })
 
   describe('array location', () => {
-
     it('replaces the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
       const r = replace('/foo/0', 'barfoo')
@@ -57,7 +53,5 @@ describe('replace', () => {
         replace('/foo/bar', {bar: 'foo'})
       }, Error)
     })
-
   })
-
 })

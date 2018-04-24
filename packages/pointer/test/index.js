@@ -1,5 +1,7 @@
-import assert from 'assert'
-import {index} from '..'
+'use strict'
+
+const assert = require('assert')
+const {index} = require('..')
 
 const primitives = {
   'null': null,

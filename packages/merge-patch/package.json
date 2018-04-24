@@ -26,7 +26,6 @@
   "devDependencies": {
     "babel-core": "^6.8.0",
     "babel-preset-es2015": "^6.3.13",
-    "eslint": "^0.24.1",
     "json8-patch": "^0.4.0",
     "json8-pointer": "^0.7.1"
   }

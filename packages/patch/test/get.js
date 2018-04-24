@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import _get from '../lib/get'
+const assert = require('assert')
+const _get = require('../lib/get')
 
 describe('get', () => {
-
   let doc
 
   const get = function(path) {
@@ -12,7 +11,6 @@ describe('get', () => {
   }
 
   describe('object location', () => {
-
     it('returns the value if the location exists', () => {
       doc = {'foo': 'bar'}
       const r = get('/foo')
@@ -31,11 +29,9 @@ describe('get', () => {
         get('/foo/bar')
       }, Error)
     })
-
   })
 
   describe('array location', () => {
-
     it('returns the value if the location exists', () => {
       doc = {'foo': ['bar']}
       const r = get('/foo/0')
@@ -54,7 +50,5 @@ describe('get', () => {
         get('/foo/0/bar')
       }, Error)
     })
-
   })
-
 })

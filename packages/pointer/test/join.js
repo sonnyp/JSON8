@@ -1,5 +1,7 @@
-import assert from 'assert'
-import join from '../lib/join'
+'use strict'
+
+const assert = require('assert')
+const join = require('../lib/join')
 
 describe('join', () => {
   it('joins base path and tokens', () => {

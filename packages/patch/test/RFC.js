@@ -1,7 +1,7 @@
 'use strict'
 
-import assert from 'assert'
-import apply from '../lib/apply'
+const assert = require('assert')
+const apply = require('../lib/apply')
 
 /* eslint comma-dangle: 0, space-in-brackets: 0 */
 

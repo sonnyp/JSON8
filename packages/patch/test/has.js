@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import _has from '../lib/has'
+const assert = require('assert')
+const _has = require('../lib/has')
 
 describe('has', () => {
-
   let doc
 
   const has = function(path) {
@@ -12,7 +11,6 @@ describe('has', () => {
   }
 
   describe('object location', () => {
-
     it('returns true if there is a value at the specified location', () => {
       doc = {'foo': 'bar'}
       const r = has('/foo')
@@ -31,11 +29,9 @@ describe('has', () => {
         has('/foo/bar')
       }, Error)
     })
-
   })
 
   describe('array location', () => {
-
     it('returns true if there is a value at the specified location', () => {
       doc = {'foo': ['bar']}
       const r = has('/foo/0')
@@ -54,7 +50,5 @@ describe('has', () => {
         has('/foo/0/bar')
       }, Error)
     })
-
   })
-
 })

@@ -1,5 +1,11 @@
-extends:
-  - 'atlas'
+parserOptions:
+  ecmaVersion: 2015
+  sourceType: script
+
+env:
+  node: true
+  browser: true
+  es6: true
 
 rules:
   guard-for-in: 0

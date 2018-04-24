@@ -1,10 +1,9 @@
 'use strict'
 
-import assert from 'assert'
-import _add from '../lib/add'
+const assert = require('assert')
+const _add = require('../lib/add')
 
 describe('add', () => {
-
   let doc
 
   const add = function(path, obj) {
@@ -12,7 +11,6 @@ describe('add', () => {
   }
 
   describe('object location', () => {
-
     it('sets the value if the parent exists and is valid', () => {
       doc = {}
       const obj = {bar: 'foo'}
@@ -33,11 +31,9 @@ describe('add', () => {
         add('/foo/bar', {bar: 'foo'})
       }, Error)
     })
-
   })
 
   describe('array location', () => {
-
     it('adds the value if the parent exists and is valid', () => {
       doc = {'foo': ['bar']}
       const r = add('/foo/0', 'barfoo')
@@ -57,7 +53,5 @@ describe('add', () => {
         add('/foo/bar', {bar: 'foo'})
       }, Error)
     })
-
   })
-
 })
