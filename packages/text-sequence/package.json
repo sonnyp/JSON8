@@ -23,6 +23,7 @@
   "devDependencies": {
     "JSONStream": "^1.3.2",
     "ava": "^0.25.0",
+    "json-text-sequence": "^0.1.1",
     "p-event": "^1.3.0",
     "prettier": "^1.10.2",
     "request": "^2.83.0"

@@ -3,10 +3,21 @@
 const { Transform } = require("stream");
 const Parser = require("./Parser");
 
+// https://nodejs.org/api/stream.html#stream_implementing_a_transform_stream
+
 module.exports = class ParseStream extends Transform {
-  constructor(options = {}) {
+  constructor(options = {}, parser = new Parser()) {
     super(Object.assign({ objectMode: true, decodeStrings: false }, options));
-    this.parser = new Parser();
+    this.parser = parser;
+    this.parser.on("truncated", seq => {
+      this.emit("truncated", seq);
+    });
+    this.parser.on("invalid", seq => {
+      this.emit("invalid", seq);
+    });
+    this.parser.on("error", err => {
+      this.emit("error", err);
+    });
     this.parser.on("data", data => {
       this.push(data);
     });

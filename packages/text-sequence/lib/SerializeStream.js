@@ -3,6 +3,8 @@
 const { Transform } = require("stream");
 const Serializer = require("./Serializer");
 
+// https://nodejs.org/api/stream.html#stream_implementing_a_transform_stream
+
 module.exports = class SerializeStream extends Transform {
   constructor(options = {}) {
     super(Object.assign({ objectMode: true, decodeStrings: false }, options));
@@ -13,7 +15,12 @@ module.exports = class SerializeStream extends Transform {
   }
 
   _transform(data, encoding, callback) {
-    this.serializer.write(data);
+    try {
+      this.serializer.write(data);
+    } catch (err) {
+      callback(err);
+      return
+    }
     callback();
   }
 

@@ -1,29 +1,7 @@
 "use strict";
 
 const test = require("ava");
-const serialize = require("../lib/serialize");
 const parse = require("../lib/parse");
-
-test("serialize", t => {
-  t.is(serialize(["hello"]), '\x1e"hello"\n');
-  t.is(serialize([true]), "\x1etrue\x0A\n");
-  t.is(serialize([false]), "\x1efalse\x0A\n");
-  t.is(serialize([null]), "\x1enull\x0A\n");
-  t.is(serialize([0]), "\x1e0\x0A\n");
-  t.is(serialize([-1]), "\x1e-1\x0A\n");
-  t.is(serialize([1]), "\x1e1\x0A\n");
-});
-
-test("parser", t => {
-  t.deepEqual(parse('\x1e"hello"\n'), ["hello"]);
-  t.deepEqual(parse("\x1etrue\x0A\n"), [true]);
-  t.deepEqual(parse("\x1efalse\x0A\n"), [false]);
-  t.deepEqual(parse("\x1enull\x0A\n"), [null]);
-  t.deepEqual(parse("\x1e0\x0A\n"), [0]);
-  t.deepEqual(parse("\x1e-1\x0A\n"), [-1]);
-  t.deepEqual(parse("\x1e1\x0A\n"), [1]);
-});
-
 const { createReadStream } = require("fs");
 const ParseStream = require("../lib/ParseStream");
 

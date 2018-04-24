@@ -3,7 +3,6 @@ sudo: false
 language: node_js
 
 node_js:
-  - '6'
   - '7'
   - '8'
   - '9'
@@ -16,6 +15,8 @@ cache:
   directories:
     - node_modules
 
-test:
+before_script: lerna bootstrap
+
+script:
   - lerna run test
   - lerna run benchmark

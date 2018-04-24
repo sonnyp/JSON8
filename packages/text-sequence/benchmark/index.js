@@ -1,21 +1,34 @@
 "use strict";
 
 const { createReadStream, readFile } = require("fs");
-const {promisify} = require('util')
-const JSONTextSequence = require("..");
+const promisify = require('util.promisify')
+const JSON8TextSequence = require("..");
 const JSONStream = require("JSONStream");
+const JSONTextSequence = require('json-text-sequence')
 const pEvent = require("p-event");
 
 const pReadFile = promisify(readFile)
 
-const testJSONTextSequence = async () => {
+const testJSON8TextSequence = async () => {
   const stream = createReadStream(__dirname + "/data.jts");
 
-  stream.pipe(new JSONTextSequence.ParseStream());
+  stream.pipe(new JSON8TextSequence.ParseStream());
 
   const now = Date.now();
   stream.on("end", () => {
     console.log("json8-text-sequence", Date.now() - now, "ms");
+  });
+  return pEvent(stream, "end");
+};
+
+const testJSONTextSequence = async () => {
+  const stream = createReadStream(__dirname + "/data.jts");
+
+  stream.pipe(new JSONTextSequence.parser());
+
+  const now = Date.now();
+  stream.on("end", () => {
+    console.log("json-text-sequence", Date.now() - now, "ms");
   });
   return pEvent(stream, "end");
 };
@@ -45,17 +58,18 @@ const testJSONParse = async () => {
   console.log("fs.readFile and JSON.parse (non streaming)", Date.now() - now, "ms");
 };
 
-const testJSONTextSequenceParse = async () => {
+const testJSON8TextSequenceParse = async () => {
   const now = Date.now();
-  JSONTextSequence.parse(await pReadFile(__dirname + "/data.jts", 'utf8'))
-  console.log("fs.readFile and json-text-sequence parse (non streaming)", Date.now() - now, "ms");
+  JSON8TextSequence.parse(await pReadFile(__dirname + "/data.jts", 'utf8'))
+  console.log("fs.readFile and json8-text-sequence parse (non streaming)", Date.now() - now, "ms");
 };
 
 
 (async () => {
   await testJSONStream();
+  await testJSON8TextSequence();
   await testJSONTextSequence();
   await testRequire();
   await testJSONParse();
-  await testJSONTextSequenceParse();
+  await testJSON8TextSequenceParse();
 })();
