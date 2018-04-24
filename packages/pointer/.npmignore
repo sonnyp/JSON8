@@ -1,7 +1,6 @@
 demos/
 test/
 
-.babelrc
 .editorconfig
 .eslintignore
 .eslintrc
