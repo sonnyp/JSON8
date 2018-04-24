@@ -34,19 +34,19 @@ test("invalid json", t => {
 test("truncated", t => {
   t.deepEqual(catchEvents("\x1enull\x1e"), [
     ["truncated", "null"],
-    ["truncated", ""]
+    ["truncated", ""],
   ]);
   t.deepEqual(catchEvents("\x0Anull\x0A"), [
     ["truncated", ""],
-    ["truncated", "null"]
+    ["truncated", "null"],
   ]);
   t.deepEqual(catchEvents('\x1e"foo"\x0Abar'), [
     ["data", "foo"],
-    ["truncated", "bar"]
+    ["truncated", "bar"],
   ]);
   t.deepEqual(catchEvents('\x1e"foo"\x1ebar'), [
     ["truncated", '"foo"'],
-    ["truncated", "bar"]
+    ["truncated", "bar"],
   ]);
   t.deepEqual(catchEvents("123\x0A"), [["truncated", "123"]]);
   t.deepEqual(catchEvents("\x1e123"), [["truncated", "123"]]);
@@ -63,7 +63,7 @@ test("empty sequence", t => {
   t.deepEqual(catchEvents("\x1e\x1e"), [["truncated", ""]]);
   t.deepEqual(catchEvents("\x1e\x0A\x1e"), [
     ["invalid", ""],
-    ["truncated", ""]
+    ["truncated", ""],
   ]);
 });
 

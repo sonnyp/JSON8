@@ -12,11 +12,7 @@
   "repository": "github:JSON8/merge-patch",
   "bugs": "https://github.com/JSON8/merge-patch/issues",
   "scripts": {
-    "preversion": "npm test",
-    "bundle": "browserify -s JSON8MergePatch index.js -o JSON8MergePatch.js",
-    "lint": "eslint .",
-    "unit": "mocha --recursive test/",
-    "test": "npm run unit && npm run lint && npm run bundle"
+    "test": "mocha --recursive test/"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
@@ -26,5 +22,8 @@
   "devDependencies": {
     "json8-patch": "^0.4.0",
     "json8-pointer": "^0.7.1"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
   }
 }

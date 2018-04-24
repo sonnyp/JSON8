@@ -1,5 +1,5 @@
-'use strict'
+"use strict";
 
 module.exports = function isNull(obj) {
-  return obj === null
-}
+  return obj === null;
+};

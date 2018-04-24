@@ -19,7 +19,7 @@ module.exports = class SerializeStream extends Transform {
       this.serializer.write(data);
     } catch (err) {
       callback(err);
-      return
+      return;
     }
     callback();
   }

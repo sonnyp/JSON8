@@ -1,7 +1,2 @@
+benchmark/
 test/
-
-.editorconfig
-.gitignore
-.travis.yml
-
-LICENSE

@@ -11,12 +11,8 @@
   "repository": "github:JSON8/patch",
   "bugs": "https://github.com/JSON8/patch/issues",
   "scripts": {
-    "preversion": "npm run bundle && npm test",
-    "bundle": "browserify -s JSON8Patch index.js -o JSON8Patch.js",
-    "lint": "eslint .",
-    "unit": "mocha --recursive test/",
-    "benchmark": "node benchmark.js",
-    "test": "npm run unit && npm run lint && npm run bundle"
+    "test": "mocha --recursive test/",
+    "benchmark": "node benchmark.js"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
@@ -25,11 +21,13 @@
     "json8-pointer": "^0.7.1"
   },
   "devDependencies": {
-    "benchmark": "^2.1.0",
     "fast-json-patch": "^2.0.6",
     "jiff": "^0.7.3",
     "json-patch": "^0.7.0",
     "json-patch-test-suite": "^1.1.0",
     "jsonpatch": "^3.0.1"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
   }
 }

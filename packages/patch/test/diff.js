@@ -1,16 +1,16 @@
-'use strict'
+"use strict";
 
-const assert = require('assert')
-const diff = require('../lib/diff')
+const assert = require("assert");
+const diff = require("../lib/diff");
 
-describe('diff', () => {
-  const tests = require('./diff.json')
+describe("diff", () => {
+  const tests = require("./diff.json");
 
   tests.forEach(function(test) {
-    const patch = diff(test.a, test.b)
+    const patch = diff(test.a, test.b);
 
     it(test.description, () => {
-      assert.deepEqual(patch, test.patch)
-    })
-  })
-})
+      assert.deepEqual(patch, test.patch);
+    });
+  });
+});

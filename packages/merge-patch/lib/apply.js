@@ -1,6 +1,6 @@
-'use strict'
+"use strict";
 
-var OBJECT = 'object'
+var OBJECT = "object";
 
 /**
  * apply a JSON merge patch
@@ -11,20 +11,20 @@ var OBJECT = 'object'
  */
 module.exports = function apply(doc, patch) {
   if (typeof patch !== OBJECT || patch === null || Array.isArray(patch)) {
-    return patch
+    return patch;
   }
 
   if (typeof doc !== OBJECT || doc === null || Array.isArray(doc))
-    doc = Object.create(null)
+    doc = Object.create(null);
 
   for (var k in patch) {
-    var v = patch[k]
+    var v = patch[k];
     if (v === null) {
-      delete doc[k]
-      continue
+      delete doc[k];
+      continue;
     }
-    doc[k] = apply(doc[k], v)
+    doc[k] = apply(doc[k], v);
   }
 
-  return doc
-}
+  return doc;
+};

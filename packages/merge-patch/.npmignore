@@ -1,10 +1,1 @@
 test/
-
-.editorconfig
-.eslintignore
-.eslintrc
-.gitignore
-.travis.yml
-
-CONTRIBUTING.md
-LICENSE

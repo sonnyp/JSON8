@@ -1,15 +1,15 @@
-'use strict'
+"use strict";
 
-var decode = require('json8-pointer').decode
-var buildRevertPatch = require('./buildRevertPatch')
+var decode = require("json8-pointer").decode;
+var buildRevertPatch = require("./buildRevertPatch");
 
-var operations = Object.create(null)
-operations.add = require('./add')
-operations.copy = require('./copy')
-operations.move = require('./move')
-operations.remove = require('./remove')
-operations.replace = require('./replace')
-operations.test = require('./test')
+var operations = Object.create(null);
+operations.add = require("./add");
+operations.copy = require("./copy");
+operations.move = require("./move");
+operations.remove = require("./remove");
+operations.replace = require("./replace");
+operations.test = require("./test");
 
 /**
  * @typedef PatchResult
@@ -25,28 +25,25 @@ operations.test = require('./test')
  * @return {Any}
  */
 function run(doc, patch) {
-  if (typeof patch.path === 'string')
-    var pathTokens = decode(patch.path)
-  if (typeof patch.from === 'string')
-    var fromTokens = decode(patch.from)
+  if (typeof patch.path === "string") var pathTokens = decode(patch.path);
+  if (typeof patch.from === "string") var fromTokens = decode(patch.from);
 
   switch (patch.op) {
-  case 'add':
-  case 'replace':
-  case 'test':
-    if (patch.value === undefined)
-      throw new Error('Missing value parameter')
-    return operations[patch.op](doc, pathTokens, patch.value)
+    case "add":
+    case "replace":
+    case "test":
+      if (patch.value === undefined) throw new Error("Missing value parameter");
+      return operations[patch.op](doc, pathTokens, patch.value);
 
-  case 'move':
-  case 'copy':
-    return operations[patch.op](doc, fromTokens, pathTokens)
+    case "move":
+    case "copy":
+      return operations[patch.op](doc, fromTokens, pathTokens);
 
-  case 'remove':
-    return operations[patch.op](doc, pathTokens)
+    case "remove":
+      return operations[patch.op](doc, pathTokens);
   }
 
-  throw new Error(patch.op + ' isn\'t a valid operation')
+  throw new Error(patch.op + " isn't a valid operation");
 }
 
 /**
@@ -59,34 +56,34 @@ function run(doc, patch) {
  */
 function apply(doc, patch, options) {
   if (!Array.isArray(patch))
-    throw new Error('Invalid argument, patch must be an array')
+    throw new Error("Invalid argument, patch must be an array");
 
-  var done = []
+  var done = [];
 
   for (var i = 0, len = patch.length; i < len; i++) {
-    var p = patch[i]
-    var r
+    var p = patch[i];
+    var r;
 
     try {
-      r = run(doc, p)
-    }
-    catch (err) { // restore document
+      r = run(doc, p);
+    } catch (err) {
+      // restore document
       // does not use ./revert.js because it is a circular dependency
-      var revertPatch = buildRevertPatch(done)
-      apply(doc, revertPatch)
-      throw err
+      var revertPatch = buildRevertPatch(done);
+      apply(doc, revertPatch);
+      throw err;
     }
 
-    doc = r.doc
-    done.push([p, r.previous, r.idx])
+    doc = r.doc;
+    done.push([p, r.previous, r.idx]);
   }
 
-  var result = {doc: doc}
+  var result = { doc: doc };
 
-  if (options && typeof options === 'object' && options.reversible === true)
-    result.revert = done
+  if (options && typeof options === "object" && options.reversible === true)
+    result.revert = done;
 
-  return result
+  return result;
 }
 
-module.exports = apply
+module.exports = apply;

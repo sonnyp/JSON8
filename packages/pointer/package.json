@@ -11,23 +11,19 @@
   "bugs": "https://github.com/JSON8/merge-patch/issues",
   "main": "index.js",
   "scripts": {
-    "preversion": "npm test",
-    "prepublish": "npm run bundle",
-    "bundle": "browserify -s JSON8Pointer index.js -o JSON8Pointer.js",
-    "lint": "eslint .",
-    "unit": "mocha --recursive test/",
-    "test": "npm run unit && npm run lint && npm run bundle",
+    "test": "mocha --recursive test/",
     "benchmark": "node benchmark.js"
   },
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "devDependencies": {
-    "benchmark": "^2.1.4",
-    "eslint-config-bestpratices": "^1.0.7",
     "json-pointer": "^0.6.0",
     "json-ptr": "^1.0.1",
     "json8": "^0.9.2",
     "jsonpointer": "^4.0.1",
     "jsonpointer.js": "^0.4.0"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
   }
 }

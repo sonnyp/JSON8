@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-const STRING = require('./types').STRING
+const STRING = require("./types").STRING;
 
 module.exports = function isString(obj) {
-  return typeof obj === STRING
-}
+  return typeof obj === STRING;
+};

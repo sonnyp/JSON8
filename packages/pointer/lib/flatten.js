@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
-var walk = require('./walk')
+var walk = require("./walk");
 
-module.exports = function index (json) {
-  var idxs = Object.create(null)
-  walk(json, function (value, pointer) {
-    var v
+module.exports = function index(json) {
+  var idxs = Object.create(null);
+  walk(json, function(value, pointer) {
+    var v;
     if (Array.isArray(value)) {
-      v = []
+      v = [];
     } else if (global.Map && value instanceof Map) {
-      v = new Map()
+      v = new Map();
     } else if (global.Set && value instanceof Set) {
-      v = new Set()
-    } else if (typeof value === 'object' && value !== null) {
-      v = {}
+      v = new Set();
+    } else if (typeof value === "object" && value !== null) {
+      v = {};
     } else {
-      v = value
+      v = value;
     }
-    idxs[pointer] = v
-  })
-  return idxs
-}
+    idxs[pointer] = v;
+  });
+  return idxs;
+};

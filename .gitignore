@@ -1,10 +1,4 @@
 node_modules/
 
-bundle.js
-
 lerna-debug.log
 yarn-error.log
-
-JSON8MergePatch.js
-JSON8Patch.js
-JSON8Pointer.js

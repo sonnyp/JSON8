@@ -1,11 +1,11 @@
-'use strict'
+"use strict";
 
 function Document(value) {
-  this.value = value
+  this.value = value;
 }
 
 Document.prototype.toJSON = function() {
-  return this.value
-}
+  return this.value;
+};
 
-module.exports = Document
+module.exports = Document;

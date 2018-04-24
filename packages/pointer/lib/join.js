@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
-var decode = require('./decode');
-var encode = require('./encode');
+var decode = require("./decode");
+var encode = require("./encode");
 
 /**
  * Joins pointers
@@ -12,7 +12,7 @@ var encode = require('./encode');
  * @return {String}            - JSON Pointer string
  */
 module.exports = function join(pointer, tokens, separator) {
-  if (typeof pointer === 'string') pointer = decode(pointer, separator);
-  if (typeof tokens === 'string') tokens = [tokens];
+  if (typeof pointer === "string") pointer = decode(pointer, separator);
+  if (typeof tokens === "string") tokens = [tokens];
   return encode(pointer.concat(tokens), separator);
-}
+};

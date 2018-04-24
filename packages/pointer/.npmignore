@@ -1,12 +1,3 @@
 demos/
 test/
-
-.editorconfig
-.eslintignore
-.eslintrc
-.gitignore
-.npmignore
-.travis.yml
-
-CONTRIBUTING.md
-LICENSE
+benchmark.js

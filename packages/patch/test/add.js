@@ -1,57 +1,57 @@
-'use strict'
+"use strict";
 
-const assert = require('assert')
-const _add = require('../lib/add')
+const assert = require("assert");
+const _add = require("../lib/add");
 
-describe('add', () => {
-  let doc
+describe("add", () => {
+  let doc;
 
   const add = function(path, obj) {
-    return _add(doc, path, obj)
-  }
+    return _add(doc, path, obj);
+  };
 
-  describe('object location', () => {
-    it('sets the value if the parent exists and is valid', () => {
-      doc = {}
-      const obj = {bar: 'foo'}
-      const r = add('/foo', {bar: 'foo'})
-      assert.deepEqual(r.doc.foo, obj)
-    })
+  describe("object location", () => {
+    it("sets the value if the parent exists and is valid", () => {
+      doc = {};
+      const obj = { bar: "foo" };
+      const r = add("/foo", { bar: "foo" });
+      assert.deepEqual(r.doc.foo, obj);
+    });
 
-    it('throws an error if the parent does not exists', () => {
-      doc = {}
+    it("throws an error if the parent does not exists", () => {
+      doc = {};
       assert.throws(() => {
-        add('/foo/bar', {bar: 'foo'})
-      }, Error)
-    })
+        add("/foo/bar", { bar: "foo" });
+      }, Error);
+    });
 
-    it('throws an error if the parent is not valid', () => {
-      doc = {foo: 'bar'}
+    it("throws an error if the parent is not valid", () => {
+      doc = { foo: "bar" };
       assert.throws(() => {
-        add('/foo/bar', {bar: 'foo'})
-      }, Error)
-    })
-  })
+        add("/foo/bar", { bar: "foo" });
+      }, Error);
+    });
+  });
 
-  describe('array location', () => {
-    it('adds the value if the parent exists and is valid', () => {
-      doc = {'foo': ['bar']}
-      const r = add('/foo/0', 'barfoo')
-      assert.deepEqual(r.doc, {foo: ['barfoo', 'bar']})
-    })
+  describe("array location", () => {
+    it("adds the value if the parent exists and is valid", () => {
+      doc = { foo: ["bar"] };
+      const r = add("/foo/0", "barfoo");
+      assert.deepEqual(r.doc, { foo: ["barfoo", "bar"] });
+    });
 
-    it('throws an error if the parent does not exists', () => {
-      doc = {'foo': []}
+    it("throws an error if the parent does not exists", () => {
+      doc = { foo: [] };
       assert.throws(() => {
-        add('/foo/0/bar', 'foobar')
-      }, Error)
-    })
+        add("/foo/0/bar", "foobar");
+      }, Error);
+    });
 
-    it('throws an error if the parent is not valid', () => {
-      doc = {foo: true}
+    it("throws an error if the parent is not valid", () => {
+      doc = { foo: true };
       assert.throws(() => {
-        add('/foo/bar', {bar: 'foo'})
-      }, Error)
-    })
-  })
-})
+        add("/foo/bar", { bar: "foo" });
+      }, Error);
+    });
+  });
+});

@@ -1,8 +1,8 @@
-'use strict'
+"use strict";
 
-var ooPointer = require('json8-pointer')
-var decode = ooPointer.decode
-var walk = require('./walk')
+var ooPointer = require("json8-pointer");
+var decode = ooPointer.decode;
+var walk = require("./walk");
 
 /**
  * @typedef OperationResult
@@ -21,21 +21,19 @@ var walk = require('./walk')
  * @return {OperationResult}
  */
 module.exports = function replace(doc, path, value) {
-  var tokens = decode(path)
+  var tokens = decode(path);
 
   // replaces the document
-  if (tokens.length === 0)
-    return {doc: value, previous: doc}
+  if (tokens.length === 0) return { doc: value, previous: doc };
 
-  var r = walk(doc, tokens)
-  var token = r[0]
-  var parent = r[1]
+  var r = walk(doc, tokens);
+  var token = r[0];
+  var parent = r[1];
 
-  var previous = parent[token]
-  if (previous === undefined)
-    throw new Error('Location not found')
+  var previous = parent[token];
+  if (previous === undefined) throw new Error("Location not found");
 
-  parent[token] = value
+  parent[token] = value;
 
-  return {doc: doc, previous: previous}
-}
+  return { doc: doc, previous: previous };
+};
