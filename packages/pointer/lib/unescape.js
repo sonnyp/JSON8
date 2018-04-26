@@ -8,7 +8,7 @@
  * @return {String}            - unescaped token
  */
 module.exports = function unescape(token, separator) {
-  var sep =
+  const sep =
     typeof separator === "string" && separator.length > 0 ? separator : "/";
   return token.replace(/~0/g, "~").replace(/~1/g, sep);
 };

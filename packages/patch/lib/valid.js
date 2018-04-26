@@ -3,15 +3,15 @@
 module.exports = function valid(patch) {
   if (!Array.isArray(patch)) return false;
 
-  for (var i = 0, l = patch.length; i < l; i++) {
-    var op = patch[i];
+  for (let i = 0, l = patch.length; i < l; i++) {
+    const op = patch[i];
 
     if (typeof op !== "object" || op === null || Array.isArray(op))
       return false;
 
     if (typeof op.path !== "string") return false;
 
-    var operation = op.op;
+    const operation = op.op;
     if (typeof op.op !== "string") return false;
 
     switch (operation) {

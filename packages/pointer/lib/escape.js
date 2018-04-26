@@ -8,11 +8,11 @@
  * @return {String}            - escaped token
  */
 module.exports = function escape(token, separator) {
-  var sep =
+  const sep =
     typeof separator === "string" && separator.length > 0 ? separator : "/";
-  var escaped = "";
-  for (var i = 0, length = token.length; i < length; i++) {
-    var l = token.charAt(i);
+  let escaped = "";
+  for (let i = 0, length = token.length; i < length; i++) {
+    const l = token.charAt(i);
     if (l === "~") escaped += "~0";
     else if (l === sep) escaped += "~1";
     else escaped += l;

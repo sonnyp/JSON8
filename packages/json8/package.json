@@ -2,16 +2,10 @@
   "name": "json8",
   "version": "0.9.2",
   "description": "JSON toolkit for JavaScript",
-  "keywords": [
-    "JSON",
-    "es6",
-    "es2015",
-    "map",
-    "set"
-  ],
-  "homepage": "https://github.com/JSON8/JSON8",
+  "keywords": ["JSON", "es6", "es2015", "map", "set"],
+  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/json8",
   "repository": "github:JSON8/JSON8",
-  "bugs": "https://github.com/JSON8/JSON8/issues",
+  "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {
     "test": "mocha --recursive test/"
   },

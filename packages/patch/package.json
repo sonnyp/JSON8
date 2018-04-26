@@ -2,14 +2,10 @@
   "name": "json8-patch",
   "version": "0.4.1",
   "description": "JSON Patch toolkit for JavaScript",
-  "keywords": [
-    "JSON",
-    "patch",
-    "diff"
-  ],
-  "homepage": "https://github.com/JSON8/patch",
+  "keywords": ["JSON", "patch", "diff"],
+  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/patch",
   "repository": "github:JSON8/patch",
-  "bugs": "https://github.com/JSON8/patch/issues",
+  "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {
     "test": "mocha --recursive test/",
     "benchmark": "node benchmark.js"

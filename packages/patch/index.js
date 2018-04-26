@@ -1,6 +1,6 @@
 "use strict";
 
-var apply = require("./lib/apply");
+const apply = require("./lib/apply");
 
 module.exports.diff = require("./lib/diff");
 module.exports.valid = require("./lib/valid");

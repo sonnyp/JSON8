@@ -3,15 +3,15 @@
 /* eslint-disable no-console */
 /* eslint-env node */
 
-var benchmark = require("benchmark");
-var ooPointer = require("./index");
+const benchmark = require("benchmark");
+const ooPointer = require("./index");
 
-var jsonpointer = require("jsonpointer"); // https://github.com/janl/node-jsonpointer
-var jsonpointerjs = require("jsonpointer.js"); // https://github.com/alexeykuzmin/jsonpointer.js
-var manuelstofer = require("json-pointer"); // https://github.com/manuelstofer/json-pointer
-var flitbit = require("json-ptr"); // https://github.com/flitbit/json-ptr
+const jsonpointer = require("jsonpointer"); // https://github.com/janl/node-jsonpointer
+const jsonpointerjs = require("jsonpointer.js"); // https://github.com/alexeykuzmin/jsonpointer.js
+const manuelstofer = require("json-pointer"); // https://github.com/manuelstofer/json-pointer
+const flitbit = require("json-ptr"); // https://github.com/flitbit/json-ptr
 
-var doc = {
+const doc = {
   foo: [1, 2, 3, 4], // eslint-disable-line no-magic-numbers
   baz: [
     {
@@ -20,16 +20,16 @@ var doc = {
   ],
 };
 
-var pointer = "/baz/0/qux";
-var compiled = ooPointer.compile(pointer);
+const pointer = "/baz/0/qux";
+const compiled = ooPointer.compile(pointer);
 
-var janlCompiled = jsonpointer.compile(pointer);
+const janlCompiled = jsonpointer.compile(pointer);
 
-var evaluate = jsonpointerjs.get(doc);
+const evaluate = jsonpointerjs.get(doc);
 
-var ptr = flitbit.create(pointer);
+const ptr = flitbit.create(pointer);
 
-var suite = benchmark.Suite("pointer");
+const suite = benchmark.Suite("pointer");
 
 suite
   .add("find", function() {

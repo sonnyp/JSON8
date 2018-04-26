@@ -3,14 +3,14 @@
 /* eslint-disable no-console */
 /* eslint-env node */
 
-var benchmark = require("benchmark");
-var ooPatch = require("./index");
-var jsonpatch = require("jsonpatch"); // https://github.com/dharmafly/jsonpatch.js
-var json_patch = require("json-patch"); // https://github.com/bruth/jsonpatch-js
-var jiff = require("jiff"); // https://github.com/cujojs/jiff
-var fastjsonpatch = require("fast-json-patch"); // https://github.com/Starcounter-Jack/JSON-Patch
+const benchmark = require("benchmark");
+const ooPatch = require("./index");
+const jsonpatch = require("jsonpatch"); // https://github.com/dharmafly/jsonpatch.js
+const json_patch = require("json-patch"); // https://github.com/bruth/jsonpatch-js
+const jiff = require("jiff"); // https://github.com/cujojs/jiff
+const fastjsonpatch = require("fast-json-patch"); // https://github.com/Starcounter-Jack/JSON-Patch
 
-var doc = {
+const doc = {
   foo: [1, 2, 3, 4],
   baz: [
     {
@@ -19,7 +19,7 @@ var doc = {
   ],
 };
 
-var patch = [
+const patch = [
   {
     op: "replace",
     path: "/baz/0/qux",

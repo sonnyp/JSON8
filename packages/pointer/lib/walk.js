@@ -1,10 +1,10 @@
 "use strict";
 
-var join = require("./join");
+const join = require("./join");
 
 function each(obj, iterator) {
   if (global.Set && obj instanceof Set) {
-    var c = 0;
+    let c = 0;
     obj.forEach(function(value) {
       iterator(value, (c += 1));
     });
@@ -29,16 +29,16 @@ function _walk(value, key, parent, fn) {
 }
 
 module.exports = function walk(json, fn) {
-  var dic = Object.create(null);
+  const dic = Object.create(null);
 
   function get(obj) {
-    for (var p in dic) {
+    for (const p in dic) {
       if (dic[p] === obj) return p;
     }
   }
 
   function set(obj, key, parent) {
-    var path = join(parent ? get(parent) : parent, key);
+    const path = join(parent ? get(parent) : parent, key);
     dic[path] = obj;
   }
 
@@ -51,7 +51,7 @@ module.exports = function walk(json, fn) {
     if (k === undefined || p === undefined) {
       fn(v, "");
     } else {
-      var parent = get(p);
+      const parent = get(p);
       fn(v, join(parent, k.toString()), p, parent);
     }
   });

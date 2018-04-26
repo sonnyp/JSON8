@@ -1,7 +1,7 @@
 "use strict";
 
-var encode = require("./lib/encode");
-var decode = require("./lib/decode");
+const encode = require("./lib/encode");
+const decode = require("./lib/decode");
 
 module.exports.context = require("./lib/context");
 module.exports.decode = decode;

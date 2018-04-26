@@ -1,6 +1,6 @@
 "use strict";
 
-var ops = Object.create(null);
+const ops = Object.create(null);
 ops[0] = "add";
 ops[1] = "remove";
 ops[2] = "replace";
@@ -9,13 +9,13 @@ ops[4] = "copy";
 ops[5] = "test";
 
 module.exports = function unpack(packed) {
-  var unpacked = [];
+  const unpacked = [];
 
-  for (var i = 0, l = packed.length; i < l; i++) {
-    var p = packed[i];
-    var ap = p[0];
-    var a = ops[ap];
-    var op = { op: a, path: p[1] };
+  for (let i = 0, l = packed.length; i < l; i++) {
+    const p = packed[i];
+    const ap = p[0];
+    const a = ops[ap];
+    const op = { op: a, path: p[1] };
 
     // add, replace, test
     if (ap === 0 || ap === 2 || ap === 5) op.value = p[2];

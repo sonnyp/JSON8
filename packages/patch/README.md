@@ -1,5 +1,4 @@
-JSON8 Patch
-===========
+# JSON8 Patch
 
 # Introduction
 
@@ -9,7 +8,7 @@ See [jsonpatch.com](http://jsonpatch.com) for more information about JSON Patch.
 
 JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite; see [Tests](#tests)
 
-----
+---
 
 * [Introduction](#introduction)
 * [Comparison](#comparison)
@@ -38,42 +37,33 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
 
 # Comparison
 
-|module                                                           | root<sub>[0](#root)</sub> | atomic<sub>[1](#atomic)</sub> | mutates<sub>[2](#mutates)</sub>|
-|-----------------------------------------------------------------|--------------------------|-------------------------------|--------------------------------|
-|**json8-patch**                                                  | ☑    | ☑      | ☑       |
-|[jsonpatch](https://github.com/dharmafly/jsonpatch.js)           | ☑    | ☐      | ☑       |
-|[jiff](https://github.com/cujojs/jiff)                           | ☑    | ☐      | ☑       |
-|[json-patch](https://github.com/bruth/jsonpatch-js)              | ☐    | ☐      | ☑       |
-|[fast-json-patch](https://github.com/Starcounter-Jack/JSON-Patch)| ☐    | ☐      | ☑       |
+| module                                                            | root<sub>[0](#root)</sub> | atomic<sub>[1](#atomic)</sub> | mutates<sub>[2](#mutates)</sub> |
+| ----------------------------------------------------------------- | ------------------------- | ----------------------------- | ------------------------------- |
+| **json8-patch**                                                   | ☑                         | ☑                             | ☑                               |
+| [jsonpatch](https://github.com/dharmafly/jsonpatch.js)            | ☑                         | ☐                             | ☑                               |
+| [jiff](https://github.com/cujojs/jiff)                            | ☑                         | ☐                             | ☑                               |
+| [json-patch](https://github.com/bruth/jsonpatch-js)               | ☐                         | ☐                             | ☑                               |
+| [fast-json-patch](https://github.com/Starcounter-Jack/JSON-Patch) | ☐                         | ☐                             | ☑                               |
 
 # Getting started
 
-```npm install json8-patch```
+`npm install json8-patch`
 
-----
+---
 
 ```javascript
-var ooPatch = require('json8-patch');
-```
-
-or
-
-```xml
-<script src="node_modules/json8-patch/JSON8Patch.js"></script>
-```
-```javascript
-var ooPatch = window.JSON8Patch
+const ooPatch = require("json8-patch");
 ```
 
 For performance concerns JSON8 Patch may mutate target document; if you want it to use its own copy use:
 
 ```javascript
-var oo = require('json8')
-var myDocument = {foo: 'bar'}
-var doc = oo.clone(myDocument)
+var oo = require("json8");
+var myDocument = { foo: "bar" };
+var doc = oo.clone(myDocument);
 ```
 
-See [clone](https://github.com/JSON8/JSON8#ooclone).
+See [clone](https://github.com/sonnyp/JSON8/tree/master/packages/json8#ooclone).
 
 JSON8 Patch never mutates patches.
 
@@ -89,7 +79,7 @@ JSON8 Patch never mutates patches.
 doc = ooPatch.apply(doc, patch).doc;
 ```
 
-```ooPatch.apply``` (and other ooPatch methods) returns an object with a doc property because per specification a patch can replace the original root document.
+`ooPatch.apply` (and other ooPatch methods) returns an object with a doc property because per specification a patch can replace the original root document.
 
 The operation is atomic, if any of the patch operation fails, the document will be restored to its original state and an error will be thrown.
 
@@ -103,14 +93,14 @@ Alias for [apply](#apply) method.
 
 ## revert
 
-If the [patch](#patch) or [apply](#apply) method is called with a third argument ```{reversible: true}``` it will return an additional value in the form of a ```revert``` property.
+If the [patch](#patch) or [apply](#apply) method is called with a third argument `{reversible: true}` it will return an additional value in the form of a `revert` property.
 
 The revert object can be used to revert a patch on a document.
 
 ```javascript
 // apply the patch with the reversible option
-var applyResult = ooPatch.apply(doc, patch, {reversible: true});
-doc = applyResult.doc
+var applyResult = ooPatch.apply(doc, patch, { reversible: true });
+doc = applyResult.doc;
 
 // revert the patch
 doc = ooPatch.revert(doc, applyResult.revert).doc;
@@ -130,12 +120,12 @@ You can then use this patch with [apply](#apply) method to revert a previously a
 
 ```javascript
 // apply the patch
-var applyResult = ooPatch.apply(doc, patch, {reversible: true});
-doc = applyResult.doc
+var applyResult = ooPatch.apply(doc, patch, { reversible: true });
+doc = applyResult.doc;
 
 // revert the patch
-var revertPatch = ooPatch.buildRevertPatch(applyResult.revert) // this is a valid JSON Patch
-doc = ooPatch.apply(doc, revertPatch).doc
+var revertPatch = ooPatch.buildRevertPatch(applyResult.revert); // this is a valid JSON Patch
+doc = ooPatch.apply(doc, revertPatch).doc;
 // doc is strictly identical to the original
 ```
 
@@ -156,13 +146,13 @@ Because `buildRevertPatch + apply` offers more flexibility over `revert` it is p
 Returns a diff in the form of a JSON Patch for 2 JSON values.
 
 ```javascript
-ooPatch.diff(true, false)
+ooPatch.diff(true, false);
 // [{"op": "replace", "path": "", "value": "false"}]
 
-ooPatch.diff([], [])
+ooPatch.diff([], []);
 // []
 
-ooPatch.diff({}, {"foo": "bar"})
+ooPatch.diff({}, { foo: "bar" });
 // [{"op": "add", "path": "/foo", "value": "bar"}]
 ```
 
@@ -170,10 +160,10 @@ ooPatch.diff({}, {"foo": "bar"})
 
 ## valid
 
-Returns ```true``` if the patch is valid, ```false``` otherwise.
+Returns `true` if the patch is valid, `false` otherwise.
 
 This method _only_ check for JSON Patch semantic.
-If you need to verify the patch is JSON valid, use [oo.valid](https://github.com/JSON8/JSON8#oovalid)
+If you need to verify the patch is JSON valid, use [oo.valid](https://github.com/sonnyp/JSON8/tree/master/packages/json8#oovalid)
 
 ```javascript
 ooPatch.valid({})  // false
@@ -192,64 +182,67 @@ ooPatch.valid([{op: "add", path: "/foo", value: "bar"}]) // true
 Concats multiple patches into one.
 
 ```javascript
-var patch1 = [{op: "add", value: "bar", path: "/foo"}]
-var patch2 = [{op: "remove", path: "/foo"}]
-var patch = ooPatch.concat(patch1, patch2)
-
-// patch is
-[
-  {op: "add", value: "bar", path: "/foo"},
-  {op: "remove", path: "/foo"}
-]
+var patch1 = [{ op: "add", value: "bar", path: "/foo" }];
+var patch2 = [{ op: "remove", path: "/foo" }];
+var patch = ooPatch.concat(patch1, patch2)[
+  // patch is
+  ({ op: "add", value: "bar", path: "/foo" }, { op: "remove", path: "/foo" })
+];
 ```
 
 [↑](#json8-patch)
 
 ## Operations
 
-```add```, ```copy```, ```replace```, ```move```, ```remove```, ```test``` operations return an object of the form ```{doc: document, previous: value}```
+`add`, `copy`, `replace`, `move`, `remove`, `test` operations return an object of the form `{doc: document, previous: value}`
 
-* ```doc``` is the patched document
-* ```previous``` is the previous/replaced value
+* `doc` is the patched document
+* `previous` is the previous/replaced value
 
 ### add
+
 ```javascript
-doc = ooPatch.add(doc, '/foo', 'foo').doc;
+doc = ooPatch.add(doc, "/foo", "foo").doc;
 ```
 
 [↑](#json8-patch)
 
 ### remove
+
 ```javascript
-doc = ooPatch.remove(doc, '/foo').doc;
+doc = ooPatch.remove(doc, "/foo").doc;
 ```
 
 [↑](#json8-patch)
 
 ### replace
+
 ```javascript
-doc = ooPatch.replace(doc, '/foo', 'foo').doc;
+doc = ooPatch.replace(doc, "/foo", "foo").doc;
 ```
 
 [↑](#json8-patch)
 
 ### move
+
 ```javascript
-doc = ooPatch.move(doc, '/foo', '/bar').doc;
+doc = ooPatch.move(doc, "/foo", "/bar").doc;
 ```
 
 [↑](#json8-patch)
 
 ### copy
+
 ```javascript
-doc = ooPatch.copy(doc, '/foo', '/bar').doc;
+doc = ooPatch.copy(doc, "/foo", "/bar").doc;
 ```
 
 [↑](#json8-patch)
 
 ### test
+
 ```javascript
-doc = ooPatch.test(doc, '/foo', 'bar').doc;
+doc = ooPatch.test(doc, "/foo", "bar").doc;
 ```
 
 [↑](#json8-patch)
@@ -259,16 +252,18 @@ doc = ooPatch.test(doc, '/foo', 'bar').doc;
 Those are not part of the standard and are only provided for convenience.
 
 ### get
+
 ```javascript
-ooPatch.get(doc, '/foo');
+ooPatch.get(doc, "/foo");
 // returns value at /foo
 ```
 
 [↑](#json8-patch)
 
 ### has
+
 ```javascript
-ooPatch.has(doc, '/foo');
+ooPatch.has(doc, "/foo");
 // returns true if there is a value at /foo
 ```
 
@@ -282,21 +277,21 @@ Size (in bytes) comparaison for the following patch file
 
 ```json
 [
-  {"op": "add", "path": "/a/b/c", "value": ["foo", "bar"]},
-  {"op": "remove", "path": "/a/b/c"},
-  {"op": "replace", "path": "/a/b/c", "value": 42},
-  {"op": "move", "from": "/a/b/c", "path": "/a/b/d"},
-  {"op": "copy", "from": "/a/b/c", "path": "/a/b/e"},
-  {"op": "test", "path": "/a/b/c", "value": "foo"}
+  { "op": "add", "path": "/a/b/c", "value": ["foo", "bar"] },
+  { "op": "remove", "path": "/a/b/c" },
+  { "op": "replace", "path": "/a/b/c", "value": 42 },
+  { "op": "move", "from": "/a/b/c", "path": "/a/b/d" },
+  { "op": "copy", "from": "/a/b/c", "path": "/a/b/e" },
+  { "op": "test", "path": "/a/b/c", "value": "foo" }
 ]
 ```
 
-|     format    | size (in bytes) |
-|:-------------:|:---------------:|
-| unpacked      |       313       |
+|    format     | size (in bytes) |
+| :-----------: | :-------------: |
+|   unpacked    |       313       |
 | unpacked gzip |       148       |
-| packed        |       151       |
-| packed gzip   |        99       |
+|    packed     |       151       |
+|  packed gzip  |       99        |
 
 In pratice I'd recommand to use pack/unpack if
 
@@ -311,12 +306,12 @@ In pratice I'd recommand to use pack/unpack if
 
 ```javascript
 var patch = [
-  {"op": "add", "path": "/a/b/c", "value": ["foo", "bar"]},
-  {"op": "remove", "path": "/a/b/c"},
-  {"op": "replace", "path": "/a/b/c", "value": 42},
-  {"op": "move", "from": "/a/b/c", "path": "/a/b/d"},
-  {"op": "copy", "from": "/a/b/c", "path": "/a/b/e"},
-  {"op": "test", "path": "/a/b/c", "value": "foo"}
+  { op: "add", path: "/a/b/c", value: ["foo", "bar"] },
+  { op: "remove", path: "/a/b/c" },
+  { op: "replace", path: "/a/b/c", value: 42 },
+  { op: "move", from: "/a/b/c", path: "/a/b/d" },
+  { op: "copy", from: "/a/b/c", path: "/a/b/e" },
+  { op: "test", path: "/a/b/c", value: "foo" },
 ];
 
 var packed = ooPatch.pack(patch);
@@ -331,7 +326,7 @@ Here is what packed looks like
   [2, "/a/b/c", 42],
   [3, "/a/b/d", "/a/b/c"],
   [4, "/a/b/e", "/a/b/c"],
-  [5, "/a/b/c", "foo"],
+  [5, "/a/b/c", "foo"]
 ]
 ```
 
@@ -358,8 +353,8 @@ Lack of this ability makes the library unable to comply with the specification a
 
 ```json
 [
-  {"op": "replace", "path": "/", "value": "{}"},
-  {"op": "remove", "path": "/"}
+  { "op": "replace", "path": "/", "value": "{}" },
+  { "op": "remove", "path": "/" }
 ]
 ```
 

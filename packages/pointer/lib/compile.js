@@ -1,13 +1,13 @@
 "use strict";
 
-var decode = require("./decode");
+const decode = require("./decode");
 
 module.exports = function compile(pointer) {
-  var tokens = Array.isArray(pointer) ? pointer : decode(pointer);
+  const tokens = Array.isArray(pointer) ? pointer : decode(pointer);
 
-  var str = "return doc";
-  for (var i = 0; i < tokens.length; i++) {
-    str += "['" + tokens[i].replace(/\\/, "\\\\").replace(/\'/, "\\'") + "']";
+  let str = "return doc";
+  for (const token of tokens) {
+    str += "['" + token.replace(/\\/, "\\\\").replace(/'/, "\\'") + "']";
   }
 
   return Function("doc", str); // eslint-disable-line no-new-func

@@ -10,18 +10,18 @@
 module.exports = function decode(pointer, separator) {
   if (Array.isArray(pointer)) return pointer;
 
-  var sep =
+  const sep =
     typeof separator === "string" && separator.length > 0 ? separator : "/";
 
   if (pointer.length === 0) return [];
 
   if (pointer.charAt(0) !== sep) throw new Error("Invalid pointer: " + pointer);
 
-  var tokens = [""];
-  var c = 0;
+  const tokens = [""];
+  let c = 0;
 
-  for (var i = 1, len = pointer.length; i < len; i++) {
-    var l = pointer.charAt(i);
+  for (let i = 1, len = pointer.length; i < len; i++) {
+    const l = pointer.charAt(i);
     if (l === sep) {
       tokens.push("");
       c++;

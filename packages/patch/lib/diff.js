@@ -1,17 +1,17 @@
 "use strict";
 
-var encode = require("json8-pointer").encode;
-var equal = require("json8/lib/equal");
-var type = require("json8/lib/type");
-var ARRAY = "array";
-var OBJECT = "object";
+const encode = require("json8-pointer").encode;
+const equal = require("json8/lib/equal");
+const type = require("json8/lib/type");
+const ARRAY = "array";
+const OBJECT = "object";
 
 module.exports = function diff(a, b, pre) {
-  var patches = [];
-  var prefix = pre || [];
+  let patches = [];
+  const prefix = pre || [];
 
-  var at = type(a);
-  var bt = type(b);
+  const at = type(a);
+  const bt = type(b);
 
   if (bt !== at) {
     if (at === undefined)
@@ -35,7 +35,7 @@ module.exports = function diff(a, b, pre) {
   }
   // both are objects
   else if (bt === OBJECT) {
-    var i, l, keys, k;
+    let i, l, keys, k;
     keys = Object.keys(b);
     for (i = 0, l = keys.length; i < l; i++) {
       k = keys[i];

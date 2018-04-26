@@ -11,8 +11,7 @@ env:
   commonjs: true
 
 rules:
-  # prefer-const: error
-  # no-var: error
+  prefer-const: error
+  no-var: error
   strict: ["error", "global"]
-  no-useless-escape: 0
   valid-jsdoc: [2, {requireReturn: false, requireReturnDescription: false}]

@@ -1,7 +1,7 @@
 "use strict";
 
-var validArrayToken = require("./validArrayToken");
-var OBJECT = "object";
+const validArrayToken = require("./validArrayToken");
+const OBJECT = "object";
 
 /**
  * Get the last token and parent
@@ -11,11 +11,11 @@ var OBJECT = "object";
  * @return {Array}               - [token, target]
  */
 module.exports = function context(doc, tokens) {
-  var length = tokens.length;
+  const length = tokens.length;
 
-  var i = 0;
-  var target = doc;
-  var token;
+  let i = 0;
+  let target = doc;
+  let token;
 
   while (i < length - 1) {
     token = tokens[i++];
@@ -29,7 +29,7 @@ module.exports = function context(doc, tokens) {
     if (typeof Map !== "undefined" && target instanceof Map) {
       target = target.get(token);
     } else if (typeof Set !== "undefined" && target instanceof Set) {
-      var c = 0;
+      let c = 0;
       target.forEach(function(item) {
         // eslint-disable-line
         if (c === +token) target = item;

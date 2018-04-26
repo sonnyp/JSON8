@@ -1,7 +1,7 @@
 "use strict";
 
-var decode = require("./decode");
-var encode = require("./encode");
+const decode = require("./decode");
+const encode = require("./encode");
 
 /**
  * Joins pointers

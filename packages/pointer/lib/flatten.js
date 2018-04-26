@@ -1,11 +1,11 @@
 "use strict";
 
-var walk = require("./walk");
+const walk = require("./walk");
 
 module.exports = function index(json) {
-  var idxs = Object.create(null);
+  const idxs = Object.create(null);
   walk(json, function(value, pointer) {
-    var v;
+    let v;
     if (Array.isArray(value)) {
       v = [];
     } else if (global.Map && value instanceof Map) {

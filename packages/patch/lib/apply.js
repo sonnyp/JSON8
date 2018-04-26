@@ -1,9 +1,9 @@
 "use strict";
 
-var decode = require("json8-pointer").decode;
-var buildRevertPatch = require("./buildRevertPatch");
+const decode = require("json8-pointer").decode;
+const buildRevertPatch = require("./buildRevertPatch");
 
-var operations = Object.create(null);
+const operations = Object.create(null);
 operations.add = require("./add");
 operations.copy = require("./copy");
 operations.move = require("./move");
@@ -25,8 +25,8 @@ operations.test = require("./test");
  * @return {Any}
  */
 function run(doc, patch) {
-  if (typeof patch.path === "string") var pathTokens = decode(patch.path);
-  if (typeof patch.from === "string") var fromTokens = decode(patch.from);
+  const pathTokens = typeof patch.path === "string" ? decode(patch.path) : null;
+  const fromTokens = typeof patch.from === "string" ? decode(patch.from) : null;
 
   switch (patch.op) {
     case "add":
@@ -58,18 +58,18 @@ function apply(doc, patch, options) {
   if (!Array.isArray(patch))
     throw new Error("Invalid argument, patch must be an array");
 
-  var done = [];
+  const done = [];
 
-  for (var i = 0, len = patch.length; i < len; i++) {
-    var p = patch[i];
-    var r;
+  for (let i = 0, len = patch.length; i < len; i++) {
+    const p = patch[i];
+    let r;
 
     try {
       r = run(doc, p);
     } catch (err) {
       // restore document
       // does not use ./revert.js because it is a circular dependency
-      var revertPatch = buildRevertPatch(done);
+      const revertPatch = buildRevertPatch(done);
       apply(doc, revertPatch);
       throw err;
     }
@@ -78,7 +78,7 @@ function apply(doc, patch, options) {
     done.push([p, r.previous, r.idx]);
   }
 
-  var result = { doc: doc };
+  const result = { doc: doc };
 
   if (options && typeof options === "object" && options.reversible === true)
     result.revert = done;

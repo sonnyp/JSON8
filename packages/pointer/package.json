@@ -2,13 +2,10 @@
   "name": "json8-pointer",
   "version": "0.7.1",
   "description": "JSON Pointer toolkit for JavaScript",
-  "keywords": [
-    "JSON",
-    "pointer"
-  ],
-  "homepage": "https://github.com/JSON8/pointer",
+  "keywords": ["JSON", "pointer"],
+  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/pointer",
   "repository": "github:JSON8/pointer",
-  "bugs": "https://github.com/JSON8/merge-patch/issues",
+  "bugs": "https://github.com/sonnyp/JSON8/issues",
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive test/",

@@ -1,17 +1,10 @@
-JSON8 Merge Patch
-=================
+# JSON8 Merge Patch
 
-# Introduction
+## Introduction
 
 JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396) toolkit for JavaScript.
 
-See also
-
-* [JSON8](https://github.com/JSON8/JSON8) to work with JSON
-* [JSON8 Patch](https://github.com/JSON8/patch) for more capable JSON diffing and patching
-* [JSON8 Pointer](https://github.com/JSON8/pointer) for JSON Pointer (URL for JSON) implementation
-
-----
+---
 
 * [Introduction](#introduction)
 * [Getting started](#getting-started)
@@ -21,42 +14,33 @@ See also
   * [diff](#diff)
   * [toJSONPatch](#tojsonpatch)
 
-# Getting started
+## Getting started
 
-```npm install json8-merge-patch```
+`npm install json8-merge-patch`
 
-----
+---
 
 ```javascript
-var ooMergePatch = require('json8-merge-patch');
-```
-
-or
-
-```xml
-<script src="node_modules/json8-merge-patch/JSON8MergePatch.js"></script>
-```
-```javascript
-var ooMergePatch = window.JSON8MergePatch
+const mergePatch = require("json8-merge-patch");
 ```
 
 [↑](#json8-merge-patch)
 
-# Methods
+## Methods
 
-## apply
+### apply
 
 Apply a JSON Merge Patch to a JSON document.
 
-* May mutates the target document, if you wish to pass a shallow copy use [JSON8 clone](https://github.com/JSON8/JSON8#ooclone).
-* Does not validate the patch nor the target nor the result for JSON validness, use [JSON8 valid](https://github.com/JSON8/JSON8#valid).
+* May mutates the target document, if you wish to pass a shallow copy use [JSON8 clone](https://github.com/sonnyp/JSON8/tree/master/packages/json8#ooclone).
+* Does not validate the patch nor the target nor the result for JSON correctness, use [JSON8 valid](https://github.com/sonnyp/JSON8/tree/master/packages/json8#oovalid).
 
 ```javascript
-doc = ooMergePatch.apply(doc, mergePatch);
+doc = mergePatch.apply(doc, mergePatch);
 ```
 
 ```javascript
-var person = {
+let person = {
   "name": "John Doe",
   "friendly": true,
   "age": 18,
@@ -65,7 +49,7 @@ var person = {
   }
 }
 
-var mergePatch = {
+const patch = {
   "age": 19,
   "friendly": "maybe"
   "address": {
@@ -73,37 +57,40 @@ var mergePatch = {
   }
 }
 
-person = ooMergePatch.apply(person, mergePatch)
-//{
-//  "name": "John Doe",
-//  "friendly": "maybe",
-//  "age": 19,
-//  "address": {}
-//}
+person = mergePatch.apply(person, patch)
+/*
+{
+  "name": "John Doe",
+  "friendly": "maybe",
+  "age": 19,
+  "address": {}
+}
+*/
 ```
-
 
 [↑](#json8-merge-patch)
 
-## patch
+### patch
 
 Alias for [apply](#apply) method.
 
 [↑](#json8-merge-patch)
 
-## diff
+### diff
 
-Compares two JSON documents and returns a JSON Merge Patch diff.
+Compares two JSON documents and returns a JSON Merge Patch.
 
 ```javascript
-var a = {"foo": "bar", "bar": "foo"}
-var b = {"foo": "foo"}
+const a = { foo: "bar", bar: "foo" };
+const b = { foo: "foo" };
 
-ooMergePatch.diff(a, b)
-//{
-//  "foo": "foo",
-//  "bar": null
-// }
+mergePatch.diff(a, b);
+/*
+{
+  "foo": "foo",
+  "bar": null
+}
+*/
 ```
 
 [↑](#json8-merge-patch)
@@ -111,22 +98,28 @@ ooMergePatch.diff(a, b)
 ## toJSONPatch
 
 JSON Patch is a more capable alternative to JSON Merge Patch.
-To work with JSON Patch see [JSON8 Patch](https://github.com/JSON8/patch).
+To work with JSON Patch see [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/master/packages/patch).
 
-This method converts a JSON Merge Patch to a JSON Patch and is only available if the optional dependency [JSON8 Pointer](https://github.com/JSON8/pointer) is available.
+This method converts a JSON Merge Patch to a JSON Patch and is only available if the optional dependency [JSON8 Pointer](https://github.com/sonnyp/JSON8/tree/master/packages/pointer) is available.
 
-Does not validate the merge patch nor the patch for JSON validness, use [JSON8 valid](https://github.com/JSON8/JSON8#valid).
+Does not validate the merge patch nor the patch for JSON correctness, use [JSON8 valid](https://github.com/sonnyp/JSON8/tree/master/packages/json8#oovalid).
+
+`npm install json8-pointer`
+
+---
 
 ```javascript
-var JSONMergePatch = {
+const JSONMergePatch = {
   "foo": {"bar": "foobar"},
   "bar": null}
 }
-var JSONPatch = ooMergePatch.toJSONPatch(JSONMergePatch)
-//[
-//  { op: 'add', path: '/foo/bar', value: 'foobar' },
-//  { op: 'remove', path: '/bar' }
-//]
+const JSONPatch = mergePatch.toJSONPatch(JSONMergePatch)
+/*
+[
+  { op: 'add', path: '/foo/bar', value: 'foobar' },
+  { op: 'remove', path: '/bar' }
+]
+*/
 ```
 
 Per specification a JSON Merge Patch that would successfully apply on a document might fail to apply once converted to a JSON Patch.
@@ -136,33 +129,30 @@ There are 3 cases:
 Incompatible destination
 
 ```javascript
-
-var doc = []
-var JSONMergePatch = {a: 'hello'}
-var JSONPatch = toJSONPatch(JSONMergePatch)
+const doc = [];
+const JSONMergePatch = { a: "hello" };
+const JSONPatch = toJSONPatch(JSONMergePatch);
 // JSONPatch will fail to apply because doc is not an object
 ```
 
 Wrong location
 
 ```javascript
-
-var doc = {}
-var JSONMergePatch = {a: {b: 'hello'}}
-var JSONPatch = toJSONPatch(JSONMergePatch)
+const doc = {};
+const JSONMergePatch = { a: { b: "hello" } };
+const JSONPatch = toJSONPatch(JSONMergePatch);
 // JSONPatch will fail to apply because doc.a doesn't exist
 ```
 
 Remove non-existant value
 
 ```javascript
-
-var doc = {}
-var JSONMergePatch = {a: null}
-var JSONPatch = toJSONPatch(JSONMergePatch)
+const doc = {};
+const JSONMergePatch = { a: null };
+const JSONPatch = toJSONPatch(JSONMergePatch);
 // JSONPatch will fail to apply because doc.a doesn't exist
 ```
 
-I might add an option to the toJSONPatch method later to produce a successful JSON Patch but the only way to do this is to pass the document as well. Let me know if there is any interest or [contribute](https://github.com/JSON8/merge-patch/blob/master/CONTRIBUTING.md).
+I might add an option to the toJSONPatch method later to produce a successful JSON Patch but the only way to do this is to pass the document as well. Let me know if there is any interest or [contribute](https://github.com/sonnyp/JSON8/blob/master/CONTRIBUTING.md).
 
 [↑](#json8-merge-patch)

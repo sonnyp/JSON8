@@ -1,7 +1,7 @@
 "use strict";
 
-var validArrayToken = require("json8-pointer").validArrayToken;
-var OBJECT = "object";
+const validArrayToken = require("json8-pointer").validArrayToken;
+const OBJECT = "object";
 
 /**
  * Walk a JSON document with a tokens array
@@ -11,11 +11,11 @@ var OBJECT = "object";
  * @return {Array}               - [token, target]
  */
 module.exports = function walk(doc, tokens) {
-  var length = tokens.length;
+  const length = tokens.length;
 
-  var i = 0;
-  var target = doc;
-  var token;
+  let i = 0;
+  let target = doc;
+  let token;
 
   while (i < length - 1) {
     token = tokens[i++];

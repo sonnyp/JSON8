@@ -306,7 +306,7 @@ describe("serialize", () => {
       });
     });
 
-    // https://github.com/JSON8/JSON8/issues/18
+    // https://github.com/sonnyp/JSON8/issues/18
     describe("returns undefined", () => {
       const replacer = (k, v) => v;
 

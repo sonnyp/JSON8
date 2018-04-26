@@ -7,7 +7,7 @@
 const assert = require("assert");
 const pointer = require("..");
 
-describe("RFC", () => {
+describe("compile", () => {
   const doc = {
     foo: ["bar", "baz"],
     "": 0,

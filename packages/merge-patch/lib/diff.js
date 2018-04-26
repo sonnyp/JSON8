@@ -1,16 +1,16 @@
 "use strict";
 
-var type = require("json8/lib/type");
-var equal = require("json8/lib/equal");
-var OBJECT = "object";
+const type = require("json8/lib/type");
+const equal = require("json8/lib/equal");
+const OBJECT = "object";
 
 module.exports = function diff(a, b) {
-  var t = type(a);
+  const t = type(a);
   if (t !== OBJECT || t !== type(b)) return b;
 
-  var patch = {};
+  const patch = {};
 
-  var keys, i, l, k;
+  let keys, i, l, k;
 
   keys = Object.keys(b);
   for (i = 0, l = keys.length; i < l; i++) {

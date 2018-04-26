@@ -1,12 +1,12 @@
 "use strict";
 
-var OBJECT = "object";
-var encode = require("json8-pointer/lib/encode");
+const OBJECT = "object";
+const encode = require("json8-pointer/lib/encode");
 
 /**
  * Convert a JSON Merge Patch to a JSON Patch
- * @param  {Any}   patch   - JSON Merge Patch
- * @param  {array} prefix  - tokens prefix (private)
+ * @param  {Object} patch  - JSON Merge Patch
+ * @param  {Array}  prefix - tokens prefix (private)
  * @return {Array}         - JSON Patch document
  */
 module.exports = function toJSONPatch(patch, prefix) {
@@ -15,11 +15,11 @@ module.exports = function toJSONPatch(patch, prefix) {
   }
 
   prefix = prefix || [];
-  var ops = [];
+  let ops = [];
 
-  for (var k in patch) {
-    var v = patch[k];
-    var tokens = prefix.slice();
+  for (const k in patch) {
+    const v = patch[k];
+    const tokens = prefix.slice();
     tokens.push(k);
 
     if (typeof v === OBJECT && v !== null && !Array.isArray(v)) {
@@ -27,7 +27,7 @@ module.exports = function toJSONPatch(patch, prefix) {
       continue;
     }
 
-    var path = encode(tokens);
+    const path = encode(tokens);
 
     if (v === null) ops.push({ op: "remove", path: path });
     else ops.push({ op: "add", path: path, value: v });
