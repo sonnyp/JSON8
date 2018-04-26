@@ -1,13 +1,12 @@
-JSON8 Pointer
-=============
+# JSON8 Pointer
 
-# Introduction
+## Introduction
 
 JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) toolkit for JavaScript.
 
-See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work with JSON pointers.
+See also [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/master/packages/patch) for more methods to work with JSON pointers.
 
-----
+---
 
 * [Introduction](#introduction)
 * [Getting started](#getting-started)
@@ -25,181 +24,173 @@ See also [JSON8 Patch](https://github.com/JSON8/patch) for more methods to work 
   * [dict](#dict)
   * [flatten](#flatten)
   * [unflatten](#unflatten)
+  * [compile](#compile)
 
-# Getting started
+## Getting started
 
 `npm install json8-pointer`
 
-----
+---
 
 ```javascript
-var pointer = require('json8-pointer');
-```
-
-or
-
-```xml
-<script src="node_modules/json8-pointer/JSON8Pointer.js"></script>
-```
-```javascript
-var pointer = window.JSON8Pointer
+const pointer = require("json8-pointer");
 ```
 
 [↑](#json8-pointer)
 
-# Methods
+## Methods
 
-## find
+### find
 
 Use a JSON Pointer to find a value in a JSON document.
-Returns ```undefined``` if the value cannot be found.
+Returns `undefined` if the value cannot be found.
 
 ```javascript
-var doc = {"foo": {"bar": "foobar"}}
+var doc = { foo: { bar: "foobar" } };
 
-pointer.find(doc, '/foo/bar');
+pointer.find(doc, "/foo/bar");
 // "foobar"
 
-pointer.find(doc, '/bar/foo');
+pointer.find(doc, "/bar/foo");
 // undefined
 ```
 
 [↑](#json8-pointer)
 
-## context
+### context
 
 Returns the target parent and target property of a pointer.
 
 ```javascript
-var doc = {"foo": {"bar": "foobar"}}
+var doc = { foo: { bar: "foobar" } };
 
-pointer.context(doc, '/foo/bar');
+pointer.context(doc, "/foo/bar");
 // ['bar', doc.foo]
 ```
 
 [↑](#json8-pointer)
 
-## encode
+### encode
 
 Takes an array of unescaped tokens (see [decode](#decode)) and return a JSON Pointer string.
 
- ```javascript
-pointer.encode(['foo', 'bar', 'hello']);
+```javascript
+pointer.encode(["foo", "bar", "hello"]);
 // '/foo/bar/hello'
 
-pointer.encode(['foo', 'a/b'])
+pointer.encode(["foo", "a/b"]);
 // '/foo/a~1b'
 ```
 
 You can specify a different separator than the default `/`.
 
 ```javascript
-pointer.encode(['foo', 'bar', 'hello'], '.');
+pointer.encode(["foo", "bar", "hello"], ".");
 // '.foo.bar.hello'
 ```
 
 [↑](#json8-pointer)
 
-## serialize
+### serialize
 
 Alias for the [encode](#encode) method.
 
 [↑](#json8-pointer)
 
-## escape
+### escape
 
 Escape a single token for use in JSON Pointer.
 
 ```javascript
-pointer.escape('a/b')
+pointer.escape("a/b");
 // 'a~1b'
 ```
 
 You can specify a different separator than the default `/`.
 
 ```javascript
-pointer.escape('a.b', '.')
+pointer.escape("a.b", ".");
 // 'a~1b'
 ```
 
 [↑](#json8-pointer)
 
-## decode
+### decode
 
 Takes a JSON Pointer string and return an array of unescaped tokens.
 
 ```javascript
-pointer.decode('/foo/bar/hello');
+pointer.decode("/foo/bar/hello");
 // ['foo', 'bar', 'hello'];
 
-pointer.decode('/foo/a~1b')
+pointer.decode("/foo/a~1b");
 // ['foo', 'a/b']
 ```
 
 You can specify a different separator than the default `/`.
 
 ```javascript
-pointer.decode('.foo.bar.hello', '.');
+pointer.decode(".foo.bar.hello", ".");
 // ['foo', 'bar', 'hello'];
 ```
 
 [↑](#json8-pointer)
 
-## parse
+### parse
 
 Alias for the [decode](#decode) method.
 
 [↑](#json8-pointer)
 
-## unescape
+### unescape
 
 Unescape a single token see [escape](#escape).
 
 ```javascript
-pointer.unescape('a~1b')
+pointer.unescape("a~1b");
 // 'a/b'
 ```
 
 You can specify a different separator than the default `/`.
 
 ```javascript
-pointer.unescape('a~1b', '.')
+pointer.unescape("a~1b", ".");
 // 'a/b'
 ```
 
 [↑](#json8-pointer)
 
-## join
+### join
 
 Join a base pointer and tokens;
 
 ```javascript
-pointer.join('/foo', ['bar'])
-pointer.join(['foo'], 'bar')
-pointer.join('', ['foo', 'bar'])
-pointer.join([], ['foo', 'bar'])
+pointer.join("/foo", ["bar"]);
+pointer.join(["foo"], "bar");
+pointer.join("", ["foo", "bar"]);
+pointer.join([], ["foo", "bar"]);
 // `/foo/bar`
 ```
 
 You can specify a different separator than the default `/`.
 
 ```javascript
-pointer.join('/foo', ['bar'], '.')
+pointer.join("/foo", ["bar"], ".");
 // `.foo.bar`
 ```
 
 [↑](#json8-pointer)
 
-## index
+### index
 
 [demo/playground](https://json8.github.io/pointer/demos/index/)
 
 The `index` method returns an object with all values indexed by pointers.
 
 ```javascript
-pointer.index('foo') // {'': 'foo'}
+pointer.index("foo"); // {'': 'foo'}
 
-pointer.index(['hello', 'earth'])
+pointer.index(["hello", "earth"]);
 //  {
 //    '': ['hello', 'earth'],
 //    '/0': 'hello',
@@ -209,7 +200,7 @@ pointer.index(['hello', 'earth'])
 
 [↑](#json8-pointer)
 
-## dict
+### dict
 
 [demo/playground](https://json8.github.io/pointer/demos/index/)
 
@@ -230,14 +221,14 @@ pointer.index({'foo', 'bar'})
 
 [↑](#json8-pointer)
 
-## flatten
+### flatten
 
 [demo/playground](https://json8.github.io/pointer/demos/flatten/)
 
 The `flatten` method works like a flat version of [index](#index).
 
 ```javascript
-pointer.flatten(['hello', 'earth'])
+pointer.flatten(["hello", "earth"]);
 //  {
 //    '': [],
 //    '/0': 'hello',
@@ -247,20 +238,30 @@ pointer.flatten(['hello', 'earth'])
 
 [↑](#json8-pointer)
 
-## unflatten
+### unflatten
 
 [demo/playground](https://json8.github.io/pointer/demos/flatten/)
 
 The `unflatten` method takes an [flattened](#flatten) object and returns a deep JSON document.
 
 ```javascript
-pointer.unflatten({'': 'foo'}) // 'foo'
+pointer.unflatten({ "": "foo" }); // 'foo'
 
 pointer.unflatten({
-  '': [],
-  '/0': 'hello',
-  '/1': 'earth'
-}) // ['hello', 'earth']
+  "": [],
+  "/0": "hello",
+  "/1": "earth",
+}); // ['hello', 'earth']
+```
+
+### compile
+
+The `compile` method takes a pointer and returns a function that accept a document and returns the value at the location of the pointer.
+
+```javascript
+const getAge = pointer.compile("/age");
+
+getAge({ age: 22 }); // 22
 ```
 
 [↑](#json8-pointer)
