@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const toJSONPatch = require("../lib/toJSONPatch");
+const toJSONPatch = require("..");
 const tests = require("./RFC.json");
 const { apply } = require("json8-patch");
 const { clone } = require("json8");
