@@ -2,7 +2,11 @@
   "name": "json8-patch",
   "version": "0.4.1",
   "description": "JSON Patch toolkit for JavaScript",
-  "keywords": ["JSON", "patch", "diff"],
+  "keywords": [
+    "JSON",
+    "patch",
+    "diff"
+  ],
   "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/patch",
   "repository": "github:JSON8/patch",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
@@ -17,7 +21,7 @@
     "json8-pointer": "^0.7.1"
   },
   "devDependencies": {
-    "fast-json-patch": "^2.0.6",
+    "fast-json-patch": "^2.0.7",
     "jiff": "^0.7.3",
     "json-patch": "^0.7.0",
     "json-patch-test-suite": "^1.1.0",
