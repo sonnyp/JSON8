@@ -14,8 +14,7 @@ module.exports = function apply(doc, patch) {
     return patch;
   }
 
-  if (typeof doc !== OBJECT || doc === null || Array.isArray(doc))
-    doc = Object.create(null);
+  if (typeof doc !== OBJECT || doc === null || Array.isArray(doc)) doc = {};
 
   for (const k in patch) {
     const v = patch[k];
