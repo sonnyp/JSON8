@@ -553,7 +553,7 @@ JSON8 [types](#types) helps avoiding many common errors as well.
 
 [↑](#json8)
 
-## Comparaisons
+## Comparisons
 
 ```javascript
 // undefined is not JSON valid
