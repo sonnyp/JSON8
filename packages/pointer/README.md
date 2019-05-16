@@ -207,13 +207,13 @@ pointer.index(["hello", "earth"]);
 Just like [index](#index) but only indexes primitives.
 
 ```javascript
-pointer.index(['hello', 'earth'])
+pointer.dict(['hello', 'earth'])
 //  {
 //    '/0': 'hello',
 //    '/1': 'earth'
 //  }
 
-pointer.index({'foo', 'bar'})
+pointer.dict({'foo', 'bar'})
 //  {
 //    '/foo': 'bar'
 //  }
