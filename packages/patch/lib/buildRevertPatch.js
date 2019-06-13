@@ -7,27 +7,35 @@ const decode = ooPointer.decode;
 /**
  * Return the reverse operation to a JSON Patch operation
  * @param  {Object}       patch     - JSON Patch operation object
- * @param  {Any}          previous  - previous value for add and replace operations
+ * @param  {Any}          previous  - previous value for add, replace and move operations
  * @param  {Number}       idx       - index of the item for array
- * @return {Object}
+ * @return {Array}
  */
 function reverse(patch, previous, idx) {
   const op = patch.op;
   const path = patch.path;
 
   if (op === "copy" || (op === "add" && previous === undefined)) {
-    if (idx === undefined) return { op: "remove", path: path };
+    if (idx === undefined) return [{ op: "remove", path: path }];
 
     // for item pushed to array with -
     const tokens = decode(path);
     tokens[tokens.length - 1] = idx.toString();
-    return { op: "remove", path: encode(tokens) };
+    return [{ op: "remove", path: encode(tokens) }];
   }
-  if (op === "replace") return { op: "replace", path: path, value: previous };
-  if (op === "move") return { op: "move", path: patch.from, from: path };
+  if (op === "replace") return [{ op: "replace", path: path, value: previous }];
+  if (op === "move") {
+    const patches = [{ op: "move", path: patch.from, from: path }];
+
+    if (previous) {
+      patches.push({ op: "add", path: path, value: previous });
+    }
+
+    return patches;
+  }
   if (op === "add" || op === "remove")
-    return { op: "add", path: path, value: previous };
-  if (op === "test") return { op: "test", path: path, value: patch.value };
+    return [{ op: "add", path: path, value: previous }];
+  if (op === "test") return [{ op: "test", path: path, value: patch.value }];
 }
 
 /**
@@ -40,7 +48,7 @@ module.exports = function buildRevertPatch(revert) {
 
   for (let i = 0, len = revert.length; i < len; i++) {
     const item = revert[i];
-    patch.unshift(reverse(item[0], item[1], item[2]));
+    patch.unshift.apply(patch, reverse(item[0], item[1], item[2]));
   }
 
   return patch;
