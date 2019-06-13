@@ -8,7 +8,7 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
     "lerna": "^3.0.0-beta.17",
-    "mocha": "^5.1.1",
+    "mocha": "^6.1.4",
     "prettier": "^1.12.1",
     "util.promisify": "^1.0.0"
   },
