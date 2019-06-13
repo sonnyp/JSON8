@@ -1,18 +1,20 @@
 {
   "private": true,
   "devDependencies": {
-    "ava": "^0.25.0",
+    "ava": "^2.1.0",
     "benchmark": "^2.1.4",
-    "browserify": "^16.2.0",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "lerna": "^3.0.0-beta.17",
-    "mocha": "^5.1.1",
-    "prettier": "^1.12.1",
+    "browserify": "^16.2.3",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "lerna": "^3.15.0",
+    "mocha": "^6.1.4",
+    "prettier": "^1.18.2",
     "util.promisify": "^1.0.0"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "test": "lerna run test && eslint ."
   }
