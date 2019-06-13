@@ -1,7 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "ava": "^0.25.0",
+    "ava": "^2.1.0",
     "benchmark": "^2.1.4",
     "browserify": "^16.2.0",
     "eslint": "^4.19.1",
