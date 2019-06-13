@@ -6,8 +6,8 @@ const add = require("./add");
 /**
  * @typedef OperationResult
  * @type Object
- * @property {Any}   doc       - The patched document
- * @property {Array} previous  - The previous/replaced value if any
+ * @property {Any} doc          - The patched document
+ * @property {Any} previous     - The previous/replaced value if any
  */
 
 /**
@@ -21,5 +21,5 @@ const add = require("./add");
  */
 module.exports = function move(doc, path, dest) {
   const r = remove(doc, path);
-  return add(doc, dest, r.previous);
+  return add(r.doc, dest, r.previous);
 };
