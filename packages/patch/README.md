@@ -271,7 +271,7 @@ ooPatch.has(doc, "/foo");
 
 ## Patch size
 
-Per specification patches are pretty verbose. JSON8 provides [pack](#patch) and [unpack](#unpack) methods to reduce the size of patches and save memory/space/bandwidth.
+Per specification patches are pretty verbose. JSON8 provides [pack](#pack) and [unpack](#unpack) methods to reduce the size of patches and save memory/space/bandwidth.
 
 Size (in bytes) comparaison for the following patch file
 
