@@ -3,8 +3,6 @@
 const assert = require("assert");
 const apply = require("../lib/apply");
 
-/* eslint comma-dangle: 0, space-in-brackets: 0 */
-
 // https://tools.ietf.org/html/rfc6902#appendix-A
 describe("RFC Examples", () => {
   it("Adding an Object Member", () => {
