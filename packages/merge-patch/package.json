@@ -1,10 +1,14 @@
 {
   "name": "json8-merge-patch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JSON Merge Patch toolkit for JavaScript",
-  "keywords": ["JSON", "merge", "patch", "diff"],
-  "homepage":
-    "https://github.com/sonnyp/JSON8/tree/master/packages/merge-patch",
+  "keywords": [
+    "JSON",
+    "merge",
+    "patch",
+    "diff"
+  ],
+  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/merge-patch",
   "repository": "github:JSON8/merge-patch",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {
@@ -13,7 +17,7 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "dependencies": {
-    "json8": "^0.9.0"
+    "json8": "^1.0.1"
   },
   "engines": {
     "node": ">= 7.6.0"

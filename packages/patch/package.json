@@ -1,6 +1,6 @@
 {
   "name": "json8-patch",
-  "version": "0.4.2",
+  "version": "1.0.1",
   "description": "JSON Patch toolkit for JavaScript",
   "keywords": [
     "JSON",
@@ -17,8 +17,8 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "dependencies": {
-    "json8": "^0.9.0",
-    "json8-pointer": "^0.7.1"
+    "json8": "^1.0.1",
+    "json8-pointer": "^1.0.1"
   },
   "devDependencies": {
     "fast-json-patch": "^2.0.6",
