@@ -6,7 +6,7 @@ const TRUNCATED = "truncated";
 const SEQUENCE = "sequence";
 const INVALID = "invalid";
 
-module.exports = class Parser {
+class Parser {
   constructor() {
     this.seq = "";
     this.open = false;
@@ -16,7 +16,7 @@ module.exports = class Parser {
   onend() {}
 
   write(data) {
-    if (typeof data !== "string") data = data.toString("utf8");
+    if (typeof data !== "string") data = data.toString();
     for (let pos = 0, l = data.length; pos < l; pos++) {
       const char = data[pos];
       if (char === RS) {
@@ -52,4 +52,6 @@ module.exports = class Parser {
     }
     this.onend();
   }
-};
+}
+
+module.exports = Parser;

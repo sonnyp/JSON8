@@ -20,7 +20,6 @@ test.cb("ParseStream", t => {
     });
 });
 
-const { createWriteStream } = require("fs");
 const SerializeStream = require("../lib/SerializeStream");
 
 test.cb("SerializeStream", t => {
@@ -28,16 +27,17 @@ test.cb("SerializeStream", t => {
 
   const stream = new SerializeStream();
 
-  stream.pipe(
-    createWriteStream(__dirname + "/SerializeStream.log", {
-      encoding: "utf8",
-      flags: "w",
-    })
-  );
+  // const { createWriteStream } = require("fs");
+  // stream.pipe(
+  //   createWriteStream(__dirname + "/SerializeStream.log", {
+  //     encoding: "utf8",
+  //     flags: "w",
+  //   })
+  // );
 
   stream
     .on("data", data => {
-      data = parse(data)[0][1];
+      data = Array.from(parse(data))[0][1];
       t.is(data.count, counter);
       counter++;
     })

@@ -1,7 +1,7 @@
 {
   "name": "json8-text-sequence",
   "version": "1.0.1",
-  "description": "JSON Text Sequence toolkit JavaScript",
+  "description": "JSON Text Sequence toolkit for JavaScript",
   "keywords": [
     "JSON",
     "text",
