@@ -15,10 +15,7 @@ module.exports = class ParseStream extends Transform {
     this.parser.on("invalid", seq => {
       this.emit("invalid", seq);
     });
-    this.parser.on("error", err => {
-      this.emit("error", err);
-    });
-    this.parser.on("data", data => {
+    this.parser.on("sequence", data => {
       this.push(data);
     });
   }

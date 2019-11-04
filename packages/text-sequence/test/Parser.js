@@ -8,7 +8,7 @@ function catchEvents(str) {
   const parser = new Parser();
   const events = [];
   let ended = false;
-  ["invalid", "error", "data", "truncated"].forEach(event => {
+  ["invalid", "sequence", "truncated"].forEach(event => {
     parser.on(event, (...args) => {
       events.push([event, ...args]);
     });
@@ -41,7 +41,7 @@ test("truncated", t => {
     ["truncated", "null"],
   ]);
   t.deepEqual(catchEvents('\x1e"foo"\x0Abar'), [
-    ["data", "foo"],
+    ["sequence", "foo"],
     ["truncated", "bar"],
   ]);
   t.deepEqual(catchEvents('\x1e"foo"\x1ebar'), [
@@ -68,11 +68,11 @@ test("empty sequence", t => {
 });
 
 test("valid json", t => {
-  t.deepEqual(catchEvents('\x1e"hello"\x0A'), [["data", "hello"]]);
-  t.deepEqual(catchEvents("\x1etrue\x0A"), [["data", true]]);
-  t.deepEqual(catchEvents("\x1efalse\x0A"), [["data", false]]);
-  t.deepEqual(catchEvents("\x1enull\x0A"), [["data", null]]);
-  t.deepEqual(catchEvents("\x1e0\x0A"), [["data", 0]]);
-  t.deepEqual(catchEvents("\x1e-1\x0A"), [["data", -1]]);
-  t.deepEqual(catchEvents("\x1e1\x0A"), [["data", 1]]);
+  t.deepEqual(catchEvents('\x1e"hello"\x0A'), [["sequence", "hello"]]);
+  t.deepEqual(catchEvents("\x1etrue\x0A"), [["sequence", true]]);
+  t.deepEqual(catchEvents("\x1efalse\x0A"), [["sequence", false]]);
+  t.deepEqual(catchEvents("\x1enull\x0A"), [["sequence", null]]);
+  t.deepEqual(catchEvents("\x1e0\x0A"), [["sequence", 0]]);
+  t.deepEqual(catchEvents("\x1e-1\x0A"), [["sequence", -1]]);
+  t.deepEqual(catchEvents("\x1e1\x0A"), [["sequence", 1]]);
 });

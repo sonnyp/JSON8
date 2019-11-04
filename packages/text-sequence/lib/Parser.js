@@ -30,7 +30,7 @@ module.exports = class Parser extends EventEmitter {
         }
         this.open = false;
         try {
-          this.emit("data", JSON.parse(this.seq));
+          this.emit("sequence", JSON.parse(this.seq));
         } catch (err) {
           this.emit("invalid", this.seq);
         }
