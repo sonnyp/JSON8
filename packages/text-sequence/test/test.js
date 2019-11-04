@@ -26,18 +26,18 @@ const SerializeStream = require("../lib/SerializeStream");
 test.cb("SerializeStream", t => {
   let counter = 0;
 
-  const serializer = new SerializeStream();
+  const stream = new SerializeStream();
 
-  serializer.pipe(
+  stream.pipe(
     createWriteStream(__dirname + "/SerializeStream.log", {
       encoding: "utf8",
       flags: "w",
     })
   );
 
-  serializer
+  stream
     .on("data", data => {
-      data = parse(data)[0];
+      data = parse(data)[0][1];
       t.is(data.count, counter);
       counter++;
     })
@@ -46,9 +46,24 @@ test.cb("SerializeStream", t => {
       t.end();
     });
 
-  serializer.write({ count: 0 });
-  serializer.write({ count: 1 });
-  serializer.write({ count: 2 });
-  serializer.write({ count: 3 });
-  serializer.end();
+  stream.write({ count: 0 });
+  stream.write({ count: 1 });
+  stream.write({ count: 2 });
+  stream.write({ count: 3 });
+  stream.end();
+});
+
+test.cb("SerializeStream exception handling", t => {
+  const stream = new SerializeStream();
+
+  stream.on("error", err => {
+    t.true(err.message.startsWith("Converting circular structure to JSON"));
+    t.end();
+  });
+
+  // circular
+  const foo = {};
+  foo.bar = foo;
+
+  stream.write(foo);
 });
