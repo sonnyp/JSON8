@@ -41,7 +41,7 @@
     ]
   },
   {
-    "description": "Returns empty array for canceling operations",
+    "description": "Returns empty array, REMOVE cancelling ADD op",
     "input": [
       { "op": "add", "path": "/foo", "value": "bar" },
       { "op": "remove", "path": "/foo" }
@@ -49,11 +49,35 @@
     "output": []
   },
   {
-    "description": "Returns empty array for canceling operations",
+    "description": "Returns empty array, REMOVE cancelling REPLACE op",
     "input": [
-      { "op": "remove", "path": "/foo" },
-      { "op": "add", "path": "/foo", "value": "bar" }
+      { "op": "replace", "path": "/foo", "value": "bar" },
+      { "op": "remove", "path": "/foo" }
+    ],
+    "output": [{ "op": "remove", "path": "/foo" }]
+  },
+  {
+    "description": "Returns empty array, REMOVE cancelling COPY op",
+    "input": [
+      { "op": "copy", "from": "/bar", "path": "/foo" },
+      { "op": "remove", "path": "/foo" }
     ],
     "output": []
+  },
+  {
+    "description": "Returns empty array, REPLACE cancelling REPLACE op",
+    "input": [
+      { "op": "replace", "path": "/foo", "value": "bar" },
+      { "op": "replace", "path": "/foo", "value": "baz" }
+    ],
+    "output": [{ "op": "replace", "path": "/foo", "value": "baz" }]
+  },
+  {
+    "description": "Returns empty array, REPLACE cancelling COPY op",
+    "input": [
+      { "op": "copy", "from": "/bar", "path": "/foo" },
+      { "op": "replace", "path": "/foo", "value": "bar" }
+    ],
+    "output": [{ "op": "replace", "path": "/foo", "value": "bar" }]
   }
 ]

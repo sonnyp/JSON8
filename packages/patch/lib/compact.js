@@ -1,7 +1,9 @@
 "use strict";
 
 function remove(operations = []) {
-  const cancellingOperation = operations.find(op => op[1] === "add");
+  const cancellingOperation = operations.find(op =>
+    /add|replace|copy/.test(op[1])
+  );
   if (cancellingOperation !== undefined) {
     return cancellingOperation;
   }
@@ -11,6 +13,15 @@ function remove(operations = []) {
 
 function add(operations = []) {
   const cancellingOperation = operations.find(op => op[1] === "remove");
+  if (cancellingOperation !== undefined) {
+    return cancellingOperation;
+  }
+
+  return null;
+}
+
+function replace(operations = []) {
+  const cancellingOperation = operations.find(op => /replace|copy/.test(op[1]));
   if (cancellingOperation !== undefined) {
     return cancellingOperation;
   }
@@ -33,7 +44,9 @@ function compact(jsonPatch = []) {
       const cancelling = remove(operations[path]);
       if (cancelling) {
         jsonPatch.splice(cancelling[0], 1);
-        jsonPatch.pop();
+        if (cancelling[1] !== "replace") {
+          jsonPatch.pop();
+        }
       }
     }
 
@@ -42,6 +55,13 @@ function compact(jsonPatch = []) {
       if (cancelling) {
         jsonPatch.splice(cancelling[0], 1);
         jsonPatch.pop();
+      }
+    }
+
+    if (op === "replace") {
+      const cancelling = replace(operations[path]);
+      if (cancelling && cancelling[2] !== value) {
+        jsonPatch.splice(cancelling[0], 1);
       }
     }
   }
