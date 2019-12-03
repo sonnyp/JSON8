@@ -79,5 +79,13 @@
       { "op": "replace", "path": "/foo", "value": "bar" }
     ],
     "output": [{ "op": "replace", "path": "/foo", "value": "bar" }]
+  },
+  {
+    "description": "Returns empty array, COPY cancelling REPLACE op",
+    "input": [
+      { "op": "replace", "path": "/foo", "value": "bar" },
+      { "op": "copy", "from": "/bar", "path": "/foo" }
+    ],
+    "output": [{ "op": "copy", "from": "/bar", "path": "/foo" }]
   }
 ]

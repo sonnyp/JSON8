@@ -29,6 +29,15 @@ function replace(operations = []) {
   return null;
 }
 
+function copy(operations = []) {
+  const cancellingOperation = operations.find(op => /replace/.test(op[1]));
+  if (cancellingOperation !== undefined) {
+    return cancellingOperation;
+  }
+
+  return null;
+}
+
 function compact(jsonPatch = []) {
   const operations = {};
 
@@ -59,6 +68,13 @@ function compact(jsonPatch = []) {
     }
 
     if (op === "replace") {
+      const cancelling = replace(operations[path]);
+      if (cancelling && cancelling[2] !== value) {
+        jsonPatch.splice(cancelling[0], 1);
+      }
+    }
+
+    if (op === "copy") {
       const cancelling = replace(operations[path]);
       if (cancelling && cancelling[2] !== value) {
         jsonPatch.splice(cancelling[0], 1);
