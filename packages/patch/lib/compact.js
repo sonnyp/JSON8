@@ -9,6 +9,15 @@ function remove(operations = []) {
   return null;
 }
 
+function add(operations = []) {
+  const cancellingOperation = operations.find(op => op[1] === "remove");
+  if (cancellingOperation !== undefined) {
+    return cancellingOperation;
+  }
+
+  return null;
+}
+
 function compact(jsonPatch = []) {
   const operations = {};
 
@@ -22,6 +31,14 @@ function compact(jsonPatch = []) {
 
     if (op === "remove") {
       const cancelling = remove(operations[path]);
+      if (cancelling) {
+        jsonPatch.splice(cancelling[0], 1);
+        jsonPatch.pop();
+      }
+    }
+
+    if (op === "add") {
+      const cancelling = add(operations[path]);
       if (cancelling) {
         jsonPatch.splice(cancelling[0], 1);
         jsonPatch.pop();
