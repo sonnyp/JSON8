@@ -28,5 +28,16 @@
     "description": "Returns the same object for test operation",
     "input": [{ "op": "test", "path": "/foo", "value": "bar" }],
     "output": [{ "op": "test", "path": "/foo", "value": "bar" }]
+  },
+  {
+    "description": "Returns the same object for different multiple operations",
+    "input": [
+      { "op": "add", "path": "/foo", "value": "bar" },
+      { "op": "add", "path": "/bar", "value": "baz" }
+    ],
+    "output": [
+      { "op": "add", "path": "/foo", "value": "bar" },
+      { "op": "add", "path": "/bar", "value": "baz" }
+    ]
   }
 ]
