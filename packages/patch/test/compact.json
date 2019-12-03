@@ -1,0 +1,32 @@
+[
+  {
+    "description": "Returns the same object for add operation",
+    "input": [{ "op": "add", "path": "/foo", "value": "bar" }],
+    "output": [{ "op": "add", "path": "/foo", "value": "bar" }]
+  },
+  {
+    "description": "Returns the same object for remove operation",
+    "input": [{ "op": "remove", "path": "/foo", "value": "bar" }],
+    "output": [{ "op": "remove", "path": "/foo", "value": "bar" }]
+  },
+  {
+    "description": "Returns the same object for replace operation",
+    "input": [{ "op": "replace", "path": "/foo", "value": "bar" }],
+    "output": [{ "op": "replace", "path": "/foo", "value": "bar" }]
+  },
+  {
+    "description": "Returns the same object for move operation",
+    "input": [{ "op": "move", "path": "/foo", "value": "bar" }],
+    "output": [{ "op": "move", "path": "/foo", "value": "bar" }]
+  },
+  {
+    "description": "Returns the same object for copy operation",
+    "input": [{ "op": "copy", "path": "/foo", "value": "bar" }],
+    "output": [{ "op": "copy", "path": "/foo", "value": "bar" }]
+  },
+  {
+    "description": "Returns the same object for test operation",
+    "input": [{ "op": "test", "path": "/foo", "value": "bar" }],
+    "output": [{ "op": "test", "path": "/foo", "value": "bar" }]
+  }
+]
