@@ -39,5 +39,13 @@
       { "op": "add", "path": "/foo", "value": "bar" },
       { "op": "add", "path": "/bar", "value": "baz" }
     ]
+  },
+  {
+    "description": "Returns empty array for canceling operations",
+    "input": [
+      { "op": "add", "path": "/foo", "value": "bar" },
+      { "op": "remove", "path": "/foo" }
+    ],
+    "output": []
   }
 ]
