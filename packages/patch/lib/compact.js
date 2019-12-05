@@ -1,9 +1,7 @@
 "use strict";
 
-function remove(operations = []) {
-  const cancellingOperation = operations.find(op =>
-    /add|replace|copy/.test(op[1])
-  );
+function getCancellingOperation(operations = [], pattern = RegExp()) {
+  const cancellingOperation = operations.find(op => pattern.test(op[1]));
   if (cancellingOperation !== undefined) {
     return cancellingOperation;
   }
@@ -11,32 +9,50 @@ function remove(operations = []) {
   return null;
 }
 
-function add(operations = []) {
-  const cancellingOperation = operations.find(op => op[1] === "remove");
-  if (cancellingOperation !== undefined) {
-    return cancellingOperation;
-  }
-
-  return null;
-}
-
-function replace(operations = []) {
-  const cancellingOperation = operations.find(op => /replace|copy/.test(op[1]));
-  if (cancellingOperation !== undefined) {
-    return cancellingOperation;
-  }
-
-  return null;
-}
-
-function copy(operations = []) {
-  const cancellingOperation = operations.find(op => /replace/.test(op[1]));
-  if (cancellingOperation !== undefined) {
-    return cancellingOperation;
-  }
-
-  return null;
-}
+const Cancelling = {
+  remove: {
+    compact(operations = [], jsonPatch) {
+      const cancelling = getCancellingOperation(operations, /add|replace|copy/);
+      if (cancelling) {
+        jsonPatch.splice(cancelling[0], 1);
+        if (cancelling[1] !== "replace") {
+          jsonPatch.pop();
+        }
+      }
+    },
+  },
+  add: {
+    compact(operations = [], jsonPatch) {
+      const cancelling = getCancellingOperation(operations, /remove/);
+      if (cancelling) {
+        jsonPatch.splice(cancelling[0], 1);
+        jsonPatch.pop();
+      }
+    },
+  },
+  replace: {
+    compact(operations = [], jsonPatch, value) {
+      const cancelling = getCancellingOperation(operations, /replace|copy/);
+      if (cancelling && cancelling[2] !== value) {
+        jsonPatch.splice(cancelling[0], 1);
+      }
+    },
+  },
+  copy: {
+    compact(operations = [], jsonPatch, value) {
+      const cancelling = getCancellingOperation(operations, /replace/);
+      if (cancelling && cancelling[2] !== value) {
+        jsonPatch.splice(cancelling[0], 1);
+      }
+    },
+  },
+  move: {
+    compact() {},
+  },
+  test: {
+    compact() {},
+  },
+};
 
 function compact(jsonPatch = []) {
   const operations = {};
@@ -49,37 +65,7 @@ function compact(jsonPatch = []) {
 
     operations[path].push([i, op, value]);
 
-    if (op === "remove") {
-      const cancelling = remove(operations[path]);
-      if (cancelling) {
-        jsonPatch.splice(cancelling[0], 1);
-        if (cancelling[1] !== "replace") {
-          jsonPatch.pop();
-        }
-      }
-    }
-
-    if (op === "add") {
-      const cancelling = add(operations[path]);
-      if (cancelling) {
-        jsonPatch.splice(cancelling[0], 1);
-        jsonPatch.pop();
-      }
-    }
-
-    if (op === "replace") {
-      const cancelling = replace(operations[path]);
-      if (cancelling && cancelling[2] !== value) {
-        jsonPatch.splice(cancelling[0], 1);
-      }
-    }
-
-    if (op === "copy") {
-      const cancelling = replace(operations[path]);
-      if (cancelling && cancelling[2] !== value) {
-        jsonPatch.splice(cancelling[0], 1);
-      }
-    }
+    Cancelling[op].compact(operations[path], jsonPatch, value);
   }
 
   return jsonPatch;
