@@ -87,5 +87,21 @@
       { "op": "copy", "from": "/bar", "path": "/foo" }
     ],
     "output": [{ "op": "copy", "from": "/bar", "path": "/foo" }]
+  },
+  {
+    "description": "Should compact Patch with multiple cancelling operations",
+    "input": [
+      { "op": "add", "path": "/CEO", "value": "John" },
+      { "op": "add", "path": "/CFO", "value": "Anna" },
+      { "op": "add", "path": "/COO", "value": "Bruce" },
+      { "op": "replace", "path": "/CEO", "value": "Mike" },
+      { "op": "remove", "path": "/COO" },
+      { "op": "replace", "path": "/CEO", "value": "Beca" }
+    ],
+    "output": [
+      { "op": "add", "path": "/CEO", "value": "John" },
+      { "op": "add", "path": "/CFO", "value": "Anna" },
+      { "op": "replace", "path": "/CEO", "value": "Beca" }
+    ]
   }
 ]
