@@ -9,24 +9,19 @@ function getCancellingOperation(operations = [], pattern = RegExp()) {
   return null;
 }
 
+function removeCancellingOperation(jsonPatch = [], cancelling = {}) {
+  jsonPatch.splice(jsonPatch.indexOf(cancelling), 1);
+}
+
 const Cancelling = {
   remove: {
     compact(operations = [], jsonPatch = []) {
       const cancelling = getCancellingOperation(operations, /add|replace|copy/);
       if (cancelling) {
-        jsonPatch.splice(jsonPatch.indexOf(cancelling), 1);
+        removeCancellingOperation(jsonPatch, cancelling);
         if (cancelling.op !== "replace") {
           jsonPatch.pop();
         }
-      }
-    },
-  },
-  add: {
-    compact(operations = [], jsonPatch) {
-      const cancelling = getCancellingOperation(operations, /remove/);
-      if (cancelling) {
-        jsonPatch.splice(jsonPatch.indexOf(cancelling), 1);
-        jsonPatch.pop();
       }
     },
   },
@@ -34,7 +29,7 @@ const Cancelling = {
     compact(operations = [], jsonPatch, { value }) {
       const cancelling = getCancellingOperation(operations, /replace|copy/);
       if (cancelling && cancelling.value !== value) {
-        jsonPatch.splice(jsonPatch.indexOf(cancelling), 1);
+        removeCancellingOperation(jsonPatch, cancelling);
       }
     },
   },
@@ -42,30 +37,33 @@ const Cancelling = {
     compact(operations = [], jsonPatch, { value }) {
       const cancelling = getCancellingOperation(operations, /replace/);
       if (cancelling && cancelling.value !== value) {
-        jsonPatch.splice(jsonPatch.indexOf(cancelling), 1);
+        removeCancellingOperation(jsonPatch, cancelling);
       }
     },
   },
+  add: { compact() {} },
   move: { compact() {} },
   test: { compact() {} },
 };
 
 function compact(jsonPatch = []) {
   const operations = {};
-  const auxPatch = [];
+  const resultJsonPatch = [];
 
   jsonPatch.forEach(operation => {
-    const { op, path, value } = operation;
+    const { op, path } = operation;
+
     if (operations[path] === undefined) {
       operations[path] = [];
     }
 
     operations[path].push(operation);
-    auxPatch.push(operation);
-    Cancelling[op].compact(operations[path], auxPatch, { value });
+    resultJsonPatch.push(operation);
+
+    Cancelling[op].compact(operations[path], resultJsonPatch, operation);
   });
 
-  return auxPatch;
+  return resultJsonPatch;
 }
 
 module.exports = compact;
