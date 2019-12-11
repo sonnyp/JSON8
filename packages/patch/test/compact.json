@@ -103,5 +103,23 @@
       { "op": "add", "path": "/CFO", "value": "Anna" },
       { "op": "replace", "path": "/CEO", "value": "Beca" }
     ]
+  },
+  {
+    "description": "Should compact Patch with ADD, REPLACE, COPY and REMOVE ops",
+    "input": [
+      { "op": "add", "path": "/CEO", "value": "John" },
+      { "op": "add", "path": "/CFO", "value": "Anna" },
+      { "op": "add", "path": "/COO", "value": "Bruce" },
+      { "op": "replace", "path": "/CEO", "value": "Mike" },
+      { "op": "copy", "from": "/CFO", "path": "/CEO" },
+      { "op": "replace", "path": "/CFO", "value": "Barbara" },
+      { "op": "remove", "path": "/COO" }
+    ],
+    "output": [
+      { "op": "add", "path": "/CEO", "value": "John" },
+      { "op": "add", "path": "/CFO", "value": "Anna" },
+      { "op": "copy", "from": "/CFO", "path": "/CEO" },
+      { "op": "replace", "path": "/CFO", "value": "Barbara" }
+    ]
   }
 ]
