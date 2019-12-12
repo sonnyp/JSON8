@@ -121,5 +121,14 @@
       { "op": "copy", "from": "/CFO", "path": "/CEO" },
       { "op": "replace", "path": "/CFO", "value": "Barbara" }
     ]
+  },
+  {
+    "description": "Should return correct JSON Patch for cancelling REMOVE op",
+    "input": [
+      { "op": "add", "path": "/foo", "value": "bar" },
+      { "op": "add", "path": "/bar", "value": "baz" },
+      { "op": "remove", "path": "/foo" }
+    ],
+    "output": [{ "op": "add", "path": "/bar", "value": "baz" }]
   }
 ]
