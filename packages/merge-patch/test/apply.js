@@ -43,4 +43,31 @@ describe("apply", () => {
     doc = apply(doc, patch);
     assert.deepEqual(doc, patch);
   });
+
+  it("ignores inherited properties on patch", () => {
+    let doc = {};
+    const patch = Object.create({ foo: "bar" });
+    doc = apply(doc, patch);
+    assert.deepEqual(doc, {});
+  });
+
+  // https://github.com/lodash/lodash/pull/4337
+  it("prevents prototype pollution", () => {
+    let doc = {};
+    const patch = { __proto__: { foobar: true } };
+    doc = apply(doc, patch);
+
+    assert.deepEqual(doc, {});
+  });
+
+  // https://github.com/lodash/lodash/pull/4336
+  it("prevents constructor pollution", () => {
+    let doc = {};
+
+    const patch = { constructor: { foo: "bar" } };
+    doc = apply(doc, patch);
+    assert.equal("foo" in Object, false);
+    assert.equal(Object.foo, undefined);
+    assert.deepEqual(doc, patch);
+  });
 });
