@@ -3,7 +3,7 @@
 const OBJECT = "object";
 
 /**
- * apply a JSON merge patch
+ * Apply a JSON merge patch onto a document
  * https://tools.ietf.org/html/rfc7396
  * @param  {Object} doc    - JSON object document
  * @param  {Object} patch  - JSON object patch
@@ -14,15 +14,18 @@ module.exports = function apply(doc, patch) {
     return patch;
   }
 
-  if (typeof doc !== OBJECT || doc === null || Array.isArray(doc)) doc = {};
+  if (typeof doc !== OBJECT || doc === null || Array.isArray(doc)) {
+    doc = Object.create(null);
+  }
 
-  for (const k in patch) {
-    const v = patch[k];
+  const keys = Object.keys(patch);
+  for (const key of keys) {
+    const v = patch[key];
     if (v === null) {
-      delete doc[k];
+      delete doc[key];
       continue;
     }
-    doc[k] = apply(doc[k], v);
+    doc[key] = apply(doc[key], v);
   }
 
   return doc;
