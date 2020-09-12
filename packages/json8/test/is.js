@@ -59,30 +59,30 @@ for (const invalid in INVALID) ALL[invalid] = INVALID[invalid];
 
 if (global.Symbol && typeof Symbol() === "symbol") INVALID.symbol = Symbol();
 
-const forEach = function(obj, fn) {
+const forEach = function (obj, fn) {
   for (const i in obj) {
     fn(i, obj[i]);
   }
 };
 
-const forEachBut = function(obj, but, fn) {
+const forEachBut = function (obj, but, fn) {
   if (isObject(but)) but = Object.keys(but);
   else but = isArray(but) ? but : [but];
 
-  forEach(obj, function(k, v) {
+  forEach(obj, function (k, v) {
     if (but.indexOf(k) === -1) fn(k, v);
   });
 };
 
-const validBut = function(but, fn) {
+const validBut = function (but, fn) {
   forEachBut(VALID, but, fn);
 };
 
-const invalidBut = function(but, fn) {
+const invalidBut = function (but, fn) {
   forEachBut(INVALID, but, fn);
 };
 
-const allBut = function(but, fn) {
+const allBut = function (but, fn) {
   validBut(but, fn);
   invalidBut(but, fn);
 };

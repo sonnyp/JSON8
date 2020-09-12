@@ -1,4 +1,4 @@
-(function() {
+(function () {
   "use strict";
 
   var ooPatch = JSON8Patch;
@@ -45,8 +45,8 @@
 
   var editors = {};
 
-  document.addEventListener("DOMContentLoaded", function() {
-    sections.forEach(function(section) {
+  document.addEventListener("DOMContentLoaded", function () {
+    sections.forEach(function (section) {
       var input = (section.textarea = document.querySelector(
         "#" + section.id + " textarea"
       ));
@@ -104,8 +104,8 @@
       editors["result"].setValue(JSON.stringify(applyResult.doc, null, 2));
     }
 
-    [editors["target"], editors["patch"]].forEach(function(editor) {
-      editor.on("change", function() {
+    [editors["target"], editors["patch"]].forEach(function (editor) {
+      editor.on("change", function () {
         run();
       });
     });

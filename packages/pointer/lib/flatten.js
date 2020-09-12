@@ -4,7 +4,7 @@ const walk = require("./walk");
 
 module.exports = function index(json) {
   const idxs = Object.create(null);
-  walk(json, function(value, pointer) {
+  walk(json, function (value, pointer) {
     let v;
     if (Array.isArray(value)) {
       v = [];

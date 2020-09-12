@@ -6,7 +6,7 @@ const _replace = require("../lib/replace");
 describe("replace", () => {
   let doc;
 
-  const replace = function(path, obj) {
+  const replace = function (path, obj) {
     return _replace(doc, path, obj);
   };
 

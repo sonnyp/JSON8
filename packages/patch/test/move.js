@@ -6,7 +6,7 @@ const _move = require("../lib/move");
 describe("move", () => {
   let doc;
 
-  const move = function(path, dest) {
+  const move = function (path, dest) {
     return _move(doc, path, dest);
   };
 

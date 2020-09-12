@@ -3,11 +3,11 @@
 const assert = require("assert");
 const { hasKey } = require("..");
 
-const has = function(obj, key) {
+const has = function (obj, key) {
   assert.deepEqual(hasKey(obj, key), true);
 };
 
-const lacks = function(obj, key) {
+const lacks = function (obj, key) {
   assert.deepEqual(hasKey(obj, key), false);
 };
 

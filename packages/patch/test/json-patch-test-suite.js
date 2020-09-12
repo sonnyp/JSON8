@@ -10,7 +10,7 @@ const spec_tests = require("json-patch-test-suite/spec_tests.json");
 tests = tests.concat(spec_tests);
 
 describe("json-patch-test-suite", () => {
-  tests.forEach(test => {
+  tests.forEach((test) => {
     if (test.disabled) return;
 
     describe(test.comment ? test.comment : "no test description", () => {
@@ -25,7 +25,7 @@ describe("json-patch-test-suite", () => {
         it("reverts the document to its original state", () => {
           const t = clone(test);
           const original = clone(t.doc);
-          assert.throws(function() {
+          assert.throws(function () {
             apply(t.doc, t.patch);
           });
           assert.deepEqual(t.doc, original);

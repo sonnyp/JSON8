@@ -28,14 +28,14 @@ describe("toJSONPatch", () => {
   });
 
   it("returns a replace operation targeting the whole document if the patch is not an object", () => {
-    [true, null, 42, [], "foo"].forEach(v => {
+    [true, null, 42, [], "foo"].forEach((v) => {
       const patch = toJSONPatch(v);
       assert.deepEqual(patch, [{ op: "replace", path: "", value: v }]);
     });
   });
 
-  describe("RFC", function() {
-    tests.forEach(function(test) {
+  describe("RFC", function () {
+    tests.forEach(function (test) {
       test = clone(test);
 
       if (test["json-patch"] === false) {
@@ -46,7 +46,7 @@ describe("toJSONPatch", () => {
             JSON.stringify(test.original),
           () => {
             const patch = toJSONPatch(test.patch);
-            assert.throws(function() {
+            assert.throws(function () {
               apply(test.original, patch);
             });
           }

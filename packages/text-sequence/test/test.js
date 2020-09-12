@@ -5,12 +5,12 @@ const parse = require("../lib/parse");
 const { createReadStream } = require("fs");
 const ParseStream = require("../lib/ParseStream");
 
-test.cb("ParseStream", t => {
+test.cb("ParseStream", (t) => {
   let counter = 0;
 
   createReadStream(__dirname + "/ParseStream.log", { encoding: "utf8" })
     .pipe(new ParseStream())
-    .on("data", data => {
+    .on("data", (data) => {
       t.is(data.count, counter);
       counter++;
     })
@@ -23,7 +23,7 @@ test.cb("ParseStream", t => {
 const { createWriteStream } = require("fs");
 const SerializeStream = require("../lib/SerializeStream");
 
-test.cb("SerializeStream", t => {
+test.cb("SerializeStream", (t) => {
   let counter = 0;
 
   const serializer = new SerializeStream();
@@ -36,7 +36,7 @@ test.cb("SerializeStream", t => {
   );
 
   serializer
-    .on("data", data => {
+    .on("data", (data) => {
       data = parse(data)[0];
       t.is(data.count, counter);
       counter++;

@@ -3,11 +3,11 @@
 const assert = require("assert");
 const JSON8 = require("..");
 
-const equal = function(a, b) {
+const equal = function (a, b) {
   assert.strictEqual(JSON8.equal(a, b), true);
 };
 
-const differ = function(a, b) {
+const differ = function (a, b) {
   assert.strictEqual(JSON8.equal(a, b), false);
 };
 

@@ -9,13 +9,13 @@ module.exports = class ParseStream extends Transform {
   constructor(options = {}, parser = new Parser()) {
     super(Object.assign({ objectMode: true, decodeStrings: false }, options));
     this.parser = parser;
-    this.parser.on("truncated", seq => {
+    this.parser.on("truncated", (seq) => {
       this.emit("truncated", seq);
     });
-    this.parser.on("invalid", seq => {
+    this.parser.on("invalid", (seq) => {
       this.emit("invalid", seq);
     });
-    this.parser.on("sequence", data => {
+    this.parser.on("sequence", (data) => {
       this.push(data);
     });
   }

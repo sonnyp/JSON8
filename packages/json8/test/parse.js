@@ -18,7 +18,7 @@ const valid = [
 const invalid = [
   ["Infinity", Infinity],
   ["-Infinity", -Infinity],
-  ["function () {}", function() {}],
+  ["function () {}", function () {}],
   ["undefined", undefined],
   ["NaN", NaN],
 ];
@@ -26,8 +26,8 @@ const invalid = [
 if (global.Symbol && typeof Symbol() === "symbol")
   invalid.push(["symbol", Symbol()]);
 
-const forEach = function(obj, fn) {
-  obj.forEach(function(item) {
+const forEach = function (obj, fn) {
+  obj.forEach(function (item) {
     fn(item[0], item[1]);
   });
 };
@@ -42,7 +42,7 @@ describe("parse", () => {
     });
   });
 
-  forEach(invalid, k => {
+  forEach(invalid, (k) => {
     it("throws a SyntaxError for " + k, () => {
       assert.throws(() => {
         parse(k);

@@ -81,7 +81,7 @@ function stringify(obj, opts, depth) {
     str += "[";
 
     let n = 0;
-    obj.forEach(function(setItem) {
+    obj.forEach(function (setItem) {
       if (replacer) {
         setItem = replacer.call(obj, setItem, setItem);
         if (setItem === undefined) {
@@ -101,7 +101,7 @@ function stringify(obj, opts, depth) {
     str += "{";
 
     let m = 0;
-    obj.forEach(function(v, k) {
+    obj.forEach(function (v, k) {
       if (typeof k !== STRING) throw new TypeError(k + " key is not a string");
       if (k === "toJSON" && typeof v === "function") return;
       if (replacer) {

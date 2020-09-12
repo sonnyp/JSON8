@@ -6,49 +6,49 @@ JSON8 is a JavaScript library that makes working with JSON/data/structures safer
 
 Features
 
-* Strong JSON and type validation
-* Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
-* Support Node.js/
+- Strong JSON and type validation
+- Full support for [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+- Support Node.js/
   and browsers; [es5-shim](https://github.com/es-shims/es5-shim) for < IE 9, [JSON polyfill](https://bestiejs.github.io/json3/) for < IE 8
-* [Smarter and safer JSON serializer/stringify](#ooserialize)
-* See [Methods](#methods) and [Motivations](#motivations)
-* [Tested](https://travis-ci.org/JSON8/JSON8/branches)
-* Small, no dependencies
-* Modular, save bandwith/memory by requiring needed methods using `require('json8/lib/METHOD_NAME')`
+- [Smarter and safer JSON serializer/stringify](#ooserialize)
+- See [Methods](#methods) and [Motivations](#motivations)
+- [Tested](https://travis-ci.org/JSON8/JSON8/branches)
+- Small, no dependencies
+- Modular, save bandwith/memory by requiring needed methods using `require('json8/lib/METHOD_NAME')`
 
 See also
 
-* [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/master/packages/patch) for JSON diffing and patching
-* [JSON8 Pointer](https://github.com/sonnyp/JSON8/tree/master/packages/pointer) for JSON Pointer (URL for JSON) implementation
-* [JSON8 Merge Patch](https://github.com/sonnyp/JSON8/tree/master/packages/merge-patch) for simpler but less capable JSON object diffing/patching alternative to JSON Patch and Pointer
+- [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/master/packages/patch) for JSON diffing and patching
+- [JSON8 Pointer](https://github.com/sonnyp/JSON8/tree/master/packages/pointer) for JSON Pointer (URL for JSON) implementation
+- [JSON8 Merge Patch](https://github.com/sonnyp/JSON8/tree/master/packages/merge-patch) for simpler but less capable JSON object diffing/patching alternative to JSON Patch and Pointer
 
 ---
 
-* [Introduction](#introduction)
-* [Getting started](#getting-started)
-* [Methods](#methods)
-  * [oo](#oo)
-  * [oo.clone](#ooclone)
-  * [oo.equal](#ooequal)
-  * [oo.type](#ootype)
-  * [oo.is](#oois)
-    * [structure](#structure)
-    * [primitive](#primitive)
-    * [object](#object)
-    * [array](#array)
-    * [number](#number)
-    * [string](#string)
-    * [boolean](#boolean)
-    * [null](#null)
-    * [JSON](#json)
-  * [oo.hasKey](#oohaskey)
-  * [oo.hasValue](#oohasvalue)
-  * [oo.has](#oohas)
-  * [oo.valid](#oovalid)
-  * [oo.serialize](#ooserialize)
-  * [oo.parse](#ooparse)
-* [oo.Document](#oodocument)
-* [Motivations](#motivations)
+- [Introduction](#introduction)
+- [Getting started](#getting-started)
+- [Methods](#methods)
+  - [oo](#oo)
+  - [oo.clone](#ooclone)
+  - [oo.equal](#ooequal)
+  - [oo.type](#ootype)
+  - [oo.is](#oois)
+    - [structure](#structure)
+    - [primitive](#primitive)
+    - [object](#object)
+    - [array](#array)
+    - [number](#number)
+    - [string](#string)
+    - [boolean](#boolean)
+    - [null](#null)
+    - [JSON](#json)
+  - [oo.hasKey](#oohaskey)
+  - [oo.hasValue](#oohasvalue)
+  - [oo.has](#oohas)
+  - [oo.valid](#oovalid)
+  - [oo.serialize](#ooserialize)
+  - [oo.parse](#ooparse)
+- [oo.Document](#oodocument)
+- [Motivations](#motivations)
 
 # Getting started
 
@@ -139,7 +139,7 @@ oo.type(Infinity); // undefined
 oo.type(-Infinity); // undefined
 oo.type(NaN); // undefined
 oo.type(Symbol()); // undefined
-oo.type(function() {}); // undefined
+oo.type(function () {}); // undefined
 ```
 
 [↑](#json8)
@@ -160,15 +160,15 @@ oo.isType("foo");
 
 Where type is any of:
 
-* [structure](#structure)
-* [primitive](#primitive)
-* [object](#object)
-* [array](#array)
-* [number](#number)
-* [string](#string)
-* [boolean](#boolean)
-* [null](#null)
-* [JSON](#json)
+- [structure](#structure)
+- [primitive](#primitive)
+- [object](#object)
+- [array](#array)
+- [number](#number)
+- [string](#string)
+- [boolean](#boolean)
+- [null](#null)
+- [JSON](#json)
 
 `oo.is(value, type)` throws an error if `type` is not one of those.
 
@@ -219,7 +219,7 @@ oo.isObject(new Map()); // true
 oo.isObject(null); // false
 oo.isObject([]); // false
 oo.isObject(null); // false
-oo.isObject(function() {}); // false
+oo.isObject(function () {}); // false
 oo.isObject(new Set()); // false
 ```
 
@@ -320,7 +320,7 @@ oo.isJSON(undefined); //false
 oo.isJSON(NaN); //false
 oo.isJSON(Infinity); //false
 oo.isJSON(-Infinity); //false
-oo.isJSON(function() {}); //false
+oo.isJSON(function () {}); //false
 ```
 
 [↑](#json8)
@@ -394,7 +394,7 @@ oo.valid({ foo: "bar" }); //true
 
 oo.valid({ foo: undefined }); //false
 oo.valid({ foo: NaN }); //false
-oo.valid(["bar", function() {}]); //false
+oo.valid(["bar", function () {}]); //false
 ```
 
 [↑](#json8)
@@ -407,24 +407,24 @@ Always use try/catch with oo.serialize.
 
 Differences with [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
-* Throws a TypeError for any invalid JSON value encountered such as
-  * `undefined`
-  * `Infinity`
-  * `-Infinity`
-  * `NaN`
-  * `symbols`
-  * `functions`
-* Works with [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (serialized as JSON object)
-* Works with [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) (serialized as JSON array)
-* Serializes signed zeros `-0` as `"-0"` while JSON.stringify returns `"0"`
-* Options are provided as an object instead of arguments
+- Throws a TypeError for any invalid JSON value encountered such as
+  - `undefined`
+  - `Infinity`
+  - `-Infinity`
+  - `NaN`
+  - `symbols`
+  - `functions`
+- Works with [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) (serialized as JSON object)
+- Works with [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) (serialized as JSON array)
+- Serializes signed zeros `-0` as `"-0"` while JSON.stringify returns `"0"`
+- Options are provided as an object instead of arguments
 
 Options
 
-* `toJSON` set to false disable [toJSON behavior](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior>) (defaults to true)
-* `space` same as JSON.stringify [space argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument)
-* `replacer` same as JSON.stringify [replacer argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) but remove the value from the array if `undefined` is returned
-* `maxIndentLevel` set a maximum level (depth) of indentation
+- `toJSON` set to false disable [toJSON behavior](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON()_behavior>) (defaults to true)
+- `space` same as JSON.stringify [space argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_space_argument)
+- `replacer` same as JSON.stringify [replacer argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter) but remove the value from the array if `undefined` is returned
+- `maxIndentLevel` set a maximum level (depth) of indentation
 
 ```javascript
 oo.serialize(doc[, options]);
@@ -516,15 +516,15 @@ doc.equal(clone); // true
 
 Getting/asserting the JSON type of a value in JavaScript is troublesome.
 
-* [oo.type](#ootype) returns the JSON type of any value
+- [oo.type](#ootype) returns the JSON type of any value
 
-* [oo.is](#oois) checks if a value is of the provided type
+- [oo.is](#oois) checks if a value is of the provided type
 
-* [oo.isStructure](#ooisStructure) checks if a value is a JSON structure (an array or an object)
+- [oo.isStructure](#ooisStructure) checks if a value is a JSON structure (an array or an object)
 
-* [oo.isPrimitive](#ooisPrimitive) checks if a value is a JSON primitive (null, boolean, string, number)
+- [oo.isPrimitive](#ooisPrimitive) checks if a value is a JSON primitive (null, boolean, string, number)
 
-* [oo.isJSON](#json) checks if the value is a JSON valid value
+- [oo.isJSON](#json) checks if the value is a JSON valid value
 
 [↑](#json8)
 
@@ -544,12 +544,12 @@ JSON8 [types](#types) helps avoiding many common errors as well.
 
 [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) and [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) are new structures available in ES6. Both are serializable and parseable as JSON, Map as object and Set as array. JSON8 was designed with that in mind and every single method supports Map and Set, a few examples:
 
-* [isArray](#array) returns `true` for Set
-* [isObject](#object) returns `true` for Map
-* [valid](#oovalid), [isStructure](#structure), [isJSON](#json) return `true` for Map and Set
-* [type](#ootype) returns `'array'` for Set and `'object'` for Map
-* [serialize](#ooserialize) stringifies Set as array and Map as object
-* [parse](#ooparse) optionally parses arrays as Set and objects as Map
+- [isArray](#array) returns `true` for Set
+- [isObject](#object) returns `true` for Map
+- [valid](#oovalid), [isStructure](#structure), [isJSON](#json) return `true` for Map and Set
+- [type](#ootype) returns `'array'` for Set and `'object'` for Map
+- [serialize](#ooserialize) stringifies Set as array and Map as object
+- [parse](#ooparse) optionally parses arrays as Set and objects as Map
 
 [↑](#json8)
 
@@ -590,10 +590,10 @@ JSON.stringify(array); // '[null,null,"foo"]'
 oo.serialize(array); // TypeError
 
 // functions
-JSON.stringify(function() {}); // undefined
-JSON.stringify({ foo: function() {} }); // '{}'
-JSON.stringify([function() {}]); // '[null]'
-oo.serialize(function() {}); // TypeError
+JSON.stringify(function () {}); // undefined
+JSON.stringify({ foo: function () {} }); // '{}'
+JSON.stringify([function () {}]); // '[null]'
+oo.serialize(function () {}); // TypeError
 
 // Set
 var set = new Set();

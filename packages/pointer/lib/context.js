@@ -30,7 +30,7 @@ module.exports = function context(doc, tokens) {
       target = target.get(token);
     } else if (typeof Set !== "undefined" && target instanceof Set) {
       let c = 0;
-      target.forEach(function(item) {
+      target.forEach(function (item) {
         // eslint-disable-line
         if (c === +token) target = item;
         else c++;

@@ -22,7 +22,7 @@ describe("compile", () => {
     "'": "machin",
   };
 
-  const find = function(p) {
+  const find = function (p) {
     const compiled = pointer.compile(p);
     return compiled(doc);
   };

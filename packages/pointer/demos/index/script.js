@@ -1,4 +1,4 @@
-(function() {
+(function () {
   "use strict";
 
   var pointer = JSON8Pointer;
@@ -44,8 +44,8 @@
 
   var editors = {};
 
-  document.addEventListener("DOMContentLoaded", function() {
-    sections.forEach(function(section) {
+  document.addEventListener("DOMContentLoaded", function () {
+    sections.forEach(function (section) {
       var input = (section.textarea = document.querySelector(
         "#" + section.id + " textarea"
       ));
@@ -75,7 +75,7 @@
       try {
         target = JSON.parse(editors["target"].getValue());
       } catch (e) {
-        ["index", "dict", "flatten"].forEach(function(id) {
+        ["index", "dict", "flatten"].forEach(function (id) {
           editors[id].setOption("mode", "text/plain");
           editors[id].setValue("target is not valid JSON\n\n" + e);
         });
@@ -94,8 +94,8 @@
       );
     }
 
-    [editors["target"]].forEach(function(editor) {
-      editor.on("change", function() {
+    [editors["target"]].forEach(function (editor) {
+      editor.on("change", function () {
         run();
       });
     });

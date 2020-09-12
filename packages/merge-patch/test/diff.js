@@ -7,7 +7,7 @@ const tests = require("./diff.json");
 const { clone } = require("json8");
 
 describe("diff", () => {
-  tests.forEach(test => {
+  tests.forEach((test) => {
     test = clone(test);
     it(test.description, () => {
       assert.deepEqual(diff(test.a, test.b), test.diff);

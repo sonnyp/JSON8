@@ -21,7 +21,7 @@ const valid = [
 const invalid = [
   ["Infinity", Infinity],
   ["-Infinity", -Infinity],
-  ["function", function() {}],
+  ["function", function () {}],
   ["undefined", undefined],
   ["NaN", NaN],
 ];
@@ -41,8 +41,8 @@ const compare = {
   "empty set": new Set(),
 };
 
-const forEach = function(obj, fn) {
-  obj.forEach(function(item) {
+const forEach = function (obj, fn) {
+  obj.forEach(function (item) {
     fn(item[0], item[1]);
   });
 };
@@ -102,7 +102,7 @@ describe("serialize", () => {
   describe("toJSON option", () => {
     it("uses toJSON if options are not provided", () => {
       const obj = {};
-      obj.toJSON = function() {
+      obj.toJSON = function () {
         return "lol";
       };
       assert.strictEqual(serialize(obj), '"lol"');
@@ -110,7 +110,7 @@ describe("serialize", () => {
 
     it("uses toJSON toJSON option is not provided", () => {
       const obj = {};
-      obj.toJSON = function() {
+      obj.toJSON = function () {
         return "lol";
       };
       assert.strictEqual(serialize(obj, {}), '"lol"');
@@ -118,7 +118,7 @@ describe("serialize", () => {
 
     it("uses toJSON toJSON option is set to true", () => {
       const obj = {};
-      obj.toJSON = function() {
+      obj.toJSON = function () {
         return "lol";
       };
       assert.strictEqual(serialize(obj, { toJSON: true }), '"lol"');
@@ -126,7 +126,7 @@ describe("serialize", () => {
 
     it("does not use and serialize toJSON if toJSON option is set to false", () => {
       const obj = {};
-      obj.toJSON = function() {
+      obj.toJSON = function () {
         return "lol";
       };
       assert.strictEqual(serialize(obj, { toJSON: false }), "{}");
@@ -154,7 +154,7 @@ describe("serialize", () => {
       "Déjà vu": "Déjà vu",
       /* eslint-disable */
       bar: {
-        toJSON: function() {
+        toJSON: function () {
           return { foo: "bar" };
         },
       },
@@ -204,7 +204,7 @@ describe("serialize", () => {
       const obj = {
         foo: "bar",
       };
-      const replacer = function(k, v) {
+      const replacer = function (k, v) {
         assert.strictEqual(this, obj); // eslint-disable-line no-invalid-this
         assert.strictEqual(k, "foo");
         assert.strictEqual(v, "bar");
@@ -216,7 +216,7 @@ describe("serialize", () => {
       const obj = {
         foo: "bar",
       };
-      const replacer = function() {
+      const replacer = function () {
         return undefined;
       };
       assert.strictEqual(serialize(obj, { replacer }), "{}");
@@ -224,7 +224,7 @@ describe("serialize", () => {
 
     it("deletes the value if the replacer return undefined for array", () => {
       const arr = ["foo"];
-      const replacer = function(k, v) {
+      const replacer = function (k, v) {
         assert.strictEqual(this, arr); // eslint-disable-line no-invalid-this
         assert.strictEqual(k, 0);
         assert.strictEqual(v, "foo");
@@ -235,7 +235,7 @@ describe("serialize", () => {
 
     it("splice the object if an item is deleted in between for object", () => {
       const obj = { foo: "bar", bar: undefined, baz: "baz" };
-      const replacer = function(k, v) {
+      const replacer = function (k, v) {
         if (k === "bar") return undefined;
         return v;
       };
@@ -250,7 +250,7 @@ describe("serialize", () => {
       map.set("foo", "bar");
       map.set("bar", undefined);
       map.set("baz", "baz");
-      const replacer = function(k, v) {
+      const replacer = function (k, v) {
         if (k === "bar") return undefined;
         return v;
       };
@@ -262,7 +262,7 @@ describe("serialize", () => {
 
     it("splice the array if an item is deleted in between for array", () => {
       const arr = ["foo", "bar", "foo"];
-      const replacer = function(k, v) {
+      const replacer = function (k, v) {
         if (k === 1) return undefined;
         return v;
       };
@@ -271,7 +271,7 @@ describe("serialize", () => {
 
     it("splice the array if an item is deleted in between for set", () => {
       const set = new Set(["foo", "bar", "baz"]);
-      const replacer = function(k, v) {
+      const replacer = function (k, v) {
         if (k === "bar") return undefined;
         return v;
       };
