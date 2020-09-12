@@ -4,7 +4,7 @@ function Document(value) {
   this.value = value;
 }
 
-Document.prototype.toJSON = function() {
+Document.prototype.toJSON = function () {
   return this.value;
 };
 

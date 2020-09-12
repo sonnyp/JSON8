@@ -1,4 +1,4 @@
-(function() {
+(function () {
   "use strict";
 
   // small hack to highlight token target in code example
@@ -11,13 +11,13 @@
   }
 
   function unhighlightAll() {
-    highlighted.forEach(function(el) {
+    highlighted.forEach(function (el) {
       el.classList.remove("highlight");
     });
     highlighted = [];
   }
 
-  document.addEventListener("click", function(e) {
+  document.addEventListener("click", function (e) {
     var target = e.target.dataset.target;
     if (!target) return unhighlightAll();
     unhighlightAll();

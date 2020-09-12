@@ -6,7 +6,7 @@ const _get = require("../lib/get");
 describe("get", () => {
   let doc;
 
-  const get = function(path) {
+  const get = function (path) {
     return _get(doc, path);
   };
 

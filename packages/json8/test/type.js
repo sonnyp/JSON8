@@ -65,7 +65,10 @@ describe("type", () => {
   });
 
   it("returns undefined for function", () => {
-    assert.strictEqual(type(() => {}), undefined);
+    assert.strictEqual(
+      type(() => {}),
+      undefined
+    );
   });
 
   if (global.Symbol && typeof Symbol() === "symbol") {

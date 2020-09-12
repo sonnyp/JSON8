@@ -1,21 +1,22 @@
 {
   "private": true,
   "devDependencies": {
-    "ava": "^2.4.0",
+    "ava": "^3.12.1",
     "benchmark": "^2.1.4",
-    "browserify": "^16.5.0",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.4.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "lerna": "^3.18.3",
-    "mocha": "^6.2.2",
-    "prettier": "^1.18.2",
-    "util.promisify": "^1.0.0"
+    "browserify": "^16.5.2",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "lerna": "^3.22.1",
+    "mocha": "^8.1.3",
+    "prettier": "^2.1.1",
+    "util.promisify": "^1.0.1"
   },
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "test": "lerna run test && eslint ."
+    "test": "lerna run test && eslint .",
+    "ncu": "ncu && for dir in packages/*; do (cd \"$dir\" && ncu); done"
   }
 }

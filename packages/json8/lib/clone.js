@@ -13,12 +13,12 @@ module.exports = function clone(obj) {
     for (i = 0, l = obj.length; i < l; i++) c[i] = clone(obj[i]);
   } else if (global.Set && obj instanceof Set) {
     c = new Set();
-    obj.forEach(function(item) {
+    obj.forEach(function (item) {
       c.add(clone(item));
     });
   } else if (global.Map && obj instanceof Map) {
     c = new Map();
-    obj.forEach(function(value, key) {
+    obj.forEach(function (value, key) {
       c.set(key, clone(value));
     });
   } else {

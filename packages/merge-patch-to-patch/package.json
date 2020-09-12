@@ -16,11 +16,10 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "dependencies": {
-    "json8": "^1.0.1",
     "json8-pointer": "^1.0.1"
   },
   "devDependencies": {
-    "json8": "^0.9.2",
+    "json8": "^1.0.1",
     "json8-patch": "^1.0.1"
   },
   "engines": {

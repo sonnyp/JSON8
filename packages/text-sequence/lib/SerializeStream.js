@@ -9,7 +9,7 @@ module.exports = class SerializeStream extends Transform {
   constructor(options = {}) {
     super(Object.assign({ objectMode: true, decodeStrings: false }, options));
     this.serializer = new Serializer();
-    this.serializer.on("data", data => {
+    this.serializer.on("data", (data) => {
       this.push(data);
     });
   }

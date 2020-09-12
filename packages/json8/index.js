@@ -3,7 +3,7 @@
 const types = require("./lib/types");
 const Document = require("./lib/Document");
 
-const oo = (module.exports = function(doc) {
+const oo = (module.exports = function (doc) {
   return new Document(doc);
 });
 
@@ -50,26 +50,26 @@ oo.valid = require("./lib/valid");
   "serialize",
   "type",
   "valid",
-].forEach(function(method) {
+].forEach(function (method) {
   const fn = oo[method];
-  Document.prototype[method] = function() {
+  Document.prototype[method] = function () {
     const args = [this.value].concat(arguments);
     return fn.apply(null, args);
   };
 });
 
-Document.prototype.toString = function() {
+Document.prototype.toString = function () {
   return oo.serialize(this.value);
 };
 
-Document.prototype.clone = function() {
+Document.prototype.clone = function () {
   return new Document(oo.clone(this.value));
 };
 
-Document.prototype.equal = function(obj) {
+Document.prototype.equal = function (obj) {
   return oo.equal(this.value, obj instanceof Document ? obj.value : obj);
 };
 
-Document.prototype.parse = function() {
+Document.prototype.parse = function () {
   this.value = oo.parse.apply(null, [this.value].concat(arguments));
 };

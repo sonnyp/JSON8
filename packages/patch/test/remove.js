@@ -6,7 +6,7 @@ const _remove = require("../lib/remove");
 describe("remove", () => {
   let doc;
 
-  const remove = function(path) {
+  const remove = function (path) {
     return _remove(doc, path);
   };
 

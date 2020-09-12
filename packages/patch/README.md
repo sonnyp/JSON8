@@ -10,30 +10,30 @@ JSON8 Patch passes the entire [json-patch-tests](https://github.com/json-patch/j
 
 ---
 
-* [Introduction](#introduction)
-* [Comparison](#comparison)
-* [Getting started](#getting-started)
-* [Methods](#methods)
-  * [apply](#apply)
-  * [patch](#patch)
-  * [revert](#revert)
-  * [buildRevertPatch](#buildrevertpatch)
-  * [diff](#diff)
-  * [valid](#valid)
-  * [concat](#concat)
-  * [Operations](#operations)
-    * [add](#add)
-    * [remove](#remove)
-    * [replace](#replace)
-    * [move](#move)
-    * [copy](#copy)
-    * [test](#test)
-  * [Extra operations](#extra-operations)
-    * [get](#get)
-    * [has](#has)
-  * [Patch size](#patch-size)
-    * [pack](#pack)
-    * [unpack](#unpack)
+- [Introduction](#introduction)
+- [Comparison](#comparison)
+- [Getting started](#getting-started)
+- [Methods](#methods)
+  - [apply](#apply)
+  - [patch](#patch)
+  - [revert](#revert)
+  - [buildRevertPatch](#buildrevertpatch)
+  - [diff](#diff)
+  - [valid](#valid)
+  - [concat](#concat)
+  - [Operations](#operations)
+    - [add](#add)
+    - [remove](#remove)
+    - [replace](#replace)
+    - [move](#move)
+    - [copy](#copy)
+    - [test](#test)
+  - [Extra operations](#extra-operations)
+    - [get](#get)
+    - [has](#has)
+  - [Patch size](#patch-size)
+    - [pack](#pack)
+    - [unpack](#unpack)
 
 # Comparison
 
@@ -131,11 +131,11 @@ doc = ooPatch.apply(doc, revertPatch).doc;
 
 Because `buildRevertPatch + apply` offers more flexibility over `revert` it is preferred.
 
-* use [pack/unpack](#patch-size) with the result of `buildRevertPatch` making it ideal for storage or transport
-* reverse a revert (and so on...) with `{reversible: true}`
-* [diff](#diff) between reverts
-* merge multiple reverts into one
-* rebase reverts
+- use [pack/unpack](#patch-size) with the result of `buildRevertPatch` making it ideal for storage or transport
+- reverse a revert (and so on...) with `{reversible: true}`
+- [diff](#diff) between reverts
+- merge multiple reverts into one
+- rebase reverts
 
 [↑](#json8-patch)
 
@@ -196,8 +196,8 @@ var patch = ooPatch.concat(patch1, patch2)[
 
 `add`, `copy`, `replace`, `move`, `remove`, `test` operations return an object of the form `{doc: document, previous: value}`
 
-* `doc` is the patched document
-* `previous` is the previous/replaced value
+- `doc` is the patched document
+- `previous` is the previous/replaced value
 
 ### add
 
@@ -295,8 +295,8 @@ Size (in bytes) comparaison for the following patch file
 
 In pratice I'd recommand to use pack/unpack if
 
-* data compression cannot be used on the transport of the patch
-* keeping a large amount of patches in memory/on disk
+- data compression cannot be used on the transport of the patch
+- keeping a large amount of patches in memory/on disk
 
 [↑](#json8-patch)
 
@@ -372,9 +372,9 @@ Refers to the ability of the library to mutates the target document.
 
 It is best to choose a library which mutate the target document because it leaves you with the choice of creating a shallow copy first.
 
-* [JSON8 clone](https://www.npmjs.com/package/json8#ooclone)
-* [lodash clone](https://www.npmjs.com/package/lodash.clone)
-* [underscore clone](http://underscorejs.org/#clone)
-* ...
+- [JSON8 clone](https://www.npmjs.com/package/json8#ooclone)
+- [lodash clone](https://www.npmjs.com/package/lodash.clone)
+- [underscore clone](http://underscorejs.org/#clone)
+- ...
 
 [↑](#json8-patch)

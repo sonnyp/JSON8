@@ -1,16 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
 
     <title>JSON8 Patch diff demo</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../style.css" />
 
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"
+    />
 
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.css"
+    />
 
     <!-- codemirror -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.js"></script>
@@ -34,19 +50,28 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <p>This is a <strong>live editor</strong>. Editing <strong data-target="input">original</strong> or <strong data-target="output">edited</strong> updates <strong data-target="patch">patch</strong> instantly.</p>
+    <p>
+      This is a <strong>live editor</strong>. Editing
+      <strong data-target="input">original</strong> or
+      <strong data-target="output">edited</strong> updates
+      <strong data-target="patch">patch</strong> instantly.
+    </p>
 
     <section id="input" class="json8">
       <h1>original</h1>
       <textarea></textarea>
-    </section><!--
+    </section>
+    <!--
 
- --><section id="output" class="json8">
+ -->
+    <section id="output" class="json8">
       <h1>edited</h1>
       <textarea></textarea>
-    </section><!--
+    </section>
+    <!--
 
- --><section id="patch" class="json8">
+ -->
+    <section id="patch" class="json8">
       <h1>patch</h1>
       <textarea></textarea>
     </section>

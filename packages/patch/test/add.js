@@ -6,7 +6,7 @@ const _add = require("../lib/add");
 describe("add", () => {
   let doc;
 
-  const add = function(path, obj) {
+  const add = function (path, obj) {
     return _add(doc, path, obj);
   };
 

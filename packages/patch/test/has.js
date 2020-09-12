@@ -6,7 +6,7 @@ const _has = require("../lib/has");
 describe("has", () => {
   let doc;
 
-  const has = function(path) {
+  const has = function (path) {
     return _has(doc, path);
   };
 

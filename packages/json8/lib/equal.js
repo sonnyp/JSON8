@@ -11,7 +11,7 @@ const type = require("./type");
 
 function toArray(set) {
   const array = [];
-  set.forEach(function(item) {
+  set.forEach(function (item) {
     array.push(item);
   });
   return array;
@@ -19,7 +19,7 @@ function toArray(set) {
 
 function toObject(map) {
   const object = Object.create(null);
-  map.forEach(function(value, key) {
+  map.forEach(function (value, key) {
     object[key] = value;
   });
   return object;

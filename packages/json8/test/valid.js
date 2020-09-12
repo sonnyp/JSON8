@@ -11,7 +11,7 @@ const VALID = {
   '"foo"': "foo",
   "{}": {},
   "[]": [],
-  "42": 42,
+  42: 42,
   "-0": -0,
   "-42": -42,
   map: new Map(),
@@ -21,13 +21,13 @@ const VALID = {
 const INVALID = {
   Infinity: Infinity,
   "-Infinity": -Infinity,
-  function: function() {},
+  function: function () {},
   undefined: undefined,
   NaN: NaN,
 };
 /*eslint-enable object-shorthand*/
 
-const forEach = function(obj, fn) {
+const forEach = function (obj, fn) {
   for (const i in obj) fn(i, obj[i]);
 };
 
@@ -46,7 +46,7 @@ describe("valid", () => {
     });
   });
 
-  describe("map", function() {
+  describe("map", function () {
     it("return false for non string keys", () => {
       const map = new Map();
       map.set(null, "hello");

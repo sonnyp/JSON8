@@ -32,7 +32,7 @@ Example
 const { createWriteStream } = require("fs");
 const textSequence = require("json8-text-sequence");
 
-const writeStream = createWriteStream("example.log", {flags: 'a'});
+const writeStream = createWriteStream("example.log", { flags: "a" });
 const serializeStream = new textSequence.SerializeStream();
 
 serializeStream.pipe(writeStream);
@@ -42,10 +42,10 @@ setInterval(() => {
   // string, boolean, array, object, ...
   const sequence = {
     date: Date.now(),
-    value: Math.random().toString().slice(2)
-  }
-  serializeStream.write(sequence)
-}, 500)
+    value: Math.random().toString().slice(2),
+  };
+  serializeStream.write(sequence);
+}, 500);
 ```
 
 [↑](#json8-text-sequence)
@@ -64,16 +64,16 @@ const parseStream = new textSequence.ParseStream();
 readStream.pipe(parseStream);
 
 // Sequence is truncated
-parseStream.on('truncated', sequence => {
-  console.log('truncated sequence', sequence)
-})
+parseStream.on("truncated", (sequence) => {
+  console.log("truncated sequence", sequence);
+});
 
 // Sequence is not valid JSON
-parseStream.on('invalid', sequence => {
-  console.log('invalid sequence', sequence)
-})
+parseStream.on("invalid", (sequence) => {
+  console.log("invalid sequence", sequence);
+});
 
-parseStream.on("data", json => {
+parseStream.on("data", (json) => {
   console.log(json);
 });
 ```

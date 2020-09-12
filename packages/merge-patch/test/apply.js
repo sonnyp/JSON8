@@ -5,13 +5,13 @@ const apply = require("../lib/apply");
 
 describe("apply", () => {
   it("returns the patch argument if it's not an object", () => {
-    [true, false, null, [], 42, "foo"].forEach(v => {
+    [true, false, null, [], 42, "foo"].forEach((v) => {
       assert.equal(apply({}, v), v);
     });
   });
 
   it("returns an object if document argument is not an object", () => {
-    [true, false, null, [], 42, "foo"].forEach(v => {
+    [true, false, null, [], 42, "foo"].forEach((v) => {
       const doc = apply(v, {});
       assert.equal(typeof doc, "object");
       assert(doc !== null);

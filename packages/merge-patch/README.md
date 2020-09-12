@@ -6,12 +6,12 @@ JSON Merge Patch [RFC 7396](https://tools.ietf.org/html/rfc7396) toolkit for Jav
 
 ---
 
-* [Introduction](#introduction)
-* [Getting started](#getting-started)
-* [Methods](#methods)
-  * [apply](#apply)
-  * [patch](#patch)
-  * [diff](#diff)
+- [Introduction](#introduction)
+- [Getting started](#getting-started)
+- [Methods](#methods)
+  - [apply](#apply)
+  - [patch](#patch)
+  - [diff](#diff)
 
 ## Getting started
 
@@ -31,8 +31,8 @@ const mergePatch = require("json8-merge-patch");
 
 Apply a JSON Merge Patch to a JSON document.
 
-* May mutates the target document, if you wish to pass a shallow copy use [JSON8 clone](https://github.com/sonnyp/JSON8/tree/master/packages/json8#ooclone).
-* Does not validate the patch nor the target nor the result for JSON correctness, use [JSON8 valid](https://github.com/sonnyp/JSON8/tree/master/packages/json8#oovalid).
+- May mutates the target document, if you wish to pass a shallow copy use [JSON8 clone](https://github.com/sonnyp/JSON8/tree/master/packages/json8#ooclone).
+- Does not validate the patch nor the target nor the result for JSON correctness, use [JSON8 valid](https://github.com/sonnyp/JSON8/tree/master/packages/json8#oovalid).
 
 ```javascript
 doc = mergePatch.apply(doc, mergePatch);

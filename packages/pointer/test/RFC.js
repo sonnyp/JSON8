@@ -21,7 +21,7 @@ describe("RFC", () => {
     "m~n": 8,
   };
 
-  const find = function(p) {
+  const find = function (p) {
     return pointer.find(doc, p);
   };
 

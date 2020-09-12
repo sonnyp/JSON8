@@ -3,7 +3,7 @@
 const test = require("ava");
 const serialize = require("../lib/serialize");
 
-test("serialize", t => {
+test("serialize", (t) => {
   t.is(serialize(["hello"]), '\x1e"hello"\x0A');
   t.is(serialize([true]), "\x1etrue\x0A");
   t.is(serialize([false]), "\x1efalse\x0A");

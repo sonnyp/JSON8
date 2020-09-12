@@ -31,7 +31,7 @@ tests.push(map);
 
 describe("unflatten", () => {
   it("returns an equal value of the original", () => {
-    tests.forEach(test => {
+    tests.forEach((test) => {
       const json = clone(test);
       assert.deepEqual(unflatten(flatten(json)), test);
     });

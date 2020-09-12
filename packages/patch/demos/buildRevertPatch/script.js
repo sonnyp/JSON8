@@ -1,4 +1,4 @@
-(function() {
+(function () {
   "use strict";
 
   var ooPatch = JSON8Patch;
@@ -45,12 +45,12 @@
 
   var editors = {};
 
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     // CodeMirror.fromTextArea(document.getElementById('example'), {
     //   mode: 'application/javascript'
     // })
 
-    sections.forEach(function(section) {
+    sections.forEach(function (section) {
       var input = (section.textarea = document.querySelector(
         "#" + section.id + " textarea"
       ));
@@ -110,8 +110,8 @@
       );
     }
 
-    [editors["target"], editors["patch"]].forEach(function(editor) {
-      editor.on("change", function() {
+    [editors["target"], editors["patch"]].forEach(function (editor) {
+      editor.on("change", function () {
         run();
       });
     });

@@ -16,7 +16,7 @@ var doc = { a: { b: "foo" } };
 function pathToStatement(path) {
   var tokens = decode(path);
   var statement = tokens.shift();
-  tokens.forEach(function(token) {
+  tokens.forEach(function (token) {
     statement += '["' + token + '"]';
   });
   return statement;
@@ -26,7 +26,7 @@ function pathToStatement(path) {
 
 function compile(patch) {
   var code = "";
-  patch.forEach(function(op) {
+  patch.forEach(function (op) {
     var o = "";
     switch (op.op) {
       case "remove":

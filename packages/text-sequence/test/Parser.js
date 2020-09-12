@@ -8,7 +8,7 @@ function catchEvents(str) {
   const parser = new Parser();
   const events = [];
   let ended = false;
-  ["invalid", "sequence", "truncated"].forEach(event => {
+  ["invalid", "sequence", "truncated"].forEach((event) => {
     parser.on(event, (...args) => {
       events.push([event, ...args]);
     });
@@ -23,7 +23,7 @@ function catchEvents(str) {
   return events;
 }
 
-test("invalid json", t => {
+test("invalid json", (t) => {
   t.deepEqual(catchEvents('\x1e"hello\x0A'), [["invalid", '"hello']]);
   t.deepEqual(catchEvents("\x1e'hello'\x0A"), [["invalid", "'hello'"]]);
   t.deepEqual(catchEvents("\x1e[\x0A"), [["invalid", "["]]);
@@ -31,7 +31,7 @@ test("invalid json", t => {
   t.deepEqual(catchEvents("\x1efoobar\x0A"), [["invalid", "foobar"]]);
 });
 
-test("truncated", t => {
+test("truncated", (t) => {
   t.deepEqual(catchEvents("\x1enull\x1e"), [
     ["truncated", "null"],
     ["truncated", ""],
@@ -54,7 +54,7 @@ test("truncated", t => {
   t.deepEqual(catchEvents("\x0A"), [["truncated", ""]]);
 });
 
-test("empty sequence", t => {
+test("empty sequence", (t) => {
   t.deepEqual(catchEvents("\x1e\x0A"), [["invalid", ""]]);
   t.deepEqual(catchEvents(""), []);
   // Multiple consecutive RS octets do not denote empty
@@ -67,7 +67,7 @@ test("empty sequence", t => {
   ]);
 });
 
-test("valid json", t => {
+test("valid json", (t) => {
   t.deepEqual(catchEvents('\x1e"hello"\x0A'), [["sequence", "hello"]]);
   t.deepEqual(catchEvents("\x1etrue\x0A"), [["sequence", true]]);
   t.deepEqual(catchEvents("\x1efalse\x0A"), [["sequence", false]]);

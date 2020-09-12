@@ -1,17 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
 
     <title>JSON8 Patch buildRevertPatch demo</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../style.css" />
 
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"
+    />
 
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css">
-
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/lint/lint.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/addon/fold/foldgutter.min.css"
+    />
 
     <!-- codemirror -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.14.2/codemirror.min.js"></script>
@@ -35,19 +50,28 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <p>This is a <strong>live editor</strong>. Editting <strong data-target="target">input</strong> or <strong data-target="patch">patch</strong> will update <strong data-target="result">revert</strong> instantly.</p>
+    <p>
+      This is a <strong>live editor</strong>. Editting
+      <strong data-target="target">input</strong> or
+      <strong data-target="patch">patch</strong> will update
+      <strong data-target="result">revert</strong> instantly.
+    </p>
 
     <section id="target" class="json8">
       <h1>input</h1>
       <textarea></textarea>
-    </section><!--
+    </section>
+    <!--
 
- --><section id="patch" class="json8">
+ -->
+    <section id="patch" class="json8">
       <h1>patch</h1>
       <textarea></textarea>
-    </section><!--
+    </section>
+    <!--
 
- --><section id="result" class="json8">
+ -->
+    <section id="result" class="json8">
       <h1>revert</h1>
       <textarea></textarea>
     </section>

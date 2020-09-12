@@ -1,4 +1,4 @@
-(function() {
+(function () {
   "use strict";
 
   var ooPatch = JSON8Patch;
@@ -55,8 +55,8 @@
 
   var editors = {};
 
-  document.addEventListener("DOMContentLoaded", function() {
-    sections.forEach(function(section) {
+  document.addEventListener("DOMContentLoaded", function () {
+    sections.forEach(function (section) {
       var input = (section.textarea = document.querySelector(
         "#" + section.id + " textarea"
       ));
@@ -114,7 +114,7 @@
       editors["patch"].setValue(JSON.stringify(diffResult, null, 2));
     }
 
-    [editors["input"], editors["output"]].forEach(function(editor) {
+    [editors["input"], editors["output"]].forEach(function (editor) {
       editor.on("change", run);
     });
 

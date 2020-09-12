@@ -6,7 +6,7 @@ const _copy = require("../lib/copy");
 describe("copy", () => {
   let doc;
 
-  const copy = function(path, dest) {
+  const copy = function (path, dest) {
     return _copy(doc, path, dest);
   };
 
