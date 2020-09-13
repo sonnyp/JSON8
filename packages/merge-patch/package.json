@@ -1,6 +1,6 @@
 {
   "name": "json8-merge-patch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JSON Merge Patch toolkit for JavaScript",
   "keywords": [
     "JSON",
@@ -17,7 +17,7 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "dependencies": {
-    "json8": "^1.0.2"
+    "json8": "^1.0.3"
   },
   "engines": {
     "node": ">= 7.6.0"
