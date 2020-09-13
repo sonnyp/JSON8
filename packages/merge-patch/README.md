@@ -69,6 +69,18 @@ person = mergePatch.apply(person, patch)
 
 [↑](#json8-merge-patch)
 
+### object creation
+
+When needed, `apply` creates objects with `null` prototype, you can choose the prototype to use with `{proto: Object}` as a third argument.
+
+[↑](#json8-merge-patch)
+
+### prototype pollution
+
+`apply` will throw with an error if [prototype pollution](https://github.com/HoLyVieR/prototype-pollution-nsec18) is attempted. You can allow for prototype pollution by passing `{pollute: true}` as a third argument.
+
+[↑](#json8-merge-patch)
+
 ### patch
 
 Alias for [apply](#apply) method.
