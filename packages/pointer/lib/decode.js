@@ -17,6 +17,8 @@ module.exports = function decode(pointer, separator) {
 
   if (pointer.charAt(0) !== sep) throw new Error("Invalid pointer: " + pointer);
 
+  pointer = pointer.replace('__proto__'+sep, '').replace('constructor'+sep+'prototype'+sep,'');
+
   const tokens = [""];
   let c = 0;
 
