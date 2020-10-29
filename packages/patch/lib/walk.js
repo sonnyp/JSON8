@@ -21,7 +21,7 @@ module.exports = function walk(doc, tokens) {
     token = tokens[i++];
 
     if (token === '__proto__' ||
-      (token == 'prototype' && i>0 && tokens[i-1] == 'constructor')
+      (token == 'prototype' && i>1 && tokens[i-2] == 'constructor')
     ) {
       throw new Error("Prototype pollution attempt detected");
     }
