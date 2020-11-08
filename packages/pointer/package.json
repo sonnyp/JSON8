@@ -1,6 +1,6 @@
 {
   "name": "json8-pointer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "JSON Pointer toolkit for JavaScript",
   "keywords": [
     "JSON",
