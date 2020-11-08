@@ -23,6 +23,10 @@ module.exports = function decode(pointer, separator) {
   for (let i = 1, len = pointer.length; i < len; i++) {
     const l = pointer.charAt(i);
     if (l === sep) {
+      const token = tokens[tokens.length - 1];
+      if (token === "constructor" || token === "__proto__") {
+        throw new Error("Prototype pollution attempt");
+      }
       tokens.push("");
       c++;
     } else if (l === "~") {
