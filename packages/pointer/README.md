@@ -136,6 +136,12 @@ pointer.decode(".foo.bar.hello", ".");
 
 [↑](#json8-pointer)
 
+### prototype pollution
+
+`decode` will throw with an error if [prototype pollution](https://github.com/HoLyVieR/prototype-pollution-nsec18) is attempted.
+
+[↑](#json8-pointer)
+
 ### parse
 
 Alias for the [decode](#decode) method.

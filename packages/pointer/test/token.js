@@ -3,7 +3,7 @@
 const assert = require("assert");
 const { encode, decode } = require("..");
 
-describe("parse", () => {
+describe("decode", () => {
   it("returns ['foo', 'bar']", () => {
     const r = decode("/foo/bar");
     assert.deepEqual(r, ["foo", "bar"]);
@@ -18,9 +18,28 @@ describe("parse", () => {
     const r = decode("");
     assert.deepEqual(r, []);
   });
+
+  // https://github.com/HoLyVieR/prototype-pollution-nsec18
+  it("prevents prototype pollution", () => {
+    assert.throws(
+      () => {
+        decode("/foo/constructor/bar");
+      },
+      Error,
+      "Prototype pollution attempt"
+    );
+
+    assert.throws(
+      () => {
+        decode("/foo/__proto__/bar");
+      },
+      Error,
+      "Prototype pollution attempt"
+    );
+  });
 });
 
-describe("serialize", () => {
+describe("encode", () => {
   it("should return /foo/bar", () => {
     const s = encode(["foo", "bar"]);
     assert.deepEqual(s, "/foo/bar");

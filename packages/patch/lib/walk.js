@@ -20,12 +20,6 @@ module.exports = function walk(doc, tokens) {
   while (i < length - 1) {
     token = tokens[i++];
 
-    if (token === '__proto__' ||
-      (token == 'prototype' && i>1 && tokens[i-2] == 'constructor')
-    ) {
-      throw new Error("Prototype pollution attempt detected");
-    }
-
     if (Array.isArray(target)) validArrayToken(token, target.length);
     else if (typeof target !== OBJECT || target === null)
       throw new Error("Cannot be walked");

@@ -36,4 +36,31 @@ describe("unflatten", () => {
       assert.deepEqual(unflatten(flatten(json)), test);
     });
   });
+
+  // https://github.com/HoLyVieR/prototype-pollution-nsec18
+  it("prevents prototype pollution", () => {
+    assert.throws(
+      () => {
+        unflatten({
+          "": {},
+          "/firstName": "John",
+          "/__proto__/polluted": "Yes! Its Polluted",
+        });
+      },
+      Error,
+      "Prototype pollution attempt"
+    );
+
+    assert.throws(
+      () => {
+        unflatten({
+          "": {},
+          "/firstName": "John",
+          "/constructor/polluted": "Yes! Its Polluted",
+        });
+      },
+      Error,
+      "Prototype pollution attempt"
+    );
+  });
 });

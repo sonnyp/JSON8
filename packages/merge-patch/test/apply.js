@@ -66,6 +66,7 @@ describe("apply", () => {
     );
 
     assert.equal(doc.isAdmin, undefined);
+    assert.equal({}.isAdmin, undefined);
     assert.equal("isAdmin" in doc, false);
   });
 });

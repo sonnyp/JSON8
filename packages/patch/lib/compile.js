@@ -22,8 +22,6 @@ function pathToStatement(path) {
   return statement;
 }
 
-// "compile" lol https://github.com/bruth/jsonpatch-js/blob/master/jsonpatch.coffee#L377
-
 function compile(patch) {
   var code = "";
   patch.forEach(function (op) {

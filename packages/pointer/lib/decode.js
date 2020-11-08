@@ -17,14 +17,16 @@ module.exports = function decode(pointer, separator) {
 
   if (pointer.charAt(0) !== sep) throw new Error("Invalid pointer: " + pointer);
 
-  pointer = pointer.replace('__proto__'+sep, '').replace('constructor'+sep+'prototype'+sep,'');
-
   const tokens = [""];
   let c = 0;
 
   for (let i = 1, len = pointer.length; i < len; i++) {
     const l = pointer.charAt(i);
     if (l === sep) {
+      const token = tokens[tokens.length - 1];
+      if (token === "constructor" || token === "__proto__") {
+        throw new Error("Prototype pollution attempt");
+      }
       tokens.push("");
       c++;
     } else if (l === "~") {
