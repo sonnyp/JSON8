@@ -1,42 +1,41 @@
 "use strict";
 
 const { RS, LF } = require("./chars");
-const { EventEmitter } = require("events");
 
 const TRUNCATED = "truncated";
 const SEQUENCE = "sequence";
 const INVALID = "invalid";
 
-class Parser extends EventEmitter {
+class Parser {
   constructor() {
-    super();
-
     this.seq = "";
     this.open = false;
   }
+
+  onvalue() {}
+  onend() {}
 
   write(data) {
     if (typeof data !== "string") data = data.toString();
     for (let pos = 0, l = data.length; pos < l; pos++) {
       const char = data[pos];
-      this.last = char;
       if (char === RS) {
         this.open = true;
         if (this.seq.length > 0) {
-          this.emit(TRUNCATED, this.seq);
+          this.onvalue(TRUNCATED, this.seq);
           this.seq = "";
         }
       } else if (char === LF) {
         if (this.open === false) {
-          this.emit(TRUNCATED, this.seq);
+          this.onvalue(TRUNCATED, this.seq);
           this.seq = "";
           continue;
         }
         this.open = false;
         try {
-          this.emit(SEQUENCE, JSON.parse(this.seq));
+          this.onvalue(SEQUENCE, JSON.parse(this.seq));
         } catch (err) {
-          this.emit(INVALID, this.seq);
+          this.onvalue(INVALID, this.seq);
         }
         this.seq = "";
       } else {
@@ -48,10 +47,10 @@ class Parser extends EventEmitter {
   end(data) {
     if (data) this.write(data);
     if (this.seq.length > 0 || this.open === true) {
-      this.emit(TRUNCATED, this.seq);
+      this.onvalue(TRUNCATED, this.seq);
       this.seq = "";
     }
-    this.emit("end");
+    this.onend();
   }
 }
 
