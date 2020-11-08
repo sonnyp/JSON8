@@ -1,6 +1,7 @@
 "use strict";
 
 const { Transform } = require("stream");
+
 const Parser = require("./Parser");
 
 // https://nodejs.org/api/stream.html#stream_implementing_a_transform_stream

@@ -3,7 +3,11 @@
 const { RS, LF } = require("./chars");
 const { EventEmitter } = require("events");
 
-module.exports = class Parser extends EventEmitter {
+const TRUNCATED = "truncated";
+const SEQUENCE = "sequence";
+const INVALID = "invalid";
+
+class Parser extends EventEmitter {
   constructor() {
     super();
 
@@ -19,20 +23,20 @@ module.exports = class Parser extends EventEmitter {
       if (char === RS) {
         this.open = true;
         if (this.seq.length > 0) {
-          this.emit("truncated", this.seq);
+          this.emit(TRUNCATED, this.seq);
           this.seq = "";
         }
       } else if (char === LF) {
         if (this.open === false) {
-          this.emit("truncated", this.seq);
+          this.emit(TRUNCATED, this.seq);
           this.seq = "";
           continue;
         }
         this.open = false;
         try {
-          this.emit("sequence", JSON.parse(this.seq));
+          this.emit(SEQUENCE, JSON.parse(this.seq));
         } catch (err) {
-          this.emit("invalid", this.seq);
+          this.emit(INVALID, this.seq);
         }
         this.seq = "";
       } else {
@@ -44,9 +48,11 @@ module.exports = class Parser extends EventEmitter {
   end(data) {
     if (data) this.write(data);
     if (this.seq.length > 0 || this.open === true) {
-      this.emit("truncated", this.seq);
+      this.emit(TRUNCATED, this.seq);
       this.seq = "";
     }
     this.emit("end");
   }
-};
+}
+
+module.exports = Parser;

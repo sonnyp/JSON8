@@ -19,7 +19,6 @@ function catchEvents(str) {
   parser.write(str);
   parser.end();
   assert(ended === true);
-  // console.log(events);
   return events;
 }
 
