@@ -1,13 +1,7 @@
 "use strict";
 
-const Serializer = require("./Serializer");
+const { RS, LF } = require("./chars");
 
-module.exports = function serialize(array) {
-  const serializer = new Serializer();
-  let str = "";
-  serializer.on("data", (data) => (str += data));
-  for (let i = 0; i < array.length; i++) {
-    serializer.write(array[i]);
-  }
-  return str;
+module.exports = function encode(value) {
+  return RS + JSON.stringify(value) + LF;
 };

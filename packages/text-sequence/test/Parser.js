@@ -8,18 +8,15 @@ function catchEvents(str) {
   const parser = new Parser();
   const events = [];
   let ended = false;
-  ["invalid", "sequence", "truncated"].forEach((event) => {
-    parser.on(event, (...args) => {
-      events.push([event, ...args]);
-    });
-  });
-  parser.on("end", () => {
+  parser.onvalue = (type, value) => {
+    events.push([type, value]);
+  };
+  parser.onend = () => {
     ended = true;
-  });
+  };
   parser.write(str);
   parser.end();
   assert(ended === true);
-  // console.log(events);
   return events;
 }
 
