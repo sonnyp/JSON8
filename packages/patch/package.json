@@ -7,7 +7,7 @@
     "patch",
     "diff"
   ],
-  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/patch",
+  "homepage": "https://github.com/sonnyp/JSON8/tree/main/packages/patch",
   "repository": "github:JSON8/patch",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {

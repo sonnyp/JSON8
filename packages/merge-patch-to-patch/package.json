@@ -7,7 +7,7 @@
     "merge",
     "patch"
   ],
-  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/merge-patch",
+  "homepage": "https://github.com/sonnyp/JSON8/tree/main/packages/merge-patch",
   "repository": "github:JSON8/merge-patch",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {

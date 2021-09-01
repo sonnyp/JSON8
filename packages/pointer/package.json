@@ -6,7 +6,7 @@
     "JSON",
     "pointer"
   ],
-  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/pointer",
+  "homepage": "https://github.com/sonnyp/JSON8/tree/main/packages/pointer",
   "repository": "github:JSON8/pointer",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
   "main": "index.js",

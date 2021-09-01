@@ -18,9 +18,9 @@ Features
 
 See also
 
-- [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/master/packages/patch) for JSON diffing and patching
-- [JSON8 Pointer](https://github.com/sonnyp/JSON8/tree/master/packages/pointer) for JSON Pointer (URL for JSON) implementation
-- [JSON8 Merge Patch](https://github.com/sonnyp/JSON8/tree/master/packages/merge-patch) for simpler but less capable JSON object diffing/patching alternative to JSON Patch and Pointer
+- [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/main/packages/patch) for JSON diffing and patching
+- [JSON8 Pointer](https://github.com/sonnyp/JSON8/tree/main/packages/pointer) for JSON Pointer (URL for JSON) implementation
+- [JSON8 Merge Patch](https://github.com/sonnyp/JSON8/tree/main/packages/merge-patch) for simpler but less capable JSON object diffing/patching alternative to JSON Patch and Pointer
 
 ---
 

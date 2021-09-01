@@ -4,7 +4,7 @@
 
 JSON Pointer [RFC 6901](http://tools.ietf.org/html/rfc6901) toolkit for JavaScript.
 
-See also [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/master/packages/patch) for more methods to work with JSON pointers.
+See also [JSON8 Patch](https://github.com/sonnyp/JSON8/tree/main/packages/patch) for more methods to work with JSON pointers.
 
 ---
 

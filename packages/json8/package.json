@@ -9,7 +9,7 @@
     "map",
     "set"
   ],
-  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/json8",
+  "homepage": "https://github.com/sonnyp/JSON8/tree/main/packages/json8",
   "repository": "github:JSON8/JSON8",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {

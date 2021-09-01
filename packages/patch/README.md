@@ -63,7 +63,7 @@ var myDocument = { foo: "bar" };
 var doc = oo.clone(myDocument);
 ```
 
-See [clone](https://github.com/sonnyp/JSON8/tree/master/packages/json8#ooclone).
+See [clone](https://github.com/sonnyp/JSON8/tree/main/packages/json8#ooclone).
 
 JSON8 Patch never mutates patches.
 
@@ -163,7 +163,7 @@ ooPatch.diff({}, { foo: "bar" });
 Returns `true` if the patch is valid, `false` otherwise.
 
 This method _only_ check for JSON Patch semantic.
-If you need to verify the patch is JSON valid, use [oo.valid](https://github.com/sonnyp/JSON8/tree/master/packages/json8#oovalid)
+If you need to verify the patch is JSON valid, use [oo.valid](https://github.com/sonnyp/JSON8/tree/main/packages/json8#oovalid)
 
 ```javascript
 ooPatch.valid({})  // false

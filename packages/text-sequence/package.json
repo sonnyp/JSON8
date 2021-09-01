@@ -8,7 +8,7 @@
     "sequence",
     "stream"
   ],
-  "homepage": "https://github.com/sonnyp/JSON8/tree/master/packages/text-sequence",
+  "homepage": "https://github.com/sonnyp/JSON8/tree/main/packages/text-sequence",
   "repository": "github:JSON8/text-sequence",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {
