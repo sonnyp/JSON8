@@ -1,6 +1,6 @@
 {
   "name": "json8-patch",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "JSON Patch toolkit for JavaScript",
   "keywords": [
     "JSON",
@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "json8": "^1.0.5",
-    "json8-pointer": "^1.0.5"
+    "json8-pointer": "^1.0.6"
   },
   "devDependencies": {
     "fast-json-patch": "^3.1.0",
