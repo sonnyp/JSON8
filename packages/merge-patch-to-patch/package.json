@@ -1,6 +1,6 @@
 {
   "name": "json8-merge-patch-to-patch",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Turn JSON Merge Patch into JSON Patch.",
   "keywords": [
     "JSON",
@@ -16,11 +16,11 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "dependencies": {
-    "json8-pointer": "^1.0.4"
+    "json8-pointer": "^1.0.5"
   },
   "devDependencies": {
-    "json8": "^1.0.3",
-    "json8-patch": "^1.0.4"
+    "json8": "^1.0.5",
+    "json8-patch": "^1.0.5"
   },
   "engines": {
     "node": ">= 7.6.0"

@@ -1,6 +1,6 @@
 {
   "name": "json8-pointer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "JSON Pointer toolkit for JavaScript",
   "keywords": [
     "JSON",
@@ -19,7 +19,7 @@
   "devDependencies": {
     "json-pointer": "^0.6.1",
     "json-ptr": "^2.2.0",
-    "json8": "^1.0.3",
+    "json8": "^1.0.5",
     "jsonpointer": "^4.1.0",
     "jsonpointer.js": "^0.4.0"
   },
