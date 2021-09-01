@@ -11,6 +11,7 @@ module.exports = function escape(token, separator) {
   const sep =
     typeof separator === "string" && separator.length > 0 ? separator : "/";
   let escaped = "";
+  if (typeof token === "number") token = token.toString();
   for (let i = 0, length = token.length; i < length; i++) {
     const l = token.charAt(i);
     if (l === "~") escaped += "~0";

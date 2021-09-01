@@ -54,4 +54,10 @@ describe("encode", () => {
     const s = encode([""]);
     assert.deepEqual(s, "/");
   });
+
+  it("stringifies numbers", () => {
+    assert.deepEqual(encode(["foo", 0, "bar"]), "/foo/0/bar");
+    assert.deepEqual(encode([0, "foo", "bar"]), "/0/foo/bar");
+    assert.deepEqual(encode(["foo", "bar", 0]), "/foo/bar/0");
+  });
 });
