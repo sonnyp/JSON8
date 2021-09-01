@@ -6,11 +6,12 @@ JSON Text Sequence [RFC 7464](https://tools.ietf.org/html/rfc7464) toolkit for J
 
 ---
 
-- [Introduction](#introduction)
-- [Getting started](#getting-started)
-- [SerializeStream](#serializestream)
-- [ParseStream](#parsestream)
-- [Benchmark](#benchmark)
+- [JSON8 Text Sequence](#json8-text-sequence)
+  - [Introduction](#introduction)
+  - [Getting started](#getting-started)
+  - [SerializeStream](#serializestream)
+  - [ParseStream](#parsestream)
+  - [Benchmark](#benchmark)
 
 ## Getting started
 
@@ -82,7 +83,7 @@ parseStream.on("data", (json) => {
 
 ```sh
 git clone git@github.com:sonnyp/JSON8.git
-yarn
+npm install
 cd JSON8/packages/text-sequence
 node benchmark
 ```

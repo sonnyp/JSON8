@@ -18,7 +18,7 @@
   "author": "Sonny Piers <sonny@fastmail.net>",
   "license": "ISC",
   "devDependencies": {
-    "json-text-sequence": "^0.1.1",
+    "json-text-sequence": "^0.3.0",
     "request": "^2.88.2"
   },
   "engines": {

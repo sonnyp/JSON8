@@ -10,12 +10,12 @@ matrix:
   fast_finish: true
 
 cache:
-  yarn: true
+  npm: true
   directories:
     - node_modules
 
 before_script: lerna bootstrap
 
 script:
-  - yarn test
+  - npm test
   - lerna run benchmark
