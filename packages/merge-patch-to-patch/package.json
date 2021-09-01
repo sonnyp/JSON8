@@ -8,7 +8,7 @@
     "patch"
   ],
   "homepage": "https://github.com/sonnyp/JSON8/tree/main/packages/merge-patch",
-  "repository": "github:JSON8/merge-patch",
+  "repository": "https://github.com/sonnyp/JSON8",
   "bugs": "https://github.com/sonnyp/JSON8/issues",
   "scripts": {
     "test": "mocha --recursive test/"
