@@ -2,6 +2,7 @@
 
 const types = require("./types");
 const OBJECT = types.OBJECT;
+const DATE = types.DATE;
 const ARRAY = types.ARRAY;
 const STRING = types.STRING;
 const BOOLEAN = types.BOOLEAN;
@@ -41,6 +42,8 @@ module.exports = function equal(a, b) {
     case NULL:
     case BOOLEAN:
       return a === b;
+    case DATE:
+      return a.getTime() === b.getTime();
   }
 
   let i, l;

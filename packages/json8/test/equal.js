@@ -54,6 +54,18 @@ describe("equal", () => {
     });
   });
 
+  describe("date", () => {
+    it("returns true for identical", () => {
+      equal(new Date(0), new Date(0));
+      equal(new Date(2021, 0, 1), new Date(2021, 0, 1));
+    });
+
+    it("returns false for different", () => {
+      differ(new Date(0), new Date(1));
+      differ(new Date(2021, 0, 1), new Date(2021, 0, 2))
+    })
+  });
+
   describe("object", () => {
     it("returns true for identical", () => {
       equal({ foo: "bar" }, { foo: "bar" });

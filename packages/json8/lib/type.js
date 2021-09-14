@@ -2,6 +2,7 @@
 
 const types = require("./types");
 const OBJECT = types.OBJECT;
+const DATE = types.DATE;
 const ARRAY = types.ARRAY;
 const NULL = types.NULL;
 const STRING = types.STRING;
@@ -18,6 +19,7 @@ module.exports = function type(obj) {
     else if (global.Set && obj instanceof Set) return ARRAY;
     else if (global.Map && obj instanceof Map) return OBJECT;
     else if (obj === null) return NULL;
+    else if (toString.call(obj) === '[object Date]') return DATE;
     else if (t === OBJECT) return OBJECT;
   }
 };

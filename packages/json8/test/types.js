@@ -24,6 +24,10 @@ describe("types", () => {
     assert.strictEqual(types.ARRAY, "array");
   });
 
+  it("has a DATE property set to 'date'", () => {
+    assert.strictEqual(types.DATE, "date");
+  });
+
   it("has an BOOLEAN property set to 'boolean'", () => {
     assert.strictEqual(types.BOOLEAN, "boolean");
   });
@@ -32,11 +36,14 @@ describe("types", () => {
     it("contains ARRAY", () => {
       assert(types.STRUCTURES.indexOf(types.ARRAY) !== -1);
     });
+    it("contains DATE", () => {
+      assert(types.STRUCTURES.indexOf(types.DATE) !== -1);
+    });
     it("contains OBJECT", () => {
       assert(types.STRUCTURES.indexOf(types.OBJECT) !== -1);
     });
-    it("has a length of 2", () => {
-      assert.equal(types.STRUCTURES.length, 2);
+    it("has a length of 3", () => {
+      assert.equal(types.STRUCTURES.length, 3);
     });
   });
 

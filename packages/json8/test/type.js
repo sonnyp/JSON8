@@ -24,6 +24,10 @@ describe("type", () => {
     assert.strictEqual(type(null), "null");
   });
 
+  it("returns date for date", () => {
+    assert.strictEqual(type(new Date()), "date");
+  });
+
   it("returns object for object", () => {
     assert.strictEqual(type({}), "object");
   });
