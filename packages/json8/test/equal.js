@@ -62,8 +62,8 @@ describe("equal", () => {
 
     it("returns false for different", () => {
       differ(new Date(0), new Date(1));
-      differ(new Date(2021, 0, 1), new Date(2021, 0, 2))
-    })
+      differ(new Date(2021, 0, 1), new Date(2021, 0, 2));
+    });
   });
 
   describe("object", () => {
