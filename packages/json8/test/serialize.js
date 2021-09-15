@@ -3,6 +3,7 @@
 const assert = require("assert");
 const { serialize } = require("..");
 const { readFileSync } = require("fs");
+const { EOL } = require("os");
 
 const valid = [
   ["true", true],
@@ -51,7 +52,9 @@ describe("serialize", () => {
   describe("escapes u2028 and u2029", () => {
     assert.strictEqual(
       serialize(readFileSync("./test/fixtures.txt", "utf8")),
-      '"ro\\u2028cks! ro\\u2029cks!\\n"'
+      '"ro\\u2028cks! ro\\u2029cks!' +
+        JSON.stringify(EOL).replace(/"/g, "") +
+        '"'
     );
   });
 
