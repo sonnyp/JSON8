@@ -89,7 +89,7 @@
     "description": "replace array with array",
     "a": [],
     "b": ["foo"],
-    "patch": [{"op": "replace", "path": "", "value": ["foo"]}]
+    "patch": [{"op": "add", "path": "/0", "value": "foo"}]
   },
 
   {

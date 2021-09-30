@@ -28,10 +28,24 @@ module.exports = function diff(a, b, pre) {
 
   // both are arrays
   if (Array.isArray(b)) {
-    // FIXME let's be smarter about array diffing
+    let i, l, elem, diffSet;
     if (a.length === 0 && b.length === 0) return patches;
     if (equal(a, b)) return patches;
-    patches.push({ op: "replace", path: encode(prefix), value: b });
+    for (i = 0, l = a.length, diffSet = new Set(b); i < l; i++) {
+      elem = a[i];
+      if (!diffSet.has(elem))
+        patches.push({ op: "remove", path: `${encode(prefix)}/${i}` });
+    }
+
+    for (i = 0, l = b.length, diffSet = new Set(a); i < l; i++) {
+      elem = b[i];
+      if (!diffSet.has(elem))
+        patches.push({
+          op: "add",
+          path: `${encode(prefix)}/${i}`,
+          value: elem,
+        });
+    }
   }
   // both are objects
   else if (bt === OBJECT) {
