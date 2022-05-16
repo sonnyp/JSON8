@@ -20,7 +20,7 @@
     "json-pointer": "^0.6.1",
     "json-ptr": "^2.2.0",
     "json8": "^1.0.5",
-    "jsonpointer": "^4.1.0",
+    "jsonpointer": "^5.0.0",
     "jsonpointer.js": "^0.4.0"
   },
   "engines": {
